@@ -5,10 +5,10 @@ Block / pixel / crafting game-style React components: inventory, crafting, HUD, 
 ## Install
 
 ```bash
-pnpm add @block-ui/react @block-ui/tokens @block-ui/themes @block-ui/icons
+pnpm add @block-ui/react
 ```
 
-Peer dependencies: `react` and `react-dom` ^18.2 or ^19.
+This installs `@block-ui/tokens`, `@block-ui/themes` and `@block-ui/icons`. Peer dependencies: `react` and `react-dom` ^18.2 or ^19.
 
 ## Usage
 

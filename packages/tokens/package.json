@@ -28,7 +28,9 @@
   },
   "files": [
     "dist",
-    "tokens.css"
+    "tokens.css",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json && node scripts/generate-css.mjs",

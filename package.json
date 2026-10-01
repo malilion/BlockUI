@@ -26,7 +26,8 @@
     "check:treeshake": "node scripts/check-treeshake.mjs",
     "screenshots": "node scripts/screenshots.mjs",
     "check:a11y": "node scripts/a11y-stories.mjs",
-    "check:package": "node scripts/check-package.mjs"
+    "check:package": "node scripts/check-package.mjs",
+    "check:publish": "pnpm -r --filter \"./packages/**\" publish --access public --dry-run --no-git-checks"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

@@ -26,19 +26,43 @@ try {
     run(`pnpm pack --pack-destination ${packs}`, join(repo, "packages", name));
   }
 
-  const files = run(`tar -tzf block-ui-react-0.1.0.tgz`, packs);
-  for (const required of [
-    "package/dist/index.js",
-    "package/dist/index.d.ts",
-    "package/dist/styles.css",
-    "package/README.md",
-    "package/LICENSE",
-  ]) {
-    if (!files.includes(required))
-      throw new Error(`@block-ui/react tarball is missing ${required}`);
-  }
-  if (/\/(stories|test)\//.test(files) || /\.(test|stories)\./.test(files)) {
-    throw new Error("@block-ui/react tarball contains test or story files");
+  const requiredByPackage = {
+    tokens: [
+      "package/dist/index.js",
+      "package/dist/index.d.ts",
+      "package/tokens.css",
+      "package/README.md",
+      "package/LICENSE",
+    ],
+    themes: [
+      "package/dist/index.js",
+      "package/dist/index.d.ts",
+      "package/themes.css",
+      "package/README.md",
+      "package/LICENSE",
+    ],
+    icons: [
+      "package/dist/index.js",
+      "package/dist/index.d.ts",
+      "package/README.md",
+      "package/LICENSE",
+    ],
+    react: [
+      "package/dist/index.js",
+      "package/dist/index.d.ts",
+      "package/dist/styles.css",
+      "package/README.md",
+      "package/LICENSE",
+    ],
+  };
+  for (const [name, required] of Object.entries(requiredByPackage)) {
+    const files = run(`tar -tzf block-ui-${name}-0.1.0.tgz`, packs);
+    for (const path of required) {
+      if (!files.includes(path)) throw new Error(`@block-ui/${name} tarball is missing ${path}`);
+    }
+    if (/\/(stories|test)\//.test(files) || /\.(test|stories)\./.test(files)) {
+      throw new Error(`@block-ui/${name} tarball contains test or story files`);
+    }
   }
 
   writeFileSync(

@@ -25,6 +25,7 @@ Phase 12 — Release (quality gates passing)
 - [x] Testing — 436 unit/component tests, Playwright E2E (desktop + mobile)
 - [x] CI — GitHub Actions: lint → typecheck → test → build → build-storybook
 - [x] Docs — bilingual README (EN / 繁中) with screenshots, CHANGELOG, LICENSE + README in every package
+- [x] npm release pipeline — `files` include README + LICENSE, `pnpm check:publish` dry-run, GitHub Actions `release.yml` on `v*` tags
 - [x] Storybook on GitHub Pages — https://malilion.github.io/BlockUI/
 - [x] Real-browser accessibility — axe on 136 stories × 5 themes (`pnpm check:a11y`) and on the playground (E2E)
 - [x] Release check — packed tarballs install into a fresh npm React app (`pnpm check:package`)
@@ -32,11 +33,11 @@ Phase 12 — Release (quality gates passing)
 
 ## In Progress
 
-- [ ] npm publish of `@block-ui/*` (Task 024)
+- [ ] First npm publish of `@block-ui/*` 0.1.0 (needs npm org `block-ui` + `NPM_TOKEN`)
 
 ## Next
 
-- [ ] Confirm npm package metadata and publish 0.1.0
+- [ ] Create the npm org `block-ui`, add GitHub secret `NPM_TOKEN`, tag `v0.1.0` (see `docs/RELEASING.md`)
 
 ## Known Issues / Decisions
 
@@ -56,4 +57,5 @@ Phase 12 — Release (quality gates passing)
 - pnpm test:e2e ✅ (28, incl. 6 axe scans)
 - pnpm check:a11y ✅ (680 story renders)
 - pnpm check:package ✅
+- pnpm check:publish ✅ (dry-run, topological order)
 - pnpm check:treeshake ✅
