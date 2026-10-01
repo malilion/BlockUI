@@ -1,0 +1,17 @@
+.sb-block-root {
+  min-height: 100vh;
+  padding: var(--block-space-4);
+  background-image: var(--block-texture);
+  background-size: 64px 64px;
+  background-color: var(--block-bg);
+  background-blend-mode: multiply;
+  image-rendering: pixelated;
+}
+
+.sb-show-main.sb-main-padded {
+  padding: 0;
+}
+
+.sb-show-main .docs-story .sb-block-root {
+  min-height: 0;
+}

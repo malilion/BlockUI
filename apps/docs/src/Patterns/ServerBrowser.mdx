@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/blocks';
+import React from 'react';
+import { ServerCard, BlockPanel } from '@block-ui/react';
+
+<Meta title="Patterns/Server Browser" />
+
+# Server Browser
+
+export const ServerBrowserExample = () => (
+  <BlockPanel>
+    <h2>Multiplayer</h2>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '16px' }}>
+      <ServerCard name="Blockville" players="142/200" ping="24ms" status="online" />
+      <ServerCard name="Survival Games" players="89/100" ping="45ms" status="online" />
+      <ServerCard name="PixelRealm" players="0/50" ping="0ms" status="offline" />
+    </div>
+  </BlockPanel>
+);
+
+<ServerBrowserExample />

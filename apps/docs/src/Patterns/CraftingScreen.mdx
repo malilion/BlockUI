@@ -1,0 +1,22 @@
+import { Meta } from '@storybook/blocks';
+import React from 'react';
+import { CraftingTable, Furnace, BlockPanel } from '@block-ui/react';
+
+<Meta title="Patterns/Crafting Screen" />
+
+# Crafting Screen
+
+export const CraftingScreenExample = () => (
+  <div style={{ display: 'flex', gap: '24px' }}>
+    <BlockPanel style={{ flex: 1 }}>
+      <h2>Crafting</h2>
+      <CraftingTable grid={3} />
+    </BlockPanel>
+    <BlockPanel style={{ flex: 1 }}>
+      <h2>Furnace</h2>
+      <Furnace />
+    </BlockPanel>
+  </div>
+);
+
+<CraftingScreenExample />

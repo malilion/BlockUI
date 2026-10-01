@@ -1,0 +1,42 @@
+.signal {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 20px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.bar {
+  width: 4px;
+  background-color: var(--block-slot);
+  box-shadow: 0 0 0 1px var(--block-border);
+}
+
+.bar:nth-child(1) {
+  height: 5px;
+}
+
+.bar:nth-child(2) {
+  height: 10px;
+}
+
+.bar:nth-child(3) {
+  height: 15px;
+}
+
+.bar:nth-child(4) {
+  height: 20px;
+}
+
+.signal[data-quality="good"] .bar[data-on] {
+  background-color: var(--block-emerald);
+}
+
+.signal[data-quality="fair"] .bar[data-on] {
+  background-color: var(--block-gold);
+}
+
+.signal[data-quality="poor"] .bar[data-on] {
+  background-color: var(--block-redstone-light);
+}

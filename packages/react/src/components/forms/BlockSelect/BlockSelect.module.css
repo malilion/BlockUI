@@ -1,0 +1,25 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  height: var(--block-size-control-md);
+  padding-right: calc(var(--block-space-3) + 24px);
+  appearance: none;
+  cursor: pointer;
+}
+
+.select option {
+  color: var(--block-text);
+  background-color: var(--block-surface-alt);
+}
+
+.chevron {
+  position: absolute;
+  right: var(--block-space-3);
+  display: inline-flex;
+  color: var(--block-text);
+  pointer-events: none;
+}

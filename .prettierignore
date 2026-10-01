@@ -1,0 +1,10 @@
+dist
+coverage
+storybook-static
+playwright-report
+test-results
+pnpm-lock.yaml
+packages/tokens/tokens.css
+packages/themes/themes.css
+*.png
+PRD*.md

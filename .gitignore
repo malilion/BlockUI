@@ -1,0 +1,14 @@
+node_modules
+dist
+coverage
+storybook-static
+playwright-report
+test-results
+blob-report
+*.tsbuildinfo
+*.log
+.DS_Store
+.vite
+.eslintcache
+.pnpm-store
+.claude

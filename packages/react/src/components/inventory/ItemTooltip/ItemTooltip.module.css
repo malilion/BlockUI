@@ -1,0 +1,87 @@
+.tooltip {
+  min-width: 180px;
+  max-width: 280px;
+  padding: var(--block-space-2) var(--block-space-3);
+  color: var(--block-text-primary);
+  background-color: color-mix(in srgb, var(--block-obsidian-dark) 94%, transparent);
+  border: var(--block-border-width-thin) solid var(--block-black);
+  box-shadow:
+    inset 0 0 0 2px var(--block-obsidian-light),
+    var(--block-shadow-drop);
+  font-size: var(--block-font-size-sm);
+  line-height: var(--block-line-height-normal);
+  text-align: left;
+  white-space: normal;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-md);
+  font-weight: var(--block-font-weight-bold);
+  color: var(--block-text-primary);
+  text-shadow: var(--block-shadow-text);
+}
+
+.tooltip[data-rarity="uncommon"] .name {
+  color: var(--block-gold-light);
+}
+
+.tooltip[data-rarity="rare"] .name {
+  color: var(--block-diamond);
+}
+
+.tooltip[data-rarity="epic"] .name {
+  color: var(--block-amethyst-light);
+}
+
+.tooltip[data-rarity="legendary"] .name {
+  color: var(--block-lava-light);
+}
+
+.rarity {
+  margin: 0;
+  font-size: var(--block-font-size-xs);
+  color: var(--block-text-secondary);
+  text-transform: capitalize;
+}
+
+.enchantments {
+  margin: var(--block-space-1) 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--block-text-secondary);
+}
+
+.description {
+  margin-top: var(--block-space-1);
+  color: var(--block-text-secondary);
+}
+
+.stats {
+  margin: var(--block-space-2) 0 0;
+  padding-top: var(--block-space-2);
+  border-top: 2px solid var(--block-obsidian-light);
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--block-space-3);
+  color: var(--block-water-light);
+}
+
+.stat dt {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--block-space-1);
+}
+
+.stat dd {
+  margin: 0;
+  font-weight: var(--block-font-weight-bold);
+}
+
+.statIcon {
+  display: inline-flex;
+}

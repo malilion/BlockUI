@@ -1,0 +1,116 @@
+/* Shared layout pieces for the game cards. */
+.card {
+  height: 100%;
+}
+
+.headline {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--block-space-3);
+}
+
+.iconBox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background-color: var(--block-slot);
+  border: var(--block-border-width-thin) solid var(--block-border);
+  box-shadow: var(--block-shadow-inset);
+}
+
+.iconBox > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--block-font-size-lg);
+  font-weight: var(--block-font-weight-bold);
+  line-height: var(--block-line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+.description,
+.meta {
+  margin: 0;
+  font-size: var(--block-font-size-sm);
+  color: var(--block-text-muted);
+}
+
+.rewards {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--block-space-2) var(--block-space-3);
+}
+
+.rewardsLabel {
+  font-size: var(--block-font-size-xs);
+  color: var(--block-text-muted);
+  text-transform: uppercase;
+}
+
+.rewardList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--block-space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reward {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--block-space-1);
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-sm);
+}
+
+.unit {
+  font-family: var(--block-font-body);
+  font-size: var(--block-font-size-xs);
+  color: var(--block-text-muted);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--block-space-1) var(--block-space-3);
+  margin: 0;
+  font-size: var(--block-font-size-sm);
+}
+
+.stats dt {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--block-space-1);
+  color: var(--block-text-muted);
+}
+
+.stats dd {
+  margin: 0;
+  text-align: right;
+  font-weight: var(--block-font-weight-medium);
+}
+
+.locked .iconBox {
+  filter: grayscale(1) brightness(0.6);
+}
+
+.statRow {
+  display: contents;
+}

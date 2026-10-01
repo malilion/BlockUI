@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/blocks';
+import React from 'react';
+import { BlockSidebar, SidebarItem, PlayerCard, WorldCard, BlockButton, BlockPanel } from '@block-ui/react';
+
+<Meta title="Patterns/Dashboard" />
+
+# Dashboard Pattern
+
+export const DashboardExample = () => (
+  <div style={{ display: 'flex', height: '600px', background: 'var(--block-bg)' }}>
+    <BlockSidebar style={{ width: '250px' }}>
+      <SidebarItem active>Home</SidebarItem>
+      <SidebarItem>Worlds</SidebarItem>
+      <SidebarItem>Servers</SidebarItem>
+      <SidebarItem>Settings</SidebarItem>
+    </BlockSidebar>
+    <div style={{ flex: 1, padding: '24px', overflowY: 'auto' }}>
+      <PlayerCard name="Steve" level={42} health={20} />
+      <div style={{ marginTop: '24px' }}>
+        <h2>My Worlds</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          <WorldCard name="Survival World" mode="Survival" seed="-123456789" />
+          <WorldCard name="Creative Plot" mode="Creative" seed="987654321" />
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+<DashboardExample />

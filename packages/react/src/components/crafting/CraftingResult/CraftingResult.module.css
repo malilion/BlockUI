@@ -1,0 +1,19 @@
+.result {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.slot.slot {
+  width: calc(var(--block-size-slot-lg) + 12px);
+}
+
+.result:not([data-empty]) .slot {
+  box-shadow:
+    inset 3px 3px 0 var(--block-shadow-bevel-dark),
+    inset -3px -3px 0 var(--block-shadow-bevel-light),
+    inset 0 0 0 5px color-mix(in srgb, var(--block-gold) 35%, transparent);
+}
+
+.result[data-empty] .slot {
+  cursor: default;
+}

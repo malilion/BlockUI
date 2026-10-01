@@ -1,0 +1,32 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  height: var(--block-size-control-md);
+}
+
+.hasStart {
+  padding-left: calc(var(--block-space-3) + 24px);
+}
+
+.hasEnd {
+  padding-right: calc(var(--block-space-3) + 32px);
+}
+
+.startIcon {
+  position: absolute;
+  left: var(--block-space-3);
+  display: inline-flex;
+  color: var(--block-text-muted);
+  pointer-events: none;
+}
+
+.end {
+  position: absolute;
+  right: var(--block-space-2);
+  display: inline-flex;
+  align-items: center;
+}

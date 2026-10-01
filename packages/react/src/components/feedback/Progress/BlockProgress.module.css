@@ -1,0 +1,81 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--block-space-1);
+  width: 100%;
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--block-space-2);
+}
+
+.label {
+  font-size: var(--block-font-size-sm);
+  color: var(--block-text);
+}
+
+.value {
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-sm);
+  color: var(--block-text-muted);
+}
+
+.track {
+  --progress-h: 16px;
+
+  position: relative;
+  width: 100%;
+  height: var(--progress-h);
+  background-color: var(--block-slot);
+  border: var(--block-border-width-thin) solid var(--block-border);
+  box-shadow: inset 0 3px 0 var(--block-shadow-bevel-dark);
+  overflow: hidden;
+}
+
+.track[data-size="sm"] {
+  --progress-h: 10px;
+}
+
+.track[data-size="lg"] {
+  --progress-h: 24px;
+}
+
+.fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--block-progress);
+  background-color: var(--block-mat);
+  box-shadow:
+    inset 0 3px 0 var(--block-mat-light),
+    inset 0 -3px 0 var(--block-mat-dark);
+  transition: width var(--block-duration-normal) steps(4, end);
+}
+
+.segments {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0 14px,
+    color-mix(in srgb, var(--block-black) 45%, transparent) 14px 16px
+  );
+  pointer-events: none;
+}
+
+.track[data-indeterminate] .fill {
+  width: 30%;
+  animation: indeterminate 1200ms steps(10, end) infinite;
+}
+
+@keyframes indeterminate {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(340%);
+  }
+}

@@ -1,0 +1,57 @@
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { StoryStack } from "../../../stories/StoryLayout";
+import { ArmorBar } from "./ArmorBar";
+
+const meta = {
+  title: "Components/HUD/ArmorBar",
+  component: ArmorBar,
+  tags: ["autodocs"],
+  args: { value: 14, max: 20 },
+  argTypes: {
+    value: { control: { type: "range", min: 0, max: 20 } },
+    iconSize: { control: "inline-radio", options: [16, 24, 32] },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: [
+          "Armor points shown as chestplates — two points per icon.",
+          "",
+          "```tsx",
+          'import { ArmorBar } from "@block-ui/react";',
+          "",
+          "<ArmorBar value={14} max={20} />",
+          "```",
+          "",
+          "**Accessibility** — a single `role=\"meter\"` named \"Armor\" with `aria-valuetext` such as \"14 of 20\"; the icons are decorative.",
+        ].join("\n"),
+      },
+    },
+  },
+} satisfies Meta<typeof ArmorBar>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {};
+
+export const States: Story = {
+  render: () => (
+    <StoryStack>
+      <ArmorBar value={20} showText />
+      <ArmorBar value={13} showText />
+      <ArmorBar value={3} showText />
+      <ArmorBar value={0} showText />
+    </StoryStack>
+  ),
+};
+
+export const Sizes: Story = {
+  render: () => (
+    <StoryStack>
+      <ArmorBar value={14} iconSize={16} />
+      <ArmorBar value={14} iconSize={24} />
+      <ArmorBar value={14} iconSize={32} />
+    </StoryStack>
+  ),
+};
