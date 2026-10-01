@@ -23,7 +23,8 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
-    "check:treeshake": "node scripts/check-treeshake.mjs"
+    "check:treeshake": "node scripts/check-treeshake.mjs",
+    "screenshots": "node scripts/screenshots.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
