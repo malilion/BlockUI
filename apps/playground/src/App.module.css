@@ -108,3 +108,12 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+.breadcrumb {
+  margin-top: calc(-1 * var(--block-space-6));
+}
+
+/* Space between consecutive blocks inside a panel. */
+:is(.section, .col) + :is(.section, .col) {
+  margin-top: var(--block-space-8);
+}

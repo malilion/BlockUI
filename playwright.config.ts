@@ -26,6 +26,6 @@ export default defineConfig({
       "pnpm --filter @block-ui/playground build && pnpm --filter @block-ui/playground preview --port 4173",
     url: "http://localhost:4173",
     reuseExistingServer: !process.env.CI,
-    timeout: 30_000,
+    timeout: 120_000,
   },
 });

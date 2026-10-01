@@ -3,6 +3,16 @@
   "version": "0.1.0",
   "description": "Block UI — block / pixel / crafting game-style React components: inventory, crafting, HUD, cards, forms and more.",
   "license": "MIT",
+  "author": "Block UI Contributors",
+  "homepage": "https://malilion.github.io/BlockUI/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malilion/BlockUI.git",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/malilion/BlockUI/issues"
+  },
   "type": "module",
   "sideEffects": [
     "**/*.css"

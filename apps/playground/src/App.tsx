@@ -42,6 +42,9 @@ import {
   HungerBar,
   XPBar,
   HotbarNavigation,
+  BlockBadge,
+  BlockTabs,
+  Breadcrumb,
   blockButtonVariants,
 } from "@block-ui/react";
 import type { BlockThemeName } from "@block-ui/themes";
@@ -126,6 +129,53 @@ function DashboardSection() {
           <IconButton icon={<SearchIcon size={16} />} label="Search" />
           <IconButton icon={<SettingsIcon size={16} />} label="Settings" />
         </div>
+      </div>
+      <div className={styles.col}>
+        <h3 className={styles.heading}>Badges</h3>
+        <div className={styles.row}>
+          <BlockBadge variant="emerald" dot>
+            Online
+          </BlockBadge>
+          <BlockBadge variant="redstone" dot>
+            Offline
+          </BlockBadge>
+          <BlockBadge variant="gold" dot>
+            AFK
+          </BlockBadge>
+          <BlockBadge variant="redstone" icon={<DiamondIcon size={16} />}>
+            Admin
+          </BlockBadge>
+          <BlockBadge variant="water" icon={<SwordIcon size={16} />}>
+            Moderator
+          </BlockBadge>
+          <BlockBadge variant="amethyst">VIP</BlockBadge>
+        </div>
+      </div>
+      <div className={styles.col}>
+        <h3 className={styles.heading}>Game Rules</h3>
+        <BlockTabs
+          label="Game rules"
+          items={[
+            {
+              id: "survival",
+              label: "Survival",
+              icon: <PickaxeIcon size={16} />,
+              content: "Gather resources, craft tools and keep your hunger up.",
+            },
+            {
+              id: "creative",
+              label: "Creative",
+              icon: <EmeraldIcon size={16} />,
+              content: "Unlimited blocks, flying and no damage.",
+            },
+            {
+              id: "hardcore",
+              label: "Hardcore",
+              icon: <RedstoneIcon size={16} />,
+              content: "One life. The world is deleted when you die.",
+            },
+          ]}
+        />
       </div>
       <div className={styles.col}>
         <h3 className={styles.heading}>Current Status</h3>
@@ -432,6 +482,17 @@ export default function App() {
             <p className={styles.brand}>Block UI</p>
             {themeSelect}
           </header>
+          <Breadcrumb
+            className={styles.breadcrumb}
+            items={[
+              {
+                label: "Block UI",
+                icon: <HomeIcon size={16} />,
+                onClick: () => setActiveTab("Dashboard"),
+              },
+              { label: activeTab },
+            ]}
+          />
           {renderSection()}
         </main>
       </div>

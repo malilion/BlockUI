@@ -92,8 +92,9 @@
   gap: var(--block-space-2);
 }
 
+/* Hide the label visually but keep it as the accessible name. */
 .button[data-loading] .content {
-  visibility: hidden;
+  opacity: 0;
 }
 
 .icon {

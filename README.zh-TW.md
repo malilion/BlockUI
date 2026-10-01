@@ -11,9 +11,9 @@
 <p align="center">方塊 × 像素 × 合成遊戲風格的元件庫，為 React 與 TypeScript 打造</p>
 
 <p align="center">
-  <a href="https://github.com/malilion/MinecraftUI/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/MinecraftUI/ci.yml?branch=main&style=flat-square&label=CI" alt="CI 狀態"></a>
-  <a href="https://github.com/malilion/MinecraftUI/actions/workflows/docs.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/MinecraftUI/docs.yml?branch=main&style=flat-square&label=docs" alt="文件建置"></a>
-  <a href="https://github.com/malilion/MinecraftUI/stargazers"><img src="https://img.shields.io/github/stars/malilion/MinecraftUI?style=flat-square&color=5d9b3d" alt="GitHub stars"></a>
+  <a href="https://github.com/malilion/BlockUI/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/BlockUI/ci.yml?branch=main&style=flat-square&label=CI" alt="CI 狀態"></a>
+  <a href="https://github.com/malilion/BlockUI/actions/workflows/docs.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/BlockUI/docs.yml?branch=main&style=flat-square&label=docs" alt="文件建置"></a>
+  <a href="https://github.com/malilion/BlockUI/stargazers"><img src="https://img.shields.io/github/stars/malilion/BlockUI?style=flat-square&color=5d9b3d" alt="GitHub stars"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-f2c94c?style=flat-square" alt="授權：MIT"></a>
   <br/>
   <img src="https://img.shields.io/badge/React_18_|_19-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React 18 / 19">
@@ -23,7 +23,7 @@
 </p>
 
 <p align="center">
-  <a href="https://malilion.github.io/MinecraftUI/"><b>📖 文件與線上範例（Storybook）</b></a>
+  <a href="https://malilion.github.io/BlockUI/"><b>📖 文件與線上範例（Storybook）</b></a>
 </p>
 
 <p align="center">
@@ -42,7 +42,7 @@ Block UI 是一套 React 元件庫，視覺語言來自方塊建造生存遊戲�
 - 5 套主題——**Grassland（草原）**、**Cave（洞穴）**、**Deepslate（深板岩）**、**Nether（地獄）**、**End（終界）**——只要一個 `data-theme` 屬性就能切換，所有元件不需修改
 - 設計 Token 同時提供 TypeScript 物件與 CSS 變數（`--block-*`），元件內不寫死任何顏色
 - `@block-ui/icons`：50 多個原創 16 × 16 像素 SVG 圖示，可 tree-shake
-- 無障礙：WCAG 2.2 AA 對比（由測試把關）、ARIA grid／tabs／dialog 模式、焦點鎖定、清楚的焦點框，並支援 `prefers-reduced-motion`
+- 無障礙：WCAG 2.2 AA——CI 會在五套主題下用 axe 檢查每個 story 與 Playground，ARIA grid／tabs／dialog 模式、焦點鎖定、清楚的焦點框，並支援 `prefers-reduced-motion`
 - 俐落的機械感動畫：不超過 160 ms、使用 `steps()` 緩動，不用彈簧、回彈或模糊
 - 響應式：平板時側邊欄收合成圖示列，手機時變成底部的 Hotbar 導覽
 - ESM、可 tree-shake（`preserveModules`）、單一 CSS 檔，唯一的 peer dependency 是 React
@@ -154,7 +154,7 @@ import "@fontsource/silkscreen/700.css";
   <sub>手機版：側邊欄變成底部的快捷欄導覽。</sub>
 </p>
 
-每個元件都有 [Storybook](https://malilion.github.io/MinecraftUI/) stories（也可在本地執行 `pnpm storybook`），包含即時控制項、所有 variants 與 states、使用方式、Props 表、無障礙說明與 a11y 檢查。Storybook 另外有 Foundations 頁面（色彩、字體、間距、陰影、主題、圖示）與完整畫面的 Patterns（儀表板、玩家資料、背包畫面、合成畫面、伺服器瀏覽器）。
+每個元件都有 [Storybook](https://malilion.github.io/BlockUI/) stories（也可在本地執行 `pnpm storybook`），包含即時控制項、所有 variants 與 states、使用方式、Props 表、無障礙說明與 a11y 檢查。Storybook 另外有 Foundations 頁面（色彩、字體、間距、陰影、主題、圖示）與完整畫面的 Patterns（儀表板、玩家資料、背包畫面、合成畫面、伺服器瀏覽器）。
 
 ## 元件
 
@@ -281,8 +281,8 @@ Block UI 遵守五條規則，新增元件時請一併遵守。
 ## 本地開發
 
 ```bash
-git clone https://github.com/malilion/MinecraftUI.git
-cd MinecraftUI
+git clone https://github.com/malilion/BlockUI.git
+cd BlockUI
 pnpm install
 ```
 
@@ -300,6 +300,8 @@ pnpm typecheck         # TypeScript 型別檢查
 pnpm build             # 建置所有套件與 Playground
 pnpm build-storybook   # 建置靜態 Storybook
 pnpm check:treeshake   # 確認未使用的元件會被移除
+pnpm check:a11y        # 用 axe（WCAG 2.2 AA）檢查每個 story，需先 build-storybook
+pnpm check:package     # 打包後用 npm 安裝到全新 React App，並型別檢查與建置
 pnpm screenshots       # 重新產生 README 圖片（需先 pnpm build）
 ```
 
@@ -321,7 +323,7 @@ block-ui/
 
 函式庫使用 Vite library mode 建置成 ESM（`preserveModules`）、TypeScript 型別宣告與單一 `dist/styles.css`。React 為 external，不會被打包。
 
-每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、Storybook 建置，以及 Playwright E2E。push 到 `main` 時也會把 Storybook 部署到 GitHub Pages。
+每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、套件安裝檢查、Storybook 建置、在五套主題下用 axe 檢查每個 story，以及 Playwright E2E（含 Playground 的 axe 檢查）。push 到 `main` 時也會把 Storybook 部署到 GitHub Pages。
 
 ## 瀏覽器支援
 

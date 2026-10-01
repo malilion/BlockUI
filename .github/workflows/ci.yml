@@ -56,8 +56,14 @@ jobs:
       - name: Tree-shake Check
         run: pnpm check:treeshake
 
+      - name: Package Check
+        run: pnpm check:package
+
       - name: Build Storybook
         run: pnpm build-storybook
+
+      - name: Storybook Accessibility (axe)
+        run: pnpm exec playwright install --with-deps chromium && THEMES=grassland,cave,deepslate,nether,end pnpm check:a11y
 
       - name: Upload Storybook
         uses: actions/upload-artifact@v7

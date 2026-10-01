@@ -11,9 +11,9 @@
 <p align="center">Block × pixel × crafting game-style component library, built for React and TypeScript</p>
 
 <p align="center">
-  <a href="https://github.com/malilion/MinecraftUI/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/MinecraftUI/ci.yml?branch=main&style=flat-square&label=CI" alt="CI status"></a>
-  <a href="https://github.com/malilion/MinecraftUI/actions/workflows/docs.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/MinecraftUI/docs.yml?branch=main&style=flat-square&label=docs" alt="docs build"></a>
-  <a href="https://github.com/malilion/MinecraftUI/stargazers"><img src="https://img.shields.io/github/stars/malilion/MinecraftUI?style=flat-square&color=5d9b3d" alt="GitHub stars"></a>
+  <a href="https://github.com/malilion/BlockUI/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/BlockUI/ci.yml?branch=main&style=flat-square&label=CI" alt="CI status"></a>
+  <a href="https://github.com/malilion/BlockUI/actions/workflows/docs.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/BlockUI/docs.yml?branch=main&style=flat-square&label=docs" alt="docs build"></a>
+  <a href="https://github.com/malilion/BlockUI/stargazers"><img src="https://img.shields.io/github/stars/malilion/BlockUI?style=flat-square&color=5d9b3d" alt="GitHub stars"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-f2c94c?style=flat-square" alt="license: MIT"></a>
   <br/>
   <img src="https://img.shields.io/badge/React_18_|_19-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React 18 / 19">
@@ -23,7 +23,7 @@
 </p>
 
 <p align="center">
-  <a href="https://malilion.github.io/MinecraftUI/"><b>📖 Docs & live demos (Storybook)</b></a>
+  <a href="https://malilion.github.io/BlockUI/"><b>📖 Docs & live demos (Storybook)</b></a>
 </p>
 
 <p align="center">
@@ -42,7 +42,7 @@ All artwork — the 50+ pixel icons, the procedural stone / dirt / planks textur
 - 5 themes — **Grassland**, **Cave**, **Deepslate**, **Nether**, **End** — switched with one `data-theme` attribute; every component follows without changes
 - Design tokens as TypeScript objects and CSS variables (`--block-*`); components never hard-code colors
 - `@block-ui/icons`: 50+ original 16 × 16 pixel-art SVG icons, tree-shakable
-- Accessible: WCAG 2.2 AA contrast (checked by tests), ARIA grid / tabs / dialog patterns, focus trapping, visible focus rings and `prefers-reduced-motion`
+- Accessible: WCAG 2.2 AA — axe runs on every story in all five themes and on the playground in CI, ARIA grid / tabs / dialog patterns, focus trapping, visible focus rings and `prefers-reduced-motion`
 - Snappy, mechanical motion: nothing slower than 160 ms, `steps()` easing, no springs or blur
 - Responsive: the sidebar collapses on tablet and turns into a hotbar at the bottom on mobile
 - ESM, tree-shakable (`preserveModules`), one CSS file, React as the only peer dependency
@@ -154,7 +154,7 @@ import "@fontsource/silkscreen/700.css";
   <sub>Mobile: the sidebar becomes a bottom hotbar.</sub>
 </p>
 
-Every component has stories in [Storybook](https://malilion.github.io/MinecraftUI/) (or run `pnpm storybook` locally) with live controls, all variants and states, usage, props tables, accessibility notes and an a11y checker. Storybook also has Foundations pages (colors, typography, spacing, shadows, themes, icons) and full-screen Patterns (dashboard, player profile, inventory screen, crafting screen, server browser).
+Every component has stories in [Storybook](https://malilion.github.io/BlockUI/) (or run `pnpm storybook` locally) with live controls, all variants and states, usage, props tables, accessibility notes and an a11y checker. Storybook also has Foundations pages (colors, typography, spacing, shadows, themes, icons) and full-screen Patterns (dashboard, player profile, inventory screen, crafting screen, server browser).
 
 ## Components
 
@@ -281,8 +281,8 @@ Block UI follows five rules. Respect them when adding new components.
 ## Local Development
 
 ```bash
-git clone https://github.com/malilion/MinecraftUI.git
-cd MinecraftUI
+git clone https://github.com/malilion/BlockUI.git
+cd BlockUI
 pnpm install
 ```
 
@@ -300,6 +300,8 @@ pnpm typecheck         # TypeScript
 pnpm build             # Build every package and the playground
 pnpm build-storybook   # Static Storybook
 pnpm check:treeshake   # Make sure unused components are dropped
+pnpm check:a11y        # axe (WCAG 2.2 AA) on every story, after build-storybook
+pnpm check:package     # Pack, install with npm into a fresh React app, type-check and build
 pnpm screenshots       # Regenerate the README images (after pnpm build)
 ```
 
@@ -321,7 +323,7 @@ Each component lives in its own folder with `Component.tsx`, `Component.types.ts
 
 The library is built with Vite library mode into ESM with `preserveModules`, TypeScript declarations and a single `dist/styles.css`. React is external.
 
-Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, Storybook build, and Playwright E2E. Pushes to `main` also deploy Storybook to GitHub Pages.
+Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, package install check, Storybook build, an axe scan of every story in all five themes, and Playwright E2E (including axe on the playground). Pushes to `main` also deploy Storybook to GitHub Pages.
 
 ## Browser Support
 
