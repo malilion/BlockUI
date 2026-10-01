@@ -34,7 +34,16 @@ describe("BlockToggle", () => {
 
   it("supports controlled usage, description and refs", () => {
     const ref = createRef<HTMLInputElement>();
-    render(<BlockToggle ref={ref} label="Weather" description="Rain and thunder" checked readOnly size="sm" />);
+    render(
+      <BlockToggle
+        ref={ref}
+        label="Weather"
+        description="Rain and thunder"
+        checked
+        readOnly
+        size="sm"
+      />,
+    );
     expect(ref.current).toBeChecked();
     expect(screen.getByRole("switch")).toHaveAccessibleDescription("Rain and thunder");
   });

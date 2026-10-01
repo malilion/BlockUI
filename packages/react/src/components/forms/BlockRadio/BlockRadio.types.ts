@@ -1,6 +1,9 @@
 import type { FieldsetHTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 
-export interface BlockRadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "size"> {
+export interface BlockRadioProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type" | "size"
+> {
   label?: ReactNode;
   description?: ReactNode;
   value: string;
@@ -13,8 +16,10 @@ export interface BlockRadioOption {
   disabled?: boolean;
 }
 
-export interface BlockRadioGroupProps
-  extends Omit<FieldsetHTMLAttributes<HTMLFieldSetElement>, "onChange" | "defaultValue"> {
+export interface BlockRadioGroupProps extends Omit<
+  FieldsetHTMLAttributes<HTMLFieldSetElement>,
+  "onChange" | "defaultValue"
+> {
   /** Group label rendered as the `<legend>`. */
   label?: ReactNode;
   /** Shared `name` for the native radios. Generated when omitted. */

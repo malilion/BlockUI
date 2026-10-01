@@ -62,7 +62,7 @@ const meta = {
           "</BlockSidebar>",
           "```",
           "",
-          "**Accessibility** — `<nav>` landmark with a list; the active item has `aria-current=\"page\"`; collapsed labels stay available to screen readers and as tooltips.",
+          '**Accessibility** — `<nav>` landmark with a list; the active item has `aria-current="page"`; collapsed labels stay available to screen readers and as tooltips.',
         ].join("\n"),
       },
     },

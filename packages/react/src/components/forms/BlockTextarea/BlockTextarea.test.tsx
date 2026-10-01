@@ -44,7 +44,9 @@ describe("BlockTextarea", () => {
   });
 
   it("has no accessibility violations", async () => {
-    const { container } = render(<BlockTextarea label="Notes" helperText="Optional" maxLength={100} />);
+    const { container } = render(
+      <BlockTextarea label="Notes" helperText="Optional" maxLength={100} />,
+    );
     await expectNoA11yViolations(container);
   });
 });

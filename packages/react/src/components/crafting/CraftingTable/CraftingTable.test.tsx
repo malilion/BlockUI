@@ -17,7 +17,9 @@ describe("CraftingTable", () => {
     );
     const table = screen.getByRole("group", { name: "Crafting table" });
     expect(within(table).getByRole("grid", { name: "Crafting grid" })).toBeInTheDocument();
-    expect(within(table).getByRole("group", { name: "Crafting result" })).toHaveTextContent("Chest");
+    expect(within(table).getByRole("group", { name: "Crafting result" })).toHaveTextContent(
+      "Chest",
+    );
   });
 
   it("wraps a bare ItemStack result and calls onTake", async () => {
@@ -36,7 +38,10 @@ describe("CraftingTable", () => {
 
   it("keeps a provided CraftingResult as-is", () => {
     render(
-      <CraftingTable input={<CraftingGrid>{null}</CraftingGrid>} result={<CraftingResult label="Output" />} />,
+      <CraftingTable
+        input={<CraftingGrid>{null}</CraftingGrid>}
+        result={<CraftingResult label="Output" />}
+      />,
     );
     expect(screen.getByRole("group", { name: "Output" })).toBeInTheDocument();
   });
@@ -44,19 +49,27 @@ describe("CraftingTable", () => {
   it("renders a Craft button that is disabled without a result", async () => {
     const user = userEvent.setup();
     const onCraft = vi.fn();
-    const { rerender } = render(<CraftingTable input={<CraftingGrid>{null}</CraftingGrid>} onCraft={onCraft} />);
+    const { rerender } = render(
+      <CraftingTable input={<CraftingGrid>{null}</CraftingGrid>} onCraft={onCraft} />,
+    );
     const craft = screen.getByRole("button", { name: "Craft" });
     expect(craft).toHaveAttribute("aria-disabled", "true");
     await user.click(craft);
     expect(onCraft).not.toHaveBeenCalled();
-    rerender(<CraftingTable input={<CraftingGrid>{null}</CraftingGrid>} onCraft={onCraft} canCraft />);
+    rerender(
+      <CraftingTable input={<CraftingGrid>{null}</CraftingGrid>} onCraft={onCraft} canCraft />,
+    );
     await user.click(screen.getByRole("button", { name: "Craft" }));
     expect(onCraft).toHaveBeenCalledTimes(1);
   });
 
   it("has no accessibility violations", async () => {
     const { container } = render(
-      <CraftingTable input={<CraftingGrid>{null}</CraftingGrid>} onCraft={() => undefined} canCraft />,
+      <CraftingTable
+        input={<CraftingGrid>{null}</CraftingGrid>}
+        onCraft={() => undefined}
+        canCraft
+      />,
     );
     await expectNoA11yViolations(container);
   });

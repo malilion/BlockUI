@@ -40,7 +40,9 @@ describe("AchievementCard", () => {
   });
 
   it("has no accessibility violations", async () => {
-    const { container } = render(<AchievementCard title="Stone Age" unlocked onView={() => undefined} />);
+    const { container } = render(
+      <AchievementCard title="Stone Age" unlocked onView={() => undefined} />,
+    );
     await expectNoA11yViolations(container);
   });
 });

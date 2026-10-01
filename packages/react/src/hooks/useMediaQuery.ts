@@ -13,7 +13,8 @@ export function useMediaQuery(query: string): boolean {
   );
   return useSyncExternalStore(
     subscribe,
-    () => (typeof window !== "undefined" && window.matchMedia ? window.matchMedia(query).matches : false),
+    () =>
+      typeof window !== "undefined" && window.matchMedia ? window.matchMedia(query).matches : false,
     () => false,
   );
 }

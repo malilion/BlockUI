@@ -93,6 +93,10 @@ export const InventorySlot = forwardRef<HTMLElement, InventorySlotProps>(functio
       event.stopPropagation();
       closeTooltip();
     }
+    if (inGrid && (event.key === "Enter" || event.key === " ")) {
+      event.preventDefault();
+      handleClick();
+    }
     onKeyDown?.(event);
   };
 
@@ -161,6 +165,7 @@ export const InventorySlot = forwardRef<HTMLElement, InventorySlotProps>(functio
         aria-disabled={inactive || undefined}
         onClick={handleClick}
         {...shared}
+        onKeyDown={handleKeyDown}
       >
         {content}
       </div>

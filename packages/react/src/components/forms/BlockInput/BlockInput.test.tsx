@@ -23,7 +23,9 @@ describe("BlockInput", () => {
   });
 
   it("announces errors with aria-invalid and aria-describedby", () => {
-    render(<BlockInput label="Seed" error="Seed must be numeric" helperText="Leave empty for random" />);
+    render(
+      <BlockInput label="Seed" error="Seed must be numeric" helperText="Leave empty for random" />,
+    );
     const input = screen.getByLabelText("Seed");
     expect(input).toHaveAttribute("aria-invalid", "true");
     expect(input).toHaveAccessibleDescription("Seed must be numeric Leave empty for random");
@@ -47,13 +49,17 @@ describe("BlockInput", () => {
   it("is reachable with the keyboard and forwards refs", async () => {
     const user = userEvent.setup();
     const ref = createRef<HTMLInputElement>();
-    render(<BlockInput ref={ref} label="Focus me" startIcon={<svg />} endAdornment={<span>⌘K</span>} />);
+    render(
+      <BlockInput ref={ref} label="Focus me" startIcon={<svg />} endAdornment={<span>⌘K</span>} />,
+    );
     await user.tab();
     expect(ref.current).toHaveFocus();
   });
 
   it("has no accessibility violations", async () => {
-    const { container } = render(<BlockInput label="Player Name" error="Required" helperText="3–16 characters" />);
+    const { container } = render(
+      <BlockInput label="Player Name" error="Required" helperText="3–16 characters" />,
+    );
     await expectNoA11yViolations(container);
   });
 });

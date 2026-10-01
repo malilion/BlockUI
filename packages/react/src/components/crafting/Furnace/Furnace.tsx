@@ -1,29 +1,12 @@
 import { ArrowIcon, FireIcon } from "@block-ui/icons";
-import { forwardRef, type CSSProperties, type ReactNode } from "react";
+import { forwardRef, type CSSProperties } from "react";
 import { cx } from "../../../utils/cx";
 import { clamp } from "../../../utils/number";
 import { InventorySlot } from "../../inventory/InventorySlot/InventorySlot";
 import { CraftingResult } from "../CraftingResult/CraftingResult";
 import styles from "./Furnace.module.css";
 import type { FurnaceProps, FurnaceState } from "./Furnace.types";
-
-const present = (node: ReactNode) => node !== undefined && node !== null && node !== false;
-
-/** Derives the furnace state from its slots (PRD §33). */
-export function getFurnaceState({
-  input,
-  fuel,
-  result,
-  progress = 0,
-  burning = false,
-}: Pick<FurnaceProps, "input" | "fuel" | "result" | "progress" | "burning">): FurnaceState {
-  if (progress >= 100) return "complete";
-  if (burning && progress > 0) return "processing";
-  if (burning) return "burning";
-  if (present(input) && !present(fuel)) return "noFuel";
-  if (!present(input) && present(result)) return "complete";
-  return "idle";
-}
+import { getFurnaceState, isPresent } from "./Furnace.utils";
 
 const defaultLabels: Record<FurnaceState, string> = {
   idle: "Idle",
@@ -58,7 +41,8 @@ export const Furnace = forwardRef<HTMLDivElement, FurnaceProps>(function Furnace
   const pct = clamp(progress, 0, 100);
   const flame = burning ? clamp(fuelLevel ?? 100, 0, 100) : 0;
   const labels = { ...defaultLabels, ...statusLabels };
-  const statusText = current === "processing" ? `${labels.processing} ${Math.round(pct)}%` : labels[current];
+  const statusText =
+    current === "processing" ? `${labels.processing} ${Math.round(pct)}%` : labels[current];
 
   return (
     <div
@@ -67,13 +51,18 @@ export const Furnace = forwardRef<HTMLDivElement, FurnaceProps>(function Furnace
       aria-label={label}
       data-state={current}
       className={cx(styles.furnace, className)}
-      style={{ "--block-furnace-progress": `${pct}%`, "--block-furnace-flame": `${flame}%` } as CSSProperties}
+      style={
+        {
+          "--block-furnace-progress": `${pct}%`,
+          "--block-furnace-flame": `${flame}%`,
+        } as CSSProperties
+      }
       {...rest}
     >
       <div className={styles.layout}>
         <div className={styles.inputs}>
           <div role="group" aria-label="Input">
-            <InventorySlot size="lg" label={present(input) ? undefined : "Input: empty"}>
+            <InventorySlot size="lg" label={isPresent(input) ? undefined : "Input: empty"}>
               {input}
             </InventorySlot>
           </div>
@@ -86,7 +75,7 @@ export const Furnace = forwardRef<HTMLDivElement, FurnaceProps>(function Furnace
             </span>
           </span>
           <div role="group" aria-label="Fuel">
-            <InventorySlot size="lg" label={present(fuel) ? undefined : "Fuel: empty"}>
+            <InventorySlot size="lg" label={isPresent(fuel) ? undefined : "Fuel: empty"}>
               {fuel}
             </InventorySlot>
           </div>

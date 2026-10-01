@@ -20,7 +20,7 @@ const meta = {
           '<WorldCard name="My World" gameMode="Survival" day={128} seed="123456789" onPlay={play} />',
           "```",
           "",
-          "**Accessibility** — the preview is decorative; the Play button is labelled \"Play {name}\".",
+          '**Accessibility** — the preview is decorative; the Play button is labelled "Play {name}".',
         ].join("\n"),
       },
     },
@@ -37,7 +37,14 @@ export const Materials: Story = {
     <StoryGrid>
       <WorldCard {...args} />
       <WorldCard {...args} name="Hardcore Run" gameMode="Hardcore" day={7} material="nether" />
-      <WorldCard {...args} name="Creative Build" gameMode="Creative" day={3} material="sand" lastPlayed="yesterday" />
+      <WorldCard
+        {...args}
+        name="Creative Build"
+        gameMode="Creative"
+        day={3}
+        material="sand"
+        lastPlayed="yesterday"
+      />
     </StoryGrid>
   ),
 };

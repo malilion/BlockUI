@@ -26,7 +26,13 @@ export const WorldCard = forwardRef<HTMLElement, WorldCardProps>(function WorldC
   ref,
 ) {
   return (
-    <BlockCard ref={ref} material={material} label={label} className={cx(styles.card, className)} {...rest}>
+    <BlockCard
+      ref={ref}
+      material={material}
+      label={label}
+      className={cx(styles.card, className)}
+      {...rest}
+    >
       <div className={worldStyles.preview}>
         {image ? (
           <img src={image} alt="" className={worldStyles.image} />

@@ -30,7 +30,7 @@ const meta = {
           '<BlockAlert variant="warning" title="Warning">Low hunger!</BlockAlert>',
           "```",
           "",
-          "**Accessibility** — `warning` / `error` use `role=\"alert\"`; `success` / `info` use `role=\"status\"`. The dismiss button has an accessible label.",
+          '**Accessibility** — `warning` / `error` use `role="alert"`; `success` / `info` use `role="status"`. The dismiss button has an accessible label.',
         ].join("\n"),
       },
     },

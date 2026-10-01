@@ -11,7 +11,10 @@ describe("PlayerCard", () => {
     expect(card).toHaveTextContent("Alex");
     expect(card).toHaveTextContent("Level 42");
     expect(screen.getByText("Online").parentElement).toHaveAttribute("data-material", "emerald");
-    expect(screen.getByRole("progressbar", { name: "Experience" })).toHaveAttribute("aria-valuenow", "600");
+    expect(screen.getByRole("progressbar", { name: "Experience" })).toHaveAttribute(
+      "aria-valuenow",
+      "600",
+    );
   });
 
   it("maps status colors and renders stats", () => {
@@ -33,7 +36,9 @@ describe("PlayerCard", () => {
   it("uses a decorative avatar image and the profile action", async () => {
     const user = userEvent.setup();
     const onViewProfile = vi.fn();
-    const { container } = render(<PlayerCard name="Alex" avatar="/alex.png" onViewProfile={onViewProfile} />);
+    const { container } = render(
+      <PlayerCard name="Alex" avatar="/alex.png" onViewProfile={onViewProfile} />,
+    );
     expect(container.querySelector("img")).toHaveAttribute("alt", "");
     await user.click(screen.getByRole("button", { name: "Profile" }));
     expect(onViewProfile).toHaveBeenCalledTimes(1);
@@ -41,7 +46,14 @@ describe("PlayerCard", () => {
 
   it("has no accessibility violations", async () => {
     const { container } = render(
-      <PlayerCard name="Alex" level={42} status="AFK" xp={1} maxXp={2} stats={[{ label: "Mode", value: "Survival" }]} />,
+      <PlayerCard
+        name="Alex"
+        level={42}
+        status="AFK"
+        xp={1}
+        maxXp={2}
+        stats={[{ label: "Mode", value: "Survival" }]}
+      />,
     );
     await expectNoA11yViolations(container);
   });

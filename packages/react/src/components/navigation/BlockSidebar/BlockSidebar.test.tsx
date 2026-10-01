@@ -18,8 +18,13 @@ describe("BlockSidebar", () => {
     );
     const nav = screen.getByRole("navigation", { name: "Main" });
     expect(within(nav).getAllByRole("listitem")).toHaveLength(2);
-    expect(within(nav).getByRole("link", { name: "Dashboard" })).toHaveAttribute("aria-current", "page");
-    expect(within(nav).getByRole("link", { name: "Inventory 3" })).not.toHaveAttribute("aria-current");
+    expect(within(nav).getByRole("link", { name: "Dashboard" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    expect(within(nav).getByRole("link", { name: "Inventory 3" })).not.toHaveAttribute(
+      "aria-current",
+    );
     expect(nav).toHaveTextContent("v0.1");
   });
 
@@ -62,7 +67,10 @@ describe("BlockSidebar", () => {
         </SidebarItem>
       </BlockSidebar>,
     );
-    expect(screen.getByRole("navigation", { name: "Game" })).toHaveAttribute("data-collapsed", "true");
+    expect(screen.getByRole("navigation", { name: "Game" })).toHaveAttribute(
+      "data-collapsed",
+      "true",
+    );
     const link = screen.getByRole("link", { name: "Quests" });
     expect(link).toHaveAttribute("title", "Quests");
   });

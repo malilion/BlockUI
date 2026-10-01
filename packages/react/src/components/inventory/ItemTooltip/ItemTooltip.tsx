@@ -1,13 +1,8 @@
 import { forwardRef } from "react";
 import { cx } from "../../../utils/cx";
 import styles from "./ItemTooltip.module.css";
-import { itemRarities, type ItemRarity, type ItemTooltipProps } from "./ItemTooltip.types";
-
-export function normalizeRarity(rarity: string | undefined): ItemRarity | undefined {
-  if (!rarity) return undefined;
-  const lower = rarity.toLowerCase();
-  return (itemRarities as readonly string[]).includes(lower) ? (lower as ItemRarity) : undefined;
-}
+import type { ItemTooltipProps } from "./ItemTooltip.types";
+import { normalizeRarity } from "./ItemTooltip.utils";
 
 /**
  * Item details card: rarity-colored name, enchantments and stats. Rendered

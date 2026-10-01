@@ -22,7 +22,14 @@ describe("BlockRadioGroup", () => {
   it("selects on click and with arrow keys", async () => {
     const user = userEvent.setup();
     const onValueChange = vi.fn();
-    render(<BlockRadioGroup label="Mode" options={modes} defaultValue="survival" onValueChange={onValueChange} />);
+    render(
+      <BlockRadioGroup
+        label="Mode"
+        options={modes}
+        defaultValue="survival"
+        onValueChange={onValueChange}
+      />,
+    );
     await user.click(screen.getByText("Creative"));
     expect(screen.getByRole("radio", { name: "Creative" })).toBeChecked();
     expect(onValueChange).toHaveBeenLastCalledWith("creative");
@@ -33,7 +40,14 @@ describe("BlockRadioGroup", () => {
   it("supports controlled value", async () => {
     const user = userEvent.setup();
     const onValueChange = vi.fn();
-    render(<BlockRadioGroup label="Mode" options={modes} value="survival" onValueChange={onValueChange} />);
+    render(
+      <BlockRadioGroup
+        label="Mode"
+        options={modes}
+        value="survival"
+        onValueChange={onValueChange}
+      />,
+    );
     await user.click(screen.getByText("Creative"));
     expect(onValueChange).toHaveBeenCalledWith("creative");
     expect(screen.getByRole("radio", { name: "Survival" })).toBeChecked();
@@ -58,11 +72,15 @@ describe("BlockRadioGroup", () => {
     );
     expect(ref.current).not.toBeChecked();
     expect(screen.getByRole("radio", { name: "Hard" })).toBeChecked();
-    expect(screen.getByRole("radio", { name: "Hard" })).toHaveAccessibleDescription("Hunger drains faster.");
+    expect(screen.getByRole("radio", { name: "Hard" })).toHaveAccessibleDescription(
+      "Hunger drains faster.",
+    );
   });
 
   it("has no accessibility violations", async () => {
-    const { container } = render(<BlockRadioGroup label="Mode" options={modes} orientation="horizontal" />);
+    const { container } = render(
+      <BlockRadioGroup label="Mode" options={modes} orientation="horizontal" />,
+    );
     await expectNoA11yViolations(container);
   });
 });

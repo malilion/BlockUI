@@ -1,9 +1,12 @@
 import type { InputHTMLAttributes } from "react";
 
-export type BlockSliderVariant = "grass" | "water" | "diamond" | "emerald" | "gold" | "redstone" | "primary";
+export type BlockSliderVariant =
+  "grass" | "water" | "diamond" | "emerald" | "gold" | "redstone" | "primary";
 
-export interface BlockSliderProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "value" | "defaultValue" | "size"> {
+export interface BlockSliderProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type" | "value" | "defaultValue" | "size"
+> {
   label?: string;
   value?: number;
   defaultValue?: number;

@@ -29,7 +29,7 @@ const meta = {
           '<ServerCard name="BlockCraft SMP" onlinePlayers={12} maxPlayers={50} version="1.20.4" ping={32} onJoin={join} />',
           "```",
           "",
-          "**Accessibility** — the signal bars are an image labelled \"Ping: 32 ms\"; Join is disabled while offline.",
+          '**Accessibility** — the signal bars are an image labelled "Ping: 32 ms"; Join is disabled while offline.',
         ].join("\n"),
       },
     },

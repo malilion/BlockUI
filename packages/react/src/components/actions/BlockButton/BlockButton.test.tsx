@@ -74,7 +74,12 @@ describe("BlockButton", () => {
 
   it("renders icons, fullWidth and custom className", () => {
     render(
-      <BlockButton fullWidth className="custom" startIcon={<svg data-testid="start" />} endIcon={<svg data-testid="end" />}>
+      <BlockButton
+        fullWidth
+        className="custom"
+        startIcon={<svg data-testid="start" />}
+        endIcon={<svg data-testid="end" />}
+      >
         Go
       </BlockButton>,
     );

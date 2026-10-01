@@ -47,7 +47,10 @@ describe("InventorySlot", () => {
     await user.click(screen.getByRole("button", { name: "Disabled slot" }));
     await user.click(screen.getByRole("button", { name: "Locked slot" }));
     expect(onClick).not.toHaveBeenCalled();
-    expect(screen.getByRole("button", { name: "Locked slot" })).toHaveAttribute("data-locked", "true");
+    expect(screen.getByRole("button", { name: "Locked slot" })).toHaveAttribute(
+      "data-locked",
+      "true",
+    );
   });
 
   it("announces empty slots and rarity", () => {
@@ -59,7 +62,10 @@ describe("InventorySlot", () => {
   it("shows the tooltip on hover and focus, and Escape closes it", async () => {
     const user = userEvent.setup();
     render(
-      <InventorySlot onClick={() => undefined} tooltip={<ItemTooltip name="Diamond Pickaxe" rarity="Rare" />}>
+      <InventorySlot
+        onClick={() => undefined}
+        tooltip={<ItemTooltip name="Diamond Pickaxe" rarity="Rare" />}
+      >
         <Diamond />
       </InventorySlot>,
     );

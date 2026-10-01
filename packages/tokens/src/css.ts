@@ -61,7 +61,8 @@ export function materialCss(): string {
   return materials
     .map((material) => {
       const name = toKebab(material);
-      const onKey = `on${material.charAt(0).toUpperCase()}${material.slice(1)}` as keyof typeof colors;
+      const onKey =
+        `on${material.charAt(0).toUpperCase()}${material.slice(1)}` as keyof typeof colors;
       const lightText = relativeLuminance(colors[onKey]) > 0.5;
       return [
         `[data-material="${name}"] {`,

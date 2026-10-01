@@ -29,7 +29,7 @@ const meta = {
           '<ItemStack icon={<DiamondIcon />} amount={12} maxAmount={64} name="Diamond" />',
           "```",
           "",
-          "**Accessibility** — visual details are `aria-hidden`; a single visually hidden description (\"Diamond, × 12\") is announced instead.",
+          '**Accessibility** — visual details are `aria-hidden`; a single visually hidden description ("Diamond, × 12") is announced instead.',
         ].join("\n"),
       },
     },
@@ -44,7 +44,13 @@ export const Default: Story = {};
 export const FullStack: Story = { args: { icon: <PlanksIcon />, amount: 64, name: "Oak Planks" } };
 
 export const Damaged: Story = {
-  args: { icon: <PickaxeIcon />, amount: undefined, durability: 300, maxDurability: 1561, name: "Diamond Pickaxe" },
+  args: {
+    icon: <PickaxeIcon />,
+    amount: undefined,
+    durability: 300,
+    maxDurability: 1561,
+    name: "Diamond Pickaxe",
+  },
 };
 
 export const Variants: Story = {

@@ -28,7 +28,11 @@ describe("BlockBadge", () => {
   });
 
   it("has no accessibility violations", async () => {
-    const { container } = render(<BlockBadge dot variant="emerald">Online</BlockBadge>);
+    const { container } = render(
+      <BlockBadge dot variant="emerald">
+        Online
+      </BlockBadge>,
+    );
     await expectNoA11yViolations(container);
   });
 });

@@ -25,7 +25,13 @@ describe("BlockCard", () => {
   it("supports as, heading level, header action and ref", () => {
     const ref = createRef<HTMLElement>();
     render(
-      <BlockCard ref={ref} as="section" label="Server" headingLevel={2} headerAction={<span>⋯</span>}>
+      <BlockCard
+        ref={ref}
+        as="section"
+        label="Server"
+        headingLevel={2}
+        headerAction={<span>⋯</span>}
+      >
         x
       </BlockCard>,
     );

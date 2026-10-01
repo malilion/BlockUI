@@ -26,12 +26,17 @@ function renderHotbar(props: Partial<React.ComponentProps<typeof Hotbar>> = {}) 
 }
 
 const selectedName = () =>
-  screen.getAllByRole("gridcell").findIndex((cell) => cell.getAttribute("aria-selected") === "true");
+  screen
+    .getAllByRole("gridcell")
+    .findIndex((cell) => cell.getAttribute("aria-selected") === "true");
 
 describe("Hotbar", () => {
   it("renders 9 slots with key hints and selects the first by default", () => {
     renderHotbar();
-    expect(screen.getByRole("grid", { name: "Hotbar" })).toHaveAttribute("aria-keyshortcuts", "1 2 3 4 5 6 7 8 9");
+    expect(screen.getByRole("grid", { name: "Hotbar" })).toHaveAttribute(
+      "aria-keyshortcuts",
+      "1 2 3 4 5 6 7 8 9",
+    );
     expect(screen.getAllByRole("gridcell")).toHaveLength(9);
     expect(selectedName()).toBe(0);
     expect(screen.getByText("9")).toBeInTheDocument();

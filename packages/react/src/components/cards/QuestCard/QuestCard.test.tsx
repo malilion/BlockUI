@@ -4,7 +4,14 @@ import { describe, expect, it, vi } from "vitest";
 import { expectNoA11yViolations } from "../../../test/axe";
 import { QuestCard } from "./QuestCard";
 
-const quest = { title: "Find Diamonds", description: "Mine 10 diamonds.", progress: 7, max: 10, xp: 120, coins: 500 };
+const quest = {
+  title: "Find Diamonds",
+  description: "Mine 10 diamonds.",
+  progress: 7,
+  max: 10,
+  xp: 120,
+  coins: 500,
+};
 
 describe("QuestCard", () => {
   it("renders title, description, progress and rewards", () => {
@@ -32,7 +39,10 @@ describe("QuestCard", () => {
 
   it("honours completed and claimed flags", () => {
     render(<QuestCard {...quest} completed claimed onClaim={() => undefined} />);
-    expect(screen.getByRole("button", { name: "Claimed" })).toHaveAttribute("aria-disabled", "true");
+    expect(screen.getByRole("button", { name: "Claimed" })).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
   });
 
   it("has no accessibility violations", async () => {

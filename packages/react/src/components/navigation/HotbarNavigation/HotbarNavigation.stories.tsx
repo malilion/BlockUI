@@ -30,7 +30,7 @@ const meta = {
           "<HotbarNavigation fixed mobileOnly items={items} value={page} onValueChange={setPage} />",
           "```",
           "",
-          "**Accessibility** — `<nav>` landmark; the active item has `aria-current=\"page\"`; 56px touch targets.",
+          '**Accessibility** — `<nav>` landmark; the active item has `aria-current="page"`; 56px touch targets.',
         ].join("\n"),
       },
     },

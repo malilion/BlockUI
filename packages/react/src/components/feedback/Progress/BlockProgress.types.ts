@@ -1,6 +1,13 @@
 import type { HTMLAttributes } from "react";
 
-export const progressVariants = ["grass", "water", "diamond", "emerald", "gold", "redstone"] as const;
+export const progressVariants = [
+  "grass",
+  "water",
+  "diamond",
+  "emerald",
+  "gold",
+  "redstone",
+] as const;
 
 export type BlockProgressVariant = (typeof progressVariants)[number];
 

@@ -11,7 +11,16 @@ import { SidebarContext, useSidebar } from "./context";
  * `responsive` (pair it with `HotbarNavigation`).
  */
 export const BlockSidebar = forwardRef<HTMLElement, BlockSidebarProps>(function BlockSidebar(
-  { header, footer, collapsed = false, responsive = true, label = "Main", className, children, ...rest },
+  {
+    header,
+    footer,
+    collapsed = false,
+    responsive = true,
+    label = "Main",
+    className,
+    children,
+    ...rest
+  },
   ref,
 ) {
   const tablet = useMediaQuery(media.tablet);
@@ -38,7 +47,18 @@ export const BlockSidebar = forwardRef<HTMLElement, BlockSidebarProps>(function 
 
 /** A sidebar entry. Renders `<a>` with `href`, otherwise `<button>`. */
 export const SidebarItem = forwardRef<HTMLElement, SidebarItemProps>(function SidebarItem(
-  { icon, active = false, href, onClick, badge, disabled = false, className, children, title, ...rest },
+  {
+    icon,
+    active = false,
+    href,
+    onClick,
+    badge,
+    disabled = false,
+    className,
+    children,
+    title,
+    ...rest
+  },
   ref,
 ) {
   const { collapsed } = useSidebar();
@@ -81,7 +101,12 @@ export const SidebarItem = forwardRef<HTMLElement, SidebarItemProps>(function Si
   return (
     <li className={styles.listItem}>
       {href !== undefined ? (
-        <a ref={ref as Ref<HTMLAnchorElement>} href={disabled ? undefined : href} {...shared} {...rest}>
+        <a
+          ref={ref as Ref<HTMLAnchorElement>}
+          href={disabled ? undefined : href}
+          {...shared}
+          {...rest}
+        >
           {content}
         </a>
       ) : (

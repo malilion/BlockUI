@@ -441,7 +441,14 @@ const cubePixels = [
   "......kkkk......",
 ] as const;
 
-function cube(top: string, topSpeck: string, left: string, leftSpeck: string, right: string, rightSpeck: string) {
+function cube(
+  top: string,
+  topSpeck: string,
+  left: string,
+  leftSpeck: string,
+  right: string,
+  rightSpeck: string,
+) {
   return {
     palette: { k: p.outline, T: top, t: topSpeck, L: left, l: leftSpeck, R: right, r: rightSpeck },
     pixels: cubePixels,

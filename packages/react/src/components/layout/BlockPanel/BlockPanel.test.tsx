@@ -13,7 +13,13 @@ describe("BlockPanel", () => {
 
   it("supports heading level, actions, icon and variants", () => {
     render(
-      <BlockPanel title="World" headingLevel={3} actions={<button type="button">More</button>} icon={<svg />} variant="inset">
+      <BlockPanel
+        title="World"
+        headingLevel={3}
+        actions={<button type="button">More</button>}
+        icon={<svg />}
+        variant="inset"
+      >
         x
       </BlockPanel>,
     );

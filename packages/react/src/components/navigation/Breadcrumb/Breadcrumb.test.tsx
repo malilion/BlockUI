@@ -8,7 +8,11 @@ describe("Breadcrumb", () => {
   it("renders an ordered trail with the current page", () => {
     render(
       <Breadcrumb
-        items={[{ label: "Home", href: "/" }, { label: "Worlds", href: "/worlds" }, { label: "My World" }]}
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Worlds", href: "/worlds" },
+          { label: "My World" },
+        ]}
       />,
     );
     const nav = screen.getByRole("navigation", { name: "Breadcrumb" });
@@ -32,7 +36,9 @@ describe("Breadcrumb", () => {
   });
 
   it("has no accessibility violations", async () => {
-    const { container } = render(<Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Inventory" }]} />);
+    const { container } = render(
+      <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Inventory" }]} />,
+    );
     await expectNoA11yViolations(container);
   });
 });

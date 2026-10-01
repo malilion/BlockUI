@@ -15,7 +15,10 @@ import type { BlockUIContextValue, BlockUIProviderProps } from "./BlockUIProvide
  * ```
  */
 export const BlockUIProvider = forwardRef<HTMLDivElement, BlockUIProviderProps>(
-  function BlockUIProvider({ theme = "grassland", toaster = true, className, children, ...rest }, ref) {
+  function BlockUIProvider(
+    { theme = "grassland", toaster = true, className, children, ...rest },
+    ref,
+  ) {
     const [portalContainer, setPortalContainer] = useState<HTMLDivElement | null>(null);
     const value = useMemo<BlockUIContextValue>(
       () => ({ theme, portalContainer }),

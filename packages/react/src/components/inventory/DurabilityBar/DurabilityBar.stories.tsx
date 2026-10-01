@@ -26,7 +26,7 @@ const meta = {
           "<DurabilityBar value={126} max={1561} showValue />",
           "```",
           "",
-          "**Accessibility** — `role=\"meter\"` with `aria-valuenow/min/max` and a `value / max` value text.",
+          '**Accessibility** — `role="meter"` with `aria-valuenow/min/max` and a `value / max` value text.',
         ].join("\n"),
       },
     },

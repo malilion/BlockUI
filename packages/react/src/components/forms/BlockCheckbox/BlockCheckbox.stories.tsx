@@ -19,7 +19,7 @@ const meta = {
           '<BlockCheckbox label="Enable PvP" defaultChecked />',
           "```",
           "",
-          "**Accessibility** — real `<input type=\"checkbox\">` with a `<label>`; `Space` toggles; focus ring on the box.",
+          '**Accessibility** — real `<input type="checkbox">` with a `<label>`; `Space` toggles; focus ring on the box.',
         ].join("\n"),
       },
     },

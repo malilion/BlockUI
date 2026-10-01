@@ -42,7 +42,9 @@ describe("BlockSlider", () => {
   });
 
   it("has no accessibility violations", async () => {
-    const { container } = render(<BlockSlider label="Volume" defaultValue={40} variant="diamond" />);
+    const { container } = render(
+      <BlockSlider label="Volume" defaultValue={40} variant="diamond" />,
+    );
     await expectNoA11yViolations(container);
   });
 });

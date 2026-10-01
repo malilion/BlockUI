@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { expectNoA11yViolations } from "../../../test/axe";
-import { ItemTooltip, normalizeRarity } from "./ItemTooltip";
+import { ItemTooltip } from "./ItemTooltip";
+import { normalizeRarity } from "./ItemTooltip.utils";
 
 describe("ItemTooltip", () => {
   it("renders name, rarity, enchantments and stats", () => {
@@ -21,7 +22,10 @@ describe("ItemTooltip", () => {
     expect(screen.getAllByRole("listitem")).toHaveLength(2);
     expect(screen.getByText("Attack Damage")).toBeInTheDocument();
     expect(screen.getByText("126 / 1561")).toBeInTheDocument();
-    expect(screen.getByText("Diamond Pickaxe").parentElement).toHaveAttribute("data-rarity", "rare");
+    expect(screen.getByText("Diamond Pickaxe").parentElement).toHaveAttribute(
+      "data-rarity",
+      "rare",
+    );
   });
 
   it("normalizes rarity names", () => {
@@ -37,7 +41,12 @@ describe("ItemTooltip", () => {
 
   it("has no accessibility violations", async () => {
     const { container } = render(
-      <ItemTooltip name="Sword" rarity="Epic" enchantments={["Sharpness V"]} stats={[{ label: "Damage", value: 7 }]} />,
+      <ItemTooltip
+        name="Sword"
+        rarity="Epic"
+        enchantments={["Sharpness V"]}
+        stats={[{ label: "Damage", value: 7 }]}
+      />,
     );
     await expectNoA11yViolations(container);
   });

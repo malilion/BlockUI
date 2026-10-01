@@ -16,7 +16,10 @@ describe("BlockProgress", () => {
 
   it.each(progressVariants)("supports the %s variant", (variant) => {
     render(<BlockProgress value={10} variant={variant} />);
-    expect(screen.getByRole("progressbar", { name: "Progress" })).toHaveAttribute("data-material", variant);
+    expect(screen.getByRole("progressbar", { name: "Progress" })).toHaveAttribute(
+      "data-material",
+      variant,
+    );
   });
 
   it("is indeterminate without a value", () => {
@@ -29,7 +32,14 @@ describe("BlockProgress", () => {
   it("clamps and formats values, supports sizes and refs", () => {
     const ref = createRef<HTMLDivElement>();
     render(
-      <BlockProgress ref={ref} value={30} max={20} size="lg" formatValue={(v, m) => `${v} of ${m}`} aria-label="Quest" />,
+      <BlockProgress
+        ref={ref}
+        value={30}
+        max={20}
+        size="lg"
+        formatValue={(v, m) => `${v} of ${m}`}
+        aria-label="Quest"
+      />,
     );
     expect(ref.current).toHaveAttribute("aria-valuenow", "20");
     expect(ref.current).toHaveAttribute("aria-valuetext", "20 of 20");

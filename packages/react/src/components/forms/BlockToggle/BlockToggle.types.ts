@@ -1,7 +1,9 @@
 import type { InputHTMLAttributes, ReactNode } from "react";
 
-export interface BlockToggleProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "size" | "role"> {
+export interface BlockToggleProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type" | "size" | "role"
+> {
   label?: ReactNode;
   description?: ReactNode;
   /** Called with the new checked state. */

@@ -25,7 +25,7 @@ const meta = {
           '<Breadcrumb items={[{ label: "Home", href: "/" }, { label: "My World" }]} />',
           "```",
           "",
-          "**Accessibility** — `<nav aria-label=\"Breadcrumb\">` with an ordered list; the last item has `aria-current=\"page\"`.",
+          '**Accessibility** — `<nav aria-label="Breadcrumb">` with an ordered list; the last item has `aria-current="page"`.',
         ].join("\n"),
       },
     },

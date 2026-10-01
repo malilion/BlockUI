@@ -50,7 +50,11 @@ export const Hotbar = forwardRef<HTMLDivElement, HotbarProps>(function Hotbar(
         selectionFollowsFocus
         wrap
         label={label}
-        aria-keyshortcuts={hotkeys ? Array.from({ length: Math.min(slots, 9) }, (_, i) => i + 1).join(" ") : undefined}
+        aria-keyshortcuts={
+          hotkeys
+            ? Array.from({ length: Math.min(slots, 9) }, (_, i) => i + 1).join(" ")
+            : undefined
+        }
         {...rest}
       >
         {children}

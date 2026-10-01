@@ -9,7 +9,10 @@ const meta = {
   tags: ["autodocs"],
   args: { label: "Render distance", defaultValue: 50, onValueChange: fn() },
   argTypes: {
-    variant: { control: "select", options: ["primary", "grass", "water", "diamond", "emerald", "gold", "redstone"] },
+    variant: {
+      control: "select",
+      options: ["primary", "grass", "water", "diamond", "emerald", "gold", "redstone"],
+    },
   },
   decorators: [
     (Story) => (
@@ -30,7 +33,7 @@ const meta = {
           '<BlockSlider label="FOV" min={30} max={110} formatValue={(v) => `${v}°`} />',
           "```",
           "",
-          "**Accessibility** — native `<input type=\"range\">`: arrow keys, Home/End and PageUp/PageDown work; `aria-valuetext` uses `formatValue`.",
+          '**Accessibility** — native `<input type="range">`: arrow keys, Home/End and PageUp/PageDown work; `aria-valuetext` uses `formatValue`.',
         ].join("\n"),
       },
     },
@@ -52,6 +55,8 @@ export const Variants: Story = {
   ),
 };
 
-export const Formatted: Story = { args: { label: "FOV", min: 30, max: 110, defaultValue: 70, formatValue: (v: number) => `${v}°` } };
+export const Formatted: Story = {
+  args: { label: "FOV", min: 30, max: 110, defaultValue: 70, formatValue: (v: number) => `${v}°` },
+};
 
 export const Disabled: Story = { args: { disabled: true } };

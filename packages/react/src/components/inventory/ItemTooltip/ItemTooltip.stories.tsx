@@ -44,10 +44,23 @@ export const Rarities: Story = {
   render: () => (
     <StoryRow>
       {itemRarities.map((rarity) => (
-        <ItemTooltip key={rarity} name={`${rarity} item`} rarity={rarity} description="Rarity colors the name." />
+        <ItemTooltip
+          key={rarity}
+          name={`${rarity} item`}
+          rarity={rarity}
+          description="Rarity colors the name."
+        />
       ))}
     </StoryRow>
   ),
 };
 
-export const Minimal: Story = { args: { name: "Bread", rarity: undefined, enchantments: [], stats: [], description: "Restores 5 hunger." } };
+export const Minimal: Story = {
+  args: {
+    name: "Bread",
+    rarity: undefined,
+    enchantments: [],
+    stats: [],
+    description: "Restores 5 hunger.",
+  },
+};

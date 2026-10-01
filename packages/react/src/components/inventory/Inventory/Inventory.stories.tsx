@@ -26,7 +26,7 @@ const meta = {
     docs: {
       description: {
         component: [
-          "An inventory window that stacks sections such as the main storage grid and the hotbar. `variant=\"chest\"` gives a wooden storage container.",
+          'An inventory window that stacks sections such as the main storage grid and the hotbar. `variant="chest"` gives a wooden storage container.',
           "",
           "```tsx",
           'import { Inventory, InventorySection, InventoryGrid, Hotbar } from "@block-ui/react";',

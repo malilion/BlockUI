@@ -19,7 +19,8 @@
   max-height: calc(100dvh - 2 * var(--block-space-4));
   color: var(--block-text);
   background-color: var(--block-surface);
-  background-image: linear-gradient(
+  background-image:
+    linear-gradient(
       color-mix(in srgb, var(--block-surface) 88%, transparent),
       color-mix(in srgb, var(--block-surface) 88%, transparent)
     ),

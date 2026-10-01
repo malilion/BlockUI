@@ -43,8 +43,18 @@ export const States: Story = {
   render: (args) => (
     <StoryGrid>
       <AchievementCard {...args} />
-      <AchievementCard {...args} unlocked={false} title="The End?" description="Enter the End portal." />
-      <AchievementCard {...args} material="obsidian" title="Into Fire" description="Enter the Nether." />
+      <AchievementCard
+        {...args}
+        unlocked={false}
+        title="The End?"
+        description="Enter the End portal."
+      />
+      <AchievementCard
+        {...args}
+        material="obsidian"
+        title="Into Fire"
+        description="Enter the Nether."
+      />
     </StoryGrid>
   ),
 };
