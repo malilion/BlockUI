@@ -1,0 +1,10 @@
+.iconButton.iconButton {
+  width: var(--button-height);
+  padding: 0;
+}
+
+.icon {
+  display: inline-flex;
+  padding-top: 0;
+  filter: drop-shadow(1px 1px 0 var(--block-border));
+}

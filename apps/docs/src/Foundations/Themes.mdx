@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/blocks';
+import React from 'react';
+import { BlockUIProvider, BlockPanel } from '@block-ui/react';
+
+<Meta title="Foundations/Themes" />
+
+# Themes
+
+Block UI includes 5 themes: grassland, cave, deepslate, nether, end.
+
+export const ThemePreview = ({ theme }) => (
+  <BlockUIProvider theme={theme}>
+    <div style={{ padding: '16px', marginBottom: '16px', border: '4px solid var(--block-border)', background: 'var(--block-bg)' }}>
+      <h3>{theme}</h3>
+      <BlockPanel>
+        <p>This is a panel in the {theme} theme.</p>
+      </BlockPanel>
+    </div>
+  </BlockUIProvider>
+);
+
+<ThemePreview theme="grassland" />
+<ThemePreview theme="cave" />
+<ThemePreview theme="deepslate" />
+<ThemePreview theme="nether" />
+<ThemePreview theme="end" />

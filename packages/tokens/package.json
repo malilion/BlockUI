@@ -1,0 +1,36 @@
+{
+  "name": "@block-ui/tokens",
+  "version": "0.1.0",
+  "description": "Design tokens (colors, spacing, typography, motion…) for Block UI.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": {
+      "@block-ui/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./tokens.css": "./tokens.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "tokens.css"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node scripts/generate-css.mjs",
+    "generate": "tsc -p tsconfig.build.json && node scripts/generate-css.mjs",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "block-ui",
+    "design-tokens",
+    "pixel"
+  ]
+}

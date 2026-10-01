@@ -1,0 +1,3 @@
+.craftingSlot {
+  background-color: color-mix(in srgb, var(--block-wood-dark) 22%, var(--block-slot));
+}

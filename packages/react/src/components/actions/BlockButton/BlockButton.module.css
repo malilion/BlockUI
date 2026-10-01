@@ -1,0 +1,131 @@
+.button {
+  --button-height: var(--block-size-control-md);
+  --button-padding: var(--block-space-4);
+  --button-font-size: var(--block-font-size-lg);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-height);
+  min-width: var(--button-height);
+  padding: 0 var(--button-padding);
+  margin: 0;
+  font-family: var(--block-font-display);
+  font-size: var(--button-font-size);
+  font-weight: var(--block-font-weight-bold);
+  line-height: 1;
+  letter-spacing: var(--block-letter-spacing-wide);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--block-mat-on);
+  text-shadow: var(--block-mat-text-shadow);
+  background-color: var(--block-mat);
+  border: var(--block-border-width) solid var(--block-border);
+  border-radius: var(--block-radius-none);
+  box-shadow:
+    inset 0 3px 0 var(--block-mat-light),
+    inset 3px 0 0 var(--block-mat-light),
+    inset 0 -4px 0 var(--block-mat-dark),
+    inset -3px 0 0 var(--block-mat-dark);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform var(--block-duration-instant) var(--block-ease-step),
+    filter var(--block-duration-instant) var(--block-ease-step);
+}
+
+.button:hover:not([aria-disabled="true"]) {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.button:active:not([aria-disabled="true"]) {
+  transform: translateY(2px);
+  filter: brightness(0.95);
+  box-shadow:
+    inset 0 4px 0 var(--block-mat-dark),
+    inset 3px 0 0 var(--block-mat-dark),
+    inset 0 -2px 0 var(--block-mat-light);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--block-focus);
+  outline-offset: 2px;
+}
+
+.button[aria-disabled="true"] {
+  cursor: not-allowed;
+  filter: saturate(0.25) brightness(0.7);
+}
+
+.button[data-loading] {
+  cursor: progress;
+  filter: none;
+}
+
+.sm {
+  --button-height: var(--block-size-control-sm);
+  --button-padding: var(--block-space-3);
+  --button-font-size: var(--block-font-size-sm);
+}
+
+.md {
+  --button-height: var(--block-size-control-md);
+}
+
+.lg {
+  --button-height: var(--block-size-control-lg);
+  --button-padding: var(--block-space-6);
+  --button-font-size: var(--block-font-size-xl);
+}
+
+.fullWidth {
+  display: flex;
+  width: 100%;
+}
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--block-space-2);
+}
+
+.button[data-loading] .content {
+  visibility: hidden;
+}
+
+.icon {
+  display: inline-flex;
+  filter: drop-shadow(1px 1px 0 var(--block-border));
+}
+
+.label {
+  /* Pixel fonts sit high; nudge for optical centering. */
+  padding-top: 2px;
+}
+
+.loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.loader span {
+  width: 6px;
+  height: 6px;
+  background-color: currentColor;
+  animation: block-blink 480ms steps(1, end) infinite;
+}
+
+.loader span:nth-child(2) {
+  animation-delay: 160ms;
+}
+
+.loader span:nth-child(3) {
+  animation-delay: 320ms;
+}

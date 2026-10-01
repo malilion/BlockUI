@@ -1,0 +1,39 @@
+{
+  "name": "@block-ui/themes",
+  "version": "0.1.0",
+  "description": "Themes (grassland, cave, deepslate, nether, end) for Block UI.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": {
+      "@block-ui/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./themes.css": "./themes.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "themes.css"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node scripts/generate-css.mjs",
+    "generate": "tsc -p tsconfig.build.json && node scripts/generate-css.mjs",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "block-ui",
+    "themes",
+    "pixel"
+  ],
+  "dependencies": {
+    "@block-ui/tokens": "workspace:^"
+  }
+}

@@ -1,0 +1,31 @@
+.inventory {
+  width: 100%;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--block-space-4);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--block-space-2);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-md);
+  font-weight: var(--block-font-weight-bold);
+  letter-spacing: var(--block-letter-spacing-wide);
+  text-transform: uppercase;
+  text-shadow: var(--block-shadow-text);
+}
+
+.chest {
+  --block-slot: color-mix(in srgb, var(--block-wood-dark) 45%, var(--block-black));
+  --block-slot-hover: color-mix(in srgb, var(--block-wood-dark) 65%, var(--block-black));
+  --block-surface-header: var(--block-wood-dark);
+}

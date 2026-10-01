@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/blocks';
+import React from 'react';
+
+<Meta title="Foundations/Colors" />
+
+# Colors
+
+export const ColorSwatch = ({ name, variable }) => (
+  <div style={{ display: 'inline-flex', flexDirection: 'column', margin: '8px', padding: '8px', border: '2px solid var(--block-border)', borderRadius: '4px', background: 'var(--block-surface)' }}>
+    <div style={{ width: '64px', height: '64px', backgroundColor: `var(${variable})`, border: '2px solid var(--block-border)', marginBottom: '8px' }}></div>
+    <span style={{ fontFamily: 'monospace', fontSize: '12px' }}>{name}</span>
+    <span style={{ fontFamily: 'monospace', fontSize: '10px', color: 'var(--block-text-muted)' }}>{variable}</span>
+  </div>
+);
+
+## Surface
+<ColorSwatch name="Background" variable="--block-bg" />
+<ColorSwatch name="Surface" variable="--block-surface" />
+<ColorSwatch name="Border" variable="--block-border" />
+
+## Materials
+<ColorSwatch name="Grass Base" variable="--block-grass-base" />
+<ColorSwatch name="Stone Base" variable="--block-stone-base" />
+<ColorSwatch name="Wood Base" variable="--block-wood-base" />
+<ColorSwatch name="Dirt Base" variable="--block-dirt-base" />
+<ColorSwatch name="Diamond Base" variable="--block-diamond-base" />
+<ColorSwatch name="Emerald Base" variable="--block-emerald-base" />
+<ColorSwatch name="Gold Base" variable="--block-gold-base" />
+<ColorSwatch name="Redstone Base" variable="--block-redstone-base" />
+<ColorSwatch name="Obsidian Base" variable="--block-obsidian-base" />
+
+## Status
+<ColorSwatch name="Success" variable="--block-success" />
+<ColorSwatch name="Warning" variable="--block-warning" />
+<ColorSwatch name="Error" variable="--block-error" />
+<ColorSwatch name="Info" variable="--block-info" />
+
+## Text
+<ColorSwatch name="Text" variable="--block-text" />
+<ColorSwatch name="Text Muted" variable="--block-text-muted" />

@@ -1,0 +1,45 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--block-space-4);
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--block-space-4);
+}
+
+.narrow {
+  max-width: 360px;
+}
+
+.grid {
+  display: grid;
+  gap: var(--block-space-4);
+}
+
+.sm {
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+.md {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.lg {
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+}
+
+.label {
+  display: block;
+  margin-bottom: var(--block-space-1);
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-xs);
+  color: var(--block-text-muted);
+  text-transform: uppercase;
+}

@@ -1,0 +1,49 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: var(--block-space-2);
+  min-width: 0;
+}
+
+.track {
+  position: relative;
+  flex: 1;
+  height: 8px;
+  min-width: 32px;
+  background-color: var(--block-black);
+  border: var(--block-border-width-thin) solid var(--block-border);
+}
+
+.fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--block-durability);
+  background-color: var(--block-emerald);
+  box-shadow: inset 0 -2px 0 var(--block-shadow-bevel-dark);
+}
+
+.track[data-level="medium"] .fill {
+  background-color: var(--block-gold);
+}
+
+.track[data-level="low"] .fill {
+  background-color: var(--block-redstone-light);
+}
+
+.compact .track {
+  height: 4px;
+  min-width: 0;
+  border-width: 0;
+  box-shadow: 0 0 0 1px var(--block-black);
+}
+
+.compact .fill {
+  box-shadow: none;
+}
+
+.value {
+  flex-shrink: 0;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-xs);
+  color: var(--block-text-muted);
+}

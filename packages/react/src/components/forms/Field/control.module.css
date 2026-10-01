@@ -1,0 +1,46 @@
+/* Shared "slot well" look for text-like controls. */
+.control {
+  width: 100%;
+  min-height: var(--block-size-control-md);
+  padding: var(--block-space-2) var(--block-space-3);
+  font: inherit;
+  font-size: var(--block-font-size-md);
+  color: var(--block-text);
+  background-color: var(--block-slot);
+  border: var(--block-border-width) solid var(--block-border);
+  border-radius: var(--block-radius-none);
+  box-shadow: var(--block-shadow-inset);
+  outline: none;
+  transition:
+    border-color var(--block-duration-instant) var(--block-ease-step),
+    background-color var(--block-duration-instant) var(--block-ease-step);
+}
+
+.control::placeholder {
+  color: var(--block-text-muted);
+  opacity: 0.85;
+}
+
+.control:hover:not(:disabled) {
+  background-color: var(--block-slot-hover);
+}
+
+.control:focus-visible {
+  border-color: var(--block-focus);
+  outline: 2px solid var(--block-focus);
+  outline-offset: 1px;
+}
+
+.control[aria-invalid="true"] {
+  border-color: var(--block-redstone-light);
+}
+
+.control:disabled {
+  cursor: not-allowed;
+  color: var(--block-text-muted);
+  opacity: 0.6;
+}
+
+[data-success] .control {
+  border-color: var(--block-emerald);
+}

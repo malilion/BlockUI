@@ -1,0 +1,51 @@
+.stack {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72%;
+  height: 72%;
+  filter: drop-shadow(2px 2px 0 var(--block-shadow-bevel-dark));
+}
+
+/* Keep pixel art square and crisp — never stretch. */
+.icon > svg,
+.icon > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.amount {
+  position: absolute;
+  right: 2px;
+  bottom: 0;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-lg);
+  font-weight: var(--block-font-weight-bold);
+  line-height: 1;
+  color: var(--block-text-primary);
+  text-shadow: var(--block-shadow-text);
+  pointer-events: none;
+}
+
+.stack[data-full] .amount {
+  color: var(--block-gold-light);
+}
+
+.durability {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 8%;
+  pointer-events: none;
+}

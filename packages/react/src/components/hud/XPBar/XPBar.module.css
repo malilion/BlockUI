@@ -1,0 +1,60 @@
+.xp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  min-width: 120px;
+}
+
+.level {
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-lg);
+  font-weight: var(--block-font-weight-bold);
+  line-height: 1;
+  color: var(--block-emerald-light);
+  text-shadow:
+    2px 0 0 var(--block-black),
+    -2px 0 0 var(--block-black),
+    0 2px 0 var(--block-black),
+    0 -2px 0 var(--block-black);
+}
+
+.track {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  background-color: var(--block-black);
+  border: var(--block-border-width-thin) solid var(--block-border);
+  overflow: hidden;
+}
+
+.fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--block-xp);
+  background-color: var(--block-emerald);
+  box-shadow:
+    inset 0 2px 0 var(--block-emerald-light),
+    inset 0 -2px 0 var(--block-emerald-dark);
+  transition: width var(--block-duration-normal) steps(4, end);
+}
+
+/* Pixel segment dividers. */
+.segments {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0 calc(100% / 18 - 2px),
+    var(--block-black) calc(100% / 18 - 2px) calc(100% / 18)
+  );
+  opacity: 0.55;
+}
+
+.value {
+  align-self: flex-end;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-xs);
+  color: var(--block-text-muted);
+}
