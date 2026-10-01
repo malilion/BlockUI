@@ -3,6 +3,16 @@
   "version": "0.1.0",
   "description": "Themes (grassland, cave, deepslate, nether, end) for Block UI.",
   "license": "MIT",
+  "author": "Block UI Contributors",
+  "homepage": "https://malilion.github.io/BlockUI/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malilion/BlockUI.git",
+    "directory": "packages/themes"
+  },
+  "bugs": {
+    "url": "https://github.com/malilion/BlockUI/issues"
+  },
   "type": "module",
   "sideEffects": [
     "*.css"

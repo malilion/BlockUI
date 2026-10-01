@@ -24,7 +24,11 @@ Phase 12 — Release (quality gates passing)
 - [x] Mobile — HotbarNavigation replaces the sidebar below 768px
 - [x] Testing — 436 unit/component tests, Playwright E2E (desktop + mobile)
 - [x] CI — GitHub Actions: lint → typecheck → test → build → build-storybook
-- [x] Docs — README, CHANGELOG, LICENSE, `@block-ui/react` package README
+- [x] Docs — bilingual README (EN / 繁中) with screenshots, CHANGELOG, LICENSE + README in every package
+- [x] Storybook on GitHub Pages — https://malilion.github.io/BlockUI/
+- [x] Real-browser accessibility — axe on 136 stories × 5 themes (`pnpm check:a11y`) and on the playground (E2E)
+- [x] Release check — packed tarballs install into a fresh npm React app (`pnpm check:package`)
+- [x] Playground shows Badges, Tabs and Breadcrumb (PRD §59)
 
 ## In Progress
 
@@ -33,7 +37,6 @@ Phase 12 — Release (quality gates passing)
 ## Next
 
 - [ ] Confirm npm package metadata and publish 0.1.0
-- [ ] Optional: add Playwright E2E and tree-shake check to CI
 
 ## Known Issues / Decisions
 
@@ -50,5 +53,7 @@ Phase 12 — Release (quality gates passing)
 - pnpm typecheck ✅
 - pnpm test ✅ (436)
 - pnpm build ✅
-- pnpm test:e2e ✅ (16)
+- pnpm test:e2e ✅ (28, incl. 6 axe scans)
+- pnpm check:a11y ✅ (680 story renders)
+- pnpm check:package ✅
 - pnpm check:treeshake ✅

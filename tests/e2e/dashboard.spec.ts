@@ -7,7 +7,11 @@ test.describe("Block UI Playground", () => {
 
   test("dashboard loads with navigation and content", async ({ page }) => {
     await expect(page.getByText("BlockMaster_42")).toBeVisible();
-    await expect(page.locator("nav").locator("visible=true")).toBeVisible();
+    await expect(
+      page
+        .getByRole("navigation", { name: /^(Playground Navigation|Quick navigation)$/ })
+        .locator("visible=true"),
+    ).toBeVisible();
   });
 
   test("sidebar navigation switches sections", async ({ page }) => {

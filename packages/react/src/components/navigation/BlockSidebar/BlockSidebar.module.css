@@ -64,7 +64,7 @@
     transform var(--block-duration-instant) var(--block-ease-step);
 }
 
-.item:hover:not([aria-disabled="true"]) {
+.item:hover:not([aria-disabled="true"]):not([data-active]) {
   background-color: var(--block-slot-hover);
   border-color: var(--block-border);
 }
@@ -80,6 +80,7 @@
 
 .item[data-active] {
   color: var(--block-on-primary);
+  /* Stays readable on hover: the hover rule above skips the active item. */
   background-color: var(--block-primary);
   border-color: var(--block-border);
   box-shadow:

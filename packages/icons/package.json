@@ -3,6 +3,16 @@
   "version": "0.1.0",
   "description": "Pixel-art React icons (16 × 16 grid) for Block UI.",
   "license": "MIT",
+  "author": "Block UI Contributors",
+  "homepage": "https://malilion.github.io/BlockUI/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malilion/BlockUI.git",
+    "directory": "packages/icons"
+  },
+  "bugs": {
+    "url": "https://github.com/malilion/BlockUI/issues"
+  },
   "type": "module",
   "sideEffects": false,
   "exports": {
