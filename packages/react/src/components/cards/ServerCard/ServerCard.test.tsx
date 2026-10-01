@@ -2,16 +2,28 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { expectNoA11yViolations } from "../../../test/axe";
-import { pingQuality, ServerCard } from "./ServerCard";
+import { ServerCard } from "./ServerCard";
+import { pingQuality } from "./ServerCard.utils";
 
 describe("ServerCard", () => {
   it("renders players, version and ping", () => {
-    render(<ServerCard name="BlockCraft SMP" onlinePlayers={12} maxPlayers={50} version="1.20.4" ping={32} />);
+    render(
+      <ServerCard
+        name="BlockCraft SMP"
+        onlinePlayers={12}
+        maxPlayers={50}
+        version="1.20.4"
+        ping={32}
+      />,
+    );
     const card = screen.getByRole("article", { name: "Server" });
     expect(card).toHaveTextContent("BlockCraft SMP");
     expect(card).toHaveTextContent("12 / 50");
     expect(card).toHaveTextContent("1.20.4");
-    expect(screen.getByRole("img", { name: "Ping: 32 ms" })).toHaveAttribute("data-quality", "good");
+    expect(screen.getByRole("img", { name: "Ping: 32 ms" })).toHaveAttribute(
+      "data-quality",
+      "good",
+    );
   });
 
   it("classifies ping quality", () => {
@@ -35,7 +47,9 @@ describe("ServerCard", () => {
   });
 
   it("has no accessibility violations", async () => {
-    const { container } = render(<ServerCard name="SMP" onlinePlayers={1} ping={10} onJoin={() => undefined} />);
+    const { container } = render(
+      <ServerCard name="SMP" onlinePlayers={1} ping={10} onJoin={() => undefined} />,
+    );
     await expectNoA11yViolations(container);
   });
 });

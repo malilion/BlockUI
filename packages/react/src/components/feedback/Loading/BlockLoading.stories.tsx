@@ -23,7 +23,7 @@ const meta = {
           '<BlockLoading variant="bar" label="Generating world…" />',
           "```",
           "",
-          "**Accessibility** — `role=\"status\"` so the label is announced; animation respects `prefers-reduced-motion`.",
+          '**Accessibility** — `role="status"` so the label is announced; animation respects `prefers-reduced-motion`.',
         ].join("\n"),
       },
     },

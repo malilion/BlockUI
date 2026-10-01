@@ -26,7 +26,7 @@ const meta = {
           "<XPBar value={1240} max={2000} level={28} showValue />",
           "```",
           "",
-          "**Accessibility** — `role=\"progressbar\"` with value text \"Level 28, 1,240 / 2,000 XP\".",
+          '**Accessibility** — `role="progressbar"` with value text "Level 28, 1,240 / 2,000 XP".',
         ].join("\n"),
       },
     },

@@ -17,8 +17,10 @@ export interface BlockSidebarProps extends HTMLAttributes<HTMLElement> {
   children?: ReactNode;
 }
 
-export interface SidebarItemProps
-  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "onClick" | "children"> {
+export interface SidebarItemProps extends Omit<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  "onClick" | "children"
+> {
   icon?: ReactNode;
   /** Current page — sets `aria-current="page"`. */
   active?: boolean;

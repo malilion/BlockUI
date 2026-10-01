@@ -3,13 +3,7 @@ import { forwardRef, useId, type ReactNode } from "react";
 import { cx } from "../../../utils/cx";
 import styles from "./BlockAlert.module.css";
 import type { AlertVariant, BlockAlertProps } from "./BlockAlert.types";
-
-export const alertMaterial: Record<AlertVariant, string> = {
-  success: "emerald",
-  info: "water",
-  warning: "gold",
-  error: "redstone",
-};
+import { alertMaterial } from "./BlockAlert.utils";
 
 const defaultIcons: Record<AlertVariant, ReactNode> = {
   success: <CheckIcon size={20} />,

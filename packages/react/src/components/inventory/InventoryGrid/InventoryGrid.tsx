@@ -12,11 +12,7 @@ import {
 import { useControllableState } from "../../../hooks/useControllableState";
 import { cx } from "../../../utils/cx";
 import { InventorySlot } from "../InventorySlot/InventorySlot";
-import {
-  InventoryGridContext,
-  SlotIndexContext,
-  type InventoryGridContextValue,
-} from "./context";
+import { InventoryGridContext, SlotIndexContext, type InventoryGridContextValue } from "./context";
 import styles from "./InventoryGrid.module.css";
 import type { InventoryGridProps } from "./InventoryGrid.types";
 

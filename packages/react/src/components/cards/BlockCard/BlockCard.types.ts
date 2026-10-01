@@ -1,6 +1,14 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
-export const cardMaterials = ["grass", "stone", "wood", "deepslate", "obsidian", "nether", "sand"] as const;
+export const cardMaterials = [
+  "grass",
+  "stone",
+  "wood",
+  "deepslate",
+  "obsidian",
+  "nether",
+  "sand",
+] as const;
 
 export type CardMaterial = (typeof cardMaterials)[number];
 

@@ -1,7 +1,10 @@
 import type { ReactNode } from "react";
 import type { BlockCardProps } from "../BlockCard/BlockCard.types";
 
-export interface AchievementCardProps extends Omit<BlockCardProps, "title" | "children" | "footer"> {
+export interface AchievementCardProps extends Omit<
+  BlockCardProps,
+  "title" | "children" | "footer"
+> {
   title: string;
   description?: string;
   icon?: ReactNode;

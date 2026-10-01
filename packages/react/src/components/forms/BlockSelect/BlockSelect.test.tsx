@@ -56,7 +56,9 @@ describe("BlockSelect", () => {
   });
 
   it("has no accessibility violations", async () => {
-    const { container } = render(<BlockSelect label="Mode" options={modes} helperText="Can be changed later" />);
+    const { container } = render(
+      <BlockSelect label="Mode" options={modes} helperText="Can be changed later" />,
+    );
     await expectNoA11yViolations(container);
   });
 });

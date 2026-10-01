@@ -31,7 +31,14 @@ describe("BlockCheckbox", () => {
   });
 
   it("supports description, error and disabled", () => {
-    render(<BlockCheckbox label="Hardcore" description="One life only." error="Not allowed here" disabled />);
+    render(
+      <BlockCheckbox
+        label="Hardcore"
+        description="One life only."
+        error="Not allowed here"
+        disabled
+      />,
+    );
     const checkbox = screen.getByRole("checkbox");
     expect(checkbox).toBeDisabled();
     expect(checkbox).toHaveAttribute("aria-invalid", "true");
@@ -45,7 +52,9 @@ describe("BlockCheckbox", () => {
   });
 
   it("has no accessibility violations", async () => {
-    const { container } = render(<BlockCheckbox label="Enable PvP" description="Players can attack each other." />);
+    const { container } = render(
+      <BlockCheckbox label="Enable PvP" description="Players can attack each other." />,
+    );
     await expectNoA11yViolations(container);
   });
 });

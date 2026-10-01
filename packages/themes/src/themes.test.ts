@@ -45,7 +45,12 @@ describe.each(themeNames)("%s theme", (name) => {
   it("maps roles to PRD CSS variable names", () => {
     const names = themeEntries(theme).map(([n]) => n);
     expect(names).toEqual(
-      expect.arrayContaining(["--block-bg", "--block-surface", "--block-surface-alt", "--block-text-muted"]),
+      expect.arrayContaining([
+        "--block-bg",
+        "--block-surface",
+        "--block-surface-alt",
+        "--block-text-muted",
+      ]),
     );
   });
 });

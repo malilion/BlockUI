@@ -9,7 +9,8 @@
 
 .stone {
   background-color: var(--block-surface);
-  background-image: linear-gradient(
+  background-image:
+    linear-gradient(
       color-mix(in srgb, var(--block-surface) 86%, transparent),
       color-mix(in srgb, var(--block-surface) 86%, transparent)
     ),
@@ -18,9 +19,7 @@
     auto,
     64px 64px;
   image-rendering: pixelated;
-  box-shadow:
-    var(--block-shadow-bevel),
-    var(--block-shadow-drop);
+  box-shadow: var(--block-shadow-bevel), var(--block-shadow-drop);
 }
 
 .inset {

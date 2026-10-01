@@ -24,7 +24,9 @@ describe("WorldCard", () => {
   });
 
   it("renders a decorative image or the fallback landscape", () => {
-    const { container, rerender } = render(<WorldCard {...world} image="/world.png" lastPlayed="today" />);
+    const { container, rerender } = render(
+      <WorldCard {...world} image="/world.png" lastPlayed="today" />,
+    );
     expect(container.querySelector("img")).toHaveAttribute("alt", "");
     expect(screen.getByText("Last played today")).toBeInTheDocument();
     rerender(<WorldCard {...world} />);

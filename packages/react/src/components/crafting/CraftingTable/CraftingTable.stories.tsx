@@ -15,7 +15,9 @@ function ChestGrid({ filled }: { filled: boolean }) {
     <CraftingGrid size={3}>
       {Array.from({ length: 9 }, (_, i) => (
         <CraftingSlot key={i}>
-          {filled && ring.includes(i) ? <ItemStack icon={<PlanksIcon />} name="Oak Planks" /> : null}
+          {filled && ring.includes(i) ? (
+            <ItemStack icon={<PlanksIcon />} name="Oak Planks" />
+          ) : null}
         </CraftingSlot>
       ))}
     </CraftingGrid>

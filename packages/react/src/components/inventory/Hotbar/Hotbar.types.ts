@@ -1,19 +1,18 @@
 import type { ReactNode } from "react";
 import type { InventoryGridProps } from "../InventoryGrid/InventoryGrid.types";
 
-export interface HotbarProps
-  extends Omit<
-    InventoryGridProps,
-    | "columns"
-    | "rows"
-    | "children"
-    | "selectedIndex"
-    | "defaultSelectedIndex"
-    | "onSelectedIndexChange"
-    | "selectionFollowsFocus"
-    | "wrap"
-    | "onSelect"
-  > {
+export interface HotbarProps extends Omit<
+  InventoryGridProps,
+  | "columns"
+  | "rows"
+  | "children"
+  | "selectedIndex"
+  | "defaultSelectedIndex"
+  | "onSelectedIndexChange"
+  | "selectionFollowsFocus"
+  | "wrap"
+  | "onSelect"
+> {
   /** Controlled selected slot. */
   selectedIndex?: number;
   /** @default 0 */

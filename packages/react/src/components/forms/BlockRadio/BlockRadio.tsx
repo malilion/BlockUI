@@ -85,7 +85,11 @@ export const BlockRadioGroup = forwardRef<HTMLFieldSetElement, BlockRadioGroupPr
   ) {
     const generated = useId();
     const groupName = name ?? `block-radio-group-${generated}`;
-    const [current, setCurrent] = useControllableState({ value, defaultValue, onChange: onValueChange });
+    const [current, setCurrent] = useControllableState({
+      value,
+      defaultValue,
+      onChange: onValueChange,
+    });
     const helperId = helperText ? `${groupName}-helper` : undefined;
     const errorId = error ? `${groupName}-error` : undefined;
 

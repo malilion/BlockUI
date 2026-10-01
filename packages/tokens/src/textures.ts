@@ -19,7 +19,12 @@ function mulberry32(seed: number): () => number {
   };
 }
 
-function noiseGrid(size: number, palette: readonly string[], weights: readonly number[], seed: number): Grid {
+function noiseGrid(
+  size: number,
+  palette: readonly string[],
+  weights: readonly number[],
+  seed: number,
+): Grid {
   const rand = mulberry32(seed);
   const total = weights.reduce((sum, w) => sum + w, 0);
   const grid: Grid = [];
@@ -86,7 +91,8 @@ function grassTop(): Grid {
     const depth = 3 + Math.floor(rand() * 3);
     for (let y = 0; y < depth; y += 1) {
       const row = grid[y];
-      if (row) row[x] = rand() > 0.7 ? colors.grassDark : rand() > 0.5 ? colors.grassLight : colors.grass;
+      if (row)
+        row[x] = rand() > 0.7 ? colors.grassDark : rand() > 0.5 ? colors.grassLight : colors.grass;
     }
   }
   return grid;

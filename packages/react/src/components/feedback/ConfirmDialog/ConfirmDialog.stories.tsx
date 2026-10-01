@@ -21,12 +21,15 @@ const meta = {
     onConfirm: fn(),
     onCancel: fn(),
   },
-  argTypes: { variant: { control: "inline-radio", options: ["default", "danger"] }, icon: { control: false } },
+  argTypes: {
+    variant: { control: "inline-radio", options: ["default", "danger"] },
+    icon: { control: false },
+  },
   parameters: {
     docs: {
       description: {
         component: [
-          "Confirmation dialog built on `BlockModal` with `role=\"alertdialog\"`.",
+          'Confirmation dialog built on `BlockModal` with `role="alertdialog"`.',
           "",
           "```tsx",
           "<ConfirmDialog",

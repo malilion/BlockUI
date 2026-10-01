@@ -2,7 +2,8 @@ import { render, screen } from "@testing-library/react";
 import { createRef } from "react";
 import { describe, expect, it } from "vitest";
 import { expectNoA11yViolations } from "../../../test/axe";
-import { describeItemStack, ItemStack } from "./ItemStack";
+import { ItemStack } from "./ItemStack";
+import { describeItemStack } from "./ItemStack.utils";
 
 const Icon = () => <svg data-testid="icon" />;
 

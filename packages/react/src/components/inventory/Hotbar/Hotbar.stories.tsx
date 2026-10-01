@@ -16,7 +16,13 @@ import { Hotbar } from "./Hotbar";
 
 const hotbarItems = [
   <ItemStack key="sword" icon={<DiamondSwordIcon />} name="Diamond Sword" />,
-  <ItemStack key="pick" icon={<PickaxeIcon />} name="Diamond Pickaxe" durability={900} maxDurability={1561} />,
+  <ItemStack
+    key="pick"
+    icon={<PickaxeIcon />}
+    name="Diamond Pickaxe"
+    durability={900}
+    maxDurability={1561}
+  />,
   <ItemStack key="axe" icon={<AxeIcon />} name="Iron Axe" />,
   <ItemStack key="shovel" icon={<ShovelIcon />} name="Iron Shovel" />,
   <ItemStack key="apple" icon={<AppleIcon />} amount={8} name="Apple" />,

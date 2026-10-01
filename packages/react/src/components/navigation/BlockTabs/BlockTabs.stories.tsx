@@ -11,10 +11,31 @@ const meta = {
     label: "Creative inventory",
     onValueChange: fn(),
     items: [
-      { id: "blocks", label: "Blocks", icon: <GrassBlockIcon size={16} />, content: "Building blocks, ores and stone." },
-      { id: "combat", label: "Combat", icon: <SwordIcon size={16} />, content: "Swords, bows and armor." },
-      { id: "food", label: "Food", icon: <AppleIcon size={16} />, content: "Apples, bread and more." },
-      { id: "rare", label: "Rare", icon: <DiamondIcon size={16} />, content: "Locked.", disabled: true },
+      {
+        id: "blocks",
+        label: "Blocks",
+        icon: <GrassBlockIcon size={16} />,
+        content: "Building blocks, ores and stone.",
+      },
+      {
+        id: "combat",
+        label: "Combat",
+        icon: <SwordIcon size={16} />,
+        content: "Swords, bows and armor.",
+      },
+      {
+        id: "food",
+        label: "Food",
+        icon: <AppleIcon size={16} />,
+        content: "Apples, bread and more.",
+      },
+      {
+        id: "rare",
+        label: "Rare",
+        icon: <DiamondIcon size={16} />,
+        content: "Locked.",
+        disabled: true,
+      },
     ],
   },
   parameters: {

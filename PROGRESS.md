@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Phase 8 — Navigation (in progress)
+Phase 12 — Release (quality gates passing)
 
 ## Completed
 
@@ -12,35 +12,43 @@ Phase 8 — Navigation (in progress)
 - [x] `@block-ui/icons` — ~50 original 16×16 pixel icons (all PRD §55 icons)
 - [x] Actions — BlockButton, IconButton
 - [x] Forms — BlockInput, BlockTextarea, BlockSelect, BlockCheckbox, BlockRadio(+Group), BlockToggle, BlockSlider
-- [x] Inventory — InventorySlot, ItemStack, InventoryGrid, DurabilityBar, ItemTooltip, Hotbar, Inventory(+Section)
+- [x] Inventory — InventorySlot, ItemStack, InventoryGrid, DurabilityBar, ItemTooltip, Hotbar, Inventory(+Section, chest variant)
 - [x] Crafting — CraftingSlot, CraftingGrid, CraftingResult, CraftingTable, Furnace
 - [x] HUD — HealthBar, ArmorBar, HungerBar, XPBar, PlayerHUD
 - [x] Cards — BlockCard, QuestCard, AchievementCard, PlayerCard, ServerCard, WorldCard
 - [x] Feedback — BlockAlert, toast + BlockToaster, BlockModal, ConfirmDialog, BlockProgress, BlockLoading, BlockBadge
 - [x] Layout — BlockPanel; Provider — BlockUIProvider
-- [x] Navigation — BlockSidebar/SidebarItem, BlockTabs, Breadcrumb (tests passing)
+- [x] Navigation — BlockSidebar/SidebarItem, BlockTabs, Breadcrumb, HotbarNavigation
+- [x] Storybook — component stories, Introduction, Foundations, Patterns
+- [x] Playground — demo dashboard covering PRD §80 (dashboard, inventory, chest, crafting, actions, forms, cards, feedback, HUD)
+- [x] Mobile — HotbarNavigation replaces the sidebar below 768px
+- [x] Testing — 436 unit/component tests, Playwright E2E (desktop + mobile)
+- [x] CI — GitHub Actions: lint → typecheck → test → build → build-storybook
+- [x] Docs — README, CHANGELOG, LICENSE, `@block-ui/react` package README
 
 ## In Progress
 
-- [ ] HotbarNavigation — 1 failing test: link accessible name with badge (`"A (2)"`)
+- [ ] npm publish of `@block-ui/*` (Task 024)
 
 ## Next
 
-- [ ] Fix HotbarNavigation test, run full `pnpm test`
-- [ ] Storybook Foundations / Introduction / Patterns pages (apps/docs/src)
-- [ ] apps/playground (demo dashboard per PRD §59–60, §80)
-- [ ] ESLint config (`eslint.config.js`) + `pnpm lint`, `pnpm typecheck`, `pnpm build`
-- [ ] Playwright E2E (tests/e2e) + `playwright.config.ts`
-- [ ] `.github/workflows/ci.yml`, README, CHANGELOG, LICENSE, tree-shake check script
+- [ ] Confirm npm package metadata and publish 0.1.0
+- [ ] Optional: add Playwright E2E and tree-shake check to CI
 
 ## Known Issues / Decisions
 
 - `stone` token is #737373 (PRD #777777 only reaches 4.48:1 with white text).
 - Inline `style` is used only to pass dynamic values as CSS custom properties (progress widths, grid column count).
-- Lint, typecheck and build have not been run on the react package yet.
+- Helper functions (`pingQuality`, `getFurnaceState`, `durabilityLevel`, …) live in `*.utils.ts` next to their component so Fast Refresh works (lint is warning-free).
+- `*.mdx` is excluded from Prettier (Prettier only supports MDX v1).
 
 ## Last Verification
 
-- tokens + themes tests ✅ (71)
-- icons tests ✅ (111)
-- react tests: 251 passed / 1 failed
+- pnpm lint ✅ (0 errors, 0 warnings)
+- pnpm format:check ✅
+- pnpm build-storybook ✅
+- pnpm typecheck ✅
+- pnpm test ✅ (436)
+- pnpm build ✅
+- pnpm test:e2e ✅ (16)
+- pnpm check:treeshake ✅

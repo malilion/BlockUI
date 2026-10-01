@@ -4,7 +4,14 @@ import { p } from "../palette";
 /* Full-color navigation icons (sidebar, hotbar navigation). */
 
 export const HomeIcon = /*#__PURE__*/ createPixelIcon("HomeIcon", {
-  palette: { k: p.outline, r: p.redstoneLight, R: p.redstone, w: p.wood, d: p.woodDark, b: p.diamond },
+  palette: {
+    k: p.outline,
+    r: p.redstoneLight,
+    R: p.redstone,
+    w: p.wood,
+    d: p.woodDark,
+    b: p.diamond,
+  },
   pixels: [
     "................",
     ".......kk.......",

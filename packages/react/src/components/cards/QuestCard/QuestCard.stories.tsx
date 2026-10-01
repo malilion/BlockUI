@@ -47,7 +47,15 @@ export const States: Story = {
       <QuestCard {...args} />
       <QuestCard {...args} progress={10} />
       <QuestCard {...args} progress={10} claimed />
-      <QuestCard {...args} material="stone" title="Gather Wood" description="Chop 64 logs." progress={12} max={64} coins={undefined} />
+      <QuestCard
+        {...args}
+        material="stone"
+        title="Gather Wood"
+        description="Chop 64 logs."
+        progress={12}
+        max={64}
+        coins={undefined}
+      />
     </StoryGrid>
   ),
 };

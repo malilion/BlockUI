@@ -2,14 +2,8 @@ import { forwardRef, type CSSProperties } from "react";
 import { cx } from "../../../utils/cx";
 import { formatNumber, ratio } from "../../../utils/number";
 import styles from "./DurabilityBar.module.css";
-import type { DurabilityBarProps, DurabilityLevel } from "./DurabilityBar.types";
-
-export function durabilityLevel(value: number, max: number): DurabilityLevel {
-  const r = ratio(value, max);
-  if (r > 0.5) return "high";
-  if (r > 0.25) return "medium";
-  return "low";
-}
+import type { DurabilityBarProps } from "./DurabilityBar.types";
+import { durabilityLevel } from "./DurabilityBar.utils";
 
 /** Tool durability gauge — green → gold → redstone as it wears out. */
 export const DurabilityBar = forwardRef<HTMLDivElement, DurabilityBarProps>(function DurabilityBar(

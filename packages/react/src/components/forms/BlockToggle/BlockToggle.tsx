@@ -30,7 +30,12 @@ export const BlockToggle = forwardRef<HTMLInputElement, BlockToggleProps>(functi
 
   return (
     <div
-      className={cx(styles.root, styles[size], labelPosition === "start" && styles.start, className)}
+      className={cx(
+        styles.root,
+        styles[size],
+        labelPosition === "start" && styles.start,
+        className,
+      )}
       data-disabled={disabled || undefined}
     >
       <span className={styles.control}>

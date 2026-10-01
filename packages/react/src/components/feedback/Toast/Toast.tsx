@@ -1,16 +1,12 @@
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type KeyboardEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 import { usePortalContainer } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { BlockAlert } from "../Alert/BlockAlert";
-import { DEFAULT_TOAST_LIMIT, getToasts, subscribeToasts, toast } from "./store";
+import { DEFAULT_TOAST_LIMIT, toast } from "./store";
 import styles from "./Toast.module.css";
 import type { BlockToasterProps, ToastRecord } from "./Toast.types";
-
-/** Subscribe to the live toast list. */
-export function useToasts(): ToastRecord[] {
-  return useSyncExternalStore(subscribeToasts, getToasts, getToasts);
-}
+import { useToasts } from "./useToasts";
 
 function ToastItem({ record }: { record: ToastRecord }) {
   const [paused, setPaused] = useState(false);

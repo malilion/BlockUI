@@ -6,7 +6,15 @@ import type { BlockLoadingProps } from "./BlockLoading.types";
 
 /** Loading indicator — stepping pixel blocks or a loading bar — inside a polite status region. */
 export const BlockLoading = forwardRef<HTMLDivElement, BlockLoadingProps>(function BlockLoading(
-  { label = "Loading…", variant = "blocks", progress, hideLabel = false, size = "md", className, ...rest },
+  {
+    label = "Loading…",
+    variant = "blocks",
+    progress,
+    hideLabel = false,
+    size = "md",
+    className,
+    ...rest
+  },
   ref,
 ) {
   return (

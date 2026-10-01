@@ -23,7 +23,7 @@ const meta = {
           "<HealthBar value={14} max={20} />",
           "```",
           "",
-          "**Accessibility** — a single `role=\"meter\"` named \"Health\" with `aria-valuetext` such as \"14 of 20\"; the icons are decorative.",
+          '**Accessibility** — a single `role="meter"` named "Health" with `aria-valuetext` such as "14 of 20"; the icons are decorative.',
         ].join("\n"),
       },
     },

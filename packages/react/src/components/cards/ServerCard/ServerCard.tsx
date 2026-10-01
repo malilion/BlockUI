@@ -7,13 +7,7 @@ import { BlockCard } from "../BlockCard/BlockCard";
 import styles from "../cards.module.css";
 import serverStyles from "./ServerCard.module.css";
 import type { PingQuality, ServerCardProps } from "./ServerCard.types";
-
-export function pingQuality(ping: number | undefined, online = true): PingQuality {
-  if (!online || ping === undefined) return "offline";
-  if (ping < 80) return "good";
-  if (ping < 200) return "fair";
-  return "poor";
-}
+import { pingQuality } from "./ServerCard.utils";
 
 const BARS: Record<PingQuality, number> = { good: 4, fair: 3, poor: 1, offline: 0 };
 
@@ -48,7 +42,12 @@ export const ServerCard = forwardRef<HTMLElement, ServerCardProps>(function Serv
       className={cx(styles.card, className)}
       footer={
         onJoin ? (
-          <BlockButton size="sm" variant={online ? "grass" : "stone"} disabled={!online} onClick={onJoin}>
+          <BlockButton
+            size="sm"
+            variant={online ? "grass" : "stone"}
+            disabled={!online}
+            onClick={onJoin}
+          >
             Join
           </BlockButton>
         ) : undefined
@@ -70,7 +69,11 @@ export const ServerCard = forwardRef<HTMLElement, ServerCardProps>(function Serv
           data-quality={quality}
         >
           {[1, 2, 3, 4].map((bar) => (
-            <span key={bar} className={serverStyles.bar} data-on={bar <= BARS[quality] || undefined} />
+            <span
+              key={bar}
+              className={serverStyles.bar}
+              data-on={bar <= BARS[quality] || undefined}
+            />
           ))}
         </span>
       </div>

@@ -7,7 +7,8 @@
   gap: var(--block-space-1);
   width: 100%;
   max-width: calc(
-    var(--block-columns) * var(--block-slot-size) + (var(--block-columns) - 1) * var(--block-slot-gap)
+    var(--block-columns) * var(--block-slot-size) + (var(--block-columns) - 1) *
+      var(--block-slot-gap)
   );
   touch-action: manipulation;
 }

@@ -36,13 +36,22 @@ type Story = StoryObj<typeof meta>;
 export const Interactive: Story = {
   render: () => (
     <StoryRow>
-      <BlockButton variant="emerald" onClick={() => toast.success("World saved.", { title: "Success!" })}>
+      <BlockButton
+        variant="emerald"
+        onClick={() => toast.success("World saved.", { title: "Success!" })}
+      >
         Success
       </BlockButton>
-      <BlockButton variant="diamond" onClick={() => toast.info("Update available.", { title: "Info" })}>
+      <BlockButton
+        variant="diamond"
+        onClick={() => toast.info("Update available.", { title: "Info" })}
+      >
         Info
       </BlockButton>
-      <BlockButton variant="gold" onClick={() => toast.warning("Low hunger.", { title: "Warning" })}>
+      <BlockButton
+        variant="gold"
+        onClick={() => toast.warning("Low hunger.", { title: "Warning" })}
+      >
         Warning
       </BlockButton>
       <BlockButton

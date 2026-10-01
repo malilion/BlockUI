@@ -1,4 +1,10 @@
-import { forwardRef, useId, type ForwardRefExoticComponent, type RefAttributes, type SVGProps } from "react";
+import {
+  forwardRef,
+  useId,
+  type ForwardRefExoticComponent,
+  type RefAttributes,
+  type SVGProps,
+} from "react";
 
 /** Transparent pixel. */
 const EMPTY = ".";

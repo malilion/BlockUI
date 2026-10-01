@@ -44,7 +44,11 @@ export const States: Story = {
   render: () => (
     <StoryStack>
       <BlockTextarea label="Helper" helperText="Markdown is not supported." />
-      <BlockTextarea label="Error" defaultValue="!!!" error="Please write at least 10 characters." />
+      <BlockTextarea
+        label="Error"
+        defaultValue="!!!"
+        error="Please write at least 10 characters."
+      />
       <BlockTextarea label="Disabled" defaultValue="Read only notes" disabled />
     </StoryStack>
   ),

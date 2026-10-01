@@ -23,7 +23,7 @@ const meta = {
           "<HungerBar value={14} max={20} />",
           "```",
           "",
-          "**Accessibility** — a single `role=\"meter\"` named \"Hunger\" with `aria-valuetext` such as \"14 of 20\"; the icons are decorative.",
+          '**Accessibility** — a single `role="meter"` named "Hunger" with `aria-valuetext` such as "14 of 20"; the icons are decorative.',
         ].join("\n"),
       },
     },

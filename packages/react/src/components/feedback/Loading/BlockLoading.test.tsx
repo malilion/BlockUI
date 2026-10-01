@@ -11,7 +11,9 @@ describe("BlockLoading", () => {
   });
 
   it("supports the bar variant with progress", () => {
-    const { container } = render(<BlockLoading variant="bar" label="Generating world…" progress={40} />);
+    const { container } = render(
+      <BlockLoading variant="bar" label="Generating world…" progress={40} />,
+    );
     expect(screen.getByRole("status")).toHaveTextContent("Generating world…");
     expect(container.querySelector('[role="progressbar"]')).toHaveAttribute("aria-valuenow", "40");
   });

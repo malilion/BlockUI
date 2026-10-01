@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { expectNoA11yViolations } from "../../../test/axe";
-import { DurabilityBar, durabilityLevel } from "./DurabilityBar";
+import { DurabilityBar } from "./DurabilityBar";
+import { durabilityLevel } from "./DurabilityBar.utils";
 
 describe("DurabilityBar", () => {
   it("exposes a meter with value text", () => {
@@ -18,7 +19,10 @@ describe("DurabilityBar", () => {
     expect(durabilityLevel(40, 100)).toBe("medium");
     expect(durabilityLevel(10, 100)).toBe("low");
     render(<DurabilityBar value={5} max={100} label="Pickaxe durability" />);
-    expect(screen.getByRole("meter", { name: "Pickaxe durability" })).toHaveAttribute("data-level", "low");
+    expect(screen.getByRole("meter", { name: "Pickaxe durability" })).toHaveAttribute(
+      "data-level",
+      "low",
+    );
   });
 
   it("clamps values and hides text in compact mode", () => {

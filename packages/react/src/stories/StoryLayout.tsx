@@ -7,11 +7,23 @@ export function StoryRow({ children, wrap = true }: { children: ReactNode; wrap?
   return <div className={cx(styles.row, wrap && styles.wrap)}>{children}</div>;
 }
 
-export function StoryStack({ children, narrow = false }: { children: ReactNode; narrow?: boolean }) {
+export function StoryStack({
+  children,
+  narrow = false,
+}: {
+  children: ReactNode;
+  narrow?: boolean;
+}) {
   return <div className={cx(styles.stack, narrow && styles.narrow)}>{children}</div>;
 }
 
-export function StoryGrid({ children, min = "md" }: { children: ReactNode; min?: "sm" | "md" | "lg" }) {
+export function StoryGrid({
+  children,
+  min = "md",
+}: {
+  children: ReactNode;
+  min?: "sm" | "md" | "lg";
+}) {
   return <div className={cx(styles.grid, styles[min])}>{children}</div>;
 }
 

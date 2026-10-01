@@ -88,7 +88,12 @@ describe("InventoryGrid", () => {
   it("supports controlled selection and selectionFollowsFocus with wrap", async () => {
     const user = userEvent.setup();
     const onSelectedIndexChange = vi.fn();
-    renderGrid({ selectedIndex: 0, onSelectedIndexChange, selectionFollowsFocus: true, wrap: true });
+    renderGrid({
+      selectedIndex: 0,
+      onSelectedIndexChange,
+      selectionFollowsFocus: true,
+      wrap: true,
+    });
     await user.tab();
     await user.keyboard("{ArrowLeft}");
     expect(screen.getAllByRole("gridcell")[2]).toHaveFocus();

@@ -49,7 +49,12 @@ export const States: Story = {
       <BlockInput label="Default" placeholder="Steve" startIcon={<PlayerIcon size={16} />} />
       <BlockInput label="Helper" placeholder="My World" helperText="Shown on the world list." />
       <BlockInput label="Error" defaultValue="??" error="Only letters and numbers." />
-      <BlockInput label="Success" defaultValue="BlockCraft SMP" success helperText="Name available." />
+      <BlockInput
+        label="Success"
+        defaultValue="BlockCraft SMP"
+        success
+        helperText="Name available."
+      />
       <BlockInput label="Disabled" defaultValue="Locked" disabled />
     </StoryStack>
   ),
@@ -57,4 +62,6 @@ export const States: Story = {
 
 export const Disabled: Story = { args: { disabled: true, defaultValue: "Steve" } };
 
-export const Required: Story = { args: { required: true, helperText: "Required to join a server." } };
+export const Required: Story = {
+  args: { required: true, helperText: "Required to join a server." },
+};

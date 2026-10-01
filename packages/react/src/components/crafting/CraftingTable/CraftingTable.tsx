@@ -35,7 +35,13 @@ export const CraftingTable = forwardRef<HTMLDivElement, CraftingTableProps>(func
   const craftEnabled = canCraft ?? hasResult;
 
   return (
-    <div ref={ref} role="group" aria-label={label} className={cx(styles.table, className)} {...rest}>
+    <div
+      ref={ref}
+      role="group"
+      aria-label={label}
+      className={cx(styles.table, className)}
+      {...rest}
+    >
       <div className={styles.layout}>
         <div className={styles.input}>{input}</div>
         <span className={styles.arrow} aria-hidden="true">
@@ -44,7 +50,12 @@ export const CraftingTable = forwardRef<HTMLDivElement, CraftingTableProps>(func
         <div className={styles.output}>{resultNode}</div>
       </div>
       {onCraft ? (
-        <BlockButton variant="grass" disabled={!craftEnabled} onClick={onCraft} className={styles.craft}>
+        <BlockButton
+          variant="grass"
+          disabled={!craftEnabled}
+          onClick={onCraft}
+          className={styles.craft}
+        >
           {craftLabel}
         </BlockButton>
       ) : null}

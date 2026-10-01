@@ -8,3 +8,4 @@ packages/tokens/tokens.css
 packages/themes/themes.css
 *.png
 PRD*.md
+*.mdx

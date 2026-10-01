@@ -46,7 +46,11 @@ describe("BlockAlert", () => {
   it("supports custom icon, no icon, action and ref", () => {
     const ref = createRef<HTMLDivElement>();
     const { rerender, container } = render(
-      <BlockAlert ref={ref} icon={<svg data-testid="custom" />} action={<button type="button">Retry</button>}>
+      <BlockAlert
+        ref={ref}
+        icon={<svg data-testid="custom" />}
+        action={<button type="button">Retry</button>}
+      >
         x
       </BlockAlert>,
     );

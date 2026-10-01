@@ -32,7 +32,7 @@ const meta = {
           '<BlockProgress value={70} max={100} variant="grass" />',
           "```",
           "",
-          "**Accessibility** — `role=\"progressbar\"` labelled by `label` (or `aria-label`), with `aria-valuetext`.",
+          '**Accessibility** — `role="progressbar"` labelled by `label` (or `aria-label`), with `aria-valuetext`.',
         ].join("\n"),
       },
     },
@@ -48,7 +48,13 @@ export const Variants: Story = {
   render: () => (
     <StoryStack>
       {progressVariants.map((variant, index) => (
-        <BlockProgress key={variant} label={variant} variant={variant} value={30 + index * 12} showValue />
+        <BlockProgress
+          key={variant}
+          label={variant}
+          variant={variant}
+          value={30 + index * 12}
+          showValue
+        />
       ))}
     </StoryStack>
   ),
@@ -64,4 +70,6 @@ export const Sizes: Story = {
   ),
 };
 
-export const Indeterminate: Story = { args: { value: undefined, label: "Generating world…", showValue: false } };
+export const Indeterminate: Story = {
+  args: { value: undefined, label: "Generating world…", showValue: false },
+};

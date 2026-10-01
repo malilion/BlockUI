@@ -21,7 +21,7 @@ const meta = {
           '<BlockToggle label="Music" defaultChecked onCheckedChange={setMusic} />',
           "```",
           "",
-          "**Accessibility** — native checkbox with `role=\"switch\"`; `Space` toggles.",
+          '**Accessibility** — native checkbox with `role="switch"`; `Space` toggles.',
         ].join("\n"),
       },
     },

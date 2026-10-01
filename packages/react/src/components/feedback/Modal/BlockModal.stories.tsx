@@ -25,7 +25,7 @@ const meta = {
           '<BlockModal open={open} title="Delete World" onClose={handleClose}>…</BlockModal>',
           "```",
           "",
-          "**Accessibility** — `role=\"dialog\"` + `aria-modal`, labelled by the title; focus is trapped (`Tab` cycles), `Escape` closes, the overlay closes on click, and focus returns to the trigger. Bottom sheet on mobile.",
+          '**Accessibility** — `role="dialog"` + `aria-modal`, labelled by the title; focus is trapped (`Tab` cycles), `Escape` closes, the overlay closes on click, and focus returns to the trigger. Bottom sheet on mobile.',
         ].join("\n"),
       },
     },
@@ -39,7 +39,11 @@ function ModalDemo({ size }: { size?: "sm" | "md" | "lg" }) {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <BlockButton variant="grass" onClick={() => setOpen(true)} startIcon={<SettingsIcon size={16} />}>
+      <BlockButton
+        variant="grass"
+        onClick={() => setOpen(true)}
+        startIcon={<SettingsIcon size={16} />}
+      >
         Open settings
       </BlockButton>
       <BlockModal

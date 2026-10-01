@@ -1,39 +1,110 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import {
   BlockUIProvider,
-  BlockSidebar, SidebarItem,
+  BlockSidebar,
+  SidebarItem,
   BlockPanel,
-  PlayerCard, WorldCard, BlockButton, IconButton, PlayerHUD,
-  InventoryGrid, InventorySlot, ItemStack, Hotbar, DurabilityBar, ItemTooltip,
-  CraftingTable, CraftingGrid, CraftingResult, Furnace,
-  BlockInput, BlockTextarea, BlockSelect, BlockCheckbox, BlockRadio, BlockToggle, BlockSlider,
-  QuestCard, AchievementCard, ServerCard,
-  BlockAlert, toast, BlockToaster, BlockModal, BlockProgress, BlockLoading,
-  HealthBar, ArmorBar, HungerBar, XPBar
+  PlayerCard,
+  WorldCard,
+  BlockButton,
+  IconButton,
+  PlayerHUD,
+  Inventory,
+  InventorySection,
+  InventoryGrid,
+  InventorySlot,
+  ItemStack,
+  Hotbar,
+  DurabilityBar,
+  ItemTooltip,
+  CraftingTable,
+  CraftingGrid,
+  CraftingResult,
+  Furnace,
+  BlockInput,
+  BlockTextarea,
+  BlockSelect,
+  BlockCheckbox,
+  BlockRadio,
+  BlockToggle,
+  BlockSlider,
+  QuestCard,
+  AchievementCard,
+  ServerCard,
+  BlockAlert,
+  toast,
+  BlockModal,
+  ConfirmDialog,
+  BlockProgress,
+  BlockLoading,
+  HealthBar,
+  ArmorBar,
+  HungerBar,
+  XPBar,
+  HotbarNavigation,
+  blockButtonVariants,
 } from "@block-ui/react";
 import type { BlockThemeName } from "@block-ui/themes";
 import { themeNames } from "@block-ui/themes";
 import {
-  HomeIcon, InventoryIcon, CraftingIcon, SettingsIcon, SearchIcon,
-  SwordIcon, PickaxeIcon, ChestIcon, HeartIcon, FoodIcon,
-  EmeraldIcon, GoldIcon, RedstoneIcon
+  HomeIcon,
+  InventoryIcon,
+  CraftingIcon,
+  SettingsIcon,
+  SearchIcon,
+  SwordIcon,
+  PickaxeIcon,
+  FoodIcon,
+  EmeraldIcon,
+  GoldIcon,
+  RedstoneIcon,
+  DiamondIcon,
+  CoalIcon,
+  TorchIcon,
+  AppleIcon,
+  QuestIcon,
 } from "@block-ui/icons";
 import styles from "./App.module.css";
 
-const TABS = ["Dashboard", "Inventory", "Crafting", "Actions", "Forms", "Cards", "Feedback", "HUD"] as const;
-type TabName = typeof TABS[number];
+const TABS = ["Dashboard", "Inventory", "Crafting", "Cards", "Feedback"] as const;
+type TabName = (typeof TABS)[number];
+
+const themeOptions = themeNames.map((name) => ({
+  value: name,
+  label: name.charAt(0).toUpperCase() + name.slice(1),
+}));
+
+function slot(
+  name: string,
+  icon: ReactNode,
+  extra?: {
+    amount?: number;
+    durability?: number;
+    maxDurability?: number;
+    rarity?: "common" | "uncommon" | "rare" | "epic";
+  },
+) {
+  return (
+    <InventorySlot
+      rarity={extra?.rarity}
+      tooltip={<ItemTooltip name={name} rarity={extra?.rarity} />}
+    >
+      <ItemStack
+        icon={icon}
+        name={name}
+        amount={extra?.amount}
+        durability={extra?.durability}
+        maxDurability={extra?.maxDurability}
+      />
+    </InventorySlot>
+  );
+}
 
 function DashboardSection() {
   return (
     <BlockPanel title="Dashboard" icon={<HomeIcon size={24} />}>
       <div className={styles.section}>
-        <PlayerCard
-          name="BlockMaster_42"
-          level={42}
-          status="Online"
-          xp={1250}
-          maxXp={2000}
-        />
+        <PlayerCard name="BlockMaster_42" level={42} status="Online" xp={1250} maxXp={2000} />
         <WorldCard
           name="Emerald Valley"
           gameMode="Survival"
@@ -42,65 +113,109 @@ function DashboardSection() {
           lastPlayed="2 hours ago"
         />
       </div>
-      <div className={styles.row} style={{ marginTop: '2rem' }}>
-        <BlockButton variant="diamond">Play Game</BlockButton>
-        <BlockButton variant="stone">Server List</BlockButton>
-        <BlockButton variant="wood">Settings</BlockButton>
+      <div className={styles.col}>
+        <h3 className={styles.heading}>Quick Actions</h3>
+        <div className={styles.row}>
+          {blockButtonVariants.map((variant) => (
+            <BlockButton key={variant} variant={variant}>
+              {variant.charAt(0).toUpperCase() + variant.slice(1)}
+            </BlockButton>
+          ))}
+        </div>
+        <div className={styles.row}>
+          <IconButton icon={<SearchIcon size={16} />} label="Search" />
+          <IconButton icon={<SettingsIcon size={16} />} label="Settings" />
+        </div>
       </div>
-      <div style={{ marginTop: '2rem' }}>
-        <h3>Current Status</h3>
+      <div className={styles.col}>
+        <h3 className={styles.heading}>Current Status</h3>
         <PlayerHUD
           player={{
-            health: 16, maxHealth: 20,
-            armor: 12, maxArmor: 20,
-            hunger: 18, maxHunger: 20,
-            level: 42, xp: 1250, maxXp: 2000
+            health: 16,
+            maxHealth: 20,
+            armor: 12,
+            maxArmor: 20,
+            hunger: 18,
+            maxHunger: 20,
+            level: 42,
+            xp: 1250,
+            maxXp: 2000,
           }}
         />
+        <HealthBar value={16} max={20} showText />
+        <ArmorBar value={12} max={20} showText />
+        <HungerBar value={18} max={20} showText />
+        <XPBar value={1250} max={2000} level={42} showValue />
+      </div>
+      <div className={styles.col}>
+        <h3 className={styles.heading}>Form</h3>
+        <div className={styles.grid}>
+          <BlockInput label="Username" placeholder="Enter username..." />
+          <BlockTextarea label="Bio" placeholder="Tell us about yourself..." />
+          <BlockSelect
+            label="Server Region"
+            options={[
+              { value: "us-east", label: "US East" },
+              { value: "eu-west", label: "EU West" },
+              { value: "asia", label: "Asia" },
+            ]}
+          />
+          <BlockCheckbox label="Enable PvP" />
+          <BlockRadio name="difficulty" value="peaceful" label="Peaceful" defaultChecked />
+          <BlockRadio name="difficulty" value="survival" label="Survival" />
+          <BlockToggle label="Fullscreen Mode" />
+          <BlockSlider label="Render Distance" min={2} max={32} defaultValue={12} />
+        </div>
       </div>
     </BlockPanel>
   );
 }
 
-function InventorySection() {
+function InventorySectionView() {
   return (
-    <BlockPanel title="Inventory" icon={<InventoryIcon size={24} />}>
-      <div className={styles.col}>
-        <InventoryGrid columns={9} rows={3}>
-          <InventorySlot tooltip={<ItemTooltip name="Diamond Sword" rarity="rare" />}>
-            <ItemStack icon={<SwordIcon size={16} />} name="Diamond Sword" durability={1200} maxDurability={1561} />
-          </InventorySlot>
-          <InventorySlot tooltip={<ItemTooltip name="Iron Pickaxe" />}>
-            <ItemStack icon={<PickaxeIcon size={16} />} name="Iron Pickaxe" durability={10} maxDurability={250} />
-          </InventorySlot>
-          <InventorySlot tooltip={<ItemTooltip name="Emerald" />}>
-            <ItemStack icon={<EmeraldIcon size={16} />} name="Emerald" amount={64} maxAmount={64} />
-          </InventorySlot>
-          <InventorySlot />
-          <InventorySlot tooltip={<ItemTooltip name="Gold Ingot" />}>
-            <ItemStack icon={<GoldIcon size={16} />} name="Gold Ingot" amount={12} maxAmount={64} />
-          </InventorySlot>
-        </InventoryGrid>
-
-        <h3 style={{ marginTop: '1rem' }}>Hotbar</h3>
-        <Hotbar slots={9} selectedIndex={0}>
-          <InventorySlot tooltip={<ItemTooltip name="Diamond Sword" />}>
-            <ItemStack icon={<SwordIcon size={16} />} />
-          </InventorySlot>
-          <InventorySlot tooltip={<ItemTooltip name="Iron Pickaxe" />}>
-            <ItemStack icon={<PickaxeIcon size={16} />} />
-          </InventorySlot>
-          <InventorySlot tooltip={<ItemTooltip name="Bread" />}>
-            <ItemStack icon={<FoodIcon size={16} />} amount={64} />
-          </InventorySlot>
-        </Hotbar>
-        
-        <h3 style={{ marginTop: '1rem' }}>Durability</h3>
-        <div style={{ width: '200px' }}>
-          <DurabilityBar value={25} max={100} />
-        </div>
-      </div>
-    </BlockPanel>
+    <div className={styles.col}>
+      <Inventory title="Inventory" icon={<InventoryIcon size={24} />}>
+        <InventorySection title="Storage">
+          <InventoryGrid columns={9} rows={3}>
+            {slot("Diamond Sword", <SwordIcon size={16} />, {
+              durability: 1200,
+              maxDurability: 1561,
+              rarity: "rare",
+            })}
+            {slot("Iron Pickaxe", <PickaxeIcon size={16} />, {
+              durability: 10,
+              maxDurability: 250,
+            })}
+            {slot("Emerald", <EmeraldIcon size={16} />, { amount: 64 })}
+            <InventorySlot />
+            {slot("Gold Ingot", <GoldIcon size={16} />, { amount: 12 })}
+            {slot("Torch", <TorchIcon size={16} />, { amount: 17 })}
+            {slot("Apple", <AppleIcon size={16} />, { amount: 8 })}
+          </InventoryGrid>
+        </InventorySection>
+        <InventorySection title="Hotbar">
+          <Hotbar slots={9} selectedIndex={0}>
+            {slot("Diamond Sword", <SwordIcon size={16} />)}
+            {slot("Iron Pickaxe", <PickaxeIcon size={16} />)}
+            {slot("Bread", <FoodIcon size={16} />, { amount: 64 })}
+          </Hotbar>
+        </InventorySection>
+        <InventorySection title="Durability">
+          <div className={styles.durability}>
+            <DurabilityBar value={25} max={100} />
+          </div>
+        </InventorySection>
+      </Inventory>
+      <Inventory title="Chest" variant="chest">
+        <InventorySection title="Storage">
+          <InventoryGrid columns={9} rows={3} label="Chest">
+            {slot("Coal", <CoalIcon size={16} />, { amount: 36 })}
+            {slot("Diamond", <DiamondIcon size={16} />, { amount: 7, rarity: "rare" })}
+            {slot("Redstone", <RedstoneIcon size={16} />, { amount: 24 })}
+          </InventoryGrid>
+        </InventorySection>
+      </Inventory>
+    </div>
   );
 }
 
@@ -109,26 +224,42 @@ function CraftingSection() {
     <BlockPanel title="Crafting" icon={<CraftingIcon size={24} />}>
       <div className={styles.section}>
         <div className={styles.col}>
-          <h3>Crafting Table</h3>
-          <CraftingTable 
+          <h3 className={styles.heading}>Crafting Table</h3>
+          <CraftingTable
             input={
               <CraftingGrid size={3}>
                 <InventorySlot />
-                <InventorySlot><ItemStack icon={<GoldIcon size={16} />} /></InventorySlot>
+                {slot("Gold Ingot", <GoldIcon size={16} />)}
                 <InventorySlot />
                 <InventorySlot />
-                <InventorySlot><ItemStack icon={<SwordIcon size={16} />} /></InventorySlot>
+                {slot("Diamond Sword", <SwordIcon size={16} />)}
               </CraftingGrid>
             }
-            result={<CraftingResult><ItemStack icon={<GoldIcon size={16} />} amount={1} /></CraftingResult>}
+            result={
+              <CraftingResult>
+                <ItemStack icon={<GoldIcon size={16} />} amount={1} name="Gilded Sword" />
+              </CraftingResult>
+            }
           />
         </div>
         <div className={styles.col}>
-          <h3>Furnace</h3>
-          <Furnace 
-            input={<InventorySlot><ItemStack icon={<SwordIcon size={16} />} /></InventorySlot>}
-            fuel={<InventorySlot><ItemStack icon={<EmeraldIcon size={16} />} /></InventorySlot>}
-            result={<InventorySlot><ItemStack icon={<GoldIcon size={16} />} /></InventorySlot>}
+          <h3 className={styles.heading}>Furnace</h3>
+          <Furnace
+            input={
+              <InventorySlot>
+                <ItemStack icon={<SwordIcon size={16} />} name="Iron Sword" />
+              </InventorySlot>
+            }
+            fuel={
+              <InventorySlot>
+                <ItemStack icon={<CoalIcon size={16} />} name="Coal" amount={8} />
+              </InventorySlot>
+            }
+            result={
+              <InventorySlot>
+                <ItemStack icon={<GoldIcon size={16} />} name="Gold Ingot" />
+              </InventorySlot>
+            }
             burning
             progress={50}
             fuelLevel={30}
@@ -139,69 +270,17 @@ function CraftingSection() {
   );
 }
 
-function ActionsSection() {
-  return (
-    <BlockPanel title="Actions" icon={<SwordIcon size={24} />}>
-      <div className={styles.col}>
-        <h3>Variants</h3>
-        <div className={styles.row}>
-          <BlockButton variant="grass">Grass</BlockButton>
-          <BlockButton variant="stone">Stone</BlockButton>
-          <BlockButton variant="wood">Wood</BlockButton>
-          <BlockButton variant="dirt">Dirt</BlockButton>
-          <BlockButton variant="diamond">Diamond</BlockButton>
-          <BlockButton variant="emerald">Emerald</BlockButton>
-          <BlockButton variant="gold">Gold</BlockButton>
-          <BlockButton variant="redstone">Redstone</BlockButton>
-          <BlockButton variant="obsidian">Obsidian</BlockButton>
-        </div>
-        <h3>Sizes</h3>
-        <div className={styles.row}>
-          <BlockButton size="sm">Small</BlockButton>
-          <BlockButton size="md">Medium</BlockButton>
-          <BlockButton size="lg">Large</BlockButton>
-        </div>
-        <h3>Icon Buttons</h3>
-        <div className={styles.row}>
-          <IconButton icon={<SearchIcon size={16} />} label="Search" />
-          <IconButton icon={<SettingsIcon size={16} />} label="Settings" />
-        </div>
-      </div>
-    </BlockPanel>
-  );
-}
-
-function FormsSection() {
-  return (
-    <BlockPanel title="Forms" icon={<SettingsIcon size={24} />}>
-      <div className={styles.grid} style={{ maxWidth: '400px' }}>
-        <BlockInput label="Username" placeholder="Enter username..." />
-        <BlockTextarea label="Bio" placeholder="Tell us about yourself..." />
-        <BlockSelect label="Server Region" options={[
-          { value: 'us-east', label: 'US East' },
-          { value: 'eu-west', label: 'EU West' },
-          { value: 'asia', label: 'Asia' }
-        ]} />
-        <BlockCheckbox label="Enable PvP" />
-        <BlockRadio name="difficulty" value="peaceful" label="Peaceful" defaultChecked />
-        <BlockRadio name="difficulty" value="survival" label="Survival" />
-        <BlockToggle label="Fullscreen Mode" />
-        <BlockSlider label="Render Distance" min={2} max={32} defaultValue={12} />
-      </div>
-    </BlockPanel>
-  );
-}
-
 function CardsSection() {
   return (
-    <BlockPanel title="Cards" icon={<ChestIcon size={24} />}>
+    <BlockPanel title="Cards" icon={<QuestIcon size={24} />}>
       <div className={styles.section}>
         <QuestCard
-          title="Mine 10 Diamonds"
-          description="Find and mine 10 diamond ores in the caves."
-          progress={4}
+          title="Find Diamonds"
+          description="Mine 10 diamonds."
+          progress={7}
           max={10}
-          xp={500}
+          xp={120}
+          coins={500}
         />
         <AchievementCard
           title="Getting an Upgrade"
@@ -210,12 +289,20 @@ function CardsSection() {
           unlocked
           unlockedAt="2 days ago"
         />
+        <PlayerCard name="Steve" level={28} status="Online" xp={1240} maxXp={2000} />
         <ServerCard
           name="Hypixel Network"
           onlinePlayers={45000}
           maxPlayers={100000}
           ping={32}
           motd="Welcome to Hypixel!"
+        />
+        <WorldCard
+          name="My World"
+          gameMode="Survival"
+          day={128}
+          seed="123456789"
+          lastPlayed="yesterday"
         />
       </div>
     </BlockPanel>
@@ -224,36 +311,55 @@ function CardsSection() {
 
 function FeedbackSection() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   return (
     <BlockPanel title="Feedback" icon={<RedstoneIcon size={24} />}>
       <div className={styles.col}>
-        <h3>Alerts</h3>
+        <h3 className={styles.heading}>Alerts</h3>
         <div className={styles.col}>
           <BlockAlert variant="success">Successfully saved world.</BlockAlert>
           <BlockAlert variant="info">New update available.</BlockAlert>
           <BlockAlert variant="warning">Low disk space.</BlockAlert>
           <BlockAlert variant="error">Failed to connect to server.</BlockAlert>
         </div>
-        
-        <h3>Toasts & Modals</h3>
+        <h3 className={styles.heading}>Toasts &amp; Modals</h3>
         <div className={styles.row}>
-          <BlockButton onClick={() => toast.success("Achievement Unlocked!")}>Toast Success</BlockButton>
+          <BlockButton onClick={() => toast.success("Achievement Unlocked!")}>
+            Toast Success
+          </BlockButton>
           <BlockButton onClick={() => toast.error("Connection Lost!")}>Toast Error</BlockButton>
           <BlockButton onClick={() => toast.info("Player joined the game")}>Toast Info</BlockButton>
           <BlockButton onClick={() => toast.warning("Durability low")}>Toast Warning</BlockButton>
           <BlockButton onClick={() => setModalOpen(true)}>Open Modal</BlockButton>
+          <BlockButton variant="redstone" onClick={() => setConfirmOpen(true)}>
+            Delete World
+          </BlockButton>
         </div>
-
         <BlockModal open={modalOpen} onClose={() => setModalOpen(false)} title="Confirm Action">
           <p>Are you sure you want to delete this world? This action cannot be undone.</p>
-          <div className={styles.row} style={{ marginTop: '1rem', justifyContent: 'flex-end' }}>
-            <BlockButton variant="stone" onClick={() => setModalOpen(false)}>Cancel</BlockButton>
-            <BlockButton variant="redstone" onClick={() => setModalOpen(false)}>Delete</BlockButton>
+          <div className={styles.modalActions}>
+            <BlockButton variant="stone" onClick={() => setModalOpen(false)}>
+              Cancel
+            </BlockButton>
+            <BlockButton variant="redstone" onClick={() => setModalOpen(false)}>
+              Delete
+            </BlockButton>
           </div>
         </BlockModal>
-
-        <h3>Progress & Loading</h3>
+        <ConfirmDialog
+          open={confirmOpen}
+          title="Delete World"
+          description="This world will be lost forever."
+          variant="danger"
+          confirmText="Delete"
+          onConfirm={() => {
+            toast.success("World deleted");
+            setConfirmOpen(false);
+          }}
+          onCancel={() => setConfirmOpen(false)}
+        />
+        <h3 className={styles.heading}>Progress &amp; Loading</h3>
         <div className={styles.col}>
           <BlockProgress value={75} max={100} label="Downloading terrain..." />
           <BlockLoading label="Generating world..." />
@@ -263,20 +369,19 @@ function FeedbackSection() {
   );
 }
 
-function HUDSection() {
-  return (
-    <BlockPanel title="HUD Elements" icon={<HeartIcon size={24} />}>
-      <div className={styles.col}>
-        <h3>Individual Bars</h3>
-        <div className={styles.col} style={{ gap: '1rem' }}>
-          <HealthBar value={15} max={20} showText />
-          <ArmorBar value={12} max={20} showText />
-          <HungerBar value={18} max={20} showText />
-          <XPBar value={340} max={1000} level={12} showValue />
-        </div>
-      </div>
-    </BlockPanel>
-  );
+function tabIcon(tab: TabName) {
+  switch (tab) {
+    case "Dashboard":
+      return <HomeIcon size={20} />;
+    case "Inventory":
+      return <InventoryIcon size={20} />;
+    case "Crafting":
+      return <CraftingIcon size={20} />;
+    case "Cards":
+      return <QuestIcon size={20} />;
+    case "Feedback":
+      return <RedstoneIcon size={20} />;
+  }
 }
 
 export default function App() {
@@ -285,60 +390,62 @@ export default function App() {
 
   const renderSection = () => {
     switch (activeTab) {
-      case "Dashboard": return <DashboardSection />;
-      case "Inventory": return <InventorySection />;
-      case "Crafting": return <CraftingSection />;
-      case "Actions": return <ActionsSection />;
-      case "Forms": return <FormsSection />;
-      case "Cards": return <CardsSection />;
-      case "Feedback": return <FeedbackSection />;
-      case "HUD": return <HUDSection />;
+      case "Dashboard":
+        return <DashboardSection />;
+      case "Inventory":
+        return <InventorySectionView />;
+      case "Crafting":
+        return <CraftingSection />;
+      case "Cards":
+        return <CardsSection />;
+      case "Feedback":
+        return <FeedbackSection />;
     }
   };
 
-  const getIcon = (tab: TabName) => {
-    switch (tab) {
-      case "Dashboard": return <HomeIcon size={20} />;
-      case "Inventory": return <InventoryIcon size={20} />;
-      case "Crafting": return <CraftingIcon size={20} />;
-      case "Actions": return <SwordIcon size={20} />;
-      case "Forms": return <SettingsIcon size={20} />;
-      case "Cards": return <ChestIcon size={20} />;
-      case "Feedback": return <RedstoneIcon size={20} />;
-      case "HUD": return <HeartIcon size={20} />;
-    }
-  };
+  const themeSelect = (
+    <BlockSelect
+      value={theme}
+      onChange={(event) => setTheme(event.target.value as BlockThemeName)}
+      options={themeOptions}
+      aria-label="Select Theme"
+    />
+  );
 
   return (
-    <BlockUIProvider theme={theme}>
+    <BlockUIProvider theme={theme} className={styles.root}>
       <div className={styles.layout}>
-        <BlockSidebar 
-          label="Playground Navigation"
-          footer={
-            <BlockSelect 
-              value={theme}
-              onChange={(e) => setTheme(e.target.value as BlockThemeName)}
-              options={(themeNames || ["grassland", "cave", "deepslate", "nether", "end"]).map(t => ({ value: t, label: t }))}
-              aria-label="Select Theme"
-            />
-          }
-        >
-          {TABS.map(tab => (
-            <SidebarItem 
-              key={tab} 
-              active={activeTab === tab} 
+        <BlockSidebar label="Playground Navigation">
+          {TABS.map((tab) => (
+            <SidebarItem
+              key={tab}
+              active={activeTab === tab}
               onClick={() => setActiveTab(tab)}
-              icon={getIcon(tab)}
+              icon={tabIcon(tab)}
             >
               {tab}
             </SidebarItem>
           ))}
         </BlockSidebar>
         <main className={styles.main}>
+          <header className={styles.topBar}>
+            <p className={styles.brand}>Block UI</p>
+            {themeSelect}
+          </header>
           {renderSection()}
         </main>
       </div>
-      <BlockToaster />
+      <HotbarNavigation
+        items={TABS.map((tab) => ({
+          id: tab,
+          label: tab,
+          icon: tabIcon(tab),
+        }))}
+        value={activeTab}
+        onValueChange={(id) => setActiveTab(id as TabName)}
+        fixed
+        mobileOnly
+      />
     </BlockUIProvider>
   );
 }

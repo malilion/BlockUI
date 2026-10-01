@@ -30,12 +30,12 @@ const meta = {
           "```tsx",
           'import { InventorySlot, ItemStack } from "@block-ui/react";',
           "",
-          "<InventorySlot selected tooltip={<ItemTooltip name=\"Diamond\" />}>",
+          '<InventorySlot selected tooltip={<ItemTooltip name="Diamond" />}>',
           '  <ItemStack icon={<DiamondIcon />} amount={12} name="Diamond" />',
           "</InventorySlot>",
           "```",
           "",
-          "**Accessibility** — empty slots read \"Empty slot\"; tooltips open on hover *and* keyboard focus, are linked with `aria-describedby`, and close with `Escape`.",
+          '**Accessibility** — empty slots read "Empty slot"; tooltips open on hover *and* keyboard focus, are linked with `aria-describedby`, and close with `Escape`.',
         ].join("\n"),
       },
     },
@@ -82,7 +82,14 @@ export const Sizes: Story = {
 export const WithTooltip: Story = {
   args: {
     rarity: "rare",
-    children: <ItemStack icon={<PickaxeIcon />} durability={126} maxDurability={1561} name="Diamond Pickaxe" />,
+    children: (
+      <ItemStack
+        icon={<PickaxeIcon />}
+        durability={126}
+        maxDurability={1561}
+        name="Diamond Pickaxe"
+      />
+    ),
     tooltip: (
       <ItemTooltip
         name="Diamond Pickaxe"

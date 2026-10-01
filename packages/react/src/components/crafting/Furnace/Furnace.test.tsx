@@ -3,7 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { expectNoA11yViolations } from "../../../test/axe";
 import { ItemStack } from "../../inventory/ItemStack/ItemStack";
-import { Furnace, getFurnaceState } from "./Furnace";
+import { Furnace } from "./Furnace";
+import { getFurnaceState } from "./Furnace.utils";
 
 const ore = <ItemStack icon={<svg />} name="Iron Ore" amount={3} />;
 const coal = <ItemStack icon={<svg />} name="Coal" amount={12} />;
@@ -13,7 +14,9 @@ describe("Furnace", () => {
   it("derives all five states", () => {
     expect(getFurnaceState({})).toBe("idle");
     expect(getFurnaceState({ input: ore, fuel: coal, burning: true })).toBe("burning");
-    expect(getFurnaceState({ input: ore, fuel: coal, burning: true, progress: 40 })).toBe("processing");
+    expect(getFurnaceState({ input: ore, fuel: coal, burning: true, progress: 40 })).toBe(
+      "processing",
+    );
     expect(getFurnaceState({ result: ingot, progress: 100 })).toBe("complete");
     expect(getFurnaceState({ result: ingot })).toBe("complete");
     expect(getFurnaceState({ input: ore })).toBe("noFuel");
@@ -23,7 +26,10 @@ describe("Furnace", () => {
     render(<Furnace input={ore} fuel={coal} burning progress={45} />);
     const furnace = screen.getByRole("group", { name: "Furnace" });
     expect(furnace).toHaveAttribute("data-state", "processing");
-    expect(screen.getByRole("progressbar", { name: "Smelting progress" })).toHaveAttribute("aria-valuenow", "45");
+    expect(screen.getByRole("progressbar", { name: "Smelting progress" })).toHaveAttribute(
+      "aria-valuenow",
+      "45",
+    );
     expect(screen.getByText("Smelting 45%")).toHaveAttribute("aria-live", "polite");
     expect(screen.getByRole("group", { name: "Input" })).toHaveTextContent("Iron Ore");
     expect(screen.getByRole("group", { name: "Fuel" })).toHaveTextContent("Coal");
@@ -41,7 +47,12 @@ describe("Furnace", () => {
     const user = userEvent.setup();
     const onTakeResult = vi.fn();
     render(
-      <Furnace result={ingot} progress={100} onTakeResult={onTakeResult} statusLabels={{ complete: "Done!" }} />,
+      <Furnace
+        result={ingot}
+        progress={100}
+        onTakeResult={onTakeResult}
+        statusLabels={{ complete: "Done!" }}
+      />,
     );
     expect(screen.getByText("Done!")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Iron Ingot, × 3" }));

@@ -28,7 +28,8 @@ export const BlockSelect = forwardRef<HTMLSelectElement, BlockSelectProps>(funct
   },
   ref,
 ) {
-  const placeholderDefault = placeholder && value === undefined && defaultValue === undefined ? "" : defaultValue;
+  const placeholderDefault =
+    placeholder && value === undefined && defaultValue === undefined ? "" : defaultValue;
   return (
     <Field
       id={id}

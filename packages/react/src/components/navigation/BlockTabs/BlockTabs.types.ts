@@ -8,7 +8,10 @@ export interface BlockTabItem {
   disabled?: boolean;
 }
 
-export interface BlockTabsProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "defaultValue"> {
+export interface BlockTabsProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "onChange" | "defaultValue"
+> {
   items: BlockTabItem[];
   /** Controlled active tab id. */
   value?: string;

@@ -17,13 +17,26 @@ describe("ConfirmDialog", () => {
     render(<ConfirmDialog {...base} onConfirm={() => undefined} onCancel={() => undefined} />);
     const dialog = screen.getByRole("alertdialog", { name: "Delete World" });
     expect(dialog).toHaveAccessibleDescription("This action cannot be undone.");
-    expect(screen.getByRole("button", { name: "Delete" })).toHaveAttribute("data-material", "grass");
+    expect(screen.getByRole("button", { name: "Delete" })).toHaveAttribute(
+      "data-material",
+      "grass",
+    );
   });
 
   it("focuses Cancel first for the danger variant", () => {
-    render(<ConfirmDialog {...base} variant="danger" onConfirm={() => undefined} onCancel={() => undefined} />);
+    render(
+      <ConfirmDialog
+        {...base}
+        variant="danger"
+        onConfirm={() => undefined}
+        onCancel={() => undefined}
+      />,
+    );
     expect(screen.getByRole("button", { name: "Cancel" })).toHaveFocus();
-    expect(screen.getByRole("button", { name: "Delete" })).toHaveAttribute("data-material", "redstone");
+    expect(screen.getByRole("button", { name: "Delete" })).toHaveAttribute(
+      "data-material",
+      "redstone",
+    );
   });
 
   it("calls onConfirm and onCancel (also via Escape)", async () => {
@@ -51,7 +64,14 @@ describe("ConfirmDialog", () => {
   });
 
   it("has no accessibility violations", async () => {
-    render(<ConfirmDialog {...base} variant="danger" onConfirm={() => undefined} onCancel={() => undefined} />);
+    render(
+      <ConfirmDialog
+        {...base}
+        variant="danger"
+        onConfirm={() => undefined}
+        onCancel={() => undefined}
+      />,
+    );
     await expectNoA11yViolations(document.body);
   });
 });

@@ -40,12 +40,12 @@ function App() {
 
 ## Packages
 
-| Package | Description |
-| --- | --- |
-| `@block-ui/react` | React components |
-| `@block-ui/tokens` | Design tokens (CSS custom properties) |
+| Package            | Description                                                 |
+| ------------------ | ----------------------------------------------------------- |
+| `@block-ui/react`  | React components                                            |
+| `@block-ui/tokens` | Design tokens (CSS custom properties)                       |
 | `@block-ui/themes` | Theme definitions (Grassland, Cave, Deepslate, Nether, End) |
-| `@block-ui/icons` | 50+ pixel-art SVG icons |
+| `@block-ui/icons`  | 50+ pixel-art SVG icons                                     |
 
 ## Development
 

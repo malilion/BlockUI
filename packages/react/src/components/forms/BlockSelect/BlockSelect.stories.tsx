@@ -43,12 +43,19 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const Placeholder: Story = { args: { placeholder: "Choose a mode…", defaultValue: undefined } };
+export const Placeholder: Story = {
+  args: { placeholder: "Choose a mode…", defaultValue: undefined },
+};
 
 export const States: Story = {
   render: () => (
     <StoryStack>
-      <BlockSelect label="Error" options={modes} placeholder="Choose…" error="A game mode is required." />
+      <BlockSelect
+        label="Error"
+        options={modes}
+        placeholder="Choose…"
+        error="A game mode is required."
+      />
       <BlockSelect label="Success" options={modes} defaultValue="creative" success />
       <BlockSelect label="Disabled" options={modes} defaultValue="survival" disabled />
     </StoryStack>

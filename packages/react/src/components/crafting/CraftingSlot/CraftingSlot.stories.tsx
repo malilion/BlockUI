@@ -9,7 +9,11 @@ const meta = {
   title: "Components/Crafting/CraftingSlot",
   component: CraftingSlot,
   tags: ["autodocs"],
-  args: { onClick: fn(), size: "lg", children: <ItemStack icon={<PlanksIcon />} name="Oak Planks" /> },
+  args: {
+    onClick: fn(),
+    size: "lg",
+    children: <ItemStack icon={<PlanksIcon />} name="Oak Planks" />,
+  },
   argTypes: { children: { control: false } },
   parameters: {
     docs: {

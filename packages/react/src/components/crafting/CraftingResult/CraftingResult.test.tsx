@@ -10,7 +10,10 @@ describe("CraftingResult", () => {
     render(<CraftingResult onTake={() => undefined} />);
     const group = screen.getByRole("group", { name: "Crafting result" });
     expect(group).toHaveAttribute("aria-live", "polite");
-    expect(screen.getByRole("button", { name: "Crafting result: empty" })).toHaveAttribute("aria-disabled", "true");
+    expect(screen.getByRole("button", { name: "Crafting result: empty" })).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
   });
 
   it("lets the player take the result", async () => {

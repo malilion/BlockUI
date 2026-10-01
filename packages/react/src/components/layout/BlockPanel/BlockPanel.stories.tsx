@@ -8,7 +8,10 @@ const meta = {
   title: "Components/Layout/BlockPanel",
   component: BlockPanel,
   tags: ["autodocs"],
-  args: { title: "Player Profile", children: "Panels are the main building block of every Block UI screen." },
+  args: {
+    title: "Player Profile",
+    children: "Panels are the main building block of every Block UI screen.",
+  },
   argTypes: { variant: { control: "inline-radio", options: ["stone", "inset", "plain"] } },
   parameters: {
     docs: {
