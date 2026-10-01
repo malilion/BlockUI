@@ -14,6 +14,7 @@
   <a href="https://github.com/malilion/BlockUI/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/BlockUI/ci.yml?branch=main&style=flat-square&label=CI" alt="CI status"></a>
   <a href="https://github.com/malilion/BlockUI/actions/workflows/docs.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/BlockUI/docs.yml?branch=main&style=flat-square&label=docs" alt="docs build"></a>
   <a href="https://github.com/malilion/BlockUI/stargazers"><img src="https://img.shields.io/github/stars/malilion/BlockUI?style=flat-square&color=5d9b3d" alt="GitHub stars"></a>
+  <a href="https://www.npmjs.com/package/@block-ui/react"><img src="https://img.shields.io/npm/v/@block-ui/react?style=flat-square&color=5d9b3d" alt="npm @block-ui/react"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-f2c94c?style=flat-square" alt="license: MIT"></a>
   <br/>
   <img src="https://img.shields.io/badge/React_18_|_19-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React 18 / 19">
@@ -64,7 +65,7 @@ yarn add @block-ui/react
 `@block-ui/react` installs `@block-ui/tokens`, `@block-ui/themes` and `@block-ui/icons` for you. It supports React 18.2 and 19.
 
 > [!NOTE]
-> The packages have not been published to npm yet. Until then, clone the repository and use the workspace (see [Local Development](#local-development)).
+> The packages have not been published to npm yet. Until the first `v*` tag, clone the repository and use the workspace (see [Local Development](#local-development)). The release pipeline is documented in [docs/RELEASING.md](./docs/RELEASING.md).
 
 ## Quick Start
 
@@ -302,6 +303,7 @@ pnpm build-storybook   # Static Storybook
 pnpm check:treeshake   # Make sure unused components are dropped
 pnpm check:a11y        # axe (WCAG 2.2 AA) on every story, after build-storybook
 pnpm check:package     # Pack, install with npm into a fresh React app, type-check and build
+pnpm check:publish     # Dry-run `pnpm publish` for every package (uploads nothing)
 pnpm screenshots       # Regenerate the README images (after pnpm build)
 ```
 
@@ -323,7 +325,7 @@ Each component lives in its own folder with `Component.tsx`, `Component.types.ts
 
 The library is built with Vite library mode into ESM with `preserveModules`, TypeScript declarations and a single `dist/styles.css`. React is external.
 
-Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, package install check, Storybook build, an axe scan of every story in all five themes, and Playwright E2E (including axe on the playground). Pushes to `main` also deploy Storybook to GitHub Pages.
+Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, package install check, Storybook build, an axe scan of every story in all five themes, and Playwright E2E (including axe on the playground). Pushes to `main` also deploy Storybook to GitHub Pages. Pushing a `v*` tag publishes `@block-ui/*` to npm (see [docs/RELEASING.md](./docs/RELEASING.md)).
 
 ## Browser Support
 

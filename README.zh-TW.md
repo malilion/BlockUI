@@ -14,6 +14,7 @@
   <a href="https://github.com/malilion/BlockUI/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/BlockUI/ci.yml?branch=main&style=flat-square&label=CI" alt="CI 狀態"></a>
   <a href="https://github.com/malilion/BlockUI/actions/workflows/docs.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/BlockUI/docs.yml?branch=main&style=flat-square&label=docs" alt="文件建置"></a>
   <a href="https://github.com/malilion/BlockUI/stargazers"><img src="https://img.shields.io/github/stars/malilion/BlockUI?style=flat-square&color=5d9b3d" alt="GitHub stars"></a>
+  <a href="https://www.npmjs.com/package/@block-ui/react"><img src="https://img.shields.io/npm/v/@block-ui/react?style=flat-square&color=5d9b3d" alt="npm @block-ui/react"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-f2c94c?style=flat-square" alt="授權：MIT"></a>
   <br/>
   <img src="https://img.shields.io/badge/React_18_|_19-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React 18 / 19">
@@ -64,7 +65,7 @@ yarn add @block-ui/react
 `@block-ui/react` 會自動安裝 `@block-ui/tokens`、`@block-ui/themes` 與 `@block-ui/icons`。支援 React 18.2 與 19。
 
 > [!NOTE]
-> 套件尚未發布到 npm。在那之前請 clone 這個 repository，直接使用 workspace（見[本地開發](#本地開發)）。
+> 套件尚未發布到 npm。在第一個 `v*` tag 之前請 clone 這個 repository，直接使用 workspace（見[本地開發](#本地開發)）。發布流程見 [docs/RELEASING.md](./docs/RELEASING.md)。
 
 ## 快速開始
 
@@ -302,6 +303,7 @@ pnpm build-storybook   # 建置靜態 Storybook
 pnpm check:treeshake   # 確認未使用的元件會被移除
 pnpm check:a11y        # 用 axe（WCAG 2.2 AA）檢查每個 story，需先 build-storybook
 pnpm check:package     # 打包後用 npm 安裝到全新 React App，並型別檢查與建置
+pnpm check:publish     # 對每個套件做 `pnpm publish --dry-run`（不會上傳）
 pnpm screenshots       # 重新產生 README 圖片（需先 pnpm build）
 ```
 
@@ -323,7 +325,7 @@ block-ui/
 
 函式庫使用 Vite library mode 建置成 ESM（`preserveModules`）、TypeScript 型別宣告與單一 `dist/styles.css`。React 為 external，不會被打包。
 
-每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、套件安裝檢查、Storybook 建置、在五套主題下用 axe 檢查每個 story，以及 Playwright E2E（含 Playground 的 axe 檢查）。push 到 `main` 時也會把 Storybook 部署到 GitHub Pages。
+每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、套件安裝檢查、Storybook 建置、在五套主題下用 axe 檢查每個 story，以及 Playwright E2E（含 Playground 的 axe 檢查）。push 到 `main` 時也會把 Storybook 部署到 GitHub Pages。推送 `v*` tag 會把 `@block-ui/*` 發布到 npm（見 [docs/RELEASING.md](./docs/RELEASING.md)）。
 
 ## 瀏覽器支援
 
