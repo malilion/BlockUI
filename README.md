@@ -65,7 +65,7 @@ yarn add @malilion/block-ui-react
 `@malilion/block-ui-react` installs `@malilion/block-ui-tokens`, `@malilion/block-ui-themes` and `@malilion/block-ui-icons` for you. It supports React 18.2 and 19.
 
 > [!NOTE]
-> The packages have not been published to npm yet. Until the first `v*` tag, clone the repository and use the workspace (see [Local Development](#local-development)). The release pipeline is documented in [docs/RELEASING.md](./docs/RELEASING.md).
+> Published on npm: [`@malilion/block-ui-react`](https://www.npmjs.com/package/@malilion/block-ui-react), [`-tokens`](https://www.npmjs.com/package/@malilion/block-ui-tokens), [`-themes`](https://www.npmjs.com/package/@malilion/block-ui-themes) and [`-icons`](https://www.npmjs.com/package/@malilion/block-ui-icons). Releases are documented in [docs/RELEASING.md](./docs/RELEASING.md).
 
 ## Quick Start
 

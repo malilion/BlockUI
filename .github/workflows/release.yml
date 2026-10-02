@@ -64,7 +64,25 @@ jobs:
       - name: Package install check
         run: pnpm check:package
 
+      - name: Check whether this version is already on npm
+        id: published
+        run: |
+          missing=0
+          for pkg in packages/*/package.json; do
+            spec=$(node -p "const p=require('./$pkg'); p.name + '@' + p.version")
+            if npm view "$spec" version >/dev/null 2>&1; then
+              echo "$spec is already published"
+            else
+              echo "$spec is not published yet"
+              missing=1
+            fi
+          done
+          echo "missing=$missing" >> "$GITHUB_OUTPUT"
+
       - name: Publish
+        # Skips cleanly when every package version already exists (e.g. a
+        # release that was published manually before the tag was pushed).
+        if: steps.published.outputs.missing == '1'
         run: pnpm -r --filter "./packages/**" publish --access public --no-git-checks --report-summary
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

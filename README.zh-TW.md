@@ -65,7 +65,7 @@ yarn add @malilion/block-ui-react
 `@malilion/block-ui-react` 會自動安裝 `@malilion/block-ui-tokens`、`@malilion/block-ui-themes` 與 `@malilion/block-ui-icons`。支援 React 18.2 與 19。
 
 > [!NOTE]
-> 套件尚未發布到 npm。在第一個 `v*` tag 之前請 clone 這個 repository，直接使用 workspace（見[本地開發](#本地開發)）。發布流程見 [docs/RELEASING.md](./docs/RELEASING.md)。
+> 已發布到 npm：[`@malilion/block-ui-react`](https://www.npmjs.com/package/@malilion/block-ui-react)、[`-tokens`](https://www.npmjs.com/package/@malilion/block-ui-tokens)、[`-themes`](https://www.npmjs.com/package/@malilion/block-ui-themes) 與 [`-icons`](https://www.npmjs.com/package/@malilion/block-ui-icons)。發布流程見 [docs/RELEASING.md](./docs/RELEASING.md)。
 
 ## 快速開始
 

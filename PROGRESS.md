@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-Phase 12 — Release (quality gates passing)
+V1 complete — 0.1.0 published to npm
 
 ## Completed
 
@@ -33,13 +33,13 @@ Phase 12 — Release (quality gates passing)
 - [x] PRD §57 stories for every component (Default, Variants, States, Sizes, Disabled, Interactive with play test, Responsive) — enforced by `storyCoverage.test.ts`
 - [x] Phase 11 docs: every component documents Accessibility
 
-## In Progress
+## Released
 
-- [ ] First npm publish of `@malilion/block-ui-*` 0.1.0 (needs npm org `block-ui` + `NPM_TOKEN`)
+- [x] npm: `@malilion/block-ui-{tokens,themes,icons,react}@0.1.0` (published 2026-10-02; the `@block-ui` npm org belongs to another account)
 
 ## Next
 
-- [ ] Create the npm org `block-ui`, add GitHub secret `NPM_TOKEN`, tag `v0.1.0` (see `docs/RELEASING.md`)
+- [ ] Optional: switch to npm trusted publishing (GitHub OIDC) so releases need no token — see docs/RELEASING.md
 
 ## Known Issues / Decisions
 

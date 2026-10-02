@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [0.1.0] — 2026-10-02
 
+Published to npm as `@malilion/block-ui-tokens`, `@malilion/block-ui-themes`, `@malilion/block-ui-icons` and `@malilion/block-ui-react` (the `@block-ui` npm org belongs to another account).
+
 ### Added
 
 - **Monorepo** — pnpm workspace with TypeScript 6, Vite 8, Vitest 5, Storybook 10.
