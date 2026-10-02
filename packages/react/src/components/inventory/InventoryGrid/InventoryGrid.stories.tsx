@@ -1,4 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, within } from "storybook/test";
+import { StoryMobile } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
 import {
   AppleIcon,
   BreadIcon,
@@ -16,7 +19,6 @@ import {
   SwordIcon,
   TorchIcon,
 } from "@block-ui/icons";
-import { fn } from "storybook/test";
 import type { ReactNode } from "react";
 import { InventorySlot } from "../InventorySlot/InventorySlot";
 import { ItemStack } from "../ItemStack/ItemStack";
@@ -105,6 +107,8 @@ const meta = {
           "```",
           "",
           "**Keyboard** — one tab stop; `←↑→↓` move, `Home`/`End` jump within the row (`Ctrl` for the whole grid), `Enter`/`Space` select, `Escape` closes a tooltip.",
+          "",
+          '**Accessibility** — ARIA `grid` with `row`/`gridcell` children and a single tab stop (roving `tabindex`). The selected cell has `aria-selected`; disabled and locked cells have `aria-disabled`. Each cell is named after its item ("Diamond, × 12") or announced as "Empty slot".',
         ].join("\n"),
       },
     },
@@ -116,11 +120,66 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const NineColumns: Story = { args: { columns: 9, rows: 3, slotSize: "md" } };
+export const Variants: Story = { args: { columns: 9, rows: 3, slotSize: "md" } };
 
 export const Sizes: Story = { args: { columns: 5, rows: 1, slotSize: "sm" } };
 
 export const Responsive: Story = {
   args: { columns: 9, rows: 2, slotSize: "lg" },
-  parameters: { viewport: { defaultViewport: "mobile1" } },
+  globals: mobileViewport,
+  decorators: [
+    (Story) => (
+      <StoryMobile>
+        <Story />
+      </StoryMobile>
+    ),
+  ],
+};
+
+export const States: Story = {
+  args: { columns: 5, rows: 1, slotSize: "lg", defaultSelectedIndex: 0 },
+  render: (args) => (
+    <InventoryGrid {...args}>
+      <InventorySlot>
+        <ItemStack icon={<DiamondIcon />} amount={12} name="Selected" />
+      </InventorySlot>
+      <InventorySlot rarity="epic">
+        <ItemStack icon={<RedstoneIcon />} amount={8} name="Epic" />
+      </InventorySlot>
+      <InventorySlot disabled>
+        <ItemStack icon={<CoalIcon />} amount={36} name="Disabled" />
+      </InventorySlot>
+      <InventorySlot locked>
+        <ItemStack icon={<IronIcon />} amount={16} name="Locked" />
+      </InventorySlot>
+    </InventoryGrid>
+  ),
+};
+
+/** Disabled and locked slots stay in the keyboard path but cannot be selected. */
+export const Disabled: Story = {
+  args: { columns: 3, rows: 1, slotSize: "lg" },
+  render: (args) => (
+    <InventoryGrid {...args}>
+      <InventorySlot disabled>
+        <ItemStack icon={<DiamondIcon />} name="Diamond" />
+      </InventorySlot>
+      <InventorySlot locked />
+      <InventorySlot locked />
+    </InventoryGrid>
+  ),
+};
+
+export const Interactive: Story = {
+  args: { columns: 5, rows: 3, slotSize: "lg", defaultSelectedIndex: null },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const cells = canvas.getAllByRole("gridcell");
+    cells[0]!.focus();
+    await userEvent.keyboard("{ArrowRight}{ArrowDown}");
+    await expect(cells[6]).toHaveFocus();
+    await userEvent.keyboard("{Enter}");
+    await expect(cells[6]).toHaveAttribute("aria-selected", "true");
+    await expect(args.onSelectedIndexChange).toHaveBeenLastCalledWith(6);
+  },
 };

@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { StoryGrid } from "../../../stories/StoryLayout";
+import { expect, fn, userEvent, within } from "storybook/test";
+import { StoryGrid, StoryMobile, StoryStack } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
+import { BlockButton } from "../../actions/BlockButton/BlockButton";
+import { BlockBadge } from "../../display/BlockBadge/BlockBadge";
 import { BlockCard } from "./BlockCard";
 import { cardMaterials } from "./BlockCard.types";
 
@@ -20,6 +24,8 @@ const meta = {
           "",
           '<BlockCard material="wood" label="Achievement">…</BlockCard>',
           "```",
+          "",
+          "**Accessibility** — an `<article>` (or `as` element) named by its header label, which is a real heading (`headingLevel`, default 3). The label text uses each material's AA-compliant `on` color.",
         ].join("\n"),
       },
     },
@@ -31,7 +37,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const Materials: Story = {
+export const Variants: Story = {
   render: () => (
     <StoryGrid>
       {cardMaterials.map((material) => (
@@ -40,5 +46,64 @@ export const Materials: Story = {
         </BlockCard>
       ))}
     </StoryGrid>
+  ),
+};
+
+export const States: Story = {
+  render: () => (
+    <StoryGrid>
+      <BlockCard label="With footer" footer={<BlockButton size="sm">Action</BlockButton>}>
+        Body
+      </BlockCard>
+      <BlockCard label="Header action" headerAction={<BlockBadge size="sm">New</BlockBadge>}>
+        Body
+      </BlockCard>
+      <BlockCard>No header</BlockCard>
+    </StoryGrid>
+  ),
+};
+
+/** Cards fill their container; use a grid or width to size them. */
+export const Sizes: Story = {
+  render: (args) => (
+    <StoryStack>
+      <BlockCard {...args} className="block-story-w-280" label="280px" />
+      <BlockCard {...args} className="block-story-w-480" label="480px" />
+    </StoryStack>
+  ),
+};
+
+/** BlockCard has no disabled state; disable the actions inside it instead. */
+export const Disabled: Story = {
+  args: {
+    footer: (
+      <BlockButton size="sm" disabled>
+        Unavailable
+      </BlockButton>
+    ),
+  },
+};
+
+export const Interactive: Story = {
+  args: {
+    footer: (
+      <BlockButton size="sm" onClick={fn()}>
+        Open
+      </BlockButton>
+    ),
+  },
+  play: async ({ canvasElement }) => {
+    const card = within(canvasElement).getByRole("article", { name: "Card" });
+    await expect(within(card).getByRole("heading", { level: 3, name: "Card" })).toBeInTheDocument();
+    await userEvent.click(within(card).getByRole("button", { name: "Open" }));
+  },
+};
+
+export const Responsive: Story = {
+  globals: mobileViewport,
+  render: (args) => (
+    <StoryMobile>
+      <BlockCard {...args} />
+    </StoryMobile>
   ),
 };

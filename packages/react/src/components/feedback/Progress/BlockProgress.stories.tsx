@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { StoryStack } from "../../../stories/StoryLayout";
+import { expect, userEvent, within } from "storybook/test";
+import { StoryMobile, StoryStack } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
+import { useState } from "react";
+import { BlockButton } from "../../actions/BlockButton/BlockButton";
 import { BlockProgress } from "./BlockProgress";
 import { progressVariants } from "./BlockProgress.types";
 
@@ -70,6 +74,55 @@ export const Sizes: Story = {
   ),
 };
 
+export const States: Story = {
+  render: () => (
+    <StoryStack>
+      <BlockProgress label="Empty" value={0} showValue />
+      <BlockProgress label="In progress" value={45} showValue />
+      <BlockProgress label="Complete" value={100} variant="gold" showValue />
+      <BlockProgress label="Indeterminate" />
+    </StoryStack>
+  ),
+};
+
 export const Indeterminate: Story = {
   args: { value: undefined, label: "Generating world…", showValue: false },
+};
+
+/** Progress bars are read-only; a paused task keeps its value in stone gray. */
+export const Disabled: Story = {
+  args: { label: "Download paused", value: 40, variant: "grass", showValue: true },
+};
+
+export const Interactive: Story = {
+  render: () => <ProgressDemo />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const bar = canvas.getByRole("progressbar", { name: "Mining" });
+    await expect(bar).toHaveAttribute("aria-valuenow", "0");
+    await userEvent.click(canvas.getByRole("button", { name: "Mine block" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Mine block" }));
+    await expect(bar).toHaveAttribute("aria-valuenow", "20");
+  },
+};
+
+function ProgressDemo() {
+  const [value, setValue] = useState(0);
+  return (
+    <StoryStack>
+      <BlockProgress label="Mining" value={value} showValue />
+      <BlockButton onClick={() => setValue((v) => Math.min(100, v + 10))}>Mine block</BlockButton>
+    </StoryStack>
+  );
+}
+
+export const Responsive: Story = {
+  globals: mobileViewport,
+  decorators: [
+    (Story) => (
+      <StoryMobile>
+        <Story />
+      </StoryMobile>
+    ),
+  ],
 };

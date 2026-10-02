@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
+import { expect, fn, userEvent, within } from "storybook/test";
+import { StoryMobile, StoryStack } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
 import { BlockRadio, BlockRadioGroup } from "./BlockRadio";
 
 const modes = [
@@ -39,7 +41,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const Horizontal: Story = { args: { orientation: "horizontal" } };
+export const Variants: Story = {
+  render: (args) => (
+    <StoryStack>
+      <BlockRadioGroup {...args} label="Vertical" />
+      <BlockRadioGroup {...args} label="Horizontal" orientation="horizontal" />
+    </StoryStack>
+  ),
+};
 
 export const WithDescriptions: Story = {
   args: {
@@ -56,3 +65,52 @@ export const WithDescriptions: Story = {
 export const ErrorState: Story = { args: { defaultValue: undefined, error: "Pick a game mode." } };
 
 export const Disabled: Story = { args: { disabled: true } };
+
+export const States: Story = {
+  render: (args) => (
+    <StoryStack>
+      <BlockRadioGroup {...args} label="Selected" />
+      <BlockRadioGroup {...args} label="Nothing selected" defaultValue={undefined} />
+      <BlockRadioGroup {...args} label="Error" defaultValue={undefined} error="Pick a game mode." />
+      <BlockRadioGroup
+        {...args}
+        label="One option disabled"
+        options={[...modes.slice(0, 2), { value: "adventure", label: "Adventure", disabled: true }]}
+      />
+    </StoryStack>
+  ),
+};
+
+/** One size; long option labels wrap. */
+export const Sizes: Story = {
+  args: {
+    orientation: "horizontal",
+    options: [
+      { value: "s", label: "S" },
+      { value: "m", label: "A medium option" },
+      { value: "l", label: "A much longer option label that wraps" },
+    ],
+    defaultValue: "m",
+    label: "Label length",
+  },
+};
+
+export const Interactive: Story = {
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByText("Creative"));
+    await expect(canvas.getByRole("radio", { name: "Creative" })).toBeChecked();
+    await userEvent.keyboard("{ArrowDown}");
+    await expect(canvas.getByRole("radio", { name: "Adventure" })).toBeChecked();
+    await expect(args.onValueChange).toHaveBeenLastCalledWith("adventure");
+  },
+};
+
+export const Responsive: Story = {
+  globals: mobileViewport,
+  render: (args) => (
+    <StoryMobile>
+      <BlockRadioGroup {...args} orientation="horizontal" />
+    </StoryMobile>
+  ),
+};

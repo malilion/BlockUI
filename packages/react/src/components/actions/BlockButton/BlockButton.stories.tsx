@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ChestIcon, PlayIcon } from "@block-ui/icons";
-import { fn } from "storybook/test";
-import { StoryRow, StoryStack } from "../../../stories/StoryLayout";
+import { expect, fn, userEvent, within } from "storybook/test";
+import { StoryMobile, StoryRow, StoryStack } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
 import { BlockButton } from "./BlockButton";
 import { blockButtonVariants } from "./BlockButton.types";
 
@@ -38,7 +39,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const AllVariants: Story = {
+export const Variants: Story = {
   render: (args) => (
     <StoryRow>
       {blockButtonVariants.map((variant) => (
@@ -100,14 +101,28 @@ export const WithIcons: Story = {
 };
 
 export const Responsive: Story = {
+  globals: mobileViewport,
   render: (args) => (
-    <StoryStack narrow>
-      <BlockButton {...args} variant="grass" fullWidth>
-        Continue
-      </BlockButton>
-      <BlockButton {...args} variant="redstone" fullWidth>
-        Leave World
-      </BlockButton>
-    </StoryStack>
+    <StoryMobile>
+      <StoryStack>
+        <BlockButton {...args} variant="grass" fullWidth>
+          Continue
+        </BlockButton>
+        <BlockButton {...args} variant="redstone" fullWidth>
+          Leave World
+        </BlockButton>
+      </StoryStack>
+    </StoryMobile>
   ),
+};
+
+export const Interactive: Story = {
+  args: { variant: "grass", children: "Craft" },
+  play: async ({ canvasElement, args }) => {
+    const button = within(canvasElement).getByRole("button", { name: "Craft" });
+    await userEvent.click(button);
+    button.focus();
+    await userEvent.keyboard("{Enter}");
+    await expect(args.onClick).toHaveBeenCalledTimes(2);
+  },
 };

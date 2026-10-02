@@ -155,7 +155,7 @@ import "@fontsource/silkscreen/700.css";
   <sub>手機版：側邊欄變成底部的快捷欄導覽。</sub>
 </p>
 
-每個元件都有 [Storybook](https://malilion.github.io/BlockUI/) stories（也可在本地執行 `pnpm storybook`），包含即時控制項、所有 variants 與 states、使用方式、Props 表、無障礙說明與 a11y 檢查。Storybook 另外有 Foundations 頁面（色彩、字體、間距、陰影、主題、圖示）與完整畫面的 Patterns（儀表板、玩家資料、背包畫面、合成畫面、伺服器瀏覽器）。
+每個元件都有 [Storybook](https://malilion.github.io/BlockUI/) stories（也可在本地執行 `pnpm storybook`）——固定包含 `Default`、`Variants`、`States`、`Sizes`、`Disabled`、`Interactive`（互動測試）與 `Responsive`——並有即時控制項、所有 variants 與 states、使用方式、Props 表、無障礙說明與 a11y 檢查。Storybook 另外有 Foundations 頁面（色彩、字體、間距、陰影、主題、圖示）與完整畫面的 Patterns（儀表板、玩家資料、背包畫面、合成畫面、伺服器瀏覽器）。
 
 ## 元件
 
@@ -301,7 +301,7 @@ pnpm typecheck         # TypeScript 型別檢查
 pnpm build             # 建置所有套件與 Playground
 pnpm build-storybook   # 建置靜態 Storybook
 pnpm check:treeshake   # 確認未使用的元件會被移除
-pnpm check:a11y        # 用 axe（WCAG 2.2 AA）檢查每個 story，需先 build-storybook
+pnpm check:a11y        # 執行每個 story 的 play 互動測試與 axe（WCAG 2.2 AA），需先 build-storybook
 pnpm check:package     # 打包後用 npm 安裝到全新 React App，並型別檢查與建置
 pnpm check:publish     # 對每個套件做 `pnpm publish --dry-run`（不會上傳）
 pnpm screenshots       # 重新產生 README 圖片（需先 pnpm build）
@@ -325,7 +325,7 @@ block-ui/
 
 函式庫使用 Vite library mode 建置成 ESM（`preserveModules`）、TypeScript 型別宣告與單一 `dist/styles.css`。React 為 external，不會被打包。
 
-每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、套件安裝檢查、Storybook 建置、在五套主題下用 axe 檢查每個 story，以及 Playwright E2E（含 Playground 的 axe 檢查）。push 到 `main` 時也會把 Storybook 部署到 GitHub Pages。推送 `v*` tag 會把 `@block-ui/*` 發布到 npm（見 [docs/RELEASING.md](./docs/RELEASING.md)）。
+每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、套件安裝檢查、Storybook 建置、在五套主題下執行每個 story 的互動測試與 axe 檢查，以及 Playwright E2E（含 Playground 的 axe 檢查）。push 到 `main` 時也會把 Storybook 部署到 GitHub Pages。推送 `v*` tag 會把 `@block-ui/*` 發布到 npm（見 [docs/RELEASING.md](./docs/RELEASING.md)）。
 
 ## 瀏覽器支援
 

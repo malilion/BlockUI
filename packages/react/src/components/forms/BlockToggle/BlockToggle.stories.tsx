@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
-import { StoryStack } from "../../../stories/StoryLayout";
+import { expect, fn, userEvent, within } from "storybook/test";
+import { StoryMobile, StoryStack } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
 import { BlockToggle } from "./BlockToggle";
 
 const meta = {
@@ -55,3 +56,34 @@ export const Sizes: Story = {
 };
 
 export const Disabled: Story = { args: { disabled: true } };
+
+export const Variants: Story = {
+  render: () => (
+    <StoryStack>
+      <BlockToggle label="Label after (default)" defaultChecked />
+      <BlockToggle label="Label before" labelPosition="start" defaultChecked />
+      <BlockToggle label="With description" description="Play ambient music." />
+    </StoryStack>
+  ),
+};
+
+export const Interactive: Story = {
+  play: async ({ canvasElement, args }) => {
+    const toggle = within(canvasElement).getByRole("switch", { name: "Music" });
+    await userEvent.click(toggle);
+    await expect(toggle).toBeChecked();
+    await expect(args.onCheckedChange).toHaveBeenLastCalledWith(true);
+  },
+};
+
+export const Responsive: Story = {
+  globals: mobileViewport,
+  render: () => (
+    <StoryMobile>
+      <StoryStack>
+        <BlockToggle label="Music" defaultChecked />
+        <BlockToggle label="Show coordinates" description="Displays X / Y / Z in the HUD." />
+      </StoryStack>
+    </StoryMobile>
+  ),
+};

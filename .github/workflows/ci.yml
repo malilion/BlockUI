@@ -62,7 +62,7 @@ jobs:
       - name: Build Storybook
         run: pnpm build-storybook
 
-      - name: Storybook Accessibility (axe)
+      - name: Storybook interaction tests + accessibility (axe)
         run: pnpm exec playwright install --with-deps chromium && THEMES=grassland,cave,deepslate,nether,end pnpm check:a11y
 
       - name: Upload Storybook

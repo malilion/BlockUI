@@ -43,3 +43,23 @@
   color: var(--block-text-muted);
   text-transform: uppercase;
 }
+
+.mobile {
+  width: 100%;
+  max-width: 360px;
+  padding: var(--block-space-3);
+  border: var(--block-border-width-thin) dashed var(--block-text-muted);
+}
+
+/* Used via wrapperClassName in "Sizes" stories. */
+:global(.block-story-w-200) {
+  max-width: 200px;
+}
+
+:global(.block-story-w-280) {
+  max-width: 280px;
+}
+
+:global(.block-story-w-480) {
+  max-width: 480px;
+}

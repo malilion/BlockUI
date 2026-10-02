@@ -30,6 +30,8 @@ Phase 12 — Release (quality gates passing)
 - [x] Real-browser accessibility — axe on 136 stories × 5 themes (`pnpm check:a11y`) and on the playground (E2E)
 - [x] Release check — packed tarballs install into a fresh npm React app (`pnpm check:package`)
 - [x] Playground shows Badges, Tabs and Breadcrumb (PRD §59)
+- [x] PRD §57 stories for every component (Default, Variants, States, Sizes, Disabled, Interactive with play test, Responsive) — enforced by `storyCoverage.test.ts`
+- [x] Phase 11 docs: every component documents Accessibility
 
 ## In Progress
 
@@ -52,7 +54,7 @@ Phase 12 — Release (quality gates passing)
 - pnpm format:check ✅
 - pnpm build-storybook ✅
 - pnpm typecheck ✅
-- pnpm test ✅ (436)
+- pnpm test ✅ (569)
 - pnpm build ✅
 - pnpm test:e2e ✅ (28, incl. 6 axe scans)
 - pnpm check:a11y ✅ (680 story renders)

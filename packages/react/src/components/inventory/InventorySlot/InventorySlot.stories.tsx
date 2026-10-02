@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, within } from "storybook/test";
 import { DiamondIcon, DiamondSwordIcon, PickaxeIcon, PlanksIcon } from "@block-ui/icons";
-import { fn } from "storybook/test";
-import { StoryRow } from "../../../stories/StoryLayout";
+import { StoryMobile, StoryRow } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
 import { ItemStack } from "../ItemStack/ItemStack";
 import { ItemTooltip } from "../ItemTooltip/ItemTooltip";
 import { itemRarities } from "../ItemTooltip/ItemTooltip.types";
@@ -59,7 +60,7 @@ export const States: Story = {
   ),
 };
 
-export const Rarity: Story = {
+export const Variants: Story = {
   render: (args) => (
     <StoryRow>
       {itemRarities.map((rarity) => (
@@ -104,7 +105,7 @@ export const WithTooltip: Story = {
   },
 };
 
-export const Interactive: Story = {
+export const Examples: Story = {
   render: (args) => (
     <StoryRow>
       <InventorySlot {...args}>
@@ -114,5 +115,36 @@ export const Interactive: Story = {
         <ItemStack icon={<PlanksIcon />} amount={64} maxAmount={64} name="Oak Planks" />
       </InventorySlot>
     </StoryRow>
+  ),
+};
+
+export const Disabled: Story = {
+  render: (args) => (
+    <StoryRow>
+      <InventorySlot {...args} disabled />
+      <InventorySlot {...args} locked />
+    </StoryRow>
+  ),
+};
+
+export const Interactive: Story = {
+  play: async ({ canvasElement, args }) => {
+    const slot = within(canvasElement).getByRole("button", { name: "Diamond, × 12" });
+    await userEvent.click(slot);
+    slot.focus();
+    await userEvent.keyboard("{Enter}");
+    await expect(args.onClick).toHaveBeenCalledTimes(2);
+  },
+};
+
+export const Responsive: Story = {
+  globals: mobileViewport,
+  render: (args) => (
+    <StoryMobile>
+      <StoryRow>
+        <InventorySlot {...args} size="lg" />
+        <InventorySlot {...args} size="lg" selected />
+      </StoryRow>
+    </StoryMobile>
   ),
 };
