@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 import { StoryMobile, StoryRow } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
 import { PickaxeIcon } from "@block-ui/icons";
@@ -120,16 +120,19 @@ export const Interactive: Story = {
       <ItemStack icon={<PickaxeIcon />} name="Diamond Pickaxe" />
     </InventorySlot>
   ),
+  // Keyboard path: focus opens the tooltip, Escape closes it. (Simulated hover
+  // cannot drive React's mouseenter in a real browser; real-mouse hover is
+  // covered by the Playwright E2E suite.)
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const slot = canvas.getByRole("button", { name: "Diamond Pickaxe" });
-    await userEvent.hover(slot);
-    await expect(canvas.getByRole("tooltip", { hidden: true })).toBeVisible();
-    await userEvent.unhover(slot);
+    const tooltip = canvas.getByRole("tooltip", { hidden: true });
+    await expect(tooltip).not.toBeVisible();
     slot.focus();
-    await expect(canvas.getByRole("tooltip", { hidden: true })).toBeVisible();
+    await waitFor(() => expect(tooltip).toBeVisible());
+    await expect(slot).toHaveAccessibleDescription(/Diamond Pickaxe/);
     await userEvent.keyboard("{Escape}");
-    await expect(canvas.getByRole("tooltip", { hidden: true })).not.toBeVisible();
+    await waitFor(() => expect(tooltip).not.toBeVisible());
   },
 };
 
