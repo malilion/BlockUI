@@ -64,6 +64,25 @@ test.describe("Block UI Playground", () => {
     await page.getByRole("button", { name: "Toast Success" }).click();
     await expect(page.getByRole("status").first()).toBeVisible({ timeout: 3000 });
   });
+
+  test("item tooltip opens on real mouse hover and keyboard focus", async ({ page, isMobile }) => {
+    test.skip(isMobile, "hover needs a mouse");
+    await page
+      .getByRole("navigation", { name: "Playground Navigation" })
+      .getByRole("button", { name: "Inventory" })
+      .click();
+    const slot = page.getByRole("grid", { name: "Inventory" }).getByRole("gridcell").first();
+    const tooltip = slot.getByRole("tooltip", { includeHidden: true });
+    await expect(tooltip).toBeHidden();
+    await slot.hover();
+    await expect(tooltip).toBeVisible();
+    await page.mouse.move(0, 0);
+    await expect(tooltip).toBeHidden();
+    await slot.focus();
+    await expect(tooltip).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(tooltip).toBeHidden();
+  });
 });
 
 test.describe("Responsive mobile navigation", () => {
