@@ -23,7 +23,7 @@ export default defineConfig({
       cssFileName: "styles",
     },
     rolldownOptions: {
-      external: [/^react($|\/)/, /^react-dom($|\/)/, /^@block-ui\/(?!.*\.css$)/],
+      external: [/^react($|\/)/, /^react-dom($|\/)/, /^@malilion\/block-ui-(?!.*\.css$)/],
       output: {
         preserveModules: true,
         preserveModulesRoot: "src",

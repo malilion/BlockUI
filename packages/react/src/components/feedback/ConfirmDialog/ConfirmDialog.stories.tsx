@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import { mobileViewport } from "../../../stories/storyGlobals";
-import { GrassBlockIcon } from "@block-ui/icons";
+import { GrassBlockIcon } from "@malilion/block-ui-icons";
 import { useState, type ComponentProps } from "react";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";
 import { toast } from "../Toast/store";

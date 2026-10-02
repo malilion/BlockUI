@@ -7,9 +7,9 @@ Phase 12 — Release (quality gates passing)
 ## Completed
 
 - [x] Monorepo (pnpm 11 workspace, TS 6 strict, Vite 8, Vitest 5, Storybook 10)
-- [x] `@block-ui/tokens` — colors (+ AA `on*` colors), spacing, typography, radius, shadow, motion, sizes, zIndex, breakpoints, textures, generated `tokens.css`
-- [x] `@block-ui/themes` — grassland, cave, deepslate, nether, end + generated `themes.css`
-- [x] `@block-ui/icons` — ~50 original 16×16 pixel icons (all PRD §55 icons)
+- [x] `@malilion/block-ui-tokens` — colors (+ AA `on*` colors), spacing, typography, radius, shadow, motion, sizes, zIndex, breakpoints, textures, generated `tokens.css`
+- [x] `@malilion/block-ui-themes` — grassland, cave, deepslate, nether, end + generated `themes.css`
+- [x] `@malilion/block-ui-icons` — ~50 original 16×16 pixel icons (all PRD §55 icons)
 - [x] Actions — BlockButton, IconButton
 - [x] Forms — BlockInput, BlockTextarea, BlockSelect, BlockCheckbox, BlockRadio(+Group), BlockToggle, BlockSlider
 - [x] Inventory — InventorySlot, ItemStack, InventoryGrid, DurabilityBar, ItemTooltip, Hotbar, Inventory(+Section, chest variant)
@@ -35,7 +35,7 @@ Phase 12 — Release (quality gates passing)
 
 ## In Progress
 
-- [ ] First npm publish of `@block-ui/*` 0.1.0 (needs npm org `block-ui` + `NPM_TOKEN`)
+- [ ] First npm publish of `@malilion/block-ui-*` 0.1.0 (needs npm org `block-ui` + `NPM_TOKEN`)
 
 ## Next
 

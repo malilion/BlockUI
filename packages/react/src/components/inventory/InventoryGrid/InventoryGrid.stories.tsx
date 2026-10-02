@@ -18,7 +18,7 @@ import {
   StoneIcon,
   SwordIcon,
   TorchIcon,
-} from "@block-ui/icons";
+} from "@malilion/block-ui-icons";
 import type { ReactNode } from "react";
 import { InventorySlot } from "../InventorySlot/InventorySlot";
 import { ItemStack } from "../ItemStack/ItemStack";
@@ -95,7 +95,7 @@ const meta = {
           "Inventory grid built on CSS Grid with ARIA `grid` semantics. Slots keep a 1:1 ratio and shrink on small screens.",
           "",
           "```tsx",
-          'import { InventoryGrid, InventorySlot, ItemStack } from "@block-ui/react";',
+          'import { InventoryGrid, InventorySlot, ItemStack } from "@malilion/block-ui-react";',
           "",
           "<InventoryGrid columns={9}>",
           "  {items.map((item) => (",

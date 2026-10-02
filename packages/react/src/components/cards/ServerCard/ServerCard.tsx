@@ -1,4 +1,4 @@
-import { GrassBlockIcon } from "@block-ui/icons";
+import { GrassBlockIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
 import { cx } from "../../../utils/cx";
 import { formatNumber } from "../../../utils/number";

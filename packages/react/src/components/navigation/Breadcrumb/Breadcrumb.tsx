@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from "@block-ui/icons";
+import { ChevronRightIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
 import { cx } from "../../../utils/cx";
 import styles from "./Breadcrumb.module.css";

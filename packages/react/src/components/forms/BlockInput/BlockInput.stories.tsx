@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
-import { PlayerIcon, SearchIcon } from "@block-ui/icons";
+import { PlayerIcon, SearchIcon } from "@malilion/block-ui-icons";
 import { StoryMobile, StoryStack } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
 import { BlockInput } from "./BlockInput";
@@ -24,7 +24,7 @@ const meta = {
           "Text input rendered as a sunken inventory-slot well.",
           "",
           "```tsx",
-          'import { BlockInput } from "@block-ui/react";',
+          'import { BlockInput } from "@malilion/block-ui-react";',
           "",
           '<BlockInput label="Player Name" placeholder="Steve" />',
           "```",

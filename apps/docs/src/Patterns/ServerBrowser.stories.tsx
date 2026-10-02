@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { SearchIcon } from "@block-ui/icons";
-import { BlockInput, BlockSelect, BlockToggle, ServerCard, toast } from "@block-ui/react";
+import { SearchIcon } from "@malilion/block-ui-icons";
+import { BlockInput, BlockSelect, BlockToggle, ServerCard, toast } from "@malilion/block-ui-react";
 import { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import styles from "./patterns.module.css";

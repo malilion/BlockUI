@@ -1,4 +1,4 @@
-import { ChestIcon } from "@block-ui/icons";
+import { ChestIcon } from "@malilion/block-ui-icons";
 import { forwardRef, useId } from "react";
 import { cx } from "../../../utils/cx";
 import { BlockPanel } from "../../layout/BlockPanel/BlockPanel";

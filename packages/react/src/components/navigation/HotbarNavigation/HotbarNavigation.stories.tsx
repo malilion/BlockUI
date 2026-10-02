@@ -2,7 +2,13 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { StoryMobile, StoryStack } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
-import { CraftingIcon, HomeIcon, InventoryIcon, QuestIcon, SettingsIcon } from "@block-ui/icons";
+import {
+  CraftingIcon,
+  HomeIcon,
+  InventoryIcon,
+  QuestIcon,
+  SettingsIcon,
+} from "@malilion/block-ui-icons";
 import { HotbarNavigation } from "./HotbarNavigation";
 
 const meta = {
@@ -26,7 +32,7 @@ const meta = {
           "Mobile bottom navigation styled like a hotbar — replaces the sidebar below 768px. Shows up to 5 items.",
           "",
           "```tsx",
-          'import { HotbarNavigation } from "@block-ui/react";',
+          'import { HotbarNavigation } from "@malilion/block-ui-react";',
           "",
           "<HotbarNavigation fixed mobileOnly items={items} value={page} onValueChange={setPage} />",
           "```",

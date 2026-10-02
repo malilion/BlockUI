@@ -1,4 +1,4 @@
-import { ArrowIcon, FireIcon } from "@block-ui/icons";
+import { ArrowIcon, FireIcon } from "@malilion/block-ui-icons";
 import { forwardRef, type CSSProperties } from "react";
 import { cx } from "../../../utils/cx";
 import { clamp } from "../../../utils/number";

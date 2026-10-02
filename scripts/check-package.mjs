@@ -19,7 +19,7 @@ mkdirSync(packs);
 mkdirSync(join(app, "src"), { recursive: true });
 
 const run = (command, cwd) => execSync(command, { cwd, stdio: "pipe" }).toString();
-const tarball = (name) => `file:${join(packs, `block-ui-${name}-0.1.0.tgz`)}`;
+const tarball = (name) => `file:${join(packs, `malilion-block-ui-${name}-0.1.0.tgz`)}`;
 
 try {
   for (const name of ["tokens", "themes", "icons", "react"]) {
@@ -56,7 +56,7 @@ try {
     ],
   };
   for (const [name, required] of Object.entries(requiredByPackage)) {
-    const files = run(`tar -tzf block-ui-${name}-0.1.0.tgz`, packs);
+    const files = run(`tar -tzf malilion-block-ui-${name}-0.1.0.tgz`, packs);
     for (const path of required) {
       if (!files.includes(path)) throw new Error(`@block-ui/${name} tarball is missing ${path}`);
     }
@@ -73,15 +73,15 @@ try {
         private: true,
         type: "module",
         dependencies: {
-          "@block-ui/react": tarball("react"),
-          "@block-ui/icons": tarball("icons"),
+          "@malilion/block-ui-react": tarball("react"),
+          "@malilion/block-ui-icons": tarball("icons"),
           react: "^19.3.0",
           "react-dom": "^19.3.0",
         },
         overrides: {
-          "@block-ui/tokens": tarball("tokens"),
-          "@block-ui/themes": tarball("themes"),
-          "@block-ui/icons": tarball("icons"),
+          "@malilion/block-ui-tokens": tarball("tokens"),
+          "@malilion/block-ui-themes": tarball("themes"),
+          "@malilion/block-ui-icons": tarball("icons"),
         },
         devDependencies: {
           "@types/react": "^19.3.0",
@@ -122,10 +122,10 @@ try {
   );
   writeFileSync(
     join(app, "src/main.tsx"),
-    `import "@block-ui/react/styles.css";
-import { BlockButton, BlockUIProvider, InventoryGrid, InventorySlot, ItemStack, QuestCard, toast } from "@block-ui/react";
-import type { BlockButtonVariant } from "@block-ui/react";
-import { DiamondIcon } from "@block-ui/icons";
+    `import "@malilion/block-ui-react/styles.css";
+import { BlockButton, BlockUIProvider, InventoryGrid, InventorySlot, ItemStack, QuestCard, toast } from "@malilion/block-ui-react";
+import type { BlockButtonVariant } from "@malilion/block-ui-react";
+import { DiamondIcon } from "@malilion/block-ui-icons";
 import { createRoot } from "react-dom/client";
 
 const variant: BlockButtonVariant = "grass";
@@ -148,7 +148,7 @@ createRoot(document.getElementById("root")!).render(
   run("npx tsc -p tsconfig.json", app);
   run("npx vite build --logLevel error", app);
   console.log(
-    "✅ Packed @block-ui/* installs with npm, type-checks and builds in a fresh React app.",
+    "✅ Packed @malilion/block-ui-* installs with npm, type-checks and builds in a fresh React app.",
   );
 } catch (error) {
   console.error("❌ Package check failed.");

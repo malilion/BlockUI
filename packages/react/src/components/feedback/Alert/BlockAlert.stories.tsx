@@ -26,7 +26,7 @@ const meta = {
           "Inline status message in four variants.",
           "",
           "```tsx",
-          'import { BlockAlert } from "@block-ui/react";',
+          'import { BlockAlert } from "@malilion/block-ui-react";',
           "",
           '<BlockAlert variant="warning" title="Warning">Low hunger!</BlockAlert>',
           "```",

@@ -6,7 +6,7 @@ import {
   letterSpacing,
   lineHeight,
   toKebab,
-} from "@block-ui/tokens";
+} from "@malilion/block-ui-tokens";
 import type { CSSProperties } from "react";
 import styles from "./foundations.module.css";
 

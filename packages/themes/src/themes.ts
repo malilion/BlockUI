@@ -1,4 +1,4 @@
-import { colors } from "@block-ui/tokens";
+import { colors } from "@malilion/block-ui-tokens";
 import type { BlockTheme, BlockThemeName } from "./types.js";
 
 const shared = {

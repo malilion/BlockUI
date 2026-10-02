@@ -6,7 +6,7 @@ import {
   DiamondIcon,
   GrassBlockIcon,
   WorldIcon,
-} from "@block-ui/icons";
+} from "@malilion/block-ui-icons";
 import {
   AchievementCard,
   BlockPanel,
@@ -17,8 +17,8 @@ import {
   ItemStack,
   PlayerCard,
   PlayerHUD,
-} from "@block-ui/react";
-import { DiamondSwordIcon, PickaxeIcon, TorchIcon } from "@block-ui/icons";
+} from "@malilion/block-ui-react";
+import { DiamondSwordIcon, PickaxeIcon, TorchIcon } from "@malilion/block-ui-icons";
 import styles from "./patterns.module.css";
 import { Shell } from "./Shell";
 

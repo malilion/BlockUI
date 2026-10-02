@@ -1,4 +1,4 @@
-import { media } from "@block-ui/tokens";
+import { media } from "@malilion/block-ui-tokens";
 import { forwardRef, useMemo, type MouseEvent, type Ref } from "react";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { cx } from "../../../utils/cx";

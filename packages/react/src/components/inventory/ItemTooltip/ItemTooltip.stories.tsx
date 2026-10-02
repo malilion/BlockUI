@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, waitFor, within } from "storybook/test";
 import { StoryMobile, StoryRow } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
-import { PickaxeIcon } from "@block-ui/icons";
+import { PickaxeIcon } from "@malilion/block-ui-icons";
 import { InventorySlot } from "../InventorySlot/InventorySlot";
 import { ItemStack } from "../ItemStack/ItemStack";
 import { ItemTooltip } from "./ItemTooltip";
@@ -28,7 +28,7 @@ const meta = {
           "Item details card with a rarity-colored name, enchantments and stats.",
           "",
           "```tsx",
-          'import { ItemTooltip } from "@block-ui/react";',
+          'import { ItemTooltip } from "@malilion/block-ui-react";',
           "",
           '<ItemTooltip name="Diamond Pickaxe" rarity="Rare" enchantments={["Efficiency IV"]} />',
           "```",

@@ -16,7 +16,7 @@ const meta = {
           "Saved world with a preview (image or the built-in pixel landscape) and a Play button.",
           "",
           "```tsx",
-          'import { WorldCard } from "@block-ui/react";',
+          'import { WorldCard } from "@malilion/block-ui-react";',
           "",
           '<WorldCard name="My World" gameMode="Survival" day={128} seed="123456789" onPlay={play} />',
           "```",

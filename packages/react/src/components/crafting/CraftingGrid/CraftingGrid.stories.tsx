@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
-import { DiamondIcon, PlanksIcon } from "@block-ui/icons";
+import { DiamondIcon, PlanksIcon } from "@malilion/block-ui-icons";
 import { StoryMobile, StoryRow } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
 import { ItemStack } from "../../inventory/ItemStack/ItemStack";
@@ -22,7 +22,7 @@ const meta = {
           "2 × 2 or 3 × 3 crafting input grid. Missing slots are filled with empty `CraftingSlot`s.",
           "",
           "```tsx",
-          'import { CraftingGrid, CraftingSlot, ItemStack } from "@block-ui/react";',
+          'import { CraftingGrid, CraftingSlot, ItemStack } from "@malilion/block-ui-react";',
           "",
           "<CraftingGrid size={3}>",
           "  <CraftingSlot><ItemStack icon={<PlanksIcon />} /></CraftingSlot>",

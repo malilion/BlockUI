@@ -23,7 +23,7 @@ const meta = {
           "Tool durability gauge. Turns gold below 50% and red below 25%.",
           "",
           "```tsx",
-          'import { DurabilityBar } from "@block-ui/react";',
+          'import { DurabilityBar } from "@malilion/block-ui-react";',
           "",
           "<DurabilityBar value={126} max={1561} showValue />",
           "```",

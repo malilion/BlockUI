@@ -46,9 +46,9 @@ import {
   BlockTabs,
   Breadcrumb,
   blockButtonVariants,
-} from "@block-ui/react";
-import type { BlockThemeName } from "@block-ui/themes";
-import { themeNames } from "@block-ui/themes";
+} from "@malilion/block-ui-react";
+import type { BlockThemeName } from "@malilion/block-ui-themes";
+import { themeNames } from "@malilion/block-ui-themes";
 import {
   HomeIcon,
   InventoryIcon,
@@ -66,7 +66,7 @@ import {
   TorchIcon,
   AppleIcon,
   QuestIcon,
-} from "@block-ui/icons";
+} from "@malilion/block-ui-icons";
 import styles from "./App.module.css";
 
 const TABS = ["Dashboard", "Inventory", "Crafting", "Cards", "Feedback"] as const;

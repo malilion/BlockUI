@@ -1,5 +1,5 @@
 {
-  "name": "@block-ui/react",
+  "name": "@malilion/block-ui-react",
   "version": "0.1.0",
   "description": "Block UI — block / pixel / crafting game-style React components: inventory, crafting, HUD, cards, forms and more.",
   "license": "MIT",
@@ -46,9 +46,9 @@
     "react-dom": "^18.2.0 || ^19.0.0"
   },
   "dependencies": {
-    "@block-ui/icons": "workspace:^",
-    "@block-ui/themes": "workspace:^",
-    "@block-ui/tokens": "workspace:^"
+    "@malilion/block-ui-icons": "workspace:^",
+    "@malilion/block-ui-themes": "workspace:^",
+    "@malilion/block-ui-tokens": "workspace:^"
   },
   "devDependencies": {
     "@storybook/react-vite": "^10.6.1",

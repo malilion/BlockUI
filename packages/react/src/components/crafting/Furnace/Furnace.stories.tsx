@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
-import { CoalIcon, IronIcon, StoneIcon } from "@block-ui/icons";
+import { CoalIcon, IronIcon, StoneIcon } from "@malilion/block-ui-icons";
 import { useEffect, useState } from "react";
 import { StoryGrid, StoryMobile } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
@@ -31,7 +31,7 @@ const meta = {
           "Furnace with input, fuel, flame, progress arrow and result. The state (Idle, Burning, Processing, Complete, No Fuel) is derived from the props and announced through a live status line.",
           "",
           "```tsx",
-          'import { Furnace, ItemStack } from "@block-ui/react";',
+          'import { Furnace, ItemStack } from "@malilion/block-ui-react";',
           "",
           "<Furnace input={ore} fuel={coal} burning progress={45} />",
           "```",

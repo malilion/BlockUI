@@ -16,7 +16,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rolldownOptions: {
-      external: [/^react($|\/)/, /^react-dom($|\/)/, /^@block-ui\//],
+      external: [/^react($|\/)/, /^react-dom($|\/)/, /^@malilion\/block-ui-/],
       output: {
         preserveModules: true,
         preserveModulesRoot: "src",

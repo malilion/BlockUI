@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn, userEvent, within } from "storybook/test";
-import { ChestIcon, PlusIcon } from "@block-ui/icons";
+import { ChestIcon, PlusIcon } from "@malilion/block-ui-icons";
 import { StoryGrid, StoryMobile, StoryStack } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
 import { IconButton } from "../../actions/IconButton/IconButton";
@@ -22,7 +22,7 @@ const meta = {
           "Textured stone container with a pixel border, bevel and title strip.",
           "",
           "```tsx",
-          'import { BlockPanel } from "@block-ui/react";',
+          'import { BlockPanel } from "@malilion/block-ui-react";',
           "",
           '<BlockPanel title="Inventory">…</BlockPanel>',
           "```",

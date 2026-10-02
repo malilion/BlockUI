@@ -11,7 +11,7 @@ import {
   QuestIcon,
   SettingsIcon,
   WorldIcon,
-} from "@block-ui/icons";
+} from "@malilion/block-ui-icons";
 import { useState } from "react";
 import { HotbarNavigation } from "../HotbarNavigation/HotbarNavigation";
 import { BlockSidebar, SidebarItem } from "./BlockSidebar";
@@ -74,7 +74,7 @@ const meta = {
           "Main navigation rail. With `responsive` (default) it collapses to icons on tablet and hides on mobile — render `HotbarNavigation` there.",
           "",
           "```tsx",
-          'import { BlockSidebar, SidebarItem } from "@block-ui/react";',
+          'import { BlockSidebar, SidebarItem } from "@malilion/block-ui-react";',
           "",
           "<BlockSidebar>",
           '  <SidebarItem icon={<HomeIcon />} active href="/">Dashboard</SidebarItem>',

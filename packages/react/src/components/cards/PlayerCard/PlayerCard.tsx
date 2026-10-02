@@ -1,4 +1,4 @@
-import { PlayerIcon } from "@block-ui/icons";
+import { PlayerIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
 import { cx } from "../../../utils/cx";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";

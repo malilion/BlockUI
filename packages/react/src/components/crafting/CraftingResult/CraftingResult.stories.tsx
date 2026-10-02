@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
-import { ChestIcon } from "@block-ui/icons";
+import { ChestIcon } from "@malilion/block-ui-icons";
 import { StoryMobile, StoryRow } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
 import { ItemStack } from "../../inventory/ItemStack/ItemStack";

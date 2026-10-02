@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
-import { DiamondIcon } from "@block-ui/icons";
+import { DiamondIcon } from "@malilion/block-ui-icons";
 import { StoryGrid, StoryMobile, StoryStack } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
 import { AchievementCard } from "./AchievementCard";
@@ -25,7 +25,7 @@ const meta = {
           "Achievement tile. Locked achievements hide their icon behind a padlock.",
           "",
           "```tsx",
-          'import { AchievementCard } from "@block-ui/react";',
+          'import { AchievementCard } from "@malilion/block-ui-react";',
           "",
           '<AchievementCard title="Diamond Hunter" unlocked unlockedAt="2024/05/20" />',
           "```",

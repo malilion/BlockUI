@@ -13,7 +13,7 @@ import {
   PickaxeIcon,
   RedstoneIcon,
   TorchIcon,
-} from "@block-ui/icons";
+} from "@malilion/block-ui-icons";
 import { Hotbar } from "../Hotbar/Hotbar";
 import { InventoryGrid } from "../InventoryGrid/InventoryGrid";
 import { InventorySlot } from "../InventorySlot/InventorySlot";
@@ -32,7 +32,7 @@ const meta = {
           'An inventory window that stacks sections such as the main storage grid and the hotbar. `variant="chest"` gives a wooden storage container.',
           "",
           "```tsx",
-          'import { Inventory, InventorySection, InventoryGrid, Hotbar } from "@block-ui/react";',
+          'import { Inventory, InventorySection, InventoryGrid, Hotbar } from "@malilion/block-ui-react";',
           "",
           "<Inventory>",
           '  <InventorySection title="Storage"><InventoryGrid columns={9} rows={3}>…</InventoryGrid></InventorySection>',

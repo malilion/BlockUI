@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
-import { DiamondIcon, SwordIcon } from "@block-ui/icons";
+import { DiamondIcon, SwordIcon } from "@malilion/block-ui-icons";
 import { StoryMobile, StoryRow } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
 import { BlockBadge } from "./BlockBadge";
@@ -22,7 +22,7 @@ const meta = {
           "Status / role label with an optional pixel dot or icon.",
           "",
           "```tsx",
-          'import { BlockBadge } from "@block-ui/react";',
+          'import { BlockBadge } from "@malilion/block-ui-react";',
           "",
           '<BlockBadge variant="emerald" dot>Online</BlockBadge>',
           "```",

@@ -19,7 +19,7 @@ env:
 
 jobs:
   publish:
-    name: Publish @block-ui/* to npm
+    name: Publish @malilion/block-ui-* to npm
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

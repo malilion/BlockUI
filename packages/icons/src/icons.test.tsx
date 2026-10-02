@@ -36,7 +36,7 @@ const REQUIRED = [
   "RedstoneIcon",
 ];
 
-describe("@block-ui/icons", () => {
+describe("@malilion/block-ui-icons", () => {
   it("ships every icon required by PRD §55", () => {
     const names = iconEntries.map(([name]) => name);
     for (const name of REQUIRED) expect(names).toContain(name);

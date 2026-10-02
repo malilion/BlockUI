@@ -20,7 +20,7 @@ const meta = {
           "Armor points shown as chestplates — two points per icon.",
           "",
           "```tsx",
-          'import { ArmorBar } from "@block-ui/react";',
+          'import { ArmorBar } from "@malilion/block-ui-react";',
           "",
           "<ArmorBar value={14} max={20} />",
           "```",

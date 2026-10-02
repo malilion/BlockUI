@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { ChestIcon, CoalIcon, IronIcon, PlanksIcon, StoneIcon } from "@block-ui/icons";
+import { ChestIcon, CoalIcon, IronIcon, PlanksIcon, StoneIcon } from "@malilion/block-ui-icons";
 import {
   BlockPanel,
   CraftingGrid,
@@ -8,7 +8,7 @@ import {
   Furnace,
   ItemStack,
   toast,
-} from "@block-ui/react";
+} from "@malilion/block-ui-react";
 import { useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import styles from "./patterns.module.css";

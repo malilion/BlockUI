@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
-import { AchievementIcon, ClockIcon, WorldIcon } from "@block-ui/icons";
+import { AchievementIcon, ClockIcon, WorldIcon } from "@malilion/block-ui-icons";
 import { StoryGrid, StoryMobile, StoryStack } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
 import { PlayerCard } from "./PlayerCard";
@@ -29,7 +29,7 @@ const meta = {
           "Player summary with avatar (or pixel head fallback), status badge, XP and stats.",
           "",
           "```tsx",
-          'import { PlayerCard } from "@block-ui/react";',
+          'import { PlayerCard } from "@malilion/block-ui-react";',
           "",
           '<PlayerCard name="Steve" level={28} status="Online" xp={1240} maxXp={2000} />',
           "```",

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
-import { DiamondIcon } from "@block-ui/icons";
+import { DiamondIcon } from "@malilion/block-ui-icons";
 import { StoryGrid, StoryMobile, StoryStack } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
 import { QuestCard } from "./QuestCard";
@@ -27,7 +27,7 @@ const meta = {
           "Quest with progress, rewards and a Claim button that unlocks when `progress >= max`.",
           "",
           "```tsx",
-          'import { QuestCard } from "@block-ui/react";',
+          'import { QuestCard } from "@malilion/block-ui-react";',
           "",
           '<QuestCard title="Find Diamonds" description="Mine 10 diamonds." progress={7} max={10} xp={120} coins={500} />',
           "```",

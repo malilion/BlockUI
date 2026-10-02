@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DiamondIcon } from "@block-ui/icons";
+import { DiamondIcon } from "@malilion/block-ui-icons";
 import {
   AchievementCard,
   BlockAlert,
@@ -10,7 +10,7 @@ import {
   QuestCard,
   WorldCard,
   toast,
-} from "@block-ui/react";
+} from "@malilion/block-ui-react";
 import { expect, userEvent, within } from "storybook/test";
 import styles from "./patterns.module.css";
 import { Shell } from "./Shell";

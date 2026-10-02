@@ -5,4 +5,4 @@ import { generateTokensCss } from "../dist/index.js";
 
 const target = fileURLToPath(new URL("../tokens.css", import.meta.url));
 writeFileSync(target, generateTokensCss());
-console.log(`@block-ui/tokens → ${target}`);
+console.log(`@malilion/block-ui-tokens → ${target}`);

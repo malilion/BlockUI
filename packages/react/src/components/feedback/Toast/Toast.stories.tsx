@@ -21,7 +21,7 @@ const meta = {
           "Imperative toasts. `<BlockUIProvider>` already renders the `<BlockToaster />` region.",
           "",
           "```ts",
-          'import { toast } from "@block-ui/react";',
+          'import { toast } from "@malilion/block-ui-react";',
           "",
           'toast.success("World saved.");',
           'toast.info("Update available.");',

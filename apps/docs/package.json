@@ -9,10 +9,10 @@
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@block-ui/icons": "workspace:^",
-    "@block-ui/react": "workspace:^",
-    "@block-ui/themes": "workspace:^",
-    "@block-ui/tokens": "workspace:^",
+    "@malilion/block-ui-icons": "workspace:^",
+    "@malilion/block-ui-react": "workspace:^",
+    "@malilion/block-ui-themes": "workspace:^",
+    "@malilion/block-ui-tokens": "workspace:^",
     "@fontsource/silkscreen": "^5.3.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"

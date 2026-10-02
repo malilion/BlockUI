@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "@block-ui/icons";
+import { ChevronDownIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
 import { cx } from "../../../utils/cx";
 import { Field } from "../Field/Field";

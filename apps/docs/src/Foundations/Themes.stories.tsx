@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DiamondIcon, PickaxeIcon, TorchIcon } from "@block-ui/icons";
+import { DiamondIcon, PickaxeIcon, TorchIcon } from "@malilion/block-ui-icons";
 import {
   BlockBadge,
   BlockButton,
@@ -11,8 +11,8 @@ import {
   InventoryGrid,
   InventorySlot,
   ItemStack,
-} from "@block-ui/react";
-import { themeNames, themes } from "@block-ui/themes";
+} from "@malilion/block-ui-react";
+import { themeNames, themes } from "@malilion/block-ui-themes";
 import styles from "./foundations.module.css";
 
 const meta = {
@@ -30,7 +30,7 @@ function ThemesPage() {
       <section>
         <h1>Themes</h1>
         <p className={styles.intro}>
-          Five themes from <code>@block-ui/themes</code>. Wrap any subtree in{" "}
+          Five themes from <code>@malilion/block-ui-themes</code>. Wrap any subtree in{" "}
           <code>{'<BlockUIProvider theme="…">'}</code> (or set <code>data-theme</code>); every
           component follows without changes. Tests check that text on every surface of every theme
           reaches WCAG AA.
