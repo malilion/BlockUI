@@ -315,6 +315,7 @@ pnpm check:treeshake   # Make sure unused components are dropped
 pnpm check:a11y        # Run every story's play test + axe (WCAG 2.2 AA), after build-storybook
 pnpm check:package     # Pack, install with npm into a fresh React app, type-check and build
 pnpm check:publish     # Dry-run `pnpm publish` for every package (uploads nothing)
+pnpm release:version 0.2.0  # Bump every package to the same version before a release
 pnpm screenshots       # Regenerate the README images (after pnpm build)
 ```
 
@@ -336,7 +337,7 @@ Each component lives in its own folder with `Component.tsx`, `Component.types.ts
 
 The library is built with Vite library mode into ESM with `preserveModules`, TypeScript declarations and a single `dist/styles.css`. React is external.
 
-Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, package install check, Storybook build, every story's interaction test plus an axe scan in all five themes, and Playwright E2E (including axe on the playground). Pushes to `main` also deploy Storybook to GitHub Pages. Pushing a `v*` tag publishes `@malilion/block-ui-*` to npm (see [docs/RELEASING.md](./docs/RELEASING.md)).
+Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, package install check, Storybook build, every story's interaction test plus an axe scan in all five themes, and Playwright E2E (including axe on the playground). Pushes to `main` also deploy Storybook to GitHub Pages. When a push to `main` carries a new package version, the Release workflow publishes `@malilion/block-ui-*` to npm through trusted publishing (no npm token), then tags `vX.Y.Z` and creates a GitHub Release from the CHANGELOG (see [docs/RELEASING.md](./docs/RELEASING.md)).
 
 ## Browser Support
 
