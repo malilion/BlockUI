@@ -27,6 +27,7 @@
     "screenshots": "node scripts/screenshots.mjs",
     "check:a11y": "node scripts/a11y-stories.mjs",
     "check:package": "node scripts/check-package.mjs",
+    "release:version": "node scripts/set-version.mjs",
     "check:publish": "pnpm -r --filter \"./packages/**\" publish --access public --dry-run --no-git-checks"
   },
   "devDependencies": {
