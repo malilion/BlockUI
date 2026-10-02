@@ -315,6 +315,7 @@ pnpm check:treeshake   # 確認未使用的元件會被移除
 pnpm check:a11y        # 執行每個 story 的 play 互動測試與 axe（WCAG 2.2 AA），需先 build-storybook
 pnpm check:package     # 打包後用 npm 安裝到全新 React App，並型別檢查與建置
 pnpm check:publish     # 對每個套件做 `pnpm publish --dry-run`（不會上傳）
+pnpm release:version 0.2.0  # 發布前把所有套件改成同一個版本號
 pnpm screenshots       # 重新產生 README 圖片（需先 pnpm build）
 ```
 
@@ -336,7 +337,7 @@ block-ui/
 
 函式庫使用 Vite library mode 建置成 ESM（`preserveModules`）、TypeScript 型別宣告與單一 `dist/styles.css`。React 為 external，不會被打包。
 
-每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、套件安裝檢查、Storybook 建置、在五套主題下執行每個 story 的互動測試與 axe 檢查，以及 Playwright E2E（含 Playground 的 axe 檢查）。push 到 `main` 時也會把 Storybook 部署到 GitHub Pages。推送 `v*` tag 會把 `@malilion/block-ui-*` 發布到 npm（見 [docs/RELEASING.md](./docs/RELEASING.md)）。
+每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、套件安裝檢查、Storybook 建置、在五套主題下執行每個 story 的互動測試與 axe 檢查，以及 Playwright E2E（含 Playground 的 axe 檢查）。push 到 `main` 時也會把 Storybook 部署到 GitHub Pages。當 push 到 `main` 的套件版本號是新的，Release workflow 會以 Trusted Publishing（不需 npm token）把 `@malilion/block-ui-*` 發布到 npm，接著打上 `vX.Y.Z` tag，並以 CHANGELOG 內容建立 GitHub Release（見 [docs/RELEASING.md](./docs/RELEASING.md)）。
 
 ## 瀏覽器支援
 
