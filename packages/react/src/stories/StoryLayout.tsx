@@ -30,3 +30,12 @@ export function StoryGrid({
 export function StoryLabel({ children }: { children: ReactNode }) {
   return <span className={styles.label}>{children}</span>;
 }
+
+/** A 360px phone-width frame so Responsive stories also read well on the docs page. */
+export function StoryMobile({ children }: { children: ReactNode }) {
+  return (
+    <div className={styles.mobile} data-story-frame="mobile">
+      {children}
+    </div>
+  );
+}

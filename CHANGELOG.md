@@ -33,6 +33,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **Accessibility** — WCAG AA contrast on all text colors, full keyboard navigation (arrow keys, Home/End, Enter), focus traps in modals, screen reader labels, axe-core validated.
 - **Release** — MIT LICENSE and README in every package, npm metadata (repository, homepage, bugs), tree-shake check, pack-and-install check, and a GitHub Actions `release.yml` that publishes `@block-ui/*` on `v*` tags.
 
+- **Stories per PRD §57** — every component has `Default`, `Variants`, `States`, `Sizes`, `Disabled`, `Interactive` and `Responsive` stories; `Interactive` stories run a `play` interaction test, `Responsive` stories use Storybook's mobile viewport. A unit test enforces this.
+- **Accessibility docs** — every component's docs page has an Accessibility section.
+- `pnpm check:a11y` now also fails when a story's `play` function or render logs an error.
+
 ### Fixed
 
 - `BlockButton` in the `loading` state kept no accessible name (the label was hidden with `visibility: hidden`).

@@ -1,4 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, userEvent, within } from "storybook/test";
+import { StoryMobile, StoryRow } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
 import {
   AchievementIcon,
   CraftingIcon,
@@ -10,6 +13,7 @@ import {
   WorldIcon,
 } from "@block-ui/icons";
 import { useState } from "react";
+import { HotbarNavigation } from "../HotbarNavigation/HotbarNavigation";
 import { BlockSidebar, SidebarItem } from "./BlockSidebar";
 
 const items = [
@@ -23,16 +27,25 @@ const items = [
   { id: "settings", label: "Settings", icon: <SettingsIcon size={24} /> },
 ];
 
-function SidebarDemo({ collapsed = false }: { collapsed?: boolean }) {
+function SidebarDemo({
+  collapsed = false,
+  responsive = false,
+  disabledIds = [],
+}: {
+  collapsed?: boolean;
+  responsive?: boolean;
+  disabledIds?: string[];
+}) {
   const [active, setActive] = useState("dashboard");
   return (
-    <BlockSidebar collapsed={collapsed} responsive={false} header={<strong>BLOCK UI</strong>}>
+    <BlockSidebar collapsed={collapsed} responsive={responsive} header={<strong>BLOCK UI</strong>}>
       {items.map((item) => (
         <SidebarItem
           key={item.id}
           icon={item.icon}
           badge={item.badge}
           active={active === item.id}
+          disabled={disabledIds.includes(item.id)}
           onClick={() => setActive(item.id)}
         >
           {item.label}
@@ -74,4 +87,78 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = { render: () => <SidebarDemo /> };
 
+export const Variants: Story = {
+  render: () => (
+    <StoryRow>
+      <SidebarDemo />
+      <SidebarDemo collapsed />
+    </StoryRow>
+  ),
+};
+
 export const Collapsed: Story = { render: () => <SidebarDemo collapsed /> };
+
+export const States: Story = {
+  render: () => (
+    <BlockSidebar responsive={false} label="States">
+      <SidebarItem icon={<HomeIcon size={24} />} active>
+        Active
+      </SidebarItem>
+      <SidebarItem icon={<InventoryIcon size={24} />}>Default</SidebarItem>
+      <SidebarItem icon={<QuestIcon size={24} />} badge={3}>
+        With badge
+      </SidebarItem>
+      <SidebarItem icon={<SettingsIcon size={24} />} disabled>
+        Disabled
+      </SidebarItem>
+      <SidebarItem icon={<WorldIcon size={24} />} href="#worlds">
+        Link
+      </SidebarItem>
+    </BlockSidebar>
+  ),
+};
+
+/** 248px expanded, 72px collapsed (tablet). */
+export const Sizes: Story = {
+  render: () => (
+    <StoryRow>
+      <SidebarDemo />
+      <SidebarDemo collapsed />
+    </StoryRow>
+  ),
+};
+
+export const Disabled: Story = {
+  render: () => <SidebarDemo disabledIds={["crafting", "players", "settings"]} />,
+};
+
+export const Interactive: Story = {
+  render: () => <SidebarDemo />,
+  play: async ({ canvasElement }) => {
+    const nav = within(canvasElement).getByRole("navigation", { name: "Main" });
+    const quests = within(nav).getByRole("button", { name: "Quests 3" });
+    await userEvent.click(quests);
+    await expect(quests).toHaveAttribute("aria-current", "page");
+    await expect(within(nav).getByRole("button", { name: "Dashboard" })).not.toHaveAttribute(
+      "aria-current",
+    );
+  },
+};
+
+/**
+ * With `responsive` the sidebar collapses on tablet and hides below 768px —
+ * pair it with `HotbarNavigation`, as shown here at phone width.
+ */
+export const Responsive: Story = {
+  globals: mobileViewport,
+  parameters: { docs: { story: { inline: false, height: "260px" } } },
+  render: () => (
+    <StoryMobile>
+      <SidebarDemo responsive />
+      <HotbarNavigation
+        mobileOnly
+        items={items.slice(0, 5).map(({ id, label, icon }) => ({ id, label, icon }))}
+      />
+    </StoryMobile>
+  ),
+};

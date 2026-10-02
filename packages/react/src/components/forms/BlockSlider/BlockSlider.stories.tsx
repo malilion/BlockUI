@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
-import { StoryStack } from "../../../stories/StoryLayout";
+import { expect, fireEvent, fn, within } from "storybook/test";
+import { StoryMobile, StoryStack } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
 import { BlockSlider } from "./BlockSlider";
 
 const meta = {
@@ -60,3 +61,51 @@ export const Formatted: Story = {
 };
 
 export const Disabled: Story = { args: { disabled: true } };
+
+export const States: Story = {
+  render: () => (
+    <StoryStack>
+      <BlockSlider label="Minimum" defaultValue={0} />
+      <BlockSlider label="Middle" defaultValue={50} />
+      <BlockSlider label="Maximum" defaultValue={100} />
+      <BlockSlider label="Error" defaultValue={90} error="Too high for this server." />
+      <BlockSlider label="Disabled" defaultValue={30} disabled />
+    </StoryStack>
+  ),
+};
+
+/** One track height; the slider stretches to its container. */
+export const Sizes: Story = {
+  render: () => (
+    <StoryStack>
+      <BlockSlider label="Narrow (200px)" wrapperClassName="block-story-w-200" defaultValue={40} />
+      <BlockSlider label="Full width" defaultValue={40} />
+    </StoryStack>
+  ),
+};
+
+export const Interactive: Story = {
+  args: { label: "Volume", defaultValue: 50, step: 10 },
+  play: async ({ canvasElement, args }) => {
+    const slider = within(canvasElement).getByRole("slider", { name: "Volume" });
+    // Native range inputs step on real arrow keys; simulated events change the value directly.
+    fireEvent.change(slider, { target: { value: "60" } });
+    await expect(slider).toHaveValue("60");
+    await expect(args.onValueChange).toHaveBeenLastCalledWith(60);
+  },
+};
+
+export const Responsive: Story = {
+  globals: mobileViewport,
+  render: () => (
+    <StoryMobile>
+      <BlockSlider
+        label="Render distance"
+        min={2}
+        max={32}
+        defaultValue={12}
+        formatValue={(v) => `${v} chunks`}
+      />
+    </StoryMobile>
+  ),
+};

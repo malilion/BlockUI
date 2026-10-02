@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, within } from "storybook/test";
 import { CoalIcon, IronIcon, StoneIcon } from "@block-ui/icons";
 import { useEffect, useState } from "react";
-import { fn } from "storybook/test";
-import { StoryGrid } from "../../../stories/StoryLayout";
+import { StoryGrid, StoryMobile } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
 import { ItemStack } from "../../inventory/ItemStack/ItemStack";
 import { BlockPanel } from "../../layout/BlockPanel/BlockPanel";
 import { Furnace } from "./Furnace";
@@ -69,7 +70,7 @@ export const States: Story = {
   ),
 };
 
-function Smelting() {
+function SmeltingDemo() {
   const [progress, setProgress] = useState(0);
   useEffect(() => {
     const id = window.setInterval(() => setProgress((p) => (p >= 100 ? 0 : p + 5)), 200);
@@ -87,4 +88,55 @@ function Smelting() {
   );
 }
 
-export const Interactive: Story = { render: () => <Smelting /> };
+export const Smelting: Story = { render: () => <SmeltingDemo /> };
+
+export const Interactive: Story = {
+  args: { input: undefined, fuel: coal, result: ingot, burning: false, progress: 100 },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("progressbar", { name: "Smelting progress" })).toHaveAttribute(
+      "aria-valuenow",
+      "100",
+    );
+    await expect(canvas.getByText("Complete")).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Iron Ingot, × 3" }));
+    await expect(args.onTakeResult).toHaveBeenCalledOnce();
+  },
+};
+
+export const Variants: Story = {
+  render: () => (
+    <StoryGrid>
+      <BlockPanel title="Default labels">
+        <Furnace input={ore} fuel={coal} burning progress={30} />
+      </BlockPanel>
+      <BlockPanel title="Custom labels">
+        <Furnace
+          input={ore}
+          fuel={coal}
+          burning
+          progress={30}
+          label="Blast furnace"
+          statusLabels={{ processing: "Blasting" }}
+        />
+      </BlockPanel>
+    </StoryGrid>
+  ),
+};
+
+/** One size: three large slots, a 32px flame and a 40px arrow. */
+export const Sizes: Story = {};
+
+/** "No fuel" is the furnace's disabled state — nothing can smelt. */
+export const Disabled: Story = {
+  args: { input: ore, fuel: undefined, burning: false, progress: 0 },
+};
+
+export const Responsive: Story = {
+  globals: mobileViewport,
+  render: (args) => (
+    <StoryMobile>
+      <Furnace {...args} />
+    </StoryMobile>
+  ),
+};

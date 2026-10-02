@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
-import { StoryGrid } from "../../../stories/StoryLayout";
+import { expect, fn, userEvent, within } from "storybook/test";
+import { StoryGrid, StoryMobile, StoryStack } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
 import { ServerCard } from "./ServerCard";
 
 const meta = {
@@ -49,5 +50,46 @@ export const States: Story = {
       <ServerCard {...args} name="Laggy Lands" ping={420} />
       <ServerCard {...args} name="Maintenance" online={false} />
     </StoryGrid>
+  ),
+};
+
+export const Variants: Story = {
+  render: (args) => (
+    <StoryGrid>
+      {(["stone", "deepslate", "nether", "obsidian"] as const).map((material) => (
+        <ServerCard key={material} {...args} material={material} label={`${material} card`} />
+      ))}
+    </StoryGrid>
+  ),
+};
+
+/** Cards fill their container; use a grid or width to size them. */
+export const Sizes: Story = {
+  render: (args) => (
+    <StoryStack>
+      <ServerCard {...args} className="block-story-w-280" label="280px" />
+      <ServerCard {...args} className="block-story-w-480" label="480px" />
+    </StoryStack>
+  ),
+};
+
+/** An offline server: no ping bars and a disabled Join button. */
+export const Disabled: Story = { args: { online: false } };
+
+export const Interactive: Story = {
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("img", { name: "Ping: 32 ms" })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Join" }));
+    await expect(args.onJoin).toHaveBeenCalledOnce();
+  },
+};
+
+export const Responsive: Story = {
+  globals: mobileViewport,
+  render: (args) => (
+    <StoryMobile>
+      <ServerCard {...args} />
+    </StoryMobile>
   ),
 };

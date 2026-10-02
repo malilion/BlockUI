@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
-import { StoryStack } from "../../../stories/StoryLayout";
+import { expect, fn, userEvent, within } from "storybook/test";
+import { StoryMobile, StoryStack } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";
 import { BlockAlert } from "./BlockAlert";
 import { alertVariants } from "./BlockAlert.types";
@@ -42,7 +43,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const AllVariants: Story = {
+export const Variants: Story = {
   render: () => (
     <StoryStack>
       <BlockAlert variant="success" title="Success!" onClose={fn()}>
@@ -72,4 +73,69 @@ export const WithAction: Story = {
       </BlockButton>
     ),
   },
+};
+
+export const States: Story = {
+  render: () => (
+    <StoryStack>
+      <BlockAlert variant="info" title="Title and text">
+        A new update is available.
+      </BlockAlert>
+      <BlockAlert variant="info">Text only.</BlockAlert>
+      <BlockAlert variant="success" title="Dismissible" onClose={fn()}>
+        Your world has been saved.
+      </BlockAlert>
+      <BlockAlert variant="warning" icon={false} title="No icon">
+        Low hunger!
+      </BlockAlert>
+    </StoryStack>
+  ),
+};
+
+/** One size; text wraps and the alert fills its container. */
+export const Sizes: Story = {
+  render: () => (
+    <StoryStack>
+      <BlockAlert variant="info">Short.</BlockAlert>
+      <BlockAlert variant="info" title="Long message">
+        A much longer message wraps across several lines while the icon and the dismiss button stay
+        aligned to the top.
+      </BlockAlert>
+    </StoryStack>
+  ),
+};
+
+/** Alerts are not interactive; a disabled action inside an alert looks like this. */
+export const Disabled: Story = {
+  args: {
+    variant: "error",
+    title: "Connection lost",
+    children: "Retrying in 30 seconds…",
+    action: (
+      <BlockButton size="sm" disabled>
+        Retry
+      </BlockButton>
+    ),
+  },
+};
+
+export const Interactive: Story = {
+  args: { variant: "success", title: "Saved", children: "World saved.", onClose: fn() },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("status", { name: "Saved" })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Dismiss" }));
+    await expect(args.onClose).toHaveBeenCalledOnce();
+  },
+};
+
+export const Responsive: Story = {
+  globals: mobileViewport,
+  decorators: [
+    (Story) => (
+      <StoryMobile>
+        <Story />
+      </StoryMobile>
+    ),
+  ],
 };

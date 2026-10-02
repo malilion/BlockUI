@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { StoryRow, StoryStack } from "../../../stories/StoryLayout";
+import { expect, within } from "storybook/test";
+import { StoryMobile, StoryRow, StoryStack } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
 import { BlockLoading } from "./BlockLoading";
 
 const meta = {
@@ -45,11 +47,40 @@ export const Sizes: Story = {
   ),
 };
 
-export const Bar: Story = {
+export const Variants: Story = {
   render: () => (
     <StoryStack narrow>
       <BlockLoading variant="bar" label="Generating world…" />
       <BlockLoading variant="bar" label="Saving chunks… 60%" progress={60} />
     </StoryStack>
+  ),
+};
+
+export const States: Story = {
+  render: () => (
+    <StoryStack narrow>
+      <BlockLoading label="Visible label" />
+      <BlockLoading label="Hidden label (still announced)" hideLabel />
+      <BlockLoading variant="bar" label="Indeterminate" />
+      <BlockLoading variant="bar" label="Determinate 60%" progress={60} />
+    </StoryStack>
+  ),
+};
+
+/** Loading indicators are status only and have no disabled state. A finished task simply removes the indicator. */
+export const Disabled: Story = { args: { label: "Nothing to load", variant: "bar", progress: 0 } };
+
+export const Interactive: Story = {
+  play: async ({ canvasElement }) => {
+    await expect(within(canvasElement).getByRole("status")).toHaveTextContent("Loading…");
+  },
+};
+
+export const Responsive: Story = {
+  globals: mobileViewport,
+  render: () => (
+    <StoryMobile>
+      <BlockLoading variant="bar" label="Generating world…" />
+    </StoryMobile>
   ),
 };

@@ -155,7 +155,7 @@ import "@fontsource/silkscreen/700.css";
   <sub>Mobile: the sidebar becomes a bottom hotbar.</sub>
 </p>
 
-Every component has stories in [Storybook](https://malilion.github.io/BlockUI/) (or run `pnpm storybook` locally) with live controls, all variants and states, usage, props tables, accessibility notes and an a11y checker. Storybook also has Foundations pages (colors, typography, spacing, shadows, themes, icons) and full-screen Patterns (dashboard, player profile, inventory screen, crafting screen, server browser).
+Every component has stories in [Storybook](https://malilion.github.io/BlockUI/) (or run `pnpm storybook` locally) — always `Default`, `Variants`, `States`, `Sizes`, `Disabled`, `Interactive` (an interaction test) and `Responsive` — with live controls, all variants and states, usage, props tables, accessibility notes and an a11y checker. Storybook also has Foundations pages (colors, typography, spacing, shadows, themes, icons) and full-screen Patterns (dashboard, player profile, inventory screen, crafting screen, server browser).
 
 ## Components
 
@@ -301,7 +301,7 @@ pnpm typecheck         # TypeScript
 pnpm build             # Build every package and the playground
 pnpm build-storybook   # Static Storybook
 pnpm check:treeshake   # Make sure unused components are dropped
-pnpm check:a11y        # axe (WCAG 2.2 AA) on every story, after build-storybook
+pnpm check:a11y        # Run every story's play test + axe (WCAG 2.2 AA), after build-storybook
 pnpm check:package     # Pack, install with npm into a fresh React app, type-check and build
 pnpm check:publish     # Dry-run `pnpm publish` for every package (uploads nothing)
 pnpm screenshots       # Regenerate the README images (after pnpm build)
@@ -325,7 +325,7 @@ Each component lives in its own folder with `Component.tsx`, `Component.types.ts
 
 The library is built with Vite library mode into ESM with `preserveModules`, TypeScript declarations and a single `dist/styles.css`. React is external.
 
-Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, package install check, Storybook build, an axe scan of every story in all five themes, and Playwright E2E (including axe on the playground). Pushes to `main` also deploy Storybook to GitHub Pages. Pushing a `v*` tag publishes `@block-ui/*` to npm (see [docs/RELEASING.md](./docs/RELEASING.md)).
+Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, package install check, Storybook build, every story's interaction test plus an axe scan in all five themes, and Playwright E2E (including axe on the playground). Pushes to `main` also deploy Storybook to GitHub Pages. Pushing a `v*` tag publishes `@block-ui/*` to npm (see [docs/RELEASING.md](./docs/RELEASING.md)).
 
 ## Browser Support
 

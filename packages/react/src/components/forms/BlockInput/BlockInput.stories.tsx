@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, userEvent, within } from "storybook/test";
 import { PlayerIcon, SearchIcon } from "@block-ui/icons";
-import { StoryStack } from "../../../stories/StoryLayout";
+import { StoryMobile, StoryStack } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
 import { BlockInput } from "./BlockInput";
 
 const meta = {
@@ -64,4 +66,49 @@ export const Disabled: Story = { args: { disabled: true, defaultValue: "Steve" }
 
 export const Required: Story = {
   args: { required: true, helperText: "Required to join a server." },
+};
+
+export const Variants: Story = {
+  render: () => (
+    <StoryStack>
+      <BlockInput label="Text" placeholder="Steve" />
+      <BlockInput label="Email" type="email" placeholder="steve@example.com" />
+      <BlockInput label="Password" type="password" defaultValue="diamonds" />
+      <BlockInput label="Number" type="number" defaultValue={64} />
+      <BlockInput
+        label="Search"
+        type="search"
+        startIcon={<SearchIcon size={16} />}
+        placeholder="Search items…"
+      />
+    </StoryStack>
+  ),
+};
+
+/** Text controls have one height and stretch to their container. */
+export const Sizes: Story = {
+  render: () => (
+    <StoryStack>
+      <BlockInput label="Narrow (200px)" wrapperClassName="block-story-w-200" placeholder="Steve" />
+      <BlockInput label="Full width" placeholder="Steve" />
+    </StoryStack>
+  ),
+};
+
+export const Interactive: Story = {
+  args: { label: "Player Name", placeholder: "Steve" },
+  play: async ({ canvasElement }) => {
+    const input = within(canvasElement).getByLabelText("Player Name");
+    await userEvent.type(input, "Alex");
+    await expect(input).toHaveValue("Alex");
+  },
+};
+
+export const Responsive: Story = {
+  globals: mobileViewport,
+  render: () => (
+    <StoryMobile>
+      <BlockInput label="Player Name" placeholder="Steve" helperText="3–16 characters." />
+    </StoryMobile>
+  ),
 };

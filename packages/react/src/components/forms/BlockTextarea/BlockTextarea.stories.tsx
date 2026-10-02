@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { StoryStack } from "../../../stories/StoryLayout";
+import { expect, userEvent, within } from "storybook/test";
+import { StoryMobile, StoryStack } from "../../../stories/StoryLayout";
+import { mobileViewport } from "../../../stories/storyGlobals";
 import { BlockTextarea } from "./BlockTextarea";
 
 const meta = {
@@ -55,3 +57,42 @@ export const States: Story = {
 };
 
 export const Disabled: Story = { args: { disabled: true } };
+
+export const Variants: Story = {
+  render: () => (
+    <StoryStack>
+      <BlockTextarea label="Plain" />
+      <BlockTextarea label="With counter" maxLength={140} />
+      <BlockTextarea label="With helper" helperText="Shown on the world list." />
+    </StoryStack>
+  ),
+};
+
+/** Use `rows` for height; width follows the container. */
+export const Sizes: Story = {
+  render: () => (
+    <StoryStack>
+      <BlockTextarea label="2 rows" rows={2} />
+      <BlockTextarea label="4 rows (default)" />
+      <BlockTextarea label="8 rows" rows={8} />
+    </StoryStack>
+  ),
+};
+
+export const Interactive: Story = {
+  args: { label: "Notes", maxLength: 50 },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.type(canvas.getByLabelText("Notes"), "Bring torches");
+    await expect(canvas.getByText("13 / 50")).toBeInTheDocument();
+  },
+};
+
+export const Responsive: Story = {
+  globals: mobileViewport,
+  render: () => (
+    <StoryMobile>
+      <BlockTextarea label="World description" maxLength={140} />
+    </StoryMobile>
+  ),
+};
