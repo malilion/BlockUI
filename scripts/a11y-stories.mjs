@@ -1,7 +1,8 @@
 /**
  * Runs every story of the static Storybook in a real browser: waits for its
  * `play` function (interaction test) to finish, fails if it errored, then runs
- * axe-core (WCAG 2.2 AA) — catching what jsdom cannot, such as color contrast.
+ * axe-core (WCAG 2.2 AA + best practices) — catching what jsdom cannot, such as
+ * color contrast.
  *
  *   pnpm build-storybook && pnpm check:a11y
  *
@@ -71,13 +72,20 @@ page.on("pageerror", (error) => storyErrors.push(error.message));
  * Storybook's own a11y addon also runs axe after each render; axe refuses to
  * start while another run is in progress, so wait for it and retry.
  */
-async function analyze(target) {
+// Same rules as Storybook's Accessibility panel: WCAG 2.x A/AA plus best
+// practices. Component previews are not pages, so the page-level rules only
+// apply to Foundations and Patterns (mirrors .storybook/preview.tsx).
+const TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"];
+const PAGE_RULES = ["bypass", "landmark-one-main", "page-has-heading-one", "region"];
+
+async function analyze(target, story) {
+  const isPage = /^(foundations|patterns)-/.test(story.id);
   for (let attempt = 0; ; attempt += 1) {
     try {
-      return await new AxeBuilder({ page: target })
-        .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
-        .include("#storybook-root")
-        .analyze();
+      const builder = new AxeBuilder({ page: target }).withTags(TAGS);
+      return await (
+        isPage ? builder : builder.include("#storybook-root").disableRules(PAGE_RULES)
+      ).analyze();
     } catch (error) {
       if (attempt >= 20 || !String(error).includes("Axe is already running")) throw error;
       await target.waitForTimeout(250);
@@ -114,7 +122,7 @@ for (const theme of themes) {
       continue;
     }
     await page.evaluate(() => document.fonts.ready);
-    const results = await analyze(page);
+    const results = await analyze(page, story);
     if (results.violations.length > 0) {
       failures += 1;
       console.log(`✖ [${theme}] ${story.title} › ${story.name}`);

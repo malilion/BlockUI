@@ -1,0 +1,214 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--block-space-8);
+  max-width: 1100px;
+}
+
+.intro {
+  margin: 0;
+  max-width: 70ch;
+  color: var(--block-text-muted);
+  line-height: var(--block-line-height-relaxed);
+}
+
+.intro code,
+.code {
+  font-family: var(--block-font-mono);
+  font-size: var(--block-font-size-sm);
+  color: var(--block-text);
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--block-space-3);
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--block-space-1);
+  min-width: 0;
+  padding: var(--block-space-2);
+  background-color: var(--block-surface-alt);
+  border: var(--block-border-width-thin) solid var(--block-border);
+}
+
+.chip {
+  height: 56px;
+  background-color: var(--swatch);
+  border: var(--block-border-width-thin) solid var(--block-border);
+  box-shadow:
+    inset 3px 3px 0 var(--block-shadow-bevel-light),
+    inset -3px -3px 0 var(--block-shadow-bevel-dark);
+}
+
+.chipText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--block-font-display);
+  font-weight: var(--block-font-weight-bold);
+}
+
+.label {
+  font-size: var(--block-font-size-sm);
+  font-weight: var(--block-font-weight-bold);
+}
+
+.meta {
+  font-family: var(--block-font-mono);
+  font-size: var(--block-font-size-xs);
+  color: var(--block-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.materialRow {
+  display: grid;
+  grid-template-columns: 120px repeat(4, minmax(0, 1fr));
+  gap: var(--block-space-2);
+  align-items: stretch;
+}
+
+.materialName {
+  align-self: center;
+  font-family: var(--block-font-display);
+  font-weight: var(--block-font-weight-bold);
+  text-transform: uppercase;
+}
+
+.scale {
+  display: flex;
+  flex-direction: column;
+  gap: var(--block-space-3);
+}
+
+.scaleRow {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--block-space-4);
+  align-items: center;
+}
+
+.bar {
+  width: var(--size);
+  height: 20px;
+  background-color: var(--block-primary);
+  border: var(--block-border-width-thin) solid var(--block-border);
+}
+
+.radiusBox {
+  width: 64px;
+  height: 64px;
+  background-color: var(--block-surface);
+  border: var(--block-border-width) solid var(--block-primary);
+  border-radius: var(--size);
+}
+
+.sample {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--block-space-6);
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+  padding: var(--block-space-4);
+  text-align: center;
+  background-color: var(--block-surface);
+  border: var(--block-border-width) solid var(--block-border);
+}
+
+.motionTrack {
+  position: relative;
+  height: 28px;
+  background-color: var(--block-slot);
+  border: var(--block-border-width-thin) solid var(--block-border);
+}
+
+.motionBlock {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: var(--block-primary);
+  animation: slide calc(var(--duration) * 6) var(--block-ease-step) infinite alternate;
+}
+
+@keyframes slide {
+  to {
+    left: calc(100% - 22px);
+  }
+}
+
+.icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--block-space-2);
+}
+
+.iconCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--block-space-2);
+  padding: var(--block-space-3) var(--block-space-2);
+  color: var(--block-text);
+  background-color: var(--block-surface-alt);
+  border: var(--block-border-width-thin) solid var(--block-border);
+}
+
+.themes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--block-space-6);
+}
+
+.themeCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--block-space-3);
+  padding: var(--block-space-4);
+  background-color: var(--block-bg);
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, var(--block-bg) 80%, transparent),
+      color-mix(in srgb, var(--block-bg) 80%, transparent)
+    ),
+    var(--block-texture);
+  background-size:
+    auto,
+    64px 64px;
+  border: var(--block-border-width) solid var(--block-border);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--block-space-2);
+}
+
+@media (max-width: 767.98px) {
+  .materialRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .materialName {
+    grid-column: 1 / -1;
+  }
+
+  .scaleRow {
+    grid-template-columns: 1fr;
+  }
+}
