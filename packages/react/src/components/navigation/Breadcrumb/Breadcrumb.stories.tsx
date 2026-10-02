@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { StoryMobile, StoryStack } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
-import { HomeIcon } from "@block-ui/icons";
+import { HomeIcon } from "@malilion/block-ui-icons";
 import { Breadcrumb } from "./Breadcrumb";
 
 const meta = {
@@ -23,7 +23,7 @@ const meta = {
           "Breadcrumb trail with pixel chevrons.",
           "",
           "```tsx",
-          'import { Breadcrumb } from "@block-ui/react";',
+          'import { Breadcrumb } from "@malilion/block-ui-react";',
           "",
           '<Breadcrumb items={[{ label: "Home", href: "/" }, { label: "My World" }]} />',
           "```",

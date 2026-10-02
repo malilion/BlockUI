@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import { StoryRow } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
-import { GrassBlockIcon, SettingsIcon } from "@block-ui/icons";
+import { GrassBlockIcon, SettingsIcon } from "@malilion/block-ui-icons";
 import { useState } from "react";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";
 import { BlockInput } from "../../forms/BlockInput/BlockInput";
@@ -24,7 +24,7 @@ const meta = {
           "Modal dialog with a pixel frame.",
           "",
           "```tsx",
-          'import { BlockModal } from "@block-ui/react";',
+          'import { BlockModal } from "@malilion/block-ui-react";',
           "",
           '<BlockModal open={open} title="Delete World" onClose={handleClose}>…</BlockModal>',
           "```",

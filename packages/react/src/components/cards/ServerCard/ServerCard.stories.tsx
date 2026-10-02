@@ -25,7 +25,7 @@ const meta = {
           "Server browser entry with a signal-bar ping indicator (good < 80 ms, fair < 200 ms).",
           "",
           "```tsx",
-          'import { ServerCard } from "@block-ui/react";',
+          'import { ServerCard } from "@malilion/block-ui-react";',
           "",
           '<ServerCard name="BlockCraft SMP" onlinePlayers={12} maxPlayers={50} version="1.20.4" ping={32} onJoin={join} />',
           "```",

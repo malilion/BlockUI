@@ -23,7 +23,7 @@ const meta = {
           "Segmented experience bar with the level above.",
           "",
           "```tsx",
-          'import { XPBar } from "@block-ui/react";',
+          'import { XPBar } from "@malilion/block-ui-react";',
           "",
           "<XPBar value={1240} max={2000} level={28} showValue />",
           "```",

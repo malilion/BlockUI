@@ -20,7 +20,7 @@ const meta = {
           "Hearts — two health points per heart. Hearts bob when health is low (≤ 20%).",
           "",
           "```tsx",
-          'import { HealthBar } from "@block-ui/react";',
+          'import { HealthBar } from "@malilion/block-ui-react";',
           "",
           "<HealthBar value={14} max={20} />",
           "```",

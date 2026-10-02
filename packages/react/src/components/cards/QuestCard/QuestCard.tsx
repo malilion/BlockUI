@@ -1,4 +1,4 @@
-import { CheckIcon, CoinIcon, QuestIcon, XPOrbIcon } from "@block-ui/icons";
+import { CheckIcon, CoinIcon, QuestIcon, XPOrbIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
 import { cx } from "../../../utils/cx";
 import { formatNumber } from "../../../utils/number";

@@ -5,4 +5,4 @@ import { generateThemesCss } from "../dist/index.js";
 
 const target = fileURLToPath(new URL("../themes.css", import.meta.url));
 writeFileSync(target, generateThemesCss());
-console.log(`@block-ui/themes → ${target}`);
+console.log(`@malilion/block-ui-themes → ${target}`);

@@ -1,4 +1,4 @@
-import { LockIcon } from "@block-ui/icons";
+import { LockIcon } from "@malilion/block-ui-icons";
 import {
   forwardRef,
   useCallback,

@@ -17,7 +17,7 @@ const meta = {
           "On/off switch with a sliding block knob.",
           "",
           "```tsx",
-          'import { BlockToggle } from "@block-ui/react";',
+          'import { BlockToggle } from "@malilion/block-ui-react";',
           "",
           '<BlockToggle label="Music" defaultChecked onCheckedChange={setMusic} />',
           "```",

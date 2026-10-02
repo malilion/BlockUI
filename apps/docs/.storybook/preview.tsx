@@ -1,9 +1,9 @@
 import "@fontsource/silkscreen/400.css";
 import "@fontsource/silkscreen/700.css";
-import "@block-ui/react/styles.css";
+import "@malilion/block-ui-react/styles.css";
 import "./preview.css";
-import { BlockUIProvider } from "@block-ui/react";
-import { themeNames, type BlockThemeName } from "@block-ui/themes";
+import { BlockUIProvider } from "@malilion/block-ui-react";
+import { themeNames, type BlockThemeName } from "@malilion/block-ui-themes";
 import type { Preview } from "@storybook/react-vite";
 import { blockTheme } from "./blockTheme";
 

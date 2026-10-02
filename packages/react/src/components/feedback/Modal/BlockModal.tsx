@@ -1,4 +1,4 @@
-import { CloseIcon } from "@block-ui/icons";
+import { CloseIcon } from "@malilion/block-ui-icons";
 import { forwardRef, useEffect, useId, useRef, type KeyboardEvent, type MouseEvent } from "react";
 import { createPortal } from "react-dom";
 import { useFocusTrap } from "../../../hooks/useFocusTrap";

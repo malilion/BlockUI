@@ -1,4 +1,4 @@
-import { CheckIcon, CloseIcon, ErrorIcon, InfoIcon, WarningIcon } from "@block-ui/icons";
+import { CheckIcon, CloseIcon, ErrorIcon, InfoIcon, WarningIcon } from "@malilion/block-ui-icons";
 import { forwardRef, useId, type ReactNode } from "react";
 import { cx } from "../../../utils/cx";
 import styles from "./BlockAlert.module.css";

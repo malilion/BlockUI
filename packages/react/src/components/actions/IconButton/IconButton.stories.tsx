@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { CloseIcon, PlayIcon, SearchIcon, SettingsIcon } from "@block-ui/icons";
+import { CloseIcon, PlayIcon, SearchIcon, SettingsIcon } from "@malilion/block-ui-icons";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { StoryMobile, StoryRow } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
@@ -23,8 +23,8 @@ const meta = {
           "Square block button for a single icon.",
           "",
           "```tsx",
-          'import { IconButton } from "@block-ui/react";',
-          'import { PlayIcon } from "@block-ui/icons";',
+          'import { IconButton } from "@malilion/block-ui-react";',
+          'import { PlayIcon } from "@malilion/block-ui-icons";',
           "",
           '<IconButton icon={<PlayIcon />} label="Play world" variant="grass" />',
           "```",

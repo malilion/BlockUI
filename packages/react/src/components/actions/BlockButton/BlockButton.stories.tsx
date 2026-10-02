@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { ChestIcon, PlayIcon } from "@block-ui/icons";
+import { ChestIcon, PlayIcon } from "@malilion/block-ui-icons";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { StoryMobile, StoryRow, StoryStack } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
@@ -22,7 +22,7 @@ const meta = {
           "Chunky block button with a pixel bevel, snap hover (`translateY(-2px)`) and press (`translateY(2px)`).",
           "",
           "```tsx",
-          'import { BlockButton } from "@block-ui/react";',
+          'import { BlockButton } from "@malilion/block-ui-react";',
           "",
           '<BlockButton variant="grass">Start</BlockButton>',
           "```",

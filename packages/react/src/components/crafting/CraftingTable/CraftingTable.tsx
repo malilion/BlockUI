@@ -1,4 +1,4 @@
-import { ArrowIcon } from "@block-ui/icons";
+import { ArrowIcon } from "@malilion/block-ui-icons";
 import { forwardRef, isValidElement } from "react";
 import { cx } from "../../../utils/cx";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";

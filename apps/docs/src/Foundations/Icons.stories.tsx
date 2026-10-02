@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import * as Icons from "@block-ui/icons";
-import type { PixelIcon } from "@block-ui/icons";
+import * as Icons from "@malilion/block-ui-icons";
+import type { PixelIcon } from "@malilion/block-ui-icons";
 import { expect, within } from "storybook/test";
 import styles from "./foundations.module.css";
 
@@ -26,7 +26,7 @@ function IconsPage() {
       <section>
         <h1>Icons</h1>
         <p className={styles.intro}>
-          {icons.length} original 16 × 16 pixel-art icons in <code>@block-ui/icons</code>,
+          {icons.length} original 16 × 16 pixel-art icons in <code>@malilion/block-ui-icons</code>,
           tree-shakable and crisp at 16, 24 and 32px. They are decorative by default; pass{" "}
           <code>title</code> to give one an accessible name. Monochrome UI glyphs use{" "}
           <code>currentColor</code>.

@@ -53,21 +53,21 @@ importers:
 
   apps/docs:
     dependencies:
-      '@block-ui/icons':
-        specifier: workspace:^
-        version: link:../../packages/icons
-      '@block-ui/react':
-        specifier: workspace:^
-        version: link:../../packages/react
-      '@block-ui/themes':
-        specifier: workspace:^
-        version: link:../../packages/themes
-      '@block-ui/tokens':
-        specifier: workspace:^
-        version: link:../../packages/tokens
       '@fontsource/silkscreen':
         specifier: ^5.3.0
         version: 5.3.0
+      '@malilion/block-ui-icons':
+        specifier: workspace:^
+        version: link:../../packages/icons
+      '@malilion/block-ui-react':
+        specifier: workspace:^
+        version: link:../../packages/react
+      '@malilion/block-ui-themes':
+        specifier: workspace:^
+        version: link:../../packages/themes
+      '@malilion/block-ui-tokens':
+        specifier: workspace:^
+        version: link:../../packages/tokens
       react:
         specifier: ^19.3.0
         version: 19.3.0
@@ -102,21 +102,21 @@ importers:
 
   apps/playground:
     dependencies:
-      '@block-ui/icons':
-        specifier: workspace:^
-        version: link:../../packages/icons
-      '@block-ui/react':
-        specifier: workspace:^
-        version: link:../../packages/react
-      '@block-ui/themes':
-        specifier: workspace:^
-        version: link:../../packages/themes
-      '@block-ui/tokens':
-        specifier: workspace:^
-        version: link:../../packages/tokens
       '@fontsource/silkscreen':
         specifier: ^5.2.5
         version: 5.3.0
+      '@malilion/block-ui-icons':
+        specifier: workspace:^
+        version: link:../../packages/icons
+      '@malilion/block-ui-react':
+        specifier: workspace:^
+        version: link:../../packages/react
+      '@malilion/block-ui-themes':
+        specifier: workspace:^
+        version: link:../../packages/themes
+      '@malilion/block-ui-tokens':
+        specifier: workspace:^
+        version: link:../../packages/tokens
       react:
         specifier: ^19.3.0
         version: 19.3.0
@@ -139,7 +139,7 @@ importers:
 
   packages/icons:
     dependencies:
-      '@block-ui/tokens':
+      '@malilion/block-ui-tokens':
         specifier: workspace:^
         version: link:../tokens
     devDependencies:
@@ -176,13 +176,13 @@ importers:
 
   packages/react:
     dependencies:
-      '@block-ui/icons':
+      '@malilion/block-ui-icons':
         specifier: workspace:^
         version: link:../icons
-      '@block-ui/themes':
+      '@malilion/block-ui-themes':
         specifier: workspace:^
         version: link:../themes
-      '@block-ui/tokens':
+      '@malilion/block-ui-tokens':
         specifier: workspace:^
         version: link:../tokens
     devDependencies:
@@ -231,7 +231,7 @@ importers:
 
   packages/themes:
     dependencies:
-      '@block-ui/tokens':
+      '@malilion/block-ui-tokens':
         specifier: workspace:^
         version: link:../tokens
 

@@ -14,7 +14,7 @@
   <a href="https://github.com/malilion/BlockUI/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/BlockUI/ci.yml?branch=main&style=flat-square&label=CI" alt="CI status"></a>
   <a href="https://github.com/malilion/BlockUI/actions/workflows/docs.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/BlockUI/docs.yml?branch=main&style=flat-square&label=docs" alt="docs build"></a>
   <a href="https://github.com/malilion/BlockUI/stargazers"><img src="https://img.shields.io/github/stars/malilion/BlockUI?style=flat-square&color=5d9b3d" alt="GitHub stars"></a>
-  <a href="https://www.npmjs.com/package/@block-ui/react"><img src="https://img.shields.io/npm/v/@block-ui/react?style=flat-square&color=5d9b3d" alt="npm @block-ui/react"></a>
+  <a href="https://www.npmjs.com/package/@malilion/block-ui-react"><img src="https://img.shields.io/npm/v/@malilion/block-ui-react?style=flat-square&color=5d9b3d" alt="npm @malilion/block-ui-react"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-f2c94c?style=flat-square" alt="license: MIT"></a>
   <br/>
   <img src="https://img.shields.io/badge/React_18_|_19-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React 18 / 19">
@@ -42,7 +42,7 @@ All artwork — the 50+ pixel icons, the procedural stone / dirt / planks textur
 - Signature game UI: `InventoryGrid`, `InventorySlot`, `ItemStack`, `ItemTooltip`, `Hotbar`, `CraftingTable`, `Furnace`, `QuestCard`, `AchievementCard`, `PlayerHUD`
 - 5 themes — **Grassland**, **Cave**, **Deepslate**, **Nether**, **End** — switched with one `data-theme` attribute; every component follows without changes
 - Design tokens as TypeScript objects and CSS variables (`--block-*`); components never hard-code colors
-- `@block-ui/icons`: 50+ original 16 × 16 pixel-art SVG icons, tree-shakable
+- `@malilion/block-ui-icons`: 50+ original 16 × 16 pixel-art SVG icons, tree-shakable
 - Accessible: WCAG 2.2 AA — axe runs on every story in all five themes and on the playground in CI, ARIA grid / tabs / dialog patterns, focus trapping, visible focus rings and `prefers-reduced-motion`
 - Snappy, mechanical motion: nothing slower than 160 ms, `steps()` easing, no springs or blur
 - Responsive: the sidebar collapses on tablet and turns into a hotbar at the bottom on mobile
@@ -51,18 +51,18 @@ All artwork — the 50+ pixel icons, the procedural stone / dirt / planks textur
 ## Installation
 
 ```bash
-pnpm add @block-ui/react
+pnpm add @malilion/block-ui-react
 ```
 
 ```bash
-npm install @block-ui/react
+npm install @malilion/block-ui-react
 ```
 
 ```bash
-yarn add @block-ui/react
+yarn add @malilion/block-ui-react
 ```
 
-`@block-ui/react` installs `@block-ui/tokens`, `@block-ui/themes` and `@block-ui/icons` for you. It supports React 18.2 and 19.
+`@malilion/block-ui-react` installs `@malilion/block-ui-tokens`, `@malilion/block-ui-themes` and `@malilion/block-ui-icons` for you. It supports React 18.2 and 19.
 
 > [!NOTE]
 > The packages have not been published to npm yet. Until the first `v*` tag, clone the repository and use the workspace (see [Local Development](#local-development)). The release pipeline is documented in [docs/RELEASING.md](./docs/RELEASING.md).
@@ -71,9 +71,9 @@ yarn add @block-ui/react
 
 ```tsx
 // main.tsx
-import "@block-ui/react/styles.css";
+import "@malilion/block-ui-react/styles.css";
 import { createRoot } from "react-dom/client";
-import { BlockUIProvider } from "@block-ui/react";
+import { BlockUIProvider } from "@malilion/block-ui-react";
 import App from "./App";
 
 createRoot(document.getElementById("root")!).render(
@@ -85,8 +85,14 @@ createRoot(document.getElementById("root")!).render(
 
 ```tsx
 // App.tsx
-import { BlockButton, InventoryGrid, InventorySlot, ItemStack, QuestCard } from "@block-ui/react";
-import { DiamondIcon } from "@block-ui/icons";
+import {
+  BlockButton,
+  InventoryGrid,
+  InventorySlot,
+  ItemStack,
+  QuestCard,
+} from "@malilion/block-ui-react";
+import { DiamondIcon } from "@malilion/block-ui-icons";
 
 export default function App() {
   return (
@@ -115,13 +121,13 @@ export default function App() {
 Always import from the package root — never from internal paths:
 
 ```tsx
-import { BlockButton, InventoryGrid } from "@block-ui/react"; // ✅
+import { BlockButton, InventoryGrid } from "@malilion/block-ui-react"; // ✅
 ```
 
 Show toasts from anywhere. `<BlockUIProvider>` already renders the toast region:
 
 ```ts
-import { toast } from "@block-ui/react";
+import { toast } from "@malilion/block-ui-react";
 
 toast.success("World saved.");
 toast.info("Update available.");
@@ -195,7 +201,12 @@ Every component accepts the usual attributes (`className`, `aria-*`, `data-*`, e
 Full API tables are generated in Storybook. Types are exported too:
 
 ```ts
-import type { BlockButtonVariant, ItemRarity, PlayerStats, ToastOptions } from "@block-ui/react";
+import type {
+  BlockButtonVariant,
+  ItemRarity,
+  PlayerStats,
+  ToastOptions,
+} from "@malilion/block-ui-react";
 ```
 
 ## Keyboard
@@ -256,8 +267,8 @@ Every material also has `-light`, `-dark` and an `--block-on-*` text color that 
 Only need the tokens?
 
 ```ts
-import "@block-ui/tokens/tokens.css";
-import { colors, spacing, motion } from "@block-ui/tokens";
+import "@malilion/block-ui-tokens/tokens.css";
+import { colors, spacing, motion } from "@malilion/block-ui-tokens";
 ```
 
 ## Design Principles
@@ -272,12 +283,12 @@ Block UI follows five rules. Respect them when adding new components.
 
 ## Packages
 
-| Package            | Description                                    |
-| ------------------ | ---------------------------------------------- |
-| `@block-ui/react`  | React components, hooks and `styles.css`       |
-| `@block-ui/tokens` | Design tokens as TypeScript and `tokens.css`   |
-| `@block-ui/themes` | The five themes as TypeScript and `themes.css` |
-| `@block-ui/icons`  | 50+ pixel-art React icons (16 / 24 / 32 px)    |
+| Package                     | Description                                    |
+| --------------------------- | ---------------------------------------------- |
+| `@malilion/block-ui-react`  | React components, hooks and `styles.css`       |
+| `@malilion/block-ui-tokens` | Design tokens as TypeScript and `tokens.css`   |
+| `@malilion/block-ui-themes` | The five themes as TypeScript and `themes.css` |
+| `@malilion/block-ui-icons`  | 50+ pixel-art React icons (16 / 24 / 32 px)    |
 
 ## Local Development
 
@@ -313,10 +324,10 @@ block-ui/
 │  ├─ docs/          # Storybook: Introduction, Foundations, Patterns
 │  └─ playground/    # Demo dashboard
 ├─ packages/
-│  ├─ react/         # @block-ui/react
-│  ├─ icons/         # @block-ui/icons
-│  ├─ themes/        # @block-ui/themes
-│  └─ tokens/        # @block-ui/tokens
+│  ├─ react/         # @malilion/block-ui-react
+│  ├─ icons/         # @malilion/block-ui-icons
+│  ├─ themes/        # @malilion/block-ui-themes
+│  └─ tokens/        # @malilion/block-ui-tokens
 ├─ tests/e2e/        # Playwright tests
 └─ docs/images/      # README images
 ```
@@ -325,7 +336,7 @@ Each component lives in its own folder with `Component.tsx`, `Component.types.ts
 
 The library is built with Vite library mode into ESM with `preserveModules`, TypeScript declarations and a single `dist/styles.css`. React is external.
 
-Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, package install check, Storybook build, every story's interaction test plus an axe scan in all five themes, and Playwright E2E (including axe on the playground). Pushes to `main` also deploy Storybook to GitHub Pages. Pushing a `v*` tag publishes `@block-ui/*` to npm (see [docs/RELEASING.md](./docs/RELEASING.md)).
+Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, package install check, Storybook build, every story's interaction test plus an axe scan in all five themes, and Playwright E2E (including axe on the playground). Pushes to `main` also deploy Storybook to GitHub Pages. Pushing a `v*` tag publishes `@malilion/block-ui-*` to npm (see [docs/RELEASING.md](./docs/RELEASING.md)).
 
 ## Browser Support
 

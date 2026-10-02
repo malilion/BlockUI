@@ -16,7 +16,7 @@ const meta = {
           "Native checkbox drawn as a pixel block. Supports `indeterminate`.",
           "",
           "```tsx",
-          'import { BlockCheckbox } from "@block-ui/react";',
+          'import { BlockCheckbox } from "@malilion/block-ui-react";',
           "",
           '<BlockCheckbox label="Enable PvP" defaultChecked />',
           "```",

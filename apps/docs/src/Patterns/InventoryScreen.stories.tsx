@@ -15,7 +15,7 @@ import {
   RedstoneIcon,
   StoneIcon,
   TorchIcon,
-} from "@block-ui/icons";
+} from "@malilion/block-ui-icons";
 import {
   Hotbar,
   Inventory,
@@ -24,7 +24,7 @@ import {
   InventorySlot,
   ItemStack,
   ItemTooltip,
-} from "@block-ui/react";
+} from "@malilion/block-ui-react";
 import type { ReactNode } from "react";
 import { expect, userEvent, within } from "storybook/test";
 import styles from "./patterns.module.css";

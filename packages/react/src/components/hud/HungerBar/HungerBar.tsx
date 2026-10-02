@@ -1,4 +1,4 @@
-import { FoodIcon } from "@block-ui/icons";
+import { FoodIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
 import { PointsBar } from "../PointsBar/PointsBar";
 import type { HungerBarProps } from "./HungerBar.types";

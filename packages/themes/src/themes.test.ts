@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { contrastRatio } from "@block-ui/tokens";
+import { contrastRatio } from "@malilion/block-ui-tokens";
 import { describe, expect, it } from "vitest";
 import { generateThemesCss, themeEntries, themeNames, themes } from "./index";
 

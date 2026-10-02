@@ -1,4 +1,4 @@
-import { AchievementIcon, LockIcon } from "@block-ui/icons";
+import { AchievementIcon, LockIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
 import { cx } from "../../../utils/cx";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";

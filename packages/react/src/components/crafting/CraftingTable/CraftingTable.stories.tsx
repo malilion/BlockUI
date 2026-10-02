@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { StoryMobile, StoryStack } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
-import { ChestIcon, PlanksIcon } from "@block-ui/icons";
+import { ChestIcon, PlanksIcon } from "@malilion/block-ui-icons";
 import { useState } from "react";
 import { ItemStack } from "../../inventory/ItemStack/ItemStack";
 import { BlockPanel } from "../../layout/BlockPanel/BlockPanel";
@@ -43,7 +43,7 @@ const meta = {
           "Crafting layout: grid → arrow → result. Horizontal on desktop and vertical on mobile.",
           "",
           "```tsx",
-          'import { CraftingTable, CraftingGrid, ItemStack } from "@block-ui/react";',
+          'import { CraftingTable, CraftingGrid, ItemStack } from "@malilion/block-ui-react";',
           "",
           "<CraftingTable",
           "  input={<CraftingGrid size={3}>…</CraftingGrid>}",

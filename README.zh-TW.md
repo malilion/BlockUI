@@ -14,7 +14,7 @@
   <a href="https://github.com/malilion/BlockUI/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/BlockUI/ci.yml?branch=main&style=flat-square&label=CI" alt="CI 狀態"></a>
   <a href="https://github.com/malilion/BlockUI/actions/workflows/docs.yml"><img src="https://img.shields.io/github/actions/workflow/status/malilion/BlockUI/docs.yml?branch=main&style=flat-square&label=docs" alt="文件建置"></a>
   <a href="https://github.com/malilion/BlockUI/stargazers"><img src="https://img.shields.io/github/stars/malilion/BlockUI?style=flat-square&color=5d9b3d" alt="GitHub stars"></a>
-  <a href="https://www.npmjs.com/package/@block-ui/react"><img src="https://img.shields.io/npm/v/@block-ui/react?style=flat-square&color=5d9b3d" alt="npm @block-ui/react"></a>
+  <a href="https://www.npmjs.com/package/@malilion/block-ui-react"><img src="https://img.shields.io/npm/v/@malilion/block-ui-react?style=flat-square&color=5d9b3d" alt="npm @malilion/block-ui-react"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-f2c94c?style=flat-square" alt="授權：MIT"></a>
   <br/>
   <img src="https://img.shields.io/badge/React_18_|_19-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React 18 / 19">
@@ -42,7 +42,7 @@ Block UI 是一套 React 元件庫，視覺語言來自方塊建造生存遊戲�
 - 招牌遊戲 UI：`InventoryGrid`、`InventorySlot`、`ItemStack`、`ItemTooltip`、`Hotbar`、`CraftingTable`、`Furnace`、`QuestCard`、`AchievementCard`、`PlayerHUD`
 - 5 套主題——**Grassland（草原）**、**Cave（洞穴）**、**Deepslate（深板岩）**、**Nether（地獄）**、**End（終界）**——只要一個 `data-theme` 屬性就能切換，所有元件不需修改
 - 設計 Token 同時提供 TypeScript 物件與 CSS 變數（`--block-*`），元件內不寫死任何顏色
-- `@block-ui/icons`：50 多個原創 16 × 16 像素 SVG 圖示，可 tree-shake
+- `@malilion/block-ui-icons`：50 多個原創 16 × 16 像素 SVG 圖示，可 tree-shake
 - 無障礙：WCAG 2.2 AA——CI 會在五套主題下用 axe 檢查每個 story 與 Playground，ARIA grid／tabs／dialog 模式、焦點鎖定、清楚的焦點框，並支援 `prefers-reduced-motion`
 - 俐落的機械感動畫：不超過 160 ms、使用 `steps()` 緩動，不用彈簧、回彈或模糊
 - 響應式：平板時側邊欄收合成圖示列，手機時變成底部的 Hotbar 導覽
@@ -51,18 +51,18 @@ Block UI 是一套 React 元件庫，視覺語言來自方塊建造生存遊戲�
 ## 安裝
 
 ```bash
-pnpm add @block-ui/react
+pnpm add @malilion/block-ui-react
 ```
 
 ```bash
-npm install @block-ui/react
+npm install @malilion/block-ui-react
 ```
 
 ```bash
-yarn add @block-ui/react
+yarn add @malilion/block-ui-react
 ```
 
-`@block-ui/react` 會自動安裝 `@block-ui/tokens`、`@block-ui/themes` 與 `@block-ui/icons`。支援 React 18.2 與 19。
+`@malilion/block-ui-react` 會自動安裝 `@malilion/block-ui-tokens`、`@malilion/block-ui-themes` 與 `@malilion/block-ui-icons`。支援 React 18.2 與 19。
 
 > [!NOTE]
 > 套件尚未發布到 npm。在第一個 `v*` tag 之前請 clone 這個 repository，直接使用 workspace（見[本地開發](#本地開發)）。發布流程見 [docs/RELEASING.md](./docs/RELEASING.md)。
@@ -71,9 +71,9 @@ yarn add @block-ui/react
 
 ```tsx
 // main.tsx
-import "@block-ui/react/styles.css";
+import "@malilion/block-ui-react/styles.css";
 import { createRoot } from "react-dom/client";
-import { BlockUIProvider } from "@block-ui/react";
+import { BlockUIProvider } from "@malilion/block-ui-react";
 import App from "./App";
 
 createRoot(document.getElementById("root")!).render(
@@ -85,8 +85,14 @@ createRoot(document.getElementById("root")!).render(
 
 ```tsx
 // App.tsx
-import { BlockButton, InventoryGrid, InventorySlot, ItemStack, QuestCard } from "@block-ui/react";
-import { DiamondIcon } from "@block-ui/icons";
+import {
+  BlockButton,
+  InventoryGrid,
+  InventorySlot,
+  ItemStack,
+  QuestCard,
+} from "@malilion/block-ui-react";
+import { DiamondIcon } from "@malilion/block-ui-icons";
 
 export default function App() {
   return (
@@ -115,13 +121,13 @@ export default function App() {
 一律從套件根目錄匯入，不要從內部路徑匯入：
 
 ```tsx
-import { BlockButton, InventoryGrid } from "@block-ui/react"; // ✅
+import { BlockButton, InventoryGrid } from "@malilion/block-ui-react"; // ✅
 ```
 
 在任何地方顯示 Toast。`<BlockUIProvider>` 已經幫你放好通知區：
 
 ```ts
-import { toast } from "@block-ui/react";
+import { toast } from "@malilion/block-ui-react";
 
 toast.success("World saved.");
 toast.info("Update available.");
@@ -195,7 +201,12 @@ import "@fontsource/silkscreen/700.css";
 完整的 API 表格在 Storybook 中自動產生。型別也一併匯出：
 
 ```ts
-import type { BlockButtonVariant, ItemRarity, PlayerStats, ToastOptions } from "@block-ui/react";
+import type {
+  BlockButtonVariant,
+  ItemRarity,
+  PlayerStats,
+  ToastOptions,
+} from "@malilion/block-ui-react";
 ```
 
 ## 鍵盤操作
@@ -256,8 +267,8 @@ import type { BlockButtonVariant, ItemRarity, PlayerStats, ToastOptions } from "
 只需要 Token？
 
 ```ts
-import "@block-ui/tokens/tokens.css";
-import { colors, spacing, motion } from "@block-ui/tokens";
+import "@malilion/block-ui-tokens/tokens.css";
+import { colors, spacing, motion } from "@malilion/block-ui-tokens";
 ```
 
 ## 設計原則
@@ -272,12 +283,12 @@ Block UI 遵守五條規則，新增元件時請一併遵守。
 
 ## 套件
 
-| 套件               | 說明                                      |
-| ------------------ | ----------------------------------------- |
-| `@block-ui/react`  | React 元件、hooks 與 `styles.css`         |
-| `@block-ui/tokens` | 設計 Token（TypeScript 與 `tokens.css`）  |
-| `@block-ui/themes` | 五套主題（TypeScript 與 `themes.css`）    |
-| `@block-ui/icons`  | 50 多個像素風 React 圖示（16／24／32 px） |
+| 套件                        | 說明                                      |
+| --------------------------- | ----------------------------------------- |
+| `@malilion/block-ui-react`  | React 元件、hooks 與 `styles.css`         |
+| `@malilion/block-ui-tokens` | 設計 Token（TypeScript 與 `tokens.css`）  |
+| `@malilion/block-ui-themes` | 五套主題（TypeScript 與 `themes.css`）    |
+| `@malilion/block-ui-icons`  | 50 多個像素風 React 圖示（16／24／32 px） |
 
 ## 本地開發
 
@@ -313,10 +324,10 @@ block-ui/
 │  ├─ docs/          # Storybook：Introduction、Foundations、Patterns
 │  └─ playground/    # 展示用儀表板
 ├─ packages/
-│  ├─ react/         # @block-ui/react
-│  ├─ icons/         # @block-ui/icons
-│  ├─ themes/        # @block-ui/themes
-│  └─ tokens/        # @block-ui/tokens
+│  ├─ react/         # @malilion/block-ui-react
+│  ├─ icons/         # @malilion/block-ui-icons
+│  ├─ themes/        # @malilion/block-ui-themes
+│  └─ tokens/        # @malilion/block-ui-tokens
 ├─ tests/e2e/        # Playwright 測試
 └─ docs/images/      # README 圖片
 ```
@@ -325,7 +336,7 @@ block-ui/
 
 函式庫使用 Vite library mode 建置成 ESM（`preserveModules`）、TypeScript 型別宣告與單一 `dist/styles.css`。React 為 external，不會被打包。
 
-每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、套件安裝檢查、Storybook 建置、在五套主題下執行每個 story 的互動測試與 axe 檢查，以及 Playwright E2E（含 Playground 的 axe 檢查）。push 到 `main` 時也會把 Storybook 部署到 GitHub Pages。推送 `v*` tag 會把 `@block-ui/*` 發布到 npm（見 [docs/RELEASING.md](./docs/RELEASING.md)）。
+每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、套件安裝檢查、Storybook 建置、在五套主題下執行每個 story 的互動測試與 axe 檢查，以及 Playwright E2E（含 Playground 的 axe 檢查）。push 到 `main` 時也會把 Storybook 部署到 GitHub Pages。推送 `v*` tag 會把 `@malilion/block-ui-*` 發布到 npm（見 [docs/RELEASING.md](./docs/RELEASING.md)）。
 
 ## 瀏覽器支援
 

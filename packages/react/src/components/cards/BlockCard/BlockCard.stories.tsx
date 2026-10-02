@@ -20,7 +20,7 @@ const meta = {
           "Base card with a block-material frame and a dark inner panel. All game cards are built on it.",
           "",
           "```tsx",
-          'import { BlockCard } from "@block-ui/react";',
+          'import { BlockCard } from "@malilion/block-ui-react";',
           "",
           '<BlockCard material="wood" label="Achievement">…</BlockCard>',
           "```",

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
 import { StoryMobile, StoryStack } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
-import { AppleIcon, DiamondIcon, GrassBlockIcon, SwordIcon } from "@block-ui/icons";
+import { AppleIcon, DiamondIcon, GrassBlockIcon, SwordIcon } from "@malilion/block-ui-icons";
 import { BlockTabs } from "./BlockTabs";
 
 const meta = {
@@ -47,7 +47,7 @@ const meta = {
           "Creative-inventory style tabs.",
           "",
           "```tsx",
-          'import { BlockTabs } from "@block-ui/react";',
+          'import { BlockTabs } from "@malilion/block-ui-react";',
           "",
           '<BlockTabs label="Inventory" items={[{ id: "blocks", label: "Blocks", content: <BlockList /> }]} />',
           "```",

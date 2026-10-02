@@ -20,7 +20,7 @@ const meta = {
           "Loading indicator with stepping pixel blocks or a loading bar.",
           "",
           "```tsx",
-          'import { BlockLoading } from "@block-ui/react";',
+          'import { BlockLoading } from "@malilion/block-ui-react";',
           "",
           '<BlockLoading variant="bar" label="Generating world…" />',
           "```",

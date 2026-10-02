@@ -1,4 +1,4 @@
-import { ArmorIcon } from "@block-ui/icons";
+import { ArmorIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
 import { PointsBar } from "../PointsBar/PointsBar";
 import type { ArmorBarProps } from "./ArmorBar.types";

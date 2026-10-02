@@ -1,4 +1,4 @@
-import type { BlockThemeName } from "@block-ui/themes";
+import type { BlockThemeName } from "@malilion/block-ui-themes";
 import type { HTMLAttributes, ReactNode } from "react";
 
 export interface BlockUIProviderProps extends HTMLAttributes<HTMLDivElement> {

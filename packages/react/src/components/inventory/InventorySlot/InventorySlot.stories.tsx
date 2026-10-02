@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn, userEvent, within } from "storybook/test";
-import { DiamondIcon, DiamondSwordIcon, PickaxeIcon, PlanksIcon } from "@block-ui/icons";
+import { DiamondIcon, DiamondSwordIcon, PickaxeIcon, PlanksIcon } from "@malilion/block-ui-icons";
 import { StoryMobile, StoryRow } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
 import { ItemStack } from "../ItemStack/ItemStack";
@@ -29,7 +29,7 @@ const meta = {
           "A single sunken slot — the core building block of every inventory. Inside `InventoryGrid` it becomes a grid cell with roving focus; standalone with `onClick` it is a toggle button.",
           "",
           "```tsx",
-          'import { InventorySlot, ItemStack } from "@block-ui/react";',
+          'import { InventorySlot, ItemStack } from "@malilion/block-ui-react";',
           "",
           '<InventorySlot selected tooltip={<ItemTooltip name="Diamond" />}>',
           '  <ItemStack icon={<DiamondIcon />} amount={12} name="Diamond" />',

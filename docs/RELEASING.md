@@ -1,11 +1,11 @@
 # Releasing Block UI
 
-V1 ships four public packages at the same version: `@block-ui/tokens`, `@block-ui/themes`, `@block-ui/icons`, `@block-ui/react`.
+V1 ships four public packages at the same version: `@malilion/block-ui-tokens`, `@malilion/block-ui-themes`, `@malilion/block-ui-icons`, `@malilion/block-ui-react`.
 
 ## One-time npm setup
 
-1. Make sure you own the npm org **`block-ui`** (`npm org ls block-ui`). The org already exists on npm; if it belongs to someone else, choose another scope and rename the packages. The unscoped `block-ui` package is unrelated.
-2. Add a granular access token with **Read and write** on `@block-ui/*`.
+1. The packages are published under the **`@malilion`** user scope (the npm account `malilion`). The `@block-ui` org on npm belongs to someone else, which is why the scope is not used.
+2. Add a granular access token with **Read and write** on `@malilion/block-ui-*`.
 3. In the GitHub repo, add an Actions secret named `NPM_TOKEN` with that token.
 
 After the first publish you can switch each package to [trusted publishing](https://docs.npmjs.com/trusted-publishers) (GitHub repo `malilion/BlockUI`, workflow `release.yml`) and drop the long-lived token.

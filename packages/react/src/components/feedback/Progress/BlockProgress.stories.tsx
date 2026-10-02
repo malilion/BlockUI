@@ -31,7 +31,7 @@ const meta = {
           "Segmented pixel progress bar in six materials. Omit `value` for an indeterminate bar.",
           "",
           "```tsx",
-          'import { BlockProgress } from "@block-ui/react";',
+          'import { BlockProgress } from "@malilion/block-ui-react";',
           "",
           '<BlockProgress value={70} max={100} variant="grass" />',
           "```",

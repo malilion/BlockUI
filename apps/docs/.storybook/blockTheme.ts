@@ -1,8 +1,8 @@
 // The manager UI is bundled by esbuild without the "@block-ui/source"
 // condition, so these resolve to the built packages — the storybook scripts
 // run `build:packages` first.
-import { colors, fontFamily } from "@block-ui/tokens";
-import { grassland } from "@block-ui/themes";
+import { colors, fontFamily } from "@malilion/block-ui-tokens";
+import { grassland } from "@malilion/block-ui-themes";
 import { create } from "storybook/theming/create";
 
 /** Dark Storybook chrome + docs theme that matches Block UI's grassland theme. */

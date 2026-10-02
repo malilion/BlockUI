@@ -24,7 +24,7 @@ const meta = {
           "Radio group rendered as a `<fieldset>` with pixel octagon radios.",
           "",
           "```tsx",
-          'import { BlockRadioGroup } from "@block-ui/react";',
+          'import { BlockRadioGroup } from "@malilion/block-ui-react";',
           "",
           '<BlockRadioGroup label="Game mode" options={modes} defaultValue="survival" />',
           "```",

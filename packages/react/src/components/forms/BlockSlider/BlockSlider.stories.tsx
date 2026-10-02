@@ -29,7 +29,7 @@ const meta = {
           "Range slider with a pixel track and a block thumb.",
           "",
           "```tsx",
-          'import { BlockSlider } from "@block-ui/react";',
+          'import { BlockSlider } from "@malilion/block-ui-react";',
           "",
           '<BlockSlider label="FOV" min={30} max={110} formatValue={(v) => `${v}°`} />',
           "```",

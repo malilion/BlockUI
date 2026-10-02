@@ -1,6 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
-import { AppleIcon, DiamondIcon, PickaxeIcon, PlanksIcon, TorchIcon } from "@block-ui/icons";
+import {
+  AppleIcon,
+  DiamondIcon,
+  PickaxeIcon,
+  PlanksIcon,
+  TorchIcon,
+} from "@malilion/block-ui-icons";
 import { StoryMobile, StoryRow } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
 import { InventorySlot } from "../InventorySlot/InventorySlot";
@@ -26,7 +32,7 @@ const meta = {
           "Item artwork with a stack amount (bottom-right) and optional durability.",
           "",
           "```tsx",
-          'import { ItemStack } from "@block-ui/react";',
+          'import { ItemStack } from "@malilion/block-ui-react";',
           "",
           '<ItemStack icon={<DiamondIcon />} amount={12} maxAmount={64} name="Diamond" />',
           "```",

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { motion, shadow, toKebab } from "@block-ui/tokens";
+import { motion, shadow, toKebab } from "@malilion/block-ui-tokens";
 import type { CSSProperties } from "react";
 import styles from "./foundations.module.css";
 
@@ -57,7 +57,7 @@ function ShadowsPage() {
           ))}
         </div>
         <p className={styles.intro}>
-          Values: {Object.keys(shadow).length} shadow tokens in @block-ui/tokens.
+          Values: {Object.keys(shadow).length} shadow tokens in @malilion/block-ui-tokens.
         </p>
       </section>
       <section className={styles.scale}>

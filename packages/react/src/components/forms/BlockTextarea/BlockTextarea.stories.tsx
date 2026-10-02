@@ -23,7 +23,7 @@ const meta = {
           "Multi-line text field. Set `maxLength` to show a live counter.",
           "",
           "```tsx",
-          'import { BlockTextarea } from "@block-ui/react";',
+          'import { BlockTextarea } from "@malilion/block-ui-react";',
           "",
           '<BlockTextarea label="World description" maxLength={140} />',
           "```",

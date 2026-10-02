@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { breakpoints, radius, sizes, spacing, toKebab } from "@block-ui/tokens";
+import { breakpoints, radius, sizes, spacing, toKebab } from "@malilion/block-ui-tokens";
 import type { CSSProperties } from "react";
 import styles from "./foundations.module.css";
 

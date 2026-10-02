@@ -17,7 +17,10 @@ const tmp = mkdtempSync(join(tmpdir(), "block-ui-treeshake-"));
 const entry = join(tmp, "index.ts");
 const outFile = "out.js";
 
-writeFileSync(entry, `import { BlockButton } from "@block-ui/react";\nconsole.log(BlockButton);\n`);
+writeFileSync(
+  entry,
+  `import { BlockButton } from "@malilion/block-ui-react";\nconsole.log(BlockButton);\n`,
+);
 
 try {
   await build({
@@ -27,7 +30,7 @@ try {
     resolve: {
       conditions: ["@block-ui/source", ...defaultClientConditions],
       alias: {
-        "@block-ui/react": join(repo, "packages/react/src/index.ts"),
+        "@malilion/block-ui-react": join(repo, "packages/react/src/index.ts"),
       },
     },
     build: {

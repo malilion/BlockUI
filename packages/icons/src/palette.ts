@@ -1,4 +1,4 @@
-import { colors } from "@block-ui/tokens";
+import { colors } from "@malilion/block-ui-tokens";
 
 /**
  * Shared illustration palette. Most entries come straight from the design

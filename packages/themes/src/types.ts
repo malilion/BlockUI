@@ -1,4 +1,4 @@
-import type { TextureToken } from "@block-ui/tokens";
+import type { TextureToken } from "@malilion/block-ui-tokens";
 
 export const themeNames = ["grassland", "cave", "deepslate", "nether", "end"] as const;
 

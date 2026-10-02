@@ -30,7 +30,7 @@ const meta = {
           "Native select with a pixel chevron. Using the native element keeps platform keyboard support and mobile pickers.",
           "",
           "```tsx",
-          'import { BlockSelect } from "@block-ui/react";',
+          'import { BlockSelect } from "@malilion/block-ui-react";',
           "",
           '<BlockSelect label="Game mode" options={[{ value: "survival", label: "Survival" }]} />',
           "```",

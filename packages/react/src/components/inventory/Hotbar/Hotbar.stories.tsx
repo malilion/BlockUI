@@ -11,7 +11,7 @@ import {
   ShovelIcon,
   StoneIcon,
   TorchIcon,
-} from "@block-ui/icons";
+} from "@malilion/block-ui-icons";
 import { InventorySlot } from "../InventorySlot/InventorySlot";
 import { ItemStack } from "../ItemStack/ItemStack";
 import { Hotbar } from "./Hotbar";
@@ -56,7 +56,7 @@ const meta = {
           "Nine-slot quick bar with a selected slot.",
           "",
           "```tsx",
-          'import { Hotbar, InventorySlot, ItemStack } from "@block-ui/react";',
+          'import { Hotbar, InventorySlot, ItemStack } from "@malilion/block-ui-react";',
           "",
           "<Hotbar selectedIndex={slot} onSelect={setSlot}>…</Hotbar>",
           "```",

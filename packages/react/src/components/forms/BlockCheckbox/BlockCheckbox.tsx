@@ -1,4 +1,4 @@
-import { CheckIcon, MinusIcon } from "@block-ui/icons";
+import { CheckIcon, MinusIcon } from "@malilion/block-ui-icons";
 import { forwardRef, useEffect, useId, useRef } from "react";
 import { cx } from "../../../utils/cx";
 import { mergeRefs } from "../../../utils/refs";

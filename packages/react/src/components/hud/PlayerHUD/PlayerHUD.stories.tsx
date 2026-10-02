@@ -28,7 +28,7 @@ const meta = {
           "Complete survival HUD: armor + health, hunger and XP.",
           "",
           "```tsx",
-          'import { PlayerHUD } from "@block-ui/react";',
+          'import { PlayerHUD } from "@malilion/block-ui-react";',
           "",
           "<PlayerHUD player={{ health: 14, armor: 12, hunger: 15, level: 28, xp: 1240, maxXp: 2000 }} />",
           "```",

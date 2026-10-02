@@ -1,4 +1,4 @@
-import { HeartIcon } from "@block-ui/icons";
+import { HeartIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
 import { PointsBar } from "../PointsBar/PointsBar";
 import type { HealthBarProps } from "./HealthBar.types";

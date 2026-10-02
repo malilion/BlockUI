@@ -7,8 +7,8 @@ import {
   QuestIcon,
   SettingsIcon,
   WorldIcon,
-} from "@block-ui/icons";
-import { BlockSidebar, HotbarNavigation, SidebarItem } from "@block-ui/react";
+} from "@malilion/block-ui-icons";
+import { BlockSidebar, HotbarNavigation, SidebarItem } from "@malilion/block-ui-react";
 import type { ReactNode } from "react";
 import styles from "./patterns.module.css";
 

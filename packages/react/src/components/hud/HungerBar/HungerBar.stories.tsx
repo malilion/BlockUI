@@ -20,7 +20,7 @@ const meta = {
           "Hunger points shown as drumsticks — two points per icon.",
           "",
           "```tsx",
-          'import { HungerBar } from "@block-ui/react";',
+          'import { HungerBar } from "@malilion/block-ui-react";',
           "",
           "<HungerBar value={14} max={20} />",
           "```",
