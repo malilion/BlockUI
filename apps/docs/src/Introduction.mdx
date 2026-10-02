@@ -1,29 +1,53 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from "@storybook/addon-docs/blocks";
 
 <Meta title="Introduction" />
 
-# Welcome to Block UI
+<img src="./logo.svg" alt="" width="96" height="96" />
 
-Block UI is a block/pixel/crafting game-style React component library.
+# Block UI
 
-## Quick start
+A **block × pixel × crafting** game-style component library for **React** and **TypeScript**.
+Every main interaction is a block: bevelled buttons that snap up and press down, real keyboard-navigable
+inventory grids, hearts for health and a crafting table that turns a grid into a result.
+
+## Install
 
 ```bash
-npm install @block-ui/react @block-ui/tokens @block-ui/themes
+pnpm add @block-ui/react
 ```
 
-## Import
+`@block-ui/react` installs `@block-ui/tokens`, `@block-ui/themes` and `@block-ui/icons`. React 18.2 and 19 are supported.
 
-```jsx
-import { BlockButton } from '@block-ui/react';
-import '@block-ui/react/styles.css';
+## Use
+
+```tsx
+import "@block-ui/react/styles.css";
+import { BlockUIProvider, BlockButton, InventoryGrid, InventorySlot, ItemStack } from "@block-ui/react";
+import { DiamondIcon } from "@block-ui/icons";
+
+<BlockUIProvider theme="deepslate">
+  <InventoryGrid columns={9}>
+    <InventorySlot>
+      <ItemStack icon={<DiamondIcon />} amount={12} name="Diamond" />
+    </InventorySlot>
+  </InventoryGrid>
+  <BlockButton variant="grass">Start</BlockButton>
+</BlockUIProvider>;
 ```
 
-## Features
-- 30+ components
-- 5 themes
-- 50+ pixel icons
-- Full keyboard and accessibility support
+Optional: `pnpm add @fontsource/silkscreen` and import `@fontsource/silkscreen/400.css` + `700.css` for the pixel display font.
 
-[Go to Foundations](?path=/docs/foundations-colors--docs)
-[Go to Components](?path=/docs/components--docs)
+## What's inside
+
+- **50+ components** — actions, forms, inventory, crafting, HUD, cards, feedback, navigation and layout
+- **5 themes** — grassland, cave, deepslate, nether, end (use the **Theme** button in the toolbar)
+- **50+ original pixel icons** in `@block-ui/icons`
+- **Accessible** — WCAG 2.2 AA; every story's interaction test and axe check run in CI in all five themes
+
+## How these docs are organised
+
+- **Foundations** — colors, typography, spacing, shadows & motion, themes and icons, generated from the tokens
+- **Components** — every component has `Default`, `Variants`, `States`, `Sizes`, `Disabled`, `Interactive` and `Responsive` stories, plus usage, props and accessibility notes
+- **Patterns** — full screens built from the components: dashboard, player profile, inventory, crafting and server browser
+
+Source, README and changelog: [github.com/malilion/BlockUI](https://github.com/malilion/BlockUI)

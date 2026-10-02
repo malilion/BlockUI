@@ -39,6 +39,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
+- Storybook docs site: Foundations pages referenced CSS variables that do not exist (every material swatch rendered the same gray) and Patterns pages used non-existent props (`PlayerHUD health=…`), so the dashboard rendered half-broken. Foundations and Patterns are now type-checked stories generated from `@block-ui/tokens` / `@block-ui/themes`, covered by the play + axe scan.
+- Docs pages used Storybook's white theme next to dark previews; the docs and manager now use a dark Block UI theme with the pixel logo.
+
 - `BlockButton` in the `loading` state kept no accessible name (the label was hidden with `visibility: hidden`).
 - Hovering the active `SidebarItem` dropped its text contrast below AA.
 - Storybook docs pages imported the removed `@storybook/blocks` package.

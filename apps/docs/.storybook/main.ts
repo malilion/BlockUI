@@ -8,6 +8,7 @@ const config: StorybookConfig = {
     "../../../packages/react/src/**/*.stories.@(ts|tsx)",
   ],
   addons: ["@storybook/addon-docs", "@storybook/addon-a11y"],
+  staticDirs: [{ from: "../../../docs/images", to: "/" }],
   framework: {
     name: "@storybook/react-vite",
     options: {},

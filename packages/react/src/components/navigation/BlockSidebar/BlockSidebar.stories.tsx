@@ -31,14 +31,21 @@ function SidebarDemo({
   collapsed = false,
   responsive = false,
   disabledIds = [],
+  label = "Main",
 }: {
   collapsed?: boolean;
   responsive?: boolean;
   disabledIds?: string[];
+  label?: string;
 }) {
   const [active, setActive] = useState("dashboard");
   return (
-    <BlockSidebar collapsed={collapsed} responsive={responsive} header={<strong>BLOCK UI</strong>}>
+    <BlockSidebar
+      collapsed={collapsed}
+      responsive={responsive}
+      label={label}
+      header={<strong>BLOCK UI</strong>}
+    >
       {items.map((item) => (
         <SidebarItem
           key={item.id}
@@ -90,8 +97,8 @@ export const Default: Story = { render: () => <SidebarDemo /> };
 export const Variants: Story = {
   render: () => (
     <StoryRow>
-      <SidebarDemo />
-      <SidebarDemo collapsed />
+      <SidebarDemo label="Expanded" />
+      <SidebarDemo collapsed label="Collapsed" />
     </StoryRow>
   ),
 };
@@ -122,8 +129,8 @@ export const States: Story = {
 export const Sizes: Story = {
   render: () => (
     <StoryRow>
-      <SidebarDemo />
-      <SidebarDemo collapsed />
+      <SidebarDemo label="Expanded" />
+      <SidebarDemo collapsed label="Collapsed" />
     </StoryRow>
   ),
 };
