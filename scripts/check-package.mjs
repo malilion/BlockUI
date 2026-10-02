@@ -6,7 +6,7 @@
  *   pnpm build && pnpm check:package
  */
 import { execSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -18,8 +18,9 @@ const app = join(tmp, "app");
 mkdirSync(packs);
 mkdirSync(join(app, "src"), { recursive: true });
 
+const { version } = JSON.parse(readFileSync(join(repo, "packages/react/package.json"), "utf8"));
 const run = (command, cwd) => execSync(command, { cwd, stdio: "pipe" }).toString();
-const tarball = (name) => `file:${join(packs, `malilion-block-ui-${name}-0.1.0.tgz`)}`;
+const tarball = (name) => `file:${join(packs, `malilion-block-ui-${name}-${version}.tgz`)}`;
 
 try {
   for (const name of ["tokens", "themes", "icons", "react"]) {
@@ -56,7 +57,7 @@ try {
     ],
   };
   for (const [name, required] of Object.entries(requiredByPackage)) {
-    const files = run(`tar -tzf malilion-block-ui-${name}-0.1.0.tgz`, packs);
+    const files = run(`tar -tzf malilion-block-ui-${name}-${version}.tgz`, packs);
     for (const path of required) {
       if (!files.includes(path)) throw new Error(`@block-ui/${name} tarball is missing ${path}`);
     }

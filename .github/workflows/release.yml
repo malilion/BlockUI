@@ -1,14 +1,19 @@
 name: Release
 
+# Every push to main checks whether the lockstep version in packages/*/package.json
+# is on npm yet. If not, it tests, builds and publishes the missing packages with
+# npm trusted publishing (OIDC, no token), then tags vX.Y.Z and creates the
+# GitHub Release from the CHANGELOG section. Pushes that do not bump the version
+# finish after the plan step.
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
-  contents: read
-  id-token: write
+  contents: write # create the vX.Y.Z tag and GitHub Release
+  id-token: write # npm trusted publishing + provenance
 
 concurrency:
   group: release
@@ -18,73 +23,76 @@ env:
   NODE_VERSION: 24
 
 jobs:
-  publish:
+  release:
     name: Publish @malilion/block-ui-* to npm
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
-
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
           registry-url: https://registry.npmjs.org
-          cache: pnpm
+
+      - name: Plan release
+        id: plan
+        run: node scripts/release-plan.mjs --notes "$RUNNER_TEMP/notes.md"
+
+      - name: Check for an existing GitHub Release
+        id: existing
+        run: |
+          if gh release view "${{ steps.plan.outputs.tag }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Install pnpm
+        if: steps.plan.outputs.packages != ''
+        uses: pnpm/action-setup@v6
 
       - name: Install dependencies
+        if: steps.plan.outputs.packages != ''
         run: pnpm install --frozen-lockfile
 
-      - name: Check tag matches package versions
-        if: startsWith(github.ref, 'refs/tags/v')
-        run: |
-          tag="${GITHUB_REF_NAME#v}"
-          status=0
-          for pkg in packages/*/package.json; do
-            version=$(node -p "require('./$pkg').version")
-            if [ "$version" != "$tag" ]; then
-              echo "::error file=$pkg::version $version does not match tag v$tag"
-              status=1
-            fi
-          done
-          exit $status
-
       - name: Unit tests
+        if: steps.plan.outputs.packages != ''
         run: pnpm test
 
       - name: Build packages
+        if: steps.plan.outputs.packages != ''
         run: pnpm build:packages
 
       - name: Tree-shake check
+        if: steps.plan.outputs.packages != ''
         run: pnpm check:treeshake
 
       - name: Package install check
+        if: steps.plan.outputs.packages != ''
         run: pnpm check:package
 
-      - name: Check whether this version is already on npm
-        id: published
-        run: |
-          missing=0
-          for pkg in packages/*/package.json; do
-            spec=$(node -p "const p=require('./$pkg'); p.name + '@' + p.version")
-            if npm view "$spec" version >/dev/null 2>&1; then
-              echo "$spec is already published"
-            else
-              echo "$spec is not published yet"
-              missing=1
-            fi
-          done
-          echo "missing=$missing" >> "$GITHUB_OUTPUT"
-
       - name: Publish
-        # Skips cleanly when every package version already exists (e.g. a
-        # release that was published manually before the tag was pushed).
-        if: steps.published.outputs.missing == '1'
-        run: pnpm -r --filter "./packages/**" publish --access public --no-git-checks --report-summary
+        if: steps.plan.outputs.packages != ''
+        # pnpm pack rewrites workspace:^ to the real version; npm publish then
+        # authenticates through OIDC (trusted publishing needs npm >= 11.5.1).
+        run: |
+          npm install -g npm@^11.5.1
+          mkdir -p "$RUNNER_TEMP/packs"
+          for dir in ${{ steps.plan.outputs.packages }}; do
+            tarball=$(cd "packages/$dir" && pnpm pack --pack-destination "$RUNNER_TEMP/packs" | tail -1)
+            npm publish "$tarball" --access public --provenance
+          done
+
+      - name: Tag and create GitHub Release
+        if: steps.existing.outputs.exists == 'false'
+        run: >
+          gh release create "${{ steps.plan.outputs.tag }}"
+          --target "$GITHUB_SHA"
+          --title "${{ steps.plan.outputs.tag }}"
+          --notes-file "$RUNNER_TEMP/notes.md"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          # Signed build provenance (uses the id-token permission above).
-          NPM_CONFIG_PROVENANCE: "true"
+          GH_TOKEN: ${{ github.token }}
