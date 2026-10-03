@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- **`BlockTooltip`** — short hint on hover and keyboard focus for any focusable element; four placements with viewport flip, `Esc` to dismiss, hoverable (WCAG 1.4.13).
+- **`BlockMenu`** — dropdown menu button (WAI-ARIA menu button pattern): icons, shortcut hints, separators, destructive and disabled items, icon-only trigger, arrow keys / `Home` / `End` / type-ahead.
+- **`BlockTable`** — data table with caption, column alignment and widths, row headers, built-in or manual (server) sorting with `aria-sort`, striping, sizes, sticky header, empty state and a focusable horizontal-scroll region.
+- **`BlockPagination`** — page navigation with ellipses (`siblingCount` / `boundaryCount`), `compact` variant ("Page 3 of 10"), sizes and `aria-current="page"`; exports `getPaginationRange`.
+- **`BlockStack`** — flex row / column on the spacing token grid (`gap`, `align`, `justify`, `wrap`, `stackOnMobile`, `as`).
+- **`BlockDivider`** — horizontal / vertical separator in `bevel`, `line` and `dashed` styles, with an optional label.
+- **Icons** — `ChevronLeftIcon`, `ChevronUpIcon`.
+
+### Fixed
+
+- Storybook "Show code": a regex in the source transform could backtrack exponentially and freeze a story whose multi-line JSX props contain nested JSX.
+
 ## [0.1.0] — 2026-10-02
 
 Published to npm as `@malilion/block-ui-tokens`, `@malilion/block-ui-themes`, `@malilion/block-ui-icons` and `@malilion/block-ui-react` (the `@block-ui` npm org belongs to another account).

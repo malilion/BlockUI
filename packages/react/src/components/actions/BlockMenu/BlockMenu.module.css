@@ -1,0 +1,107 @@
+.root {
+  position: relative;
+  display: inline-flex;
+}
+
+.chevron {
+  display: inline-flex;
+  transition: transform var(--block-duration-instant) var(--block-ease-step);
+}
+
+.root[data-open] .chevron {
+  transform: rotate(180deg);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + var(--block-space-1));
+  left: 0;
+  z-index: var(--block-z-dropdown);
+  display: flex;
+  flex-direction: column;
+  min-width: max(100%, 200px);
+  max-width: min(320px, calc(100vw - var(--block-space-8)));
+  padding: var(--block-space-1);
+  background-color: var(--block-surface);
+  border: var(--block-border-width) solid var(--block-border);
+  box-shadow: var(--block-shadow-bevel), var(--block-shadow-drop);
+}
+
+.menu[hidden] {
+  display: none;
+}
+
+.menu[data-align="end"] {
+  left: auto;
+  right: 0;
+}
+
+.menu[data-placement="top"] {
+  top: auto;
+  bottom: calc(100% + var(--block-space-1));
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--block-space-2);
+  width: 100%;
+  min-height: var(--block-size-control-sm);
+  padding: var(--block-space-1) var(--block-space-2);
+  font: inherit;
+  font-size: var(--block-font-size-sm);
+  font-weight: var(--block-font-weight-medium);
+  text-align: left;
+  color: var(--block-text);
+  background: transparent;
+  border: var(--block-border-width-thin) solid transparent;
+  cursor: pointer;
+}
+
+.item:hover:not([aria-disabled]),
+.item:focus-visible {
+  background-color: var(--block-slot-hover);
+  border-color: var(--block-border);
+}
+
+.item:focus-visible {
+  outline: 3px solid var(--block-focus);
+  outline-offset: -3px;
+}
+
+.item[aria-disabled] {
+  color: var(--block-text-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.item[data-danger] {
+  color: var(--block-redstone-light);
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 16px;
+}
+
+.label {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.shortcut {
+  flex-shrink: 0;
+  margin-left: var(--block-space-3);
+  font-family: var(--block-font-mono);
+  font-size: var(--block-font-size-xs);
+  color: var(--block-text-muted);
+}
+
+.separator {
+  height: 4px;
+  margin: var(--block-space-1) 0;
+  background-color: var(--block-shadow-bevel-dark);
+  box-shadow: inset -2px -2px 0 var(--block-shadow-bevel-light);
+}

@@ -67,6 +67,7 @@ const preview: Preview = {
             "Inventory",
             "Crafting",
             "Cards",
+            "Display",
             "Feedback",
             "HUD",
             "Navigation",

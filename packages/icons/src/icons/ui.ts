@@ -192,6 +192,48 @@ export const ChevronRightIcon = /*#__PURE__*/ createPixelIcon("ChevronRightIcon"
   ],
 });
 
+export const ChevronLeftIcon = /*#__PURE__*/ createPixelIcon("ChevronLeftIcon", {
+  pixels: [
+    "................",
+    "................",
+    ".........xx.....",
+    "........xxx.....",
+    ".......xxx......",
+    "......xxx.......",
+    ".....xxx........",
+    ".....xx.........",
+    ".....xx.........",
+    ".....xxx........",
+    "......xxx.......",
+    ".......xxx......",
+    "........xxx.....",
+    ".........xx.....",
+    "................",
+    "................",
+  ],
+});
+
+export const ChevronUpIcon = /*#__PURE__*/ createPixelIcon("ChevronUpIcon", {
+  pixels: [
+    "................",
+    "................",
+    "................",
+    "................",
+    ".......xx.......",
+    "......xxxx......",
+    ".....xxxxxx.....",
+    "....xxx..xxx....",
+    "...xxx....xxx...",
+    "..xxx......xxx..",
+    "..xx........xx..",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+  ],
+});
+
 export const LockIcon = /*#__PURE__*/ createPixelIcon("LockIcon", {
   pixels: [
     "................",

@@ -22,8 +22,10 @@ export function sourceSnippet(code: string): string {
       // A tag whose props all went away: `<Tag\n  >` → `<Tag>`.
       .replace(/<([A-Z]\w*)\s+>/g, "<$1>")
       // Join a multi-line opening tag of simple props when it fits on one line.
+      // Each prop line must split one way only (indent, then a non-space), or a
+      // tag with many lines and a nested `<`/`>` backtracks exponentially.
       .replace(
-        /^(\s*)<([A-Z]\w*)((?:\n\s+[^\n<>]+)+)\n\s*(\/?)>/gm,
+        /^([ \t]*)<([A-Z]\w*)((?:\n[ \t]+[^\s<>][^\n<>]*)+)\n[ \t]*(\/?)>/gm,
         (tag, indent: string, name: string, props: string, selfClosing: string) => {
           const line = `${indent}<${name} ${props.trim().split(/\n\s+/).join(" ")}${selfClosing ? " />" : ">"}`;
           return line.length <= MAX_LINE ? line : tag;
