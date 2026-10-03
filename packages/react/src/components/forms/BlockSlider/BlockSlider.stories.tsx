@@ -58,6 +58,13 @@ export const Variants: Story = {
 
 export const Formatted: Story = {
   args: { label: "FOV", min: 30, max: 110, defaultValue: 70, formatValue: (v: number) => `${v}°` },
+  parameters: {
+    docs: {
+      source: {
+        code: '<BlockSlider label="FOV" min={30} max={110} defaultValue={70} formatValue={(v) => `${v}°`} />',
+      },
+    },
+  },
 };
 
 export const Disabled: Story = { args: { disabled: true } };
@@ -108,4 +115,19 @@ export const Responsive: Story = {
       />
     </StoryMobile>
   ),
+  parameters: {
+    docs: {
+      source: {
+        code: [
+          "<BlockSlider",
+          '  label="Render distance"',
+          "  min={2}",
+          "  max={32}",
+          "  defaultValue={12}",
+          "  formatValue={(v) => `${v} chunks`}",
+          "/>",
+        ].join("\n"),
+      },
+    },
+  },
 };

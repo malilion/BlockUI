@@ -88,7 +88,36 @@ function SmeltingDemo() {
   );
 }
 
-export const Smelting: Story = { render: () => <SmeltingDemo /> };
+const smeltingSource = `import { useEffect, useState } from "react";
+import { Furnace, ItemStack } from "@malilion/block-ui-react";
+import { CoalIcon, IronIcon, StoneIcon } from "@malilion/block-ui-icons";
+
+const ore = <ItemStack icon={<StoneIcon />} amount={3} name="Iron Ore" />;
+const coal = <ItemStack icon={<CoalIcon />} amount={12} name="Coal" />;
+const ingot = <ItemStack icon={<IronIcon />} amount={3} name="Iron Ingot" />;
+
+export function Smelting() {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => setProgress((p) => (p >= 100 ? 0 : p + 5)), 200);
+    return () => window.clearInterval(id);
+  }, []);
+  return (
+    <Furnace
+      input={progress < 100 ? ore : undefined}
+      fuel={coal}
+      result={progress >= 100 ? ingot : undefined}
+      burning={progress < 100}
+      progress={progress}
+      fuelLevel={100 - progress}
+    />
+  );
+}`;
+
+export const Smelting: Story = {
+  render: () => <SmeltingDemo />,
+  parameters: { docs: { source: { code: smeltingSource } } },
+};
 
 export const Interactive: Story = {
   args: { input: undefined, fuel: coal, result: ingot, burning: false, progress: 100 },

@@ -94,8 +94,22 @@ export const Disabled: Story = {
   args: { label: "Download paused", value: 40, variant: "grass", showValue: true },
 };
 
+const interactiveSource = `import { useState } from "react";
+import { BlockButton, BlockProgress } from "@malilion/block-ui-react";
+
+export function Mining() {
+  const [value, setValue] = useState(0);
+  return (
+    <>
+      <BlockProgress label="Mining" value={value} showValue />
+      <BlockButton onClick={() => setValue((v) => Math.min(100, v + 10))}>Mine block</BlockButton>
+    </>
+  );
+}`;
+
 export const Interactive: Story = {
   render: () => <ProgressDemo />,
+  parameters: { docs: { source: { code: interactiveSource } } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const bar = canvas.getByRole("progressbar", { name: "Mining" });

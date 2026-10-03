@@ -12,7 +12,8 @@ import { CraftingTable } from "./CraftingTable";
 
 const ring = [0, 1, 2, 3, 5, 6, 7, 8];
 
-function ChestGrid({ filled }: { filled: boolean }) {
+// A plain function (not a component) so "Show code" prints the grid itself.
+function chestGrid(filled: boolean) {
   return (
     <CraftingGrid size={3}>
       {Array.from({ length: 9 }, (_, i) => (
@@ -31,7 +32,7 @@ const meta = {
   component: CraftingTable,
   tags: ["autodocs"],
   args: {
-    input: <ChestGrid filled />,
+    input: chestGrid(true),
     result: <ItemStack icon={<ChestIcon />} amount={1} name="Chest" />,
     onTake: fn(),
   },
@@ -70,16 +71,16 @@ export const States: Story = {
     <StoryStack>
       <CraftingTable
         label="Ready"
-        input={<ChestGrid filled />}
+        input={chestGrid(true)}
         result={<ItemStack icon={<ChestIcon />} name="Chest" />}
         onCraft={fn()}
       />
-      <CraftingTable label="Empty" input={<ChestGrid filled={false} />} onCraft={fn()} />
+      <CraftingTable label="Empty" input={chestGrid(false)} onCraft={fn()} />
     </StoryStack>
   ),
 };
 
-export const Empty: Story = { args: { input: <ChestGrid filled={false} />, result: undefined } };
+export const Empty: Story = { args: { input: chestGrid(false), result: undefined } };
 
 function InteractiveDemo() {
   const [crafted, setCrafted] = useState(0);
@@ -87,7 +88,7 @@ function InteractiveDemo() {
   return (
     <BlockPanel title={`Crafting (${crafted} crafted)`}>
       <CraftingTable
-        input={<ChestGrid filled={filled} />}
+        input={chestGrid(filled)}
         result={filled ? <ItemStack icon={<ChestIcon />} amount={1} name="Chest" /> : undefined}
         onCraft={() => {
           setCrafted((n) => n + 1);
@@ -99,8 +100,41 @@ function InteractiveDemo() {
   );
 }
 
+const interactiveSource = `import { useState } from "react";
+import { BlockPanel, CraftingGrid, CraftingSlot, CraftingTable, ItemStack } from "@malilion/block-ui-react";
+import { ChestIcon, PlanksIcon } from "@malilion/block-ui-icons";
+
+const ring = [0, 1, 2, 3, 5, 6, 7, 8];
+
+export function ChestCrafting() {
+  const [crafted, setCrafted] = useState(0);
+  const [filled, setFilled] = useState(true);
+  return (
+    <BlockPanel title={\`Crafting (\${crafted} crafted)\`}>
+      <CraftingTable
+        input={
+          <CraftingGrid size={3}>
+            {Array.from({ length: 9 }, (_, i) => (
+              <CraftingSlot key={i}>
+                {filled && ring.includes(i) ? <ItemStack icon={<PlanksIcon />} name="Oak Planks" /> : null}
+              </CraftingSlot>
+            ))}
+          </CraftingGrid>
+        }
+        result={filled ? <ItemStack icon={<ChestIcon />} amount={1} name="Chest" /> : undefined}
+        onCraft={() => {
+          setCrafted((n) => n + 1);
+          setFilled(false);
+        }}
+        onTake={() => setFilled(true)}
+      />
+    </BlockPanel>
+  );
+}`;
+
 export const Interactive: Story = {
   render: () => <InteractiveDemo />,
+  parameters: { docs: { source: { code: interactiveSource } } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button", { name: "Craft" }));
@@ -128,7 +162,7 @@ export const Variants: Story = {
     <StoryStack>
       <CraftingTable
         label="3 × 3 table"
-        input={<ChestGrid filled />}
+        input={chestGrid(true)}
         result={<ItemStack icon={<ChestIcon />} name="Chest" />}
       />
       <CraftingTable
@@ -158,12 +192,12 @@ export const Sizes: Story = {
           </CraftingGrid>
         }
       />
-      <CraftingTable label="Large slots (default)" input={<ChestGrid filled={false} />} />
+      <CraftingTable label="Large slots (default)" input={chestGrid(false)} />
     </StoryStack>
   ),
 };
 
 /** Without a result the Craft button is disabled (`aria-disabled`). */
 export const Disabled: Story = {
-  args: { input: <ChestGrid filled={false} />, result: undefined, onCraft: fn() },
+  args: { input: chestGrid(false), result: undefined, onCraft: fn() },
 };

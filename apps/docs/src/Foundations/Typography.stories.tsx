@@ -9,15 +9,33 @@ import {
 } from "@malilion/block-ui-tokens";
 import type { CSSProperties } from "react";
 import styles from "./foundations.module.css";
+import { CodeBlock } from "./CodeBlock";
 
 const meta = {
   title: "Foundations/Typography",
   tags: ["!autodocs"],
-  parameters: { layout: "padded", a11y: { config: { rules: [] } } },
+  parameters: {
+    layout: "padded",
+    a11y: { config: { rules: [] } },
+    // The page has its own Usage code blocks.
+    docs: { codePanel: false },
+  },
 } satisfies Meta;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+const usage = [
+  `pnpm add @fontsource/silkscreen`,
+  `// main.tsx — load the pixel font once
+import "@fontsource/silkscreen/400.css";
+import "@fontsource/silkscreen/700.css";`,
+  `.title {
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-xl);
+  line-height: var(--block-line-height-tight);
+}`,
+];
 
 const SAMPLE = "Craft a diamond pickaxe";
 
@@ -31,6 +49,12 @@ function TypographyPage() {
           body text (PRD §5.3 — function before decoration). Load{" "}
           <code>@fontsource/silkscreen</code> for the display face.
         </p>
+      </section>
+      <section>
+        <h2>Usage</h2>
+        {usage.map((code) => (
+          <CodeBlock key={code} code={code} label="Copy usage example" />
+        ))}
       </section>
       <section className={styles.scale}>
         <h2>Families</h2>
