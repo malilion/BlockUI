@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { expectNoA11yViolations } from "../../../test/axe";
+import { BlockUIProvider } from "../../../provider/BlockUIProvider";
 import { BlockMenu } from "./BlockMenu";
 import type { BlockMenuEntry } from "./BlockMenu.types";
 import { typeaheadIndex } from "./BlockMenu.utils";
@@ -110,6 +111,7 @@ describe("BlockMenu", () => {
     await user.keyboard("{Enter}");
     await user.tab();
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Outside" })).toHaveFocus();
 
     await user.click(trigger);
     await user.click(screen.getByRole("button", { name: "Outside" }));
@@ -128,7 +130,26 @@ describe("BlockMenu", () => {
     const ref = createRef<HTMLDivElement>();
     render(<BlockMenu ref={ref} label="More" icon={<svg />} iconOnly align="end" items={items} />);
     expect(screen.getByRole("button", { name: "More" })).toBeInTheDocument();
-    expect(ref.current?.querySelector('[role="menu"]')).toHaveAttribute("data-align", "end");
+    expect(document.querySelector('[role="menu"]')).toHaveAttribute("data-align", "end");
+  });
+
+  it("renders the menu in the provider's overlay layer, outside scroll containers", async () => {
+    const user = userEvent.setup();
+    render(
+      <BlockUIProvider>
+        <div className="scroller">
+          <BlockMenu label="Row actions" items={items} />
+        </div>
+      </BlockUIProvider>,
+    );
+    await user.click(screen.getByRole("button", { name: "Row actions" }));
+    const menu = screen.getByRole("menu");
+    expect(menu.closest("[data-block-portal]")).not.toBeNull();
+    expect(menu.closest(".scroller")).toBeNull();
+    expect(menu.style.getPropertyValue("--block-float-x")).toMatch(/px$/);
+    expect(screen.getByRole("menuitem", { name: "Open world" })).toHaveFocus();
+    await user.click(screen.getByRole("menuitem", { name: "Rename" }));
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
   });
 
   it("type-ahead wraps and skips disabled items", () => {

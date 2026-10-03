@@ -15,6 +15,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **`BlockStack`** — flex row / column on the spacing token grid (`gap`, `align`, `justify`, `wrap`, `stackOnMobile`, `as`).
 - **`BlockDivider`** — horizontal / vertical separator in `bevel`, `line` and `dashed` styles, with an optional label.
 - **Icons** — `ChevronLeftIcon`, `ChevronUpIcon`.
+- **Playground** — a "Servers" tab: a server browser built from `BlockTable` (sorted across pages), `BlockPagination`, row `BlockMenu`s, toolbar `BlockTooltip`s, `BlockStack` and `BlockDivider`.
+
+`BlockTooltip` and `BlockMenu` render in the `BlockUIProvider` overlay layer with fixed, viewport-aware positioning, so tables and other scroll containers never clip them.
 
 ### Fixed
 

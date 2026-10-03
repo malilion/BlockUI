@@ -8,6 +8,9 @@ import {
   type FocusEvent,
   type KeyboardEvent,
 } from "react";
+import { createPortal } from "react-dom";
+import { useAnchoredPosition } from "../../../hooks/useAnchoredPosition";
+import { usePortalContainer } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { mergeRefs } from "../../../utils/refs";
 import { BlockButton } from "../BlockButton/BlockButton";
@@ -21,7 +24,8 @@ type FocusTarget = "first" | "last" | number;
 /**
  * Dropdown menu button following the WAI-ARIA menu button pattern: arrow keys
  * move with wrap-around, Home/End jump, letters type-ahead, Enter/Space choose
- * and Escape closes — focus always returns to the trigger.
+ * and Escape closes — focus always returns to the trigger. The menu renders in
+ * the provider's overlay layer, so scroll containers (tables) never clip it.
  */
 export const BlockMenu = forwardRef<HTMLDivElement, BlockMenuProps>(function BlockMenu(
   {
@@ -44,11 +48,21 @@ export const BlockMenu = forwardRef<HTMLDivElement, BlockMenuProps>(function Blo
   const baseId = useId();
   const triggerId = `${baseId}-trigger`;
   const menuId = `${baseId}-menu`;
+  const container = usePortalContainer();
   const rootRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const itemRefs = useRef(new Map<string, HTMLButtonElement>());
   const [open, setOpenState] = useState(false);
   const [focusTarget, setFocusTarget] = useState<FocusTarget | null>(null);
+
+  const position = useAnchoredPosition(triggerRef, menuRef, open, {
+    side: placement,
+    align: align === "end" ? "end" : "start",
+    gap: 4,
+  });
+  const isInside = (node: Node | null) =>
+    Boolean(node && (rootRef.current?.contains(node) || menuRef.current?.contains(node)));
 
   const menuItems = items.filter(isMenuItem);
   const enabledIndexes = menuItems.flatMap((item, index) => (item.disabled ? [] : [index]));
@@ -76,7 +90,7 @@ export const BlockMenu = forwardRef<HTMLDivElement, BlockMenuProps>(function Blo
   };
 
   useEffect(() => {
-    if (!open || focusTarget === null) return;
+    if (!open || focusTarget === null || !position) return;
     const index =
       focusTarget === "first"
         ? enabledIndexes[0]
@@ -84,14 +98,14 @@ export const BlockMenu = forwardRef<HTMLDivElement, BlockMenuProps>(function Blo
           ? enabledIndexes[enabledIndexes.length - 1]
           : focusTarget;
     if (index !== undefined) focusItem(index);
-    // Focus only when the menu opens or the target changes.
+    // Focus once the menu is open and positioned, or when the target changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, focusTarget]);
+  }, [open, focusTarget, position !== null]);
 
   useEffect(() => {
     if (!open) return;
     const onPointerDown = (event: PointerEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) closeMenu(false);
+      if (!isInside(event.target as Node)) closeMenu(false);
     };
     document.addEventListener("pointerdown", onPointerDown);
     return () => document.removeEventListener("pointerdown", onPointerDown);
@@ -142,7 +156,9 @@ export const BlockMenu = forwardRef<HTMLDivElement, BlockMenuProps>(function Blo
         closeMenu(true);
         return;
       case "Tab":
-        closeMenu(false);
+        // The menu lives in the overlay layer at the end of the page: hand focus back to the
+        // trigger first so the browser's Tab continues from the trigger's place in the page.
+        closeMenu(true);
         return;
       default:
         if (event.key.length === 1 && /\S/.test(event.key) && !event.ctrlKey && !event.metaKey) {
@@ -156,7 +172,7 @@ export const BlockMenu = forwardRef<HTMLDivElement, BlockMenuProps>(function Blo
   };
 
   const onMenuBlur = (event: FocusEvent<HTMLDivElement>) => {
-    if (!rootRef.current?.contains(event.relatedTarget as Node | null)) closeMenu(false);
+    if (!isInside(event.relatedTarget as Node | null)) closeMenu(false);
   };
 
   return (
@@ -197,56 +213,63 @@ export const BlockMenu = forwardRef<HTMLDivElement, BlockMenuProps>(function Blo
           label
         )}
       </BlockButton>
-      <div
-        id={menuId}
-        role="menu"
-        tabIndex={-1}
-        aria-labelledby={triggerId}
-        hidden={!open}
-        data-align={align}
-        data-placement={placement}
-        className={styles.menu}
-        onKeyDown={onMenuKeyDown}
-        onBlur={onMenuBlur}
-      >
-        {items.map((entry, index) => {
-          if (!isMenuItem(entry)) {
-            return (
-              <div
-                key={entry.id ?? `separator-${index}`}
-                role="separator"
-                className={styles.separator}
-              />
-            );
-          }
-          return (
-            <button
-              key={entry.id}
-              ref={(element) => {
-                if (element) itemRefs.current.set(entry.id, element);
-                else itemRefs.current.delete(entry.id);
-              }}
-              type="button"
-              role="menuitem"
+      {container
+        ? createPortal(
+            <div
+              ref={menuRef}
+              id={menuId}
+              role="menu"
               tabIndex={-1}
-              aria-disabled={entry.disabled || undefined}
-              data-danger={entry.danger || undefined}
-              className={styles.item}
-              onClick={() => choose(entry)}
+              aria-labelledby={triggerId}
+              hidden={!open}
+              data-align={align}
+              data-placement={position?.side ?? placement}
+              className={styles.menu}
+              style={position?.style}
+              onKeyDown={onMenuKeyDown}
+              onBlur={onMenuBlur}
             >
-              <span className={styles.icon} aria-hidden="true">
-                {entry.icon}
-              </span>
-              <span className={styles.label}>{entry.label}</span>
-              {entry.shortcut ? (
-                <kbd className={styles.shortcut} aria-hidden="true">
-                  {entry.shortcut}
-                </kbd>
-              ) : null}
-            </button>
-          );
-        })}
-      </div>
+              {items.map((entry, index) => {
+                if (!isMenuItem(entry)) {
+                  return (
+                    <div
+                      key={entry.id ?? `separator-${index}`}
+                      role="separator"
+                      className={styles.separator}
+                    />
+                  );
+                }
+                return (
+                  <button
+                    key={entry.id}
+                    ref={(element) => {
+                      if (element) itemRefs.current.set(entry.id, element);
+                      else itemRefs.current.delete(entry.id);
+                    }}
+                    type="button"
+                    role="menuitem"
+                    tabIndex={-1}
+                    aria-disabled={entry.disabled || undefined}
+                    data-danger={entry.danger || undefined}
+                    className={styles.item}
+                    onClick={() => choose(entry)}
+                  >
+                    <span className={styles.icon} aria-hidden="true">
+                      {entry.icon}
+                    </span>
+                    <span className={styles.label}>{entry.label}</span>
+                    {entry.shortcut ? (
+                      <kbd className={styles.shortcut} aria-hidden="true">
+                        {entry.shortcut}
+                      </kbd>
+                    ) : null}
+                  </button>
+                );
+              })}
+            </div>,
+            container,
+          )
+        : null}
     </div>
   );
 });
