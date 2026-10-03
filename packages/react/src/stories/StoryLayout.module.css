@@ -63,3 +63,14 @@
 :global(.block-story-w-480) {
   max-width: 480px;
 }
+
+/* Room above and around stories whose content pops out (tooltips, menus). */
+:global(.block-story-tooltip-stage) {
+  padding: var(--block-space-12) var(--block-space-16);
+}
+
+/* Leaves room below for an open menu so it is not clipped by the story frame. */
+:global(.block-story-menu-stage) {
+  min-height: 280px;
+  padding-top: var(--block-space-12);
+}

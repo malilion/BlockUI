@@ -165,18 +165,19 @@ import "@fontsource/silkscreen/700.css";
 
 ## 元件
 
-| 分類  | 元件                                                                                                                                |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| 動作  | `BlockButton` · `IconButton`                                                                                                        |
-| 表單  | `BlockInput` · `BlockTextarea` · `BlockSelect` · `BlockCheckbox` · `BlockRadioGroup` / `BlockRadio` · `BlockToggle` · `BlockSlider` |
-| 背包  | `Inventory` / `InventorySection` · `InventoryGrid` · `InventorySlot` · `ItemStack` · `ItemTooltip` · `DurabilityBar` · `Hotbar`     |
-| 合成  | `CraftingTable` · `CraftingGrid` · `CraftingSlot` · `CraftingResult` · `Furnace`                                                    |
-| HUD   | `HealthBar` · `ArmorBar` · `HungerBar` · `XPBar` · `PlayerHUD`                                                                      |
-| 卡片  | `BlockCard` · `QuestCard` · `AchievementCard` · `PlayerCard` · `ServerCard` · `WorldCard`                                           |
-| 回饋  | `BlockAlert` · `toast()` / `BlockToaster` · `BlockModal` · `ConfirmDialog` · `BlockProgress` · `BlockLoading` · `BlockBadge`        |
-| 導覽  | `BlockSidebar` / `SidebarItem` · `BlockTabs` · `Breadcrumb` · `HotbarNavigation`                                                    |
-| 版面  | `BlockUIProvider` · `BlockPanel`                                                                                                    |
-| Hooks | `useControllableState` · `useFocusTrap` · `useDigitHotkeys` · `useMediaQuery` · `useToasts` · `useBlockUI`                          |
+| 分類  | 元件                                                                                                                                          |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| 動作  | `BlockButton` · `IconButton` · `BlockMenu`                                                                                                    |
+| 表單  | `BlockInput` · `BlockTextarea` · `BlockSelect` · `BlockCheckbox` · `BlockRadioGroup` / `BlockRadio` · `BlockToggle` · `BlockSlider`           |
+| 背包  | `Inventory` / `InventorySection` · `InventoryGrid` · `InventorySlot` · `ItemStack` · `ItemTooltip` · `DurabilityBar` · `Hotbar`               |
+| 合成  | `CraftingTable` · `CraftingGrid` · `CraftingSlot` · `CraftingResult` · `Furnace`                                                              |
+| HUD   | `HealthBar` · `ArmorBar` · `HungerBar` · `XPBar` · `PlayerHUD`                                                                                |
+| 卡片  | `BlockCard` · `QuestCard` · `AchievementCard` · `PlayerCard` · `ServerCard` · `WorldCard`                                                     |
+| 資料  | `BlockTable`                                                                                                                                  |
+| 回饋  | `BlockAlert` · `toast()` / `BlockToaster` · `BlockModal` · `ConfirmDialog` · `BlockProgress` · `BlockLoading` · `BlockBadge` · `BlockTooltip` |
+| 導覽  | `BlockSidebar` / `SidebarItem` · `BlockTabs` · `Breadcrumb` · `HotbarNavigation` · `BlockPagination`                                          |
+| 版面  | `BlockUIProvider` · `BlockPanel` · `BlockStack` · `BlockDivider`                                                                              |
+| Hooks | `useControllableState` · `useFocusTrap` · `useDigitHotkeys` · `useMediaQuery` · `useToasts` · `useBlockUI`                                    |
 
 ## 元件 Props
 

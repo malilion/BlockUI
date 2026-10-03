@@ -1,0 +1,141 @@
+.wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  background-color: var(--block-surface);
+  border: var(--block-border-width) solid var(--block-border);
+  box-shadow: var(--block-shadow-bevel);
+  scrollbar-width: thin;
+}
+
+.wrapper:focus-visible {
+  outline: 3px solid var(--block-focus);
+  outline-offset: 2px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--block-font-size-sm);
+  color: var(--block-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.caption {
+  padding: var(--block-space-2) var(--block-space-3);
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-md);
+  font-weight: var(--block-font-weight-bold);
+  letter-spacing: var(--block-letter-spacing-wide);
+  text-align: left;
+  text-transform: uppercase;
+  text-shadow: var(--block-shadow-text);
+  background-color: var(--block-surface-header);
+  border-bottom: var(--block-border-width-thin) solid var(--block-border);
+}
+
+.col {
+  width: var(--block-table-col-width);
+}
+
+.headerCell {
+  padding: var(--block-space-2) var(--block-space-3);
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-xs);
+  font-weight: var(--block-font-weight-bold);
+  letter-spacing: var(--block-letter-spacing-wide);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--block-text-muted);
+  background-color: var(--block-surface-alt);
+  border-bottom: var(--block-border-width) solid var(--block-border);
+}
+
+.sticky {
+  overflow: visible;
+}
+
+.sticky .headerCell {
+  position: sticky;
+  top: 0;
+  z-index: var(--block-z-sticky);
+}
+
+.cell {
+  padding: var(--block-space-2) var(--block-space-3);
+  border-bottom: var(--block-border-width-thin) solid var(--block-shadow-bevel-dark);
+  vertical-align: middle;
+}
+
+.table[data-size="sm"] .headerCell,
+.table[data-size="sm"] .cell {
+  padding: var(--block-space-1) var(--block-space-2);
+}
+
+.rowHeader {
+  font-weight: var(--block-font-weight-bold);
+  text-align: left;
+}
+
+.row:last-child .cell {
+  border-bottom: 0;
+}
+
+.table[data-striped] .row:nth-child(even) {
+  background-color: color-mix(in srgb, var(--block-surface-alt) 70%, transparent);
+}
+
+.row:hover {
+  background-color: var(--block-slot-hover);
+}
+
+.table [data-align="start"] {
+  text-align: start;
+}
+
+.table [data-align="center"] {
+  text-align: center;
+}
+
+.table [data-align="end"] {
+  text-align: end;
+}
+
+.sortButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--block-space-1);
+  margin: calc(-1 * var(--block-space-1));
+  padding: var(--block-space-1);
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.sortButton:hover,
+.sortButton[data-direction] {
+  color: var(--block-text);
+}
+
+.sortButton:focus-visible {
+  outline: 3px solid var(--block-focus);
+  outline-offset: 0;
+}
+
+.sortIcon {
+  display: inline-flex;
+  opacity: 0.35;
+}
+
+.sortButton[data-direction] .sortIcon {
+  opacity: 1;
+}
+
+.empty {
+  padding: var(--block-space-6) var(--block-space-3);
+  text-align: center;
+  color: var(--block-text-muted);
+}
