@@ -11,3 +11,4 @@ export * from "./icons/navigation";
 export * from "./icons/items";
 export * from "./icons/hud";
 export * from "./icons/environment";
+export * from "./icons/workstation";

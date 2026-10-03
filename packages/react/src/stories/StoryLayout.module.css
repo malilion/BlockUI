@@ -74,3 +74,12 @@
   min-height: 280px;
   padding-top: var(--block-space-12);
 }
+
+/* Potion tints for BrewingStand stories (PotionIcon fills with currentColor). */
+:global(.block-story-potion-water) {
+  color: var(--block-water);
+}
+
+:global(.block-story-potion-awkward) {
+  color: var(--block-amethyst-light);
+}

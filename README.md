@@ -170,7 +170,7 @@ Every component has stories in [Storybook](https://malilion.github.io/BlockUI/) 
 | Actions    | `BlockButton` · `IconButton` · `BlockMenu`                                                                                                                                 |
 | Forms      | `BlockInput` · `BlockTextarea` · `BlockSelect` · `BlockCheckbox` · `BlockRadioGroup` / `BlockRadio` · `BlockToggle` · `BlockSlider`                                        |
 | Inventory  | `Inventory` / `InventorySection` · `InventoryGrid` · `InventorySlot` · `ItemStack` · `ItemTooltip` · `DurabilityBar` · `Hotbar`                                            |
-| Crafting   | `CraftingTable` · `CraftingGrid` · `CraftingSlot` · `CraftingResult` · `Furnace`                                                                                           |
+| Crafting   | `CraftingTable` · `CraftingGrid` · `CraftingSlot` · `CraftingResult` · `Furnace` · `EnchantingTable` · `BrewingStand` · `Anvil` · `TradingUI` · `RecipeBook`               |
 | HUD        | `HealthBar` · `ArmorBar` · `HungerBar` · `XPBar` · `PlayerHUD` · `BossBar` · `Scoreboard` · `CoordinatesHUD` · `BiomeIndicator` · `DayNightIndicator` · `WeatherIndicator` |
 | Cards      | `BlockCard` · `QuestCard` · `AchievementCard` · `PlayerCard` · `ServerCard` · `WorldCard`                                                                                  |
 | Display    | `BlockTable`                                                                                                                                                               |
