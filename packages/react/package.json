@@ -1,6 +1,6 @@
 {
   "name": "@malilion/block-ui-react",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Block UI — block / pixel / crafting game-style React components: inventory, crafting, HUD, cards, forms and more.",
   "license": "MIT",
   "author": "Block UI Contributors",

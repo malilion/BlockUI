@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-V1 complete — 0.1.0 published to npm
+V1 complete — 0.1.0 published to npm; 0.2.0 prepared
 
 ## Completed
 
@@ -41,7 +41,9 @@ V1 complete — 0.1.0 published to npm
 
 ## Next
 
-- [ ] Release 0.2.0: `pnpm release:version 0.2.0` + move the CHANGELOG `Unreleased` entry under 0.2.0, push to `main` (first publish through trusted publishing)
+- [x] 0.2.0 versioned (`pnpm release:version 0.2.0`) and CHANGELOG section dated 2026-10-04
+- [ ] Publish 0.2.0: merge `feat/0.2.0-components` into `main` and push (first publish through trusted publishing)
+- [ ] Next batch: V2 candidates from PRD §83 (e.g. BossBar, Scoreboard, ServerBrowser)
 
 ## Known Issues / Decisions
 
