@@ -43,7 +43,8 @@
 ## Next
 
 - [x] 0.2.0 versioned (`pnpm release:version 0.2.0`) and CHANGELOG section dated 2026-10-04
-- [ ] Fix npm trusted publishing for `@malilion/block-ui-icons` and `@malilion/block-ui-react` (CI publish returns `404 Not Found`; compare `npm trust list` with tokens) before the next release
+- [x] npm trusted publishing for icons / react: their configs hold the environment `leave blank` (npm web form would not clear it); `release.yml` now publishes them in a `publish-ui` job running in a GitHub environment of that name (docs/RELEASING.md)
+- [ ] Confirm on the 0.3.0 release that all four packages publish from CI with no manual step
 - [ ] Next batch: V2 candidates from PRD §83 (e.g. BossBar, Scoreboard, ServerBrowser)
 
 ## Known Issues / Decisions

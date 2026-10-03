@@ -4,7 +4,14 @@ name: Release
 # is on npm yet. If not, it tests, builds and publishes the missing packages with
 # npm trusted publishing (OIDC, no token), then tags vX.Y.Z and creates the
 # GitHub Release from the CHANGELOG section. Pushes that do not bump the version
-# finish after the plan step.
+# finish after the plan job.
+#
+# Publishing is split in two jobs because the npm trusted-publisher configs differ:
+# tokens / themes trust release.yml with no GitHub environment, while icons / react
+# were saved with the environment name "leave blank" (literally — npm's web form
+# would not clear it). npm only accepts an OIDC token whose environment matches, so
+# publish-ui runs in a GitHub environment of that name. If those configs are ever
+# fixed (environment empty), move icons / react back into publish-core.
 on:
   push:
     branches:
@@ -21,11 +28,18 @@ concurrency:
 
 env:
   NODE_VERSION: 24
+  # Packages whose npm trusted publisher expects the GitHub environment below.
+  UI_PACKAGES: icons react
 
 jobs:
-  release:
-    name: Publish @malilion/block-ui-* to npm
+  plan:
+    name: Plan release
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.plan.outputs.tag }}
+      core: ${{ steps.split.outputs.core }}
+      ui: ${{ steps.split.outputs.ui }}
+      release-exists: ${{ steps.existing.outputs.exists }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -34,11 +48,22 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
-          registry-url: https://registry.npmjs.org
 
       - name: Plan release
         id: plan
-        run: node scripts/release-plan.mjs --notes "$RUNNER_TEMP/notes.md"
+        run: node scripts/release-plan.mjs
+
+      - name: Split packages by trusted-publisher config
+        id: split
+        # Keeps the publish order (tokens → themes → icons → react) within each group.
+        run: |
+          core=""
+          ui=""
+          for dir in ${{ steps.plan.outputs.packages }}; do
+            if [[ " $UI_PACKAGES " == *" $dir "* ]]; then ui="$ui $dir"; else core="$core $dir"; fi
+          done
+          echo "core=${core# }" >> "$GITHUB_OUTPUT"
+          echo "ui=${ui# }" >> "$GITHUB_OUTPUT"
 
       - name: Check for an existing GitHub Release
         id: existing
@@ -51,48 +76,114 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
+  publish-core:
+    name: Publish tokens / themes
+    needs: plan
+    if: needs.plan.outputs.core != '' || needs.plan.outputs.ui != ''
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://registry.npmjs.org
+
       - name: Install pnpm
-        if: steps.plan.outputs.packages != ''
         uses: pnpm/action-setup@v6
 
       - name: Install dependencies
-        if: steps.plan.outputs.packages != ''
         run: pnpm install --frozen-lockfile
 
+      # The full gate runs once here, before anything is published.
       - name: Unit tests
-        if: steps.plan.outputs.packages != ''
         run: pnpm test
 
       - name: Build packages
-        if: steps.plan.outputs.packages != ''
         run: pnpm build:packages
 
       - name: Tree-shake check
-        if: steps.plan.outputs.packages != ''
         run: pnpm check:treeshake
 
       - name: Package install check
-        if: steps.plan.outputs.packages != ''
         run: pnpm check:package
 
       - name: Publish
-        if: steps.plan.outputs.packages != ''
+        if: needs.plan.outputs.core != ''
         # pnpm pack rewrites workspace:^ to the real version; npm publish then
         # authenticates through OIDC (trusted publishing needs npm >= 11.5.1).
         run: |
           npm install -g npm@^11.5.1
           mkdir -p "$RUNNER_TEMP/packs"
-          for dir in ${{ steps.plan.outputs.packages }}; do
+          for dir in ${{ needs.plan.outputs.core }}; do
             tarball=$(cd "packages/$dir" && pnpm pack --pack-destination "$RUNNER_TEMP/packs" | tail -1)
             npm publish "$tarball" --access public --provenance
           done
 
-      - name: Tag and create GitHub Release
-        if: steps.existing.outputs.exists == 'false'
+  publish-ui:
+    name: Publish icons / react
+    needs: [plan, publish-core]
+    if: needs.plan.outputs.ui != ''
+    runs-on: ubuntu-latest
+    # Must equal the environment saved in the npm trusted-publisher config of
+    # icons / react (see the note at the top of this file).
+    environment: leave blank
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://registry.npmjs.org
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build:packages
+
+      - name: Publish
+        run: |
+          npm install -g npm@^11.5.1
+          mkdir -p "$RUNNER_TEMP/packs"
+          for dir in ${{ needs.plan.outputs.ui }}; do
+            tarball=$(cd "packages/$dir" && pnpm pack --pack-destination "$RUNNER_TEMP/packs" | tail -1)
+            npm publish "$tarball" --access public --provenance
+          done
+
+  github-release:
+    name: Tag and create GitHub Release
+    needs: [plan, publish-core, publish-ui]
+    # Runs after a successful publish, or on its own when the version is already on npm.
+    if: >
+      always() && needs.plan.result == 'success' &&
+      needs.plan.outputs.release-exists == 'false' &&
+      !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Release notes
+        run: node scripts/release-plan.mjs --notes "$RUNNER_TEMP/notes.md"
+
+      - name: Create the tag and GitHub Release
         run: >
-          gh release create "${{ steps.plan.outputs.tag }}"
+          gh release create "${{ needs.plan.outputs.tag }}"
           --target "$GITHUB_SHA"
-          --title "${{ steps.plan.outputs.tag }}"
+          --title "${{ needs.plan.outputs.tag }}"
           --notes-file "$RUNNER_TEMP/notes.md"
         env:
           GH_TOKEN: ${{ github.token }}
