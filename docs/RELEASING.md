@@ -31,6 +31,12 @@ npm trust github @malilion/block-ui-<name> --repo malilion/BlockUI --file releas
 
 `npm trust list <package>` shows the current configuration.
 
+### Known quirk: icons / react expect the environment "leave blank"
+
+The trusted-publisher configs of `@malilion/block-ui-icons` and `@malilion/block-ui-react` were saved with the GitHub environment name `leave blank` (the form hint, typed in as a value), and npm's web form would not clear it. npm rejects an OIDC token whose environment does not match — the publish fails with `404 Not Found`. The workaround lives in `release.yml`: `tokens` / `themes` publish in the `publish-core` job (no environment) and `icons` / `react` in the `publish-ui` job, which runs in a GitHub environment named `leave blank`.
+
+To undo it, give icons / react a config with **no** environment (delete and re-add the trusted publisher, as for `tokens`), then remove `UI_PACKAGES` / `publish-ui` from `release.yml` so all four publish in one job.
+
 ## Local dry run
 
 ```bash
