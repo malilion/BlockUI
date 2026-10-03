@@ -1,0 +1,46 @@
+.coordinates {
+  flex-wrap: wrap;
+  column-gap: var(--block-space-3);
+}
+
+.axes {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--block-space-3);
+}
+
+.axis {
+  white-space: nowrap;
+}
+
+.facing {
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+
+.copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 24px;
+  margin-left: auto;
+  padding: 0 var(--block-space-2);
+  font: inherit;
+  font-size: var(--block-font-size-xs);
+  text-transform: uppercase;
+  color: var(--block-text-primary);
+  background-color: var(--block-obsidian-light);
+  border: var(--block-border-width-thin) solid var(--block-black);
+  box-shadow: inset 2px 2px 0 color-mix(in srgb, var(--block-white) 15%, transparent);
+  cursor: pointer;
+}
+
+.copy:hover {
+  background-color: color-mix(in srgb, var(--block-obsidian-light) 70%, var(--block-white));
+}
+
+.copy:focus-visible {
+  outline: 3px solid var(--block-focus);
+  outline-offset: 2px;
+}

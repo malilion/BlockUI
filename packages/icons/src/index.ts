@@ -10,3 +10,4 @@ export * from "./icons/ui";
 export * from "./icons/navigation";
 export * from "./icons/items";
 export * from "./icons/hud";
+export * from "./icons/environment";

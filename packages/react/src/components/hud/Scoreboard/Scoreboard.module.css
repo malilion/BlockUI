@@ -1,0 +1,75 @@
+.scoreboard {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 180px;
+  max-width: 100%;
+  padding: var(--block-space-1) var(--block-space-2) var(--block-space-2);
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-sm);
+  color: var(--block-text-primary);
+  text-shadow: var(--block-shadow-text);
+  background-color: color-mix(in srgb, var(--block-obsidian-dark) 82%, transparent);
+  border: var(--block-border-width-thin) solid var(--block-black);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.title {
+  padding: var(--block-space-1) 0 var(--block-space-2);
+  font-size: var(--block-font-size-md);
+  font-weight: var(--block-font-weight-bold);
+  text-align: center;
+  color: var(--block-gold-light);
+  overflow-wrap: anywhere;
+}
+
+.row > * {
+  padding: 2px 0;
+  vertical-align: baseline;
+}
+
+.rank {
+  width: 1%;
+  padding-right: var(--block-space-2);
+  color: var(--block-text-secondary);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.name {
+  font-weight: var(--block-font-weight-regular);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.score {
+  padding-left: var(--block-space-4);
+  text-align: right;
+  white-space: nowrap;
+  color: var(--block-redstone-light);
+  font-variant-numeric: tabular-nums;
+}
+
+.row[data-highlighted] > * {
+  background-color: color-mix(in srgb, var(--block-emerald) 30%, transparent);
+}
+
+.row[data-highlighted] .name {
+  color: var(--block-emerald-light);
+}
+
+.empty {
+  padding: var(--block-space-2) 0;
+  text-align: center;
+  color: var(--block-text-secondary);
+}
+
+.more {
+  margin: var(--block-space-1) 0 0;
+  font-size: var(--block-font-size-xs);
+  text-align: right;
+  color: var(--block-text-secondary);
+}

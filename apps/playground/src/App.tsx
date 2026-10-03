@@ -51,6 +51,12 @@ import {
   BlockTooltip,
   BlockStack,
   BlockDivider,
+  BossBar,
+  Scoreboard,
+  CoordinatesHUD,
+  BiomeIndicator,
+  DayNightIndicator,
+  WeatherIndicator,
   blockButtonVariants,
   type BlockTableColumn,
   type BlockTableSort,
@@ -209,6 +215,29 @@ function DashboardSection() {
         <ArmorBar value={12} max={20} showText />
         <HungerBar value={18} max={20} showText />
         <XPBar value={1250} max={2000} level={42} showValue />
+      </div>
+      <div className={styles.col}>
+        <h3 className={styles.heading}>World HUD</h3>
+        <BossBar name="Ender Dragon" value={140} max={200} segments={10} showPercent />
+        <div className={styles.row}>
+          <CoordinatesHUD x={120} y={64} z={-340} facing="north" copyable />
+          <BiomeIndicator type="forest" name="Dark Forest" />
+          <DayNightIndicator time={14.5} day={156} />
+          <WeatherIndicator weather="rain" remaining="4 min" />
+        </div>
+        <div>
+          <Scoreboard
+            title="Kills"
+            highlightId="BlockMaster_42"
+            entries={[
+              { name: "BlockMaster_42", score: 42 },
+              { name: "Steve", score: 128 },
+              { name: "Alex", score: 302 },
+              { name: "Jeb", score: 64 },
+            ]}
+            showRank
+          />
+        </div>
       </div>
       <div className={styles.col}>
         <h3 className={styles.heading}>Form</h3>

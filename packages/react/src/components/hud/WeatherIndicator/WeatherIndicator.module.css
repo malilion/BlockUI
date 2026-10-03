@@ -1,0 +1,36 @@
+.weather[data-weather="rain"] .icon,
+.weather[data-weather="snow"] .icon {
+  animation: block-weather-drift 1.2s steps(2, end) infinite;
+}
+
+.weather[data-weather="thunder"] .icon {
+  animation: block-weather-flash 2.4s steps(1, end) infinite;
+}
+
+.weather[data-weather="thunder"] .name {
+  color: var(--block-gold-light);
+}
+
+.weather[data-weather="snow"] .name {
+  color: var(--block-diamond-light);
+}
+
+/* Two-frame pixel drift; reduced motion stops it (base.css). */
+@keyframes block-weather-drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(2px);
+  }
+}
+
+@keyframes block-weather-flash {
+  0%,
+  90% {
+    filter: none;
+  }
+  92% {
+    filter: brightness(1.8);
+  }
+}

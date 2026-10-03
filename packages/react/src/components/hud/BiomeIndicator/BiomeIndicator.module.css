@@ -1,0 +1,8 @@
+/* A stripe in the biome's material on the leading edge. */
+.biome {
+  border-left: 4px solid var(--block-mat);
+}
+
+.name {
+  color: var(--block-text-primary);
+}
