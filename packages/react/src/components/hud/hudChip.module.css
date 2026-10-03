@@ -1,0 +1,47 @@
+/*
+ * Shared look of the small HUD read-outs (CoordinatesHUD, BiomeIndicator,
+ * DayNightIndicator, WeatherIndicator): a dark, semi-transparent obsidian chip
+ * that stays legible over any game scene or theme.
+ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--block-space-2);
+  min-height: 32px;
+  padding: var(--block-space-1) var(--block-space-2);
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-sm);
+  line-height: var(--block-line-height-tight);
+  color: var(--block-text-primary);
+  text-shadow: var(--block-shadow-text);
+  background-color: color-mix(in srgb, var(--block-obsidian-dark) 88%, transparent);
+  border: var(--block-border-width-thin) solid var(--block-black);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--block-obsidian-light) 70%, transparent);
+}
+
+.chip[data-size="sm"] {
+  min-height: 24px;
+  padding: 2px var(--block-space-1);
+  font-size: var(--block-font-size-xs);
+}
+
+.chip[data-size="lg"] {
+  min-height: 44px;
+  padding: var(--block-space-2) var(--block-space-3);
+  font-size: var(--block-font-size-md);
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  image-rendering: pixelated;
+}
+
+.label {
+  color: var(--block-text-secondary);
+}
+
+.value {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}

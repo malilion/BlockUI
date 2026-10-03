@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- **V2 HUD components (PRD §83):**
+  - **`BossBar`** — centered boss name over a long bar in six materials, with optional notches (6 / 10 / 12 / 20), icon and percentage; a `meter` labelled by the boss name.
+  - **`Scoreboard`** — sidebar objective with name / score rows sorted by score, row limit with "+N more", ranks and a highlighted current player; a captioned table.
+  - **`CoordinatesHUD`** — X / Y / Z read-out with facing and axis, decimals, and a copy button that announces "Coordinates copied".
+  - **`BiomeIndicator`** — 11 biome types, each with a pixel icon and accent stripe; optional polite announcements.
+  - **`DayNightIndicator`** — sky arc with the sun or moon, day counter, 24h / 12h clock and phase (dawn / day / dusk / night).
+  - **`WeatherIndicator`** — clear, cloudy, rain, thunder and snow with time remaining; gentle icon animation that respects reduced motion.
+- **Icons** — `SunIcon`, `MoonIcon`, `CloudIcon`, `RainIcon`, `ThunderIcon`, `SnowIcon`, `TreeIcon`, `WaveIcon`.
+- **Playground** — a "World HUD" block on the dashboard.
+
+### Changed
+
+- **Release workflow** — `icons` / `react` publish from a job in the GitHub environment `leave blank` to match their npm trusted-publisher configs (see docs/RELEASING.md).
+
 ## [0.2.0] — 2026-10-04
 
 ### Added

@@ -6,7 +6,7 @@ test.describe("Block UI Playground", () => {
   });
 
   test("dashboard loads with navigation and content", async ({ page }) => {
-    await expect(page.getByText("BlockMaster_42")).toBeVisible();
+    await expect(page.getByText("BlockMaster_42").first()).toBeVisible();
     await expect(
       page
         .getByRole("navigation", { name: /^(Playground Navigation|Quick navigation)$/ })
@@ -91,7 +91,7 @@ test.describe("Responsive mobile navigation", () => {
   test("shows hotbar navigation and hides the sidebar", async ({ page }) => {
     await page.goto("/");
 
-    await expect(page.getByText("BlockMaster_42")).toBeVisible();
+    await expect(page.getByText("BlockMaster_42").first()).toBeVisible();
     await expect(page.getByRole("navigation", { name: "Playground Navigation" })).toBeHidden();
     const hotbar = page.getByRole("navigation", { name: "Quick navigation" });
     await expect(hotbar).toBeVisible();

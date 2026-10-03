@@ -45,7 +45,9 @@
 - [x] 0.2.0 versioned (`pnpm release:version 0.2.0`) and CHANGELOG section dated 2026-10-04
 - [x] npm trusted publishing for icons / react: their configs hold the environment `leave blank` (npm web form would not clear it); `release.yml` now publishes them in a `publish-ui` job running in a GitHub environment of that name (docs/RELEASING.md)
 - [ ] Confirm on the 0.3.0 release that all four packages publish from CI with no manual step
-- [ ] Next batch: V2 candidates from PRD §83 (e.g. BossBar, Scoreboard, ServerBrowser)
+- [x] V2 batch 1 (HUD): `BossBar`, `Scoreboard`, `CoordinatesHUD`, `BiomeIndicator`, `DayNightIndicator`, `WeatherIndicator` + 8 environment icons; playground "World HUD"
+- [ ] V2 batch 2: EnchantingTable, BrewingStand, Anvil, TradingUI, RecipeBook
+- [ ] V2 batch 3: ServerBrowser, WorldBrowser, ChatWindow, CommandConsole, SkillTree, MiniMap
 
 ## Known Issues / Decisions
 
@@ -60,10 +62,10 @@
 - pnpm format:check ✅
 - pnpm build-storybook ✅
 - pnpm typecheck ✅
-- pnpm test ✅ (645)
+- pnpm test ✅ (725)
 - pnpm build ✅
-- pnpm test:e2e ✅ (36 passed, 2 skipped)
-- pnpm check:a11y ✅ (392 stories in grassland; the 42 new 0.2.0 stories in all 5 themes)
+- pnpm test:e2e ✅ (36 passed, 2 skipped; axe on every playground tab in 5 themes)
+- pnpm check:a11y ✅ (434 stories in grassland; new stories in all 5 themes)
 - pnpm check:package ✅
 - pnpm check:publish ✅ (dry-run, topological order)
 - pnpm check:treeshake ✅

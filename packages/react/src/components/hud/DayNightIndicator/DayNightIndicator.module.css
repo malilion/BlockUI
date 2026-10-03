@@ -1,0 +1,80 @@
+.dayNight {
+  gap: var(--block-space-3);
+}
+
+/* Sky arc: the body travels along a half ellipse above the horizon. */
+.dial {
+  --dial-w: 56px;
+  --dial-h: 28px;
+  position: relative;
+  flex-shrink: 0;
+  width: var(--dial-w);
+  height: var(--dial-h);
+  overflow: hidden;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--block-water) 60%, transparent),
+    color-mix(in srgb, var(--block-water-dark) 30%, transparent)
+  );
+  border-bottom: 2px solid var(--block-grass);
+}
+
+.dayNight[data-phase="night"] .dial {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--block-obsidian-light) 80%, transparent),
+    color-mix(in srgb, var(--block-black) 60%, transparent)
+  );
+}
+
+.dayNight[data-phase="dawn"] .dial,
+.dayNight[data-phase="dusk"] .dial {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--block-lava) 70%, transparent),
+    color-mix(in srgb, var(--block-amethyst-dark) 50%, transparent)
+  );
+}
+
+.dayNight[data-size="lg"] .dial {
+  --dial-w: 80px;
+  --dial-h: 40px;
+}
+
+.dayNight[data-size="sm"] .dial {
+  --dial-w: 40px;
+  --dial-h: 20px;
+}
+
+.horizon {
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background-color: var(--block-grass-dark);
+}
+
+.body {
+  position: absolute;
+  left: calc(var(--block-dial-x) * (var(--dial-w) - 16px));
+  bottom: calc(var(--block-dial-y) * (var(--dial-h) - 16px) - 4px);
+  display: inline-flex;
+  image-rendering: pixelated;
+  transition:
+    left var(--block-duration-normal) var(--block-ease-step),
+    bottom var(--block-duration-normal) var(--block-ease-step);
+}
+
+.text {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--block-space-2);
+}
+
+.phase {
+  color: var(--block-gold-light);
+}
+
+.dayNight[data-phase="night"] .phase {
+  color: var(--block-diamond-light);
+}
