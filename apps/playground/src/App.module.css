@@ -117,3 +117,8 @@
 :is(.section, .col) + :is(.section, .col) {
   margin-top: var(--block-space-8);
 }
+
+/* Potion liquid tint (PotionIcon fills with currentColor). */
+.potion {
+  color: var(--block-water-light);
+}

@@ -57,6 +57,11 @@ import {
   BiomeIndicator,
   DayNightIndicator,
   WeatherIndicator,
+  EnchantingTable,
+  BrewingStand,
+  Anvil,
+  TradingUI,
+  RecipeBook,
   blockButtonVariants,
   type BlockTableColumn,
   type BlockTableSort,
@@ -85,6 +90,13 @@ import {
   CloseIcon,
   MenuIcon,
   PlusIcon,
+  LapisIcon,
+  PotionIcon,
+  BlazePowderIcon,
+  BreadIcon,
+  BookIcon,
+  IronIcon,
+  DiamondSwordIcon,
 } from "@malilion/block-ui-icons";
 import styles from "./App.module.css";
 
@@ -357,6 +369,133 @@ function CraftingSection() {
             fuelLevel={30}
           />
         </div>
+      </div>
+      <div className={styles.section}>
+        <div className={styles.col}>
+          <h3 className={styles.heading}>Enchanting Table</h3>
+          <EnchantingTable
+            item={<ItemStack icon={<DiamondSwordIcon size={16} />} name="Diamond Sword" />}
+            lapis={<ItemStack icon={<LapisIcon size={16} />} name="Lapis Lazuli" amount={2} />}
+            lapisCount={2}
+            playerLevel={20}
+            options={[
+              { id: "unbreaking", level: 4, lapisCost: 1, clue: "Unbreaking I…?" },
+              { id: "sharpness", level: 17, lapisCost: 2, clue: "Sharpness II…?" },
+              { id: "fire", level: 30, lapisCost: 3, clue: "Fire Aspect II…?" },
+            ]}
+            onEnchant={(id) => toast.success(`Enchanted: ${id}`)}
+          />
+        </div>
+        <div className={styles.col}>
+          <h3 className={styles.heading}>Brewing Stand</h3>
+          <BrewingStand
+            ingredient={<ItemStack icon={<RedstoneIcon size={16} />} name="Redstone" />}
+            fuel={<ItemStack icon={<BlazePowderIcon size={16} />} name="Blaze Powder" amount={3} />}
+            bottles={[
+              <ItemStack
+                key="1"
+                icon={<PotionIcon size={16} className={styles.potion} />}
+                name="Water Bottle"
+              />,
+              <ItemStack
+                key="2"
+                icon={<PotionIcon size={16} className={styles.potion} />}
+                name="Water Bottle"
+              />,
+            ]}
+            progress={60}
+            fuelLevel={55}
+          />
+        </div>
+        <div className={styles.col}>
+          <h3 className={styles.heading}>Anvil</h3>
+          <Anvil
+            left={<ItemStack icon={<PickaxeIcon size={16} />} name="Iron Pickaxe" />}
+            right={<ItemStack icon={<IronIcon size={16} />} name="Iron Ingot" amount={2} />}
+            result={<ItemStack icon={<PickaxeIcon size={16} />} name="Lucky Pick" />}
+            defaultName="Lucky Pick"
+            cost={5}
+            playerLevel={20}
+            onTakeResult={() => toast.success("Repaired!")}
+          />
+        </div>
+      </div>
+      <div className={styles.col}>
+        <h3 className={styles.heading}>Trading</h3>
+        <TradingUI
+          profession="Armorer"
+          level={3}
+          levelProgress={55}
+          trades={[
+            {
+              id: "bread",
+              cost: <ItemStack icon={<EmeraldIcon size={16} />} name="Emerald" />,
+              result: <ItemStack icon={<BreadIcon size={16} />} name="Bread" amount={6} />,
+              label: "1 emerald for 6 bread",
+            },
+            {
+              id: "sword",
+              cost: <ItemStack icon={<EmeraldIcon size={16} />} name="Emerald" amount={12} />,
+              cost2: <ItemStack icon={<BookIcon size={16} />} name="Book" />,
+              result: <ItemStack icon={<DiamondSwordIcon size={16} />} name="Diamond Sword" />,
+              label: "12 emeralds and a book for a diamond sword",
+            },
+            {
+              id: "map",
+              cost: <ItemStack icon={<EmeraldIcon size={16} />} name="Emerald" amount={8} />,
+              result: <ItemStack icon={<QuestIcon size={16} />} name="Explorer Map" />,
+              label: "8 emeralds for an explorer map",
+              uses: 4,
+              maxUses: 4,
+            },
+          ]}
+          onTrade={(id) => toast.success(`Traded: ${id}`)}
+        />
+      </div>
+      <div className={styles.col}>
+        <h3 className={styles.heading}>Recipe Book</h3>
+        <RecipeBook
+          defaultValue="pick"
+          recipes={[
+            {
+              id: "pick",
+              name: "Iron Pickaxe",
+              category: "tools",
+              result: <ItemStack icon={<PickaxeIcon size={16} />} name="Iron Pickaxe" />,
+              ingredients: [
+                <ItemStack key="a" icon={<IronIcon size={16} />} name="Iron Ingot" />,
+                <ItemStack key="b" icon={<IronIcon size={16} />} name="Iron Ingot" />,
+                <ItemStack key="c" icon={<IronIcon size={16} />} name="Iron Ingot" />,
+                null,
+                <ItemStack key="d" icon={<TorchIcon size={16} />} name="Stick" />,
+                null,
+                null,
+                <ItemStack key="e" icon={<TorchIcon size={16} />} name="Stick" />,
+                null,
+              ],
+            },
+            {
+              id: "sword",
+              name: "Diamond Sword",
+              category: "combat",
+              result: <ItemStack icon={<DiamondSwordIcon size={16} />} name="Diamond Sword" />,
+              craftable: false,
+            },
+            {
+              id: "torch",
+              name: "Torch",
+              category: "building",
+              result: <ItemStack icon={<TorchIcon size={16} />} name="Torch" amount={4} />,
+            },
+            {
+              id: "bread",
+              name: "Bread",
+              category: "food",
+              result: <ItemStack icon={<BreadIcon size={16} />} name="Bread" />,
+            },
+          ]}
+          onCraft={(id) => toast.success(`Crafted: ${id}`)}
+        />
       </div>
     </BlockPanel>
   );

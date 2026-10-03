@@ -1,0 +1,141 @@
+.table {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--block-space-4);
+  width: 100%;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--block-space-2);
+}
+
+.book {
+  display: inline-flex;
+  animation: block-enchant-float 2.4s steps(4, end) infinite;
+}
+
+.slots {
+  display: flex;
+  gap: var(--block-space-2);
+}
+
+.ghost {
+  display: inline-flex;
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+.options {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--block-space-1);
+  min-width: min(280px, 100%);
+  max-width: 420px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--block-space-2);
+  width: 100%;
+  min-height: 52px;
+  padding: var(--block-space-1) var(--block-space-2);
+  font: inherit;
+  text-align: left;
+  color: var(--block-text);
+  background-color: var(--block-surface-alt);
+  border: var(--block-border-width) solid var(--block-border);
+  box-shadow: var(--block-shadow-bevel);
+  cursor: pointer;
+}
+
+.option:hover:not([aria-disabled]) {
+  background-color: color-mix(in srgb, var(--block-amethyst) 30%, var(--block-surface-alt));
+}
+
+.option:focus-visible {
+  outline: 3px solid var(--block-focus);
+  outline-offset: 2px;
+}
+
+.option[aria-disabled] {
+  cursor: not-allowed;
+  background-color: var(--block-slot);
+  box-shadow: var(--block-shadow-inset);
+}
+
+.cost {
+  display: inline-flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 16px;
+}
+
+.option[aria-disabled] .cost {
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+.text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.runes {
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-xs);
+  letter-spacing: var(--block-letter-spacing-wider);
+  color: var(--block-text-muted);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
+}
+
+.clue {
+  font-size: var(--block-font-size-sm);
+  overflow-wrap: anywhere;
+}
+
+.option[data-blocker="level"] .clue,
+.option[data-blocker="lapis"] .clue,
+.option[data-blocker="disabled"] .clue,
+.option[data-blocker="noItem"] .clue {
+  color: var(--block-text-muted);
+}
+
+.level {
+  flex-shrink: 0;
+  min-width: 2ch;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-lg);
+  font-weight: var(--block-font-weight-bold);
+  text-align: right;
+  color: var(--block-emerald-light);
+  text-shadow: var(--block-shadow-text);
+}
+
+.option[data-blocker="level"] .level {
+  color: var(--block-redstone-light);
+}
+
+.option[data-blocker="noItem"] .level,
+.option[data-blocker="disabled"] .level {
+  color: var(--block-text-muted);
+}
+
+@keyframes block-enchant-float {
+  50% {
+    transform: translateY(-3px);
+  }
+}

@@ -1,0 +1,58 @@
+.anvil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--block-space-3);
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--block-space-2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  margin-bottom: var(--block-space-1);
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+}
+
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--block-space-3);
+}
+
+.symbol {
+  display: inline-flex;
+  color: var(--block-text-muted);
+}
+
+.cost {
+  margin: 0;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-sm);
+  color: var(--block-emerald-light);
+  text-shadow: var(--block-shadow-text);
+}
+
+.anvil[data-cost="unaffordable"] .cost,
+.anvil[data-cost="tooExpensive"] .cost {
+  color: var(--block-redstone-light);
+}
+
+@media (max-width: 767.98px) {
+  .layout {
+    gap: var(--block-space-2);
+  }
+}

@@ -15,8 +15,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - **`BiomeIndicator`** — 11 biome types, each with a pixel icon and accent stripe; optional polite announcements.
   - **`DayNightIndicator`** — sky arc with the sun or moon, day counter, 24h / 12h clock and phase (dawn / day / dusk / night).
   - **`WeatherIndicator`** — clear, cloudy, rain, thunder and snow with time remaining; gentle icon animation that respects reduced motion.
-- **Icons** — `SunIcon`, `MoonIcon`, `CloudIcon`, `RainIcon`, `ThunderIcon`, `SnowIcon`, `TreeIcon`, `WaveIcon`.
-- **Playground** — a "World HUD" block on the dashboard.
+- **V2 workstation components (PRD §83):**
+  - **`EnchantingTable`** — item and lapis slots with up to three offers (runes, clue, level, lapis cost); unaffordable offers stay focusable with the reason.
+  - **`BrewingStand`** — ingredient, fuel gauge and three bottles with a downward progress bar; idle / brewing / complete / no fuel.
+  - **`Anvil`** — rename field, two inputs and a result with the experience cost, "not enough levels" and "Too Expensive!".
+  - **`TradingUI`** — villager offers as a keyboard listbox (sold-out offers marked), payment / result slots, profession and level progress.
+  - **`RecipeBook`** — search, category filters and "Craftable only" over a recipe grid, with a 3 × 3 pattern preview and Craft button.
+- **Icons** — `SunIcon`, `MoonIcon`, `CloudIcon`, `RainIcon`, `ThunderIcon`, `SnowIcon`, `TreeIcon`, `WaveIcon`, `PotionIcon` (tinted with `currentColor`), `LapisIcon`, `BlazePowderIcon`, `AnvilIcon`.
+- **Playground** — a "World HUD" block on the dashboard; the Crafting tab shows all five workstations.
 
 ### Changed
 

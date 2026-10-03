@@ -12,6 +12,8 @@ test.describe("Accessibility (axe, WCAG 2.2 AA)", () => {
 
   for (const theme of THEMES) {
     test(`every section passes in the ${theme} theme`, async ({ page }) => {
+      // Six tabs, each with a full-page axe scan.
+      test.slow();
       await page.goto("/");
       await page.getByRole("combobox", { name: "Select Theme" }).selectOption(theme);
       for (const tab of TABS) {

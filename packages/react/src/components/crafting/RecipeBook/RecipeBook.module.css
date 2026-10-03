@@ -1,0 +1,138 @@
+.book {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--block-space-4);
+  width: 100%;
+}
+
+.browser {
+  display: flex;
+  flex: 1 1 320px;
+  flex-direction: column;
+  gap: var(--block-space-2);
+  min-width: 0;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--block-space-2);
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--block-space-1);
+}
+
+.category {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--block-space-1);
+  min-height: 32px;
+  padding: 0 var(--block-space-2);
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-xs);
+  text-transform: uppercase;
+  color: var(--block-text-muted);
+  background-color: var(--block-surface-alt);
+  border: var(--block-border-width-thin) solid var(--block-border);
+  box-shadow: inset 2px 2px 0 var(--block-shadow-bevel-light);
+  cursor: pointer;
+}
+
+.category:hover {
+  color: var(--block-text);
+}
+
+.category[aria-pressed="true"] {
+  color: var(--block-text);
+  background-color: var(--block-surface);
+  border-color: var(--block-text-muted);
+}
+
+.category:focus-visible {
+  outline: 3px solid var(--block-focus);
+  outline-offset: 2px;
+}
+
+.categoryIcon {
+  display: inline-flex;
+}
+
+.count {
+  margin: 0;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-xs);
+  color: var(--block-text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--block-size-slot-md), 1fr));
+  gap: var(--block-space-1);
+  max-height: 260px;
+  margin: 0;
+  padding: var(--block-space-1);
+  overflow-y: auto;
+  list-style: none;
+  background-color: var(--block-slot);
+  border: var(--block-border-width-thin) solid var(--block-border);
+  box-shadow: var(--block-shadow-inset);
+}
+
+/* Missing ingredients: the slot glows redstone instead of looking normal. */
+.recipe[data-craftable="false"] {
+  background-color: color-mix(in srgb, var(--block-redstone) 35%, var(--block-slot));
+}
+
+.empty {
+  margin: 0;
+  padding: var(--block-space-4);
+  text-align: center;
+  color: var(--block-text-muted);
+}
+
+.detail {
+  display: flex;
+  flex: 0 1 260px;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--block-space-3);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-md);
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: var(--block-shadow-text);
+}
+
+.preview {
+  display: flex;
+  align-items: center;
+  gap: var(--block-space-2);
+}
+
+.pattern {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 2px;
+}
+
+.arrow {
+  display: inline-flex;
+  color: var(--block-text-muted);
+}
+
+.missing {
+  margin: 0;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-xs);
+  color: var(--block-redstone-light);
+}

@@ -1,0 +1,169 @@
+.trading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--block-space-4);
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--block-space-1);
+  width: 220px;
+  max-width: 100%;
+  max-height: 360px;
+  margin: 0;
+  padding: var(--block-space-1);
+  overflow-y: auto;
+  list-style: none;
+  background-color: var(--block-slot);
+  border: var(--block-border-width-thin) solid var(--block-border);
+  box-shadow: var(--block-shadow-inset);
+}
+
+.offer {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: var(--block-space-1);
+  background-color: var(--block-surface-alt);
+  border: var(--block-border-width-thin) solid var(--block-border);
+  cursor: pointer;
+}
+
+.offer:hover {
+  background-color: var(--block-slot-hover);
+}
+
+.offer[aria-selected="true"] {
+  background-color: color-mix(in srgb, var(--block-emerald) 28%, var(--block-surface-alt));
+  border-color: var(--block-emerald-light);
+}
+
+.offer:focus-visible {
+  outline: 3px solid var(--block-focus);
+  outline-offset: -3px;
+}
+
+.offerItems {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--block-space-1);
+}
+
+.offer[data-sold-out] .offerItems {
+  opacity: 0.55;
+}
+
+/* Small item previews inside an offer. */
+.mini {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini > * {
+  width: 100%;
+  height: 100%;
+}
+
+.offerArrow {
+  display: inline-flex;
+  color: var(--block-text-muted);
+}
+
+.offer[data-sold-out] .offerArrow {
+  color: var(--block-redstone-light);
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--block-space-3);
+  min-width: min(280px, 100%);
+}
+
+.villager {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--block-space-1);
+  width: 100%;
+}
+
+.profession {
+  margin: 0;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-md);
+  font-weight: var(--block-font-weight-bold);
+  text-transform: uppercase;
+  text-shadow: var(--block-shadow-text);
+}
+
+.level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.levelName {
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-xs);
+  color: var(--block-text-muted);
+}
+
+.levelBar {
+  position: relative;
+  width: 100%;
+  height: 8px;
+  background-color: var(--block-black);
+  border: var(--block-border-width-thin) solid var(--block-border);
+  overflow: hidden;
+}
+
+.levelFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--block-trade-xp);
+  background-color: var(--block-emerald);
+  box-shadow: inset 0 2px 0 var(--block-emerald-light);
+}
+
+.exchange {
+  display: flex;
+  align-items: center;
+  gap: var(--block-space-3);
+}
+
+.payment {
+  display: flex;
+  gap: var(--block-space-2);
+}
+
+.arrow {
+  display: inline-flex;
+  color: var(--block-text-muted);
+}
+
+.arrow[data-sold-out] {
+  color: var(--block-redstone-light);
+}
+
+@media (max-width: 767.98px) {
+  .list {
+    width: 100%;
+    max-height: 200px;
+  }
+
+  .exchange {
+    gap: var(--block-space-2);
+  }
+}

@@ -3,3 +3,8 @@ export * from "./CraftingGrid";
 export * from "./CraftingResult";
 export * from "./CraftingTable";
 export * from "./Furnace";
+export * from "./EnchantingTable";
+export * from "./BrewingStand";
+export * from "./Anvil";
+export * from "./TradingUI";
+export * from "./RecipeBook";

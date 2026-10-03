@@ -170,7 +170,7 @@ import "@fontsource/silkscreen/700.css";
 | 動作  | `BlockButton` · `IconButton` · `BlockMenu`                                                                                                                                 |
 | 表單  | `BlockInput` · `BlockTextarea` · `BlockSelect` · `BlockCheckbox` · `BlockRadioGroup` / `BlockRadio` · `BlockToggle` · `BlockSlider`                                        |
 | 背包  | `Inventory` / `InventorySection` · `InventoryGrid` · `InventorySlot` · `ItemStack` · `ItemTooltip` · `DurabilityBar` · `Hotbar`                                            |
-| 合成  | `CraftingTable` · `CraftingGrid` · `CraftingSlot` · `CraftingResult` · `Furnace`                                                                                           |
+| 合成  | `CraftingTable` · `CraftingGrid` · `CraftingSlot` · `CraftingResult` · `Furnace` · `EnchantingTable` · `BrewingStand` · `Anvil` · `TradingUI` · `RecipeBook`               |
 | HUD   | `HealthBar` · `ArmorBar` · `HungerBar` · `XPBar` · `PlayerHUD` · `BossBar` · `Scoreboard` · `CoordinatesHUD` · `BiomeIndicator` · `DayNightIndicator` · `WeatherIndicator` |
 | 卡片  | `BlockCard` · `QuestCard` · `AchievementCard` · `PlayerCard` · `ServerCard` · `WorldCard`                                                                                  |
 | 資料  | `BlockTable`                                                                                                                                                               |
