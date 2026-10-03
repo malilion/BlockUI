@@ -10,15 +10,36 @@ import { themeVar, themes, type BlockTheme } from "@malilion/block-ui-themes";
 import { useBlockUI } from "@malilion/block-ui-react";
 import styles from "./foundations.module.css";
 import { Swatch } from "./Swatch";
+import { CodeBlock } from "./CodeBlock";
 
 const meta = {
   title: "Foundations/Colors",
   tags: ["!autodocs"],
-  parameters: { layout: "padded", a11y: { config: { rules: [] } } },
+  parameters: {
+    layout: "padded",
+    a11y: { config: { rules: [] } },
+    // The page has its own Usage code blocks.
+    docs: { codePanel: false },
+  },
 } satisfies Meta;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+const usage = [
+  `/* Theme roles follow the active theme — prefer them in app UI. */
+.panel {
+  color: var(--block-text);
+  background: var(--block-surface);
+  border: 3px solid var(--block-border);
+}
+
+/* Fixed material colors, each with an AA-tested "on" text color. */
+.badge {
+  color: var(--block-on-grass);
+  background: var(--block-grass);
+}`,
+];
 
 const cap = (value: string) => value.charAt(0).toUpperCase() + value.slice(1);
 const onKey = (material: string) => `on${cap(material)}` as ColorToken;
@@ -71,6 +92,12 @@ function ColorsPage() {
           text color that is tested to reach WCAG AA (4.5:1) on the base. Components pick a material
           with <code>data-material</code> and read <code>--block-mat*</code>.
         </p>
+      </section>
+      <section>
+        <h2>Usage</h2>
+        {usage.map((code) => (
+          <CodeBlock key={code} code={code} label="Copy usage example" />
+        ))}
       </section>
       <section>
         <h2>Materials</h2>

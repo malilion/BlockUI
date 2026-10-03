@@ -72,7 +72,42 @@ function ModalDemo({ size }: { size?: "sm" | "md" | "lg" }) {
   );
 }
 
-export const Default: Story = { render: () => <ModalDemo /> };
+const modalSource = (size?: "sm" | "md" | "lg") => `import { useState } from "react";
+import { BlockButton, BlockInput, BlockModal, BlockToggle } from "@malilion/block-ui-react";
+import { SettingsIcon } from "@malilion/block-ui-icons";
+
+export function WorldSettings() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <BlockButton variant="grass" onClick={() => setOpen(true)} startIcon={<SettingsIcon size={16} />}>
+        Open settings
+      </BlockButton>
+      <BlockModal
+        open={open}${size ? `\n        size="${size}"` : ""}
+        title="World Settings"
+        description="Changes apply the next time the world loads."
+        onClose={() => setOpen(false)}
+        footer={
+          <>
+            <BlockButton onClick={() => setOpen(false)}>Cancel</BlockButton>
+            <BlockButton variant="grass" onClick={() => setOpen(false)}>
+              Save
+            </BlockButton>
+          </>
+        }
+      >
+        <BlockInput label="World name" defaultValue="My World" />
+        <BlockToggle label="Allow cheats" />
+      </BlockModal>
+    </>
+  );
+}`;
+
+export const Default: Story = {
+  render: () => <ModalDemo />,
+  parameters: { docs: { source: { code: modalSource() } } },
+};
 
 export const Sizes: Story = {
   render: () => (
@@ -82,6 +117,7 @@ export const Sizes: Story = {
       <ModalDemo size="lg" />
     </StoryRow>
   ),
+  parameters: { docs: { source: { code: modalSource("sm") } } },
 };
 
 export const States: Story = {
@@ -126,6 +162,7 @@ export const Disabled: Story = {
 
 export const Interactive: Story = {
   render: () => <ModalDemo />,
+  parameters: { docs: { source: { code: modalSource() } } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const opener = canvas.getByRole("button", { name: "Open settings" });

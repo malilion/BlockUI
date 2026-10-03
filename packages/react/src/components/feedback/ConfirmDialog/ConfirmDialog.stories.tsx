@@ -97,8 +97,44 @@ function Demo() {
   );
 }
 
+const interactiveSource = `import { useState } from "react";
+// toast() shows up in the <BlockToaster /> that <BlockUIProvider> renders.
+import { BlockButton, ConfirmDialog, toast } from "@malilion/block-ui-react";
+import { GrassBlockIcon } from "@malilion/block-ui-icons";
+
+export function DeleteWorld() {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  return (
+    <>
+      <BlockButton variant="redstone" onClick={() => setOpen(true)}>
+        Delete World
+      </BlockButton>
+      <ConfirmDialog
+        open={open}
+        loading={loading}
+        variant="danger"
+        title="Delete World"
+        description="This action cannot be undone."
+        confirmText="Delete"
+        icon={<GrassBlockIcon size={48} />}
+        onCancel={() => setOpen(false)}
+        onConfirm={() => {
+          setLoading(true);
+          window.setTimeout(() => {
+            setLoading(false);
+            setOpen(false);
+            toast.success("World deleted.");
+          }, 900);
+        }}
+      />
+    </>
+  );
+}`;
+
 export const Interactive: Story = {
   render: () => <Demo />,
+  parameters: { docs: { source: { code: interactiveSource } } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button", { name: "Delete World" }));
@@ -112,8 +148,36 @@ export const Interactive: Story = {
 };
 
 /** Two variants: `default` (grass confirm) and `danger` (redstone confirm, Cancel focused first). */
+const variantsSource = `import { useState } from "react";
+import { BlockButton, ConfirmDialog } from "@malilion/block-ui-react";
+
+export function ConfirmVariants() {
+  const [variant, setVariant] = useState<"default" | "danger" | null>(null);
+  return (
+    <>
+      <BlockButton variant="grass" onClick={() => setVariant("default")}>
+        Default
+      </BlockButton>
+      <BlockButton variant="redstone" onClick={() => setVariant("danger")}>
+        Danger
+      </BlockButton>
+      <ConfirmDialog
+        open={variant !== null}
+        variant={variant ?? "default"}
+        title="Delete World"
+        description="Are you sure you want to delete this world? This action cannot be undone."
+        confirmText="Delete"
+        cancelText="Cancel"
+        onConfirm={() => setVariant(null)}
+        onCancel={() => setVariant(null)}
+      />
+    </>
+  );
+}`;
+
 export const Variants: Story = {
   render: (args) => <VariantsDemo {...args} />,
+  parameters: { docs: { source: { code: variantsSource } } },
 };
 
 function VariantsDemo(args: ComponentProps<typeof ConfirmDialog>) {

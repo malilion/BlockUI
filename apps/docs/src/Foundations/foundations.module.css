@@ -164,8 +164,57 @@
   gap: var(--block-space-2);
   padding: var(--block-space-3) var(--block-space-2);
   color: var(--block-text);
+  font: inherit;
   background-color: var(--block-surface-alt);
   border: var(--block-border-width-thin) solid var(--block-border);
+  cursor: pointer;
+}
+
+.iconCell:hover {
+  border-color: var(--block-primary);
+}
+
+.iconCell:focus-visible {
+  outline: 3px solid var(--block-focus);
+  outline-offset: 2px;
+}
+
+.iconCell[data-copied] .meta {
+  color: var(--block-primary);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--block-space-3);
+  margin-block-end: var(--block-space-4);
+}
+
+.codeBlock {
+  position: relative;
+  max-width: 900px;
+}
+
+.codeBlock + .codeBlock {
+  margin-block-start: var(--block-space-3);
+}
+
+.codeBlock pre {
+  margin: 0;
+  padding: var(--block-space-4);
+  padding-inline-end: 96px;
+  overflow-x: auto;
+  line-height: var(--block-line-height-relaxed);
+  background-color: var(--block-surface-alt);
+  border: var(--block-border-width-thin) solid var(--block-border);
+}
+
+.copyButton {
+  position: absolute;
+  inset-block-start: var(--block-space-2);
+  inset-inline-end: var(--block-space-2);
 }
 
 .themes {

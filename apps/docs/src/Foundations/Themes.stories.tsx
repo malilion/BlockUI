@@ -14,15 +14,30 @@ import {
 } from "@malilion/block-ui-react";
 import { themeNames, themes } from "@malilion/block-ui-themes";
 import styles from "./foundations.module.css";
+import { CodeBlock } from "./CodeBlock";
 
 const meta = {
   title: "Foundations/Themes",
   tags: ["!autodocs"],
-  parameters: { layout: "padded", a11y: { config: { rules: [] } } },
+  parameters: {
+    layout: "padded",
+    a11y: { config: { rules: [] } },
+    // The page has its own Usage code blocks.
+    docs: { codePanel: false },
+  },
 } satisfies Meta;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+const usage = [
+  `import { BlockUIProvider } from "@malilion/block-ui-react";
+
+// "grassland" (default) · "cave" · "deepslate" · "nether" · "end"
+<BlockUIProvider theme="nether">
+  <App />
+</BlockUIProvider>`,
+];
 
 function ThemesPage() {
   return (
@@ -35,6 +50,12 @@ function ThemesPage() {
           component follows without changes. Tests check that text on every surface of every theme
           reaches WCAG AA.
         </p>
+      </section>
+      <section>
+        <h2>Usage</h2>
+        {usage.map((code) => (
+          <CodeBlock key={code} code={code} label="Copy usage example" />
+        ))}
       </section>
       <div className={styles.themes}>
         {themeNames.map((name) => (

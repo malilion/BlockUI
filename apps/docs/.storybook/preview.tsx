@@ -6,6 +6,7 @@ import { BlockUIProvider } from "@malilion/block-ui-react";
 import { themeNames, type BlockThemeName } from "@malilion/block-ui-themes";
 import type { Preview } from "@storybook/react-vite";
 import { blockTheme } from "./blockTheme";
+import { sourceSnippet } from "./sourceSnippet";
 
 const PAGE_RULES = ["bypass", "landmark-one-main", "page-has-heading-one", "region"];
 
@@ -35,6 +36,10 @@ const preview: Preview = {
     layout: "padded",
     docs: {
       theme: blockTheme,
+      // Show the rendered JSX (not the story object) and make it paste-ready.
+      source: { type: "dynamic", excludeDecorators: true, transform: sourceSnippet },
+      // A "Code" tab in the addon panel, so the canvas view has copyable code too.
+      codePanel: true,
     },
     controls: {
       expanded: true,

@@ -41,7 +41,34 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const interactiveSource = `import { BlockButton, toast } from "@malilion/block-ui-react";
+
+// Needs <BlockUIProvider> around your app: it renders the <BlockToaster /> region.
+export function ToastButtons() {
+  return (
+    <>
+      <BlockButton variant="emerald" onClick={() => toast.success("World saved.", { title: "Success!" })}>
+        Success
+      </BlockButton>
+      <BlockButton variant="diamond" onClick={() => toast.info("Update available.", { title: "Info" })}>
+        Info
+      </BlockButton>
+      <BlockButton variant="gold" onClick={() => toast.warning("Low hunger.", { title: "Warning" })}>
+        Warning
+      </BlockButton>
+      <BlockButton
+        variant="redstone"
+        onClick={() => toast.error("Connection failed.", { title: "Error", duration: 0 })}
+      >
+        Error (sticky)
+      </BlockButton>
+      <BlockButton onClick={() => toast.dismiss()}>Dismiss all</BlockButton>
+    </>
+  );
+}`;
+
 export const Interactive: Story = {
+  parameters: { docs: { source: { code: interactiveSource } } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button", { name: "Error (sticky)" }));
@@ -92,6 +119,22 @@ function ShowToasts({ toasts }: { toasts: Array<[keyof typeof kinds, string, Toa
   return null;
 }
 
+/** The `toast.*()` calls a ShowToasts story makes, for "Show code". */
+function toastSource(toasts: Array<[keyof typeof kinds, string, ToastOptions?]>) {
+  const usesAction = toasts.some(([, , options]) => options?.action);
+  const imports = usesAction ? "BlockButton, toast" : "toast";
+  const calls = toasts.map(([kind, message, options]) => {
+    const props = Object.entries(options ?? {}).map(([key, value]) =>
+      key === "action"
+        ? 'action: <BlockButton size="sm">Retry</BlockButton>'
+        : `${key}: ${JSON.stringify(value)}`,
+    );
+    const args = [JSON.stringify(message), ...(props.length ? [`{ ${props.join(", ")} }`] : [])];
+    return `toast.${kind}(${args.join(", ")});`;
+  });
+  return `import { ${imports} } from "@malilion/block-ui-react";\n\n${calls.join("\n")}`;
+}
+
 const kinds = {
   success: toast.success,
   info: toast.info,
@@ -102,7 +145,10 @@ const kinds = {
 const defaultToasts: Array<[keyof typeof kinds, string, ToastOptions?]> = [
   ["success", "World saved."],
 ];
-export const Default: Story = { render: () => <ShowToasts toasts={defaultToasts} /> };
+export const Default: Story = {
+  render: () => <ShowToasts toasts={defaultToasts} />,
+  parameters: { docs: { source: { code: toastSource(defaultToasts) } } },
+};
 
 const variantToasts: Array<[keyof typeof kinds, string, ToastOptions?]> = [
   ["success", "World saved.", { title: "Success!" }],
@@ -110,7 +156,10 @@ const variantToasts: Array<[keyof typeof kinds, string, ToastOptions?]> = [
   ["warning", "Low hunger.", { title: "Warning" }],
   ["error", "Connection failed.", { title: "Error" }],
 ];
-export const Variants: Story = { render: () => <ShowToasts toasts={variantToasts} /> };
+export const Variants: Story = {
+  render: () => <ShowToasts toasts={variantToasts} />,
+  parameters: { docs: { source: { code: toastSource(variantToasts) } } },
+};
 
 const stateToasts: Array<[keyof typeof kinds, string, ToastOptions?]> = [
   ["info", "Message only."],
@@ -121,7 +170,10 @@ const stateToasts: Array<[keyof typeof kinds, string, ToastOptions?]> = [
     { title: "Disconnected", action: <BlockButton size="sm">Retry</BlockButton> },
   ],
 ];
-export const States: Story = { render: () => <ShowToasts toasts={stateToasts} /> };
+export const States: Story = {
+  render: () => <ShowToasts toasts={stateToasts} />,
+  parameters: { docs: { source: { code: toastSource(stateToasts) } } },
+};
 
 const sizeToasts: Array<[keyof typeof kinds, string, ToastOptions?]> = [
   ["info", "Short."],
@@ -131,7 +183,10 @@ const sizeToasts: Array<[keyof typeof kinds, string, ToastOptions?]> = [
   ],
 ];
 /** One width: 380px on desktop, full width minus the gutter on phones. */
-export const Sizes: Story = { render: () => <ShowToasts toasts={sizeToasts} /> };
+export const Sizes: Story = {
+  render: () => <ShowToasts toasts={sizeToasts} />,
+  parameters: { docs: { source: { code: toastSource(sizeToasts) } } },
+};
 
 const stickyToasts: Array<[keyof typeof kinds, string, ToastOptions?]> = [
   [
@@ -141,7 +196,10 @@ const stickyToasts: Array<[keyof typeof kinds, string, ToastOptions?]> = [
   ],
 ];
 /** `duration: 0` disables auto-close; the toast stays until dismissed. */
-export const Disabled: Story = { render: () => <ShowToasts toasts={stickyToasts} /> };
+export const Disabled: Story = {
+  render: () => <ShowToasts toasts={stickyToasts} />,
+  parameters: { docs: { source: { code: toastSource(stickyToasts) } } },
+};
 
 export const Responsive: Story = {
   globals: mobileViewport,
@@ -150,4 +208,5 @@ export const Responsive: Story = {
       <ShowToasts toasts={variantToasts} />
     </StoryMobile>
   ),
+  parameters: { docs: { source: { code: toastSource(variantToasts) } } },
 };

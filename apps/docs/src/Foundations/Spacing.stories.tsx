@@ -2,15 +2,32 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { breakpoints, radius, sizes, spacing, toKebab } from "@malilion/block-ui-tokens";
 import type { CSSProperties } from "react";
 import styles from "./foundations.module.css";
+import { CodeBlock } from "./CodeBlock";
 
 const meta = {
   title: "Foundations/Spacing",
   tags: ["!autodocs"],
-  parameters: { layout: "padded", a11y: { config: { rules: [] } } },
+  parameters: {
+    layout: "padded",
+    a11y: { config: { rules: [] } },
+    // The page has its own Usage code blocks.
+    docs: { codePanel: false },
+  },
 } satisfies Meta;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+const usage = [
+  `.toolbar {
+  display: flex;
+  gap: var(--block-space-2);     /* 8px — everything sits on a 4px grid */
+  padding: var(--block-space-4); /* 16px */
+}`,
+  `import { spacing } from "@malilion/block-ui-tokens";
+
+spacing[4]; // "16px"`,
+];
 
 function SpacingPage() {
   return (
@@ -22,6 +39,12 @@ function SpacingPage() {
           Breakpoints: mobile below {breakpoints.md}, tablet {breakpoints.md}–{breakpoints.lg},
           desktop from {breakpoints.lg}.
         </p>
+      </section>
+      <section>
+        <h2>Usage</h2>
+        {usage.map((code) => (
+          <CodeBlock key={code} code={code} label="Copy usage example" />
+        ))}
       </section>
       <section className={styles.scale}>
         <h2>Spacing</h2>

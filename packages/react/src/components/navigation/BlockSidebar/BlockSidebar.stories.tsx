@@ -62,6 +62,66 @@ function SidebarDemo({
   );
 }
 
+/** A paste-ready version of SidebarDemo for "Show code". */
+function sidebarSource({
+  collapsed = false,
+  disabledIds = [] as string[],
+  withHotbar = false,
+} = {}) {
+  const icons = items.map((item) => item.icon.type.displayName ?? item.icon.type.name);
+  const itemLines = items.map(
+    (item, i) =>
+      `  { id: "${item.id}", label: "${item.label}", icon: <${icons[i]} size={24} />${item.badge ? `, badge: ${item.badge}` : ""} },`,
+  );
+  const sidebarProps = [
+    collapsed ? "collapsed" : "",
+    `label="Main"`,
+    `header={<strong>BLOCK UI</strong>}`,
+  ].filter(Boolean);
+  const disabled = disabledIds.length
+    ? `\n          disabled={${JSON.stringify(disabledIds)}.includes(item.id)}`
+    : "";
+  const sidebar = `<BlockSidebar ${sidebarProps.join(" ")}>
+      {items.map((item) => (
+        <SidebarItem
+          key={item.id}
+          icon={item.icon}
+          badge={item.badge}
+          active={active === item.id}${disabled}
+          onClick={() => setActive(item.id)}
+        >
+          {item.label}
+        </SidebarItem>
+      ))}
+    </BlockSidebar>`;
+  const body = withHotbar
+    ? `<>
+      ${sidebar.replace(/\n/g, "\n  ")}
+      {/* The sidebar hides below 768px; the hotbar takes over on phones. */}
+      <HotbarNavigation
+        mobileOnly
+        items={items.slice(0, 5)}
+        value={active}
+        onValueChange={setActive}
+      />
+    </>`
+    : sidebar;
+  return `import { useState } from "react";
+import { BlockSidebar, ${withHotbar ? "HotbarNavigation, " : ""}SidebarItem } from "@malilion/block-ui-react";
+import { ${[...new Set(icons)].sort().join(", ")} } from "@malilion/block-ui-icons";
+
+const items = [
+${itemLines.join("\n")}
+];
+
+export function MainNav() {
+  const [active, setActive] = useState("dashboard");
+  return (
+    ${body}
+  );
+}`;
+}
+
 const meta = {
   title: "Components/Navigation/BlockSidebar",
   component: BlockSidebar,
@@ -92,7 +152,10 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = { render: () => <SidebarDemo /> };
+export const Default: Story = {
+  render: () => <SidebarDemo />,
+  parameters: { docs: { source: { code: sidebarSource() } } },
+};
 
 export const Variants: Story = {
   render: () => (
@@ -101,9 +164,13 @@ export const Variants: Story = {
       <SidebarDemo collapsed label="Collapsed" />
     </StoryRow>
   ),
+  parameters: { docs: { source: { code: sidebarSource({ collapsed: true }) } } },
 };
 
-export const Collapsed: Story = { render: () => <SidebarDemo collapsed /> };
+export const Collapsed: Story = {
+  render: () => <SidebarDemo collapsed />,
+  parameters: { docs: { source: { code: sidebarSource({ collapsed: true }) } } },
+};
 
 export const States: Story = {
   render: () => (
@@ -133,14 +200,19 @@ export const Sizes: Story = {
       <SidebarDemo collapsed label="Collapsed" />
     </StoryRow>
   ),
+  parameters: { docs: { source: { code: sidebarSource({ collapsed: true }) } } },
 };
 
 export const Disabled: Story = {
   render: () => <SidebarDemo disabledIds={["crafting", "players", "settings"]} />,
+  parameters: {
+    docs: { source: { code: sidebarSource({ disabledIds: ["crafting", "players", "settings"] }) } },
+  },
 };
 
 export const Interactive: Story = {
   render: () => <SidebarDemo />,
+  parameters: { docs: { source: { code: sidebarSource() } } },
   play: async ({ canvasElement }) => {
     const nav = within(canvasElement).getByRole("navigation", { name: "Main" });
     const quests = within(nav).getByRole("button", { name: "Quests 3" });
@@ -158,7 +230,12 @@ export const Interactive: Story = {
  */
 export const Responsive: Story = {
   globals: mobileViewport,
-  parameters: { docs: { story: { inline: false, height: "260px" } } },
+  parameters: {
+    docs: {
+      story: { inline: false, height: "260px" },
+      source: { code: sidebarSource({ withHotbar: true }) },
+    },
+  },
   render: () => (
     <StoryMobile>
       <SidebarDemo responsive />
