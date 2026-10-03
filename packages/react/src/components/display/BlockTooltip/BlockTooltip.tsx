@@ -3,22 +3,25 @@ import {
   forwardRef,
   useEffect,
   useId,
-  useLayoutEffect,
   useRef,
   useState,
   type FocusEvent,
   type PointerEvent,
 } from "react";
+import { createPortal } from "react-dom";
+import { useAnchoredPosition } from "../../../hooks/useAnchoredPosition";
+import { usePortalContainer } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
+import { mergeRefs } from "../../../utils/refs";
 import styles from "./BlockTooltip.module.css";
-import type { BlockTooltipPlacement, BlockTooltipProps } from "./BlockTooltip.types";
-import { flipPlacement } from "./BlockTooltip.utils";
+import type { BlockTooltipProps } from "./BlockTooltip.types";
 
 /** Grace period so the pointer can cross the gap onto the tooltip (WCAG 1.4.13 hoverable). */
 const CLOSE_DELAY = 120;
 
 /**
  * Short hint for a focusable element, shown on hover and keyboard focus.
+ * Rendered in the provider's overlay layer, so scroll containers never clip it.
  * Escape dismisses it; the pointer can move onto it without closing it.
  */
 export const BlockTooltip = forwardRef<HTMLSpanElement, BlockTooltipProps>(function BlockTooltip(
@@ -38,11 +41,15 @@ export const BlockTooltip = forwardRef<HTMLSpanElement, BlockTooltipProps>(funct
   },
   ref,
 ) {
+  const container = usePortalContainer();
   const tooltipId = useId();
   const [open, setOpen] = useState(false);
-  const [actual, setActual] = useState<BlockTooltipPlacement>(placement);
+  const anchorRef = useRef<HTMLSpanElement>(null);
   const tooltipRef = useRef<HTMLSpanElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  const visible = open && !disabled;
+  const position = useAnchoredPosition(anchorRef, tooltipRef, visible, { side: placement });
 
   const schedule = (next: boolean, ms: number) => {
     clearTimeout(timer.current);
@@ -64,23 +71,12 @@ export const BlockTooltip = forwardRef<HTMLSpanElement, BlockTooltipProps>(funct
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
-  useLayoutEffect(() => {
-    if (!open) {
-      setActual(placement);
-      return;
-    }
-    const element = tooltipRef.current;
-    if (!element) return;
-    const viewport = { width: window.innerWidth, height: window.innerHeight };
-    setActual(flipPlacement(placement, element.getBoundingClientRect(), viewport));
-  }, [open, placement]);
-
-  const visible = open && !disabled;
-  const describedBy = cx(children.props["aria-describedby"], !disabled && tooltipId) || undefined;
+  const hasTooltip = !disabled && container !== null;
+  const describedBy = cx(children.props["aria-describedby"], hasTooltip && tooltipId) || undefined;
 
   return (
     <span
-      ref={ref}
+      ref={mergeRefs(ref, anchorRef)}
       className={cx(styles.anchor, className)}
       onPointerEnter={(event: PointerEvent<HTMLSpanElement>) => {
         schedule(true, delay);
@@ -101,19 +97,25 @@ export const BlockTooltip = forwardRef<HTMLSpanElement, BlockTooltipProps>(funct
       {...rest}
     >
       {cloneElement(children, { "aria-describedby": describedBy })}
-      {disabled ? null : (
-        <span
-          ref={tooltipRef}
-          id={tooltipId}
-          role="tooltip"
-          hidden={!visible}
-          data-placement={actual}
-          data-size={size}
-          className={styles.tooltip}
-        >
-          {content}
-        </span>
-      )}
+      {hasTooltip
+        ? createPortal(
+            <span
+              ref={tooltipRef}
+              id={tooltipId}
+              role="tooltip"
+              hidden={!visible}
+              data-placement={position?.side ?? placement}
+              data-size={size}
+              className={styles.tooltip}
+              style={position?.style}
+              onPointerEnter={() => schedule(true, 0)}
+              onPointerLeave={() => schedule(false, CLOSE_DELAY)}
+            >
+              {content}
+            </span>,
+            container,
+          )
+        : null}
     </span>
   );
 });

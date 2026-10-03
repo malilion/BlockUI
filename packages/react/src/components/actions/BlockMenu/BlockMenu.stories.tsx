@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, fn, userEvent, within } from "storybook/test";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import {
   BookIcon,
   ChestIcon,
@@ -60,9 +60,9 @@ const meta = {
           "/>",
           "```",
           "",
-          "For choosing a form value use `BlockSelect`; a menu is for commands.",
+          "The menu renders in the `BlockUIProvider` overlay layer with fixed positioning (flipping above the trigger when there is no room below), so it works inside tables and other scroll containers. For choosing a form value use `BlockSelect`; a menu is for commands.",
           "",
-          "**Keyboard** — `Enter`, `Space` or `↓` open on the first item, `↑` on the last. Inside: `↑`/`↓` move (wrapping, skipping disabled items), `Home`/`End` jump, a letter jumps to the next matching item, `Enter`/`Space` choose, `Esc` closes and `Tab` leaves.",
+          "**Keyboard** — `Enter`, `Space` or `↓` open on the first item, `↑` on the last. Inside: `↑`/`↓` move (wrapping, skipping disabled items), `Home`/`End` jump, a letter jumps to the next matching item, `Enter`/`Space` choose, `Esc` closes, and `Tab` closes and moves on from the trigger.",
           "",
           '**Accessibility** — WAI-ARIA menu button: the trigger has `aria-haspopup="menu"`, `aria-expanded` and `aria-controls`; the `menu` is labelled by the trigger and its items are `menuitem`s with roving focus. Disabled items use `aria-disabled`. Focus returns to the trigger after choosing or `Esc`. Shortcut hints are visual only.',
         ].join("\n"),
@@ -123,12 +123,13 @@ export const Interactive: Story = {
     const canvas = within(canvasElement);
     const trigger = canvas.getByRole("button", { name: "World" });
     await userEvent.click(trigger);
-    await expect(canvas.getByRole("menuitem", { name: "Play" })).toHaveFocus();
+    const play = await canvas.findByRole("menuitem", { name: "Play" });
+    await waitFor(() => expect(play).toHaveFocus());
     await userEvent.keyboard("{ArrowDown}");
     await expect(canvas.getByRole("menuitem", { name: "Edit" })).toHaveFocus();
     await userEvent.keyboard("{Enter}");
     await expect(args.onSelect).toHaveBeenCalledWith("edit");
-    await expect(trigger).toHaveFocus();
+    await waitFor(() => expect(trigger).toHaveFocus());
   },
 };
 

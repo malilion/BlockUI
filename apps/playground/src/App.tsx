@@ -45,7 +45,15 @@ import {
   BlockBadge,
   BlockTabs,
   Breadcrumb,
+  BlockTable,
+  BlockPagination,
+  BlockMenu,
+  BlockTooltip,
+  BlockStack,
+  BlockDivider,
   blockButtonVariants,
+  type BlockTableColumn,
+  type BlockTableSort,
 } from "@malilion/block-ui-react";
 import type { BlockThemeName } from "@malilion/block-ui-themes";
 import { themeNames } from "@malilion/block-ui-themes";
@@ -66,10 +74,15 @@ import {
   TorchIcon,
   AppleIcon,
   QuestIcon,
+  WorldIcon,
+  PlayIcon,
+  CloseIcon,
+  MenuIcon,
+  PlusIcon,
 } from "@malilion/block-ui-icons";
 import styles from "./App.module.css";
 
-const TABS = ["Dashboard", "Inventory", "Crafting", "Cards", "Feedback"] as const;
+const TABS = ["Dashboard", "Inventory", "Crafting", "Cards", "Servers", "Feedback"] as const;
 type TabName = (typeof TABS)[number];
 
 const themeOptions = themeNames.map((name) => ({
@@ -359,6 +372,142 @@ function CardsSection() {
   );
 }
 
+interface Server {
+  id: string;
+  name: string;
+  mode: string;
+  players: number;
+  ping: number;
+}
+
+const SERVER_MODES = ["Survival", "Creative", "Skyblock", "Minigames", "Hardcore"];
+const SERVERS: Server[] = Array.from({ length: 23 }, (_, i) => ({
+  id: `server-${i + 1}`,
+  name: `Block Realm ${String(i + 1).padStart(2, "0")}`,
+  mode: SERVER_MODES[i % SERVER_MODES.length] ?? "Survival",
+  players: (i * 137) % 1000,
+  ping: 12 + ((i * 53) % 240),
+}));
+const PAGE_SIZE = 6;
+
+function pingVariant(ping: number) {
+  if (ping < 80) return "emerald";
+  if (ping < 160) return "gold";
+  return "redstone";
+}
+
+function compareServers(a: Server, b: Server, sort: BlockTableSort) {
+  const key = sort.key as keyof Server;
+  const order = String(a[key]).localeCompare(String(b[key]), undefined, { numeric: true });
+  return sort.direction === "asc" ? order : -order;
+}
+
+function ServersSection() {
+  const [page, setPage] = useState(1);
+  const [sort, setSort] = useState<BlockTableSort | null>(null);
+  const pageCount = Math.ceil(SERVERS.length / PAGE_SIZE);
+  // Sort the whole list, then page it (as a server API would) — hence `manualSort`.
+  const sorted = sort ? [...SERVERS].sort((a, b) => compareServers(a, b, sort)) : SERVERS;
+  const rows = sorted.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  const columns: BlockTableColumn<Server>[] = [
+    { key: "name", header: "Server", sortable: true, rowHeader: true },
+    { key: "mode", header: "Mode", sortable: true },
+    { key: "players", header: "Players", sortable: true, align: "end" },
+    {
+      key: "ping",
+      header: "Ping",
+      sortable: true,
+      align: "end",
+      cell: (server) => (
+        <BlockBadge size="sm" dot variant={pingVariant(server.ping)}>
+          {server.ping} ms
+        </BlockBadge>
+      ),
+    },
+    {
+      key: "actions",
+      header: <span className="block-visually-hidden">Actions</span>,
+      align: "end",
+      cell: (server) => (
+        <BlockMenu
+          label={`Actions for ${server.name}`}
+          icon={<MenuIcon size={16} />}
+          iconOnly
+          size="sm"
+          align="end"
+          items={[
+            { id: "join", label: "Join", icon: <PlayIcon size={16} /> },
+            { id: "favorite", label: "Add to favorites", icon: <PlusIcon size={16} /> },
+            { type: "separator" },
+            { id: "remove", label: "Remove", icon: <CloseIcon size={16} />, danger: true },
+          ]}
+          onSelect={(id) => toast.info(`${id} → ${server.name}`)}
+        />
+      ),
+    },
+  ];
+
+  return (
+    <BlockPanel title="Servers" icon={<WorldIcon size={24} />}>
+      <BlockStack gap={4}>
+        <BlockStack direction="row" justify="between" align="center" wrap stackOnMobile>
+          <BlockStack direction="row" gap={2} align="center">
+            <BlockTooltip content="Add a server by address">
+              <IconButton icon={<PlusIcon size={16} />} label="Add server" />
+            </BlockTooltip>
+            <BlockTooltip content="Search the server list">
+              <IconButton icon={<SearchIcon size={16} />} label="Search servers" />
+            </BlockTooltip>
+            <BlockDivider orientation="vertical" />
+            <BlockMenu
+              label="Region"
+              icon={<WorldIcon size={16} />}
+              items={[
+                { id: "all", label: "All regions" },
+                { id: "us", label: "US East" },
+                { id: "eu", label: "EU West" },
+                { id: "asia", label: "Asia" },
+              ]}
+              onSelect={(id) => toast.info(`Region: ${id}`)}
+            />
+          </BlockStack>
+          <BlockBadge variant="emerald" dot>
+            {SERVERS.length} servers
+          </BlockBadge>
+        </BlockStack>
+        <BlockTable
+          caption="Server list"
+          hideCaption
+          columns={columns}
+          rows={rows}
+          getRowKey={(server) => server.id}
+          sort={sort}
+          onSortChange={(next) => {
+            setSort(next);
+            setPage(1);
+          }}
+          manualSort
+          striped
+        />
+        <BlockPagination
+          label="Server list pages"
+          pageCount={pageCount}
+          page={page}
+          onPageChange={setPage}
+        />
+        <BlockDivider label="or" />
+        <BlockStack direction="row" gap={2} wrap>
+          <BlockButton variant="grass" startIcon={<PlayIcon size={16} />}>
+            Direct connect
+          </BlockButton>
+          <BlockButton>Refresh</BlockButton>
+        </BlockStack>
+      </BlockStack>
+    </BlockPanel>
+  );
+}
+
 function FeedbackSection() {
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -429,6 +578,8 @@ function tabIcon(tab: TabName) {
       return <CraftingIcon size={20} />;
     case "Cards":
       return <QuestIcon size={20} />;
+    case "Servers":
+      return <WorldIcon size={20} />;
     case "Feedback":
       return <RedstoneIcon size={20} />;
   }
@@ -448,6 +599,8 @@ export default function App() {
         return <CraftingSection />;
       case "Cards":
         return <CardsSection />;
+      case "Servers":
+        return <ServersSection />;
       case "Feedback":
         return <FeedbackSection />;
     }
@@ -504,6 +657,7 @@ export default function App() {
         }))}
         value={activeTab}
         onValueChange={(id) => setActiveTab(id as TabName)}
+        maxItems={TABS.length}
         fixed
         mobileOnly
       />

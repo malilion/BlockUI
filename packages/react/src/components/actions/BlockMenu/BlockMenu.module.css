@@ -13,14 +13,16 @@
 }
 
 .menu {
-  position: absolute;
-  top: calc(100% + var(--block-space-1));
-  left: 0;
+  position: fixed;
+  top: var(--block-float-y, 0);
+  left: var(--block-float-x, 0);
   z-index: var(--block-z-dropdown);
   display: flex;
   flex-direction: column;
-  min-width: max(100%, 200px);
-  max-width: min(320px, calc(100vw - var(--block-space-8)));
+  min-width: max(var(--block-float-anchor-width, 0px), 200px);
+  max-width: min(320px, calc(100vw - var(--block-space-4)));
+  max-height: calc(100vh - var(--block-space-4));
+  overflow-y: auto;
   padding: var(--block-space-1);
   background-color: var(--block-surface);
   border: var(--block-border-width) solid var(--block-border);
@@ -29,16 +31,6 @@
 
 .menu[hidden] {
   display: none;
-}
-
-.menu[data-align="end"] {
-  left: auto;
-  right: 0;
-}
-
-.menu[data-placement="top"] {
-  top: auto;
-  bottom: calc(100% + var(--block-space-1));
 }
 
 .item {

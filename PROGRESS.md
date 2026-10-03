@@ -32,7 +32,7 @@ V1 complete — 0.1.0 published to npm
 - [x] Playground shows Badges, Tabs and Breadcrumb (PRD §59)
 - [x] PRD §57 stories for every component (Default, Variants, States, Sizes, Disabled, Interactive with play test, Responsive) — enforced by `storyCoverage.test.ts`
 - [x] Phase 11 docs: every component documents Accessibility
-- [x] 0.2.0 batch: `BlockTooltip`, `BlockMenu`, `BlockTable`, `BlockPagination`, `BlockStack`, `BlockDivider` (+ `ChevronLeftIcon` / `ChevronUpIcon`) with stories, tests and docs
+- [x] 0.2.0 batch: `BlockTooltip`, `BlockMenu`, `BlockTable`, `BlockPagination`, `BlockStack`, `BlockDivider` (+ `ChevronLeftIcon` / `ChevronUpIcon`) with stories, tests and docs; playground "Servers" tab; Tooltip / Menu portal into the provider overlay layer
 - [x] Copyable code on every Storybook page — paste-ready "Show code" for all component stories, Usage code blocks on Foundations (incl. Borders), click-to-copy icons, pattern page source in the Code panel
 
 ## Released
@@ -56,9 +56,9 @@ V1 complete — 0.1.0 published to npm
 - pnpm format:check ✅
 - pnpm build-storybook ✅
 - pnpm typecheck ✅
-- pnpm test ✅ (639)
+- pnpm test ✅ (645)
 - pnpm build ✅
-- pnpm test:e2e ✅ (29 passed, 1 skipped)
+- pnpm test:e2e ✅ (36 passed, 2 skipped)
 - pnpm check:a11y ✅ (392 stories in grassland; the 42 new 0.2.0 stories in all 5 themes)
 - pnpm check:package ✅
 - pnpm check:publish ✅ (dry-run, topological order)

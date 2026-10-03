@@ -1,15 +1,15 @@
 .anchor {
-  position: relative;
   display: inline-flex;
   vertical-align: middle;
 }
 
 .tooltip {
-  --tooltip-gap: 8px;
-  position: absolute;
+  position: fixed;
+  top: var(--block-float-y, 0);
+  left: var(--block-float-x, 0);
   z-index: var(--block-z-tooltip);
   width: max-content;
-  max-width: 280px;
+  max-width: min(280px, calc(100vw - var(--block-space-4)));
   padding: var(--block-space-1) var(--block-space-2);
   font-family: var(--block-font-body);
   font-size: var(--block-font-size-sm);
@@ -31,10 +31,10 @@
 }
 
 .tooltip[data-size="sm"] {
-  max-width: 200px;
+  max-width: min(200px, calc(100vw - var(--block-space-4)));
 }
 
-/* Pixel arrow. */
+/* Pixel arrow, aligned with the anchor's center even when the box slides. */
 .tooltip::after {
   content: "";
   position: absolute;
@@ -43,50 +43,32 @@
   background-color: var(--block-obsidian-light);
 }
 
-.tooltip[data-placement="top"] {
-  bottom: calc(100% + var(--tooltip-gap));
-  left: 50%;
-  transform: translateX(-50%);
+.tooltip[data-placement="top"]::after,
+.tooltip[data-placement="bottom"]::after {
+  left: calc(var(--block-float-arrow, 50%) - 4px);
 }
 
-.tooltip[data-placement="bottom"] {
-  top: calc(100% + var(--tooltip-gap));
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.tooltip[data-placement="left"] {
-  right: calc(100% + var(--tooltip-gap));
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.tooltip[data-placement="right"] {
-  left: calc(100% + var(--tooltip-gap));
-  top: 50%;
-  transform: translateY(-50%);
+.tooltip[data-placement="left"]::after,
+.tooltip[data-placement="right"]::after {
+  top: calc(var(--block-float-arrow, 50%) - 4px);
 }
 
 .tooltip[data-placement="top"]::after {
   top: 100%;
-  left: calc(50% - 4px);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
 
 .tooltip[data-placement="bottom"]::after {
   bottom: 100%;
-  left: calc(50% - 4px);
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 
 .tooltip[data-placement="left"]::after {
   left: 100%;
-  top: calc(50% - 4px);
   clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
 .tooltip[data-placement="right"]::after {
   right: 100%;
-  top: calc(50% - 4px);
   clip-path: polygon(100% 0, 100% 100%, 0 50%);
 }

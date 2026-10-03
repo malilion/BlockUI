@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const TABS = ["Dashboard", "Inventory", "Crafting", "Cards", "Feedback"] as const;
+const TABS = ["Dashboard", "Inventory", "Crafting", "Cards", "Servers", "Feedback"] as const;
 const THEMES = ["grassland", "cave", "deepslate", "nether", "end"] as const;
 const WCAG = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
 

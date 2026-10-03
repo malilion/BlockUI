@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 import { ChestIcon, CraftingIcon, SettingsIcon, TorchIcon } from "@malilion/block-ui-icons";
 import { StoryMobile, StoryRow } from "../../../stories/StoryLayout";
 import { mobileViewport } from "../../../stories/storyGlobals";
@@ -42,7 +42,7 @@ const meta = {
           "</BlockTooltip>",
           "```",
           "",
-          "Wrap a single focusable element. A disabled `<button>` fires no pointer events — use `aria-disabled` if a disabled control needs a tooltip.",
+          "Wrap a single focusable element. The tooltip renders in the `BlockUIProvider` overlay layer with fixed positioning, so scroll containers and `overflow: hidden` never clip it. A disabled `<button>` fires no pointer events — use `aria-disabled` if a disabled control needs a tooltip.",
           "",
           "**Keyboard** — focus shows the tooltip immediately; `Esc` hides it without moving focus.",
           "",
@@ -112,9 +112,9 @@ export const Interactive: Story = {
     const canvas = within(canvasElement);
     await userEvent.tab();
     await expect(canvas.getByRole("button", { name: "Inventory" })).toHaveFocus();
-    await expect(canvas.getByRole("tooltip")).toHaveTextContent("Open your inventory");
+    await expect(await canvas.findByRole("tooltip")).toHaveTextContent("Open your inventory");
     await userEvent.keyboard("{Escape}");
-    await expect(canvas.queryByRole("tooltip")).not.toBeInTheDocument();
+    await waitFor(() => expect(canvas.queryByRole("tooltip")).not.toBeInTheDocument());
   },
 };
 

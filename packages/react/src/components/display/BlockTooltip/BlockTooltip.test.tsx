@@ -2,8 +2,8 @@ import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { expectNoA11yViolations } from "../../../test/axe";
+import { BlockUIProvider } from "../../../provider/BlockUIProvider";
 import { BlockTooltip } from "./BlockTooltip";
-import { flipPlacement } from "./BlockTooltip.utils";
 
 afterEach(() => {
   vi.useRealTimers();
@@ -102,14 +102,22 @@ describe("BlockTooltip", () => {
     expect(screen.getByRole("button")).not.toHaveAttribute("aria-describedby");
   });
 
-  it("flips to the opposite side when it would leave the viewport", () => {
-    const viewport = { width: 800, height: 600 };
-    const box = { top: 100, bottom: 140, left: 100, right: 300 };
-    expect(flipPlacement("top", box, viewport)).toBe("top");
-    expect(flipPlacement("top", { ...box, top: 2 }, viewport)).toBe("bottom");
-    expect(flipPlacement("bottom", { ...box, bottom: 598 }, viewport)).toBe("top");
-    expect(flipPlacement("left", { ...box, left: -10 }, viewport)).toBe("right");
-    expect(flipPlacement("right", { ...box, right: 795 }, viewport)).toBe("left");
+  it("renders in the provider's overlay layer, outside the anchor", async () => {
+    const user = userEvent.setup();
+    render(
+      <BlockUIProvider>
+        <div className="scroller">
+          <BlockTooltip content="Hint">
+            <button type="button">Trigger</button>
+          </BlockTooltip>
+        </div>
+      </BlockUIProvider>,
+    );
+    await user.tab();
+    const tooltip = screen.getByRole("tooltip");
+    expect(tooltip.closest("[data-block-portal]")).not.toBeNull();
+    expect(tooltip.closest(".scroller")).toBeNull();
+    expect(tooltip.style.getPropertyValue("--block-float-x")).toMatch(/px$/);
   });
 
   it("has no accessibility violations when open", async () => {
