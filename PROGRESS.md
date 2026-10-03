@@ -25,13 +25,14 @@ V1 complete — 0.1.0 published to npm
 - [x] Testing — 436 unit/component tests, Playwright E2E (desktop + mobile)
 - [x] CI — GitHub Actions: lint → typecheck → test → build → build-storybook
 - [x] Docs — bilingual README (EN / 繁中) with screenshots, CHANGELOG, LICENSE + README in every package
-- [x] npm release pipeline — `files` include README + LICENSE, `pnpm check:publish` dry-run, GitHub Actions `release.yml` on `v*` tags
+- [x] npm release pipeline — `files` include README + LICENSE, `pnpm check:publish` dry-run; `release.yml` publishes automatically when a new version lands on `main` (npm trusted publishing, no token), then tags `vX.Y.Z` and creates the GitHub Release
 - [x] Storybook on GitHub Pages — https://malilion.github.io/BlockUI/
 - [x] Real-browser accessibility — axe on 136 stories × 5 themes (`pnpm check:a11y`) and on the playground (E2E)
 - [x] Release check — packed tarballs install into a fresh npm React app (`pnpm check:package`)
 - [x] Playground shows Badges, Tabs and Breadcrumb (PRD §59)
 - [x] PRD §57 stories for every component (Default, Variants, States, Sizes, Disabled, Interactive with play test, Responsive) — enforced by `storyCoverage.test.ts`
 - [x] Phase 11 docs: every component documents Accessibility
+- [x] Copyable code on every Storybook page — paste-ready "Show code" for all component stories, Usage code blocks on Foundations (incl. Borders), click-to-copy icons, pattern page source in the Code panel
 
 ## Released
 
@@ -39,7 +40,7 @@ V1 complete — 0.1.0 published to npm
 
 ## Next
 
-- [ ] Optional: switch to npm trusted publishing (GitHub OIDC) so releases need no token — see docs/RELEASING.md
+- [ ] Next release: `pnpm release:version x.y.z` + CHANGELOG entry, push to `main` (first publish through trusted publishing)
 
 ## Known Issues / Decisions
 

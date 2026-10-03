@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { motion, shadow, toKebab } from "@malilion/block-ui-tokens";
+import { border, motion, shadow, toKebab } from "@malilion/block-ui-tokens";
 import type { CSSProperties } from "react";
 import styles from "./foundations.module.css";
 import { CodeBlock } from "./CodeBlock";
@@ -20,6 +20,7 @@ type Story = StoryObj<typeof meta>;
 
 const usage = [
   `.tile {
+  border: var(--block-border-width) solid var(--block-border); /* 3px block outline */
   box-shadow: var(--block-shadow-bevel);   /* raised block */
 }
 .slot {
@@ -48,6 +49,25 @@ function ShadowsPage() {
         {usage.map((code) => (
           <CodeBlock key={code} code={code} label="Copy usage example" />
         ))}
+      </section>
+      <section>
+        <h2>Borders</h2>
+        <div className={styles.tiles}>
+          {(["width", "widthThin"] as const).map((name) => (
+            <div
+              key={name}
+              className={styles.tile}
+              style={{ borderWidth: `var(--block-border-${toKebab(name)})` }}
+            >
+              <code className={styles.code}>
+                --block-border-{toKebab(name)} · {border[name]}
+              </code>
+            </div>
+          ))}
+          <div className={styles.tile} style={{ borderColor: "var(--block-border-color)" }}>
+            <code className={styles.code}>--block-border-color · {border.color}</code>
+          </div>
+        </div>
       </section>
       <section>
         <h2>Box shadows</h2>
