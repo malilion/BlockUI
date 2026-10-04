@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.5.1] — 2026-10-04
+
+No changes to the published packages; this release exercises the hardened release pipeline.
+
+### Security
+
+- Release pipeline: GitHub Actions are pinned to commit SHAs and npm to an exact version, workflow permissions are granted per job (only the publish jobs get `id-token: write`, only the release job gets `contents: write`), and Dependabot keeps the action pins current.
+
 ## [0.5.0] — 2026-10-04
 
 ### Added

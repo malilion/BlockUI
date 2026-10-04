@@ -1,6 +1,6 @@
 {
   "name": "@malilion/block-ui-tokens",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Design tokens (colors, spacing, typography, motion…) for Block UI.",
   "license": "MIT",
   "author": "Block UI Contributors",
