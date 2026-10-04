@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-0.4.0 released
+0.5.0 released
 
 ## Completed
 
@@ -50,6 +50,7 @@
 - [x] V2 batch 1 (HUD): `BossBar`, `Scoreboard`, `CoordinatesHUD`, `BiomeIndicator`, `DayNightIndicator`, `WeatherIndicator` + 8 environment icons; playground "World HUD"
 - [x] V2 batch 2 (workstations): `EnchantingTable`, `BrewingStand`, `Anvil`, `TradingUI`, `RecipeBook` + 4 icons; playground Crafting tab
 - [x] V2 batch 3 (community): `ServerBrowser`, `WorldBrowser`, `ChatWindow`, `CommandConsole`, `SkillTree`, `MiniMap` — every PRD §83 V2 component is done
+- [x] 0.5.0 versioned (`pnpm release:version 0.5.0`)
 - [x] General batch 3: `Popover`, `ContextMenu`, `Kbd`, `BlockGrid`, `BlockContainer`, `BlockStepper` (+ shared `MenuList`)
 - [x] 0.4.0 versioned (`pnpm release:version 0.4.0`)
 - [x] General batch 2: `Avatar`, `Accordion`, `Drawer`, `EmptyState`, `Skeleton`, `NumberInput` (+ shared `useScrollLock`)
