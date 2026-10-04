@@ -1,7 +1,7 @@
 {
   "name": "block-ui",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Block UI — a block / pixel / crafting game-style React component library.",
   "type": "module",
   "packageManager": "pnpm@11.21.0",
