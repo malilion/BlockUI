@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-0.2.0 published to npm
+0.3.0 released (all PRD §83 V2 components)
 
 ## Completed
 
@@ -48,7 +48,7 @@
 - [x] V2 batch 1 (HUD): `BossBar`, `Scoreboard`, `CoordinatesHUD`, `BiomeIndicator`, `DayNightIndicator`, `WeatherIndicator` + 8 environment icons; playground "World HUD"
 - [x] V2 batch 2 (workstations): `EnchantingTable`, `BrewingStand`, `Anvil`, `TradingUI`, `RecipeBook` + 4 icons; playground Crafting tab
 - [x] V2 batch 3 (community): `ServerBrowser`, `WorldBrowser`, `ChatWindow`, `CommandConsole`, `SkillTree`, `MiniMap` — every PRD §83 V2 component is done
-- [ ] Release 0.3.0 (first CI publish with the icons / react workaround)
+- [x] 0.3.0 versioned (`pnpm release:version 0.3.0`), CHANGELOG section dated 2026-10-04
 
 ## Known Issues / Decisions
 
