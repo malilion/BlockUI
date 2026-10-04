@@ -19,7 +19,7 @@ export interface ChatWindowProps extends HTMLAttributes<HTMLDivElement> {
   messages: ChatMessage[];
   /** Renders the input; called with the trimmed text on Enter. */
   onSend?: (text: string) => void;
-  /** @default "Type a message…" */
+  /** @default messages.chatWindow.placeholder ("Type a message…") */
   placeholder?: string;
   /** @default 256 */
   maxLength?: number;
@@ -27,6 +27,6 @@ export interface ChatWindowProps extends HTMLAttributes<HTMLDivElement> {
   showTimestamps?: boolean;
   /** Log height. @default "md" */
   size?: "sm" | "md" | "lg";
-  /** Accessible name. @default "Chat" */
+  /** Accessible name. @default messages.chatWindow.label ("Chat") */
   label?: string;
 }

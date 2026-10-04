@@ -1,16 +1,11 @@
 import { BookIcon, LapisIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
 import { cx } from "../../../utils/cx";
+import { useBlockUIMessages } from "../../../provider/context";
 import { InventorySlot } from "../../inventory/InventorySlot/InventorySlot";
 import styles from "./EnchantingTable.module.css";
 import type { EnchantingTableProps } from "./EnchantingTable.types";
 import { enchantBlocker, hasContent } from "./EnchantingTable.utils";
-
-const BLOCKER_TEXT = {
-  level: "Not enough levels",
-  lapis: "Not enough lapis",
-  disabled: "Unavailable",
-} as const;
 
 /**
  * Enchanting table: item and lapis slots beside three enchantment offers.
@@ -18,25 +13,21 @@ const BLOCKER_TEXT = {
  */
 export const EnchantingTable = forwardRef<HTMLDivElement, EnchantingTableProps>(
   function EnchantingTable(
-    {
-      item,
-      lapis,
-      lapisCount,
-      playerLevel,
-      options = [],
-      onEnchant,
-      label = "Enchanting table",
-      className,
-      ...rest
-    },
+    { item, lapis, lapisCount, playerLevel, options = [], onEnchant, label, className, ...rest },
     ref,
   ) {
+    const m = useBlockUIMessages();
+    const blockerText = {
+      level: m.enchantingTable.notEnoughLevels,
+      lapis: m.enchantingTable.notEnoughLapis,
+      disabled: m.enchantingTable.unavailable,
+    };
     const hasItem = hasContent(item);
     return (
       <div
         ref={ref}
         role="group"
-        aria-label={label}
+        aria-label={label ?? m.enchantingTable.label}
         className={cx(styles.table, className)}
         {...rest}
       >
@@ -45,12 +36,15 @@ export const EnchantingTable = forwardRef<HTMLDivElement, EnchantingTableProps>(
             <BookIcon size={32} />
           </span>
           <div className={styles.slots}>
-            <InventorySlot size="lg" label={hasItem ? undefined : "Item: empty"}>
+            <InventorySlot
+              size="lg"
+              label={hasItem ? undefined : m.common.emptyNamed(m.enchantingTable.item)}
+            >
               {item}
             </InventorySlot>
             <InventorySlot
               size="lg"
-              label={hasContent(lapis) ? undefined : "Lapis: empty"}
+              label={hasContent(lapis) ? undefined : m.common.emptyNamed(m.enchantingTable.lapis)}
               className={styles.lapisSlot}
             >
               {lapis ?? (
@@ -61,10 +55,10 @@ export const EnchantingTable = forwardRef<HTMLDivElement, EnchantingTableProps>(
             </InventorySlot>
           </div>
         </div>
-        <ul className={styles.options} aria-label="Enchantments">
+        <ul className={styles.options} aria-label={m.enchantingTable.enchantments}>
           {options.slice(0, 3).map((option) => {
             const blocker = enchantBlocker(option, { hasItem, playerLevel, lapisCount });
-            const reason = blocker && blocker !== "noItem" ? BLOCKER_TEXT[blocker] : undefined;
+            const reason = blocker && blocker !== "noItem" ? blockerText[blocker] : undefined;
             return (
               <li key={option.id}>
                 <button
@@ -88,10 +82,15 @@ export const EnchantingTable = forwardRef<HTMLDivElement, EnchantingTableProps>(
                       </span>
                     ) : null}
                     <span className={styles.clue}>
-                      {hasItem ? (option.clue ?? "Unknown enchantment") : "Place an item"}
+                      {hasItem
+                        ? (option.clue ?? m.enchantingTable.unknown)
+                        : m.enchantingTable.placeItem}
                     </span>
                     <span className="block-visually-hidden">
-                      {`, level ${option.level}, ${option.lapisCost} lapis${reason ? `. ${reason}` : ""}`}
+                      {m.enchantingTable.optionDetail(
+                        String(option.level),
+                        String(option.lapisCost),
+                      ) + (reason ? `. ${reason}` : "")}
                     </span>
                   </span>
                   <span className={styles.level} aria-hidden="true">

@@ -5,6 +5,7 @@ import { cx } from "../../../utils/cx";
 import { InventoryGrid } from "../InventoryGrid/InventoryGrid";
 import styles from "./Hotbar.module.css";
 import type { HotbarProps } from "./Hotbar.types";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /**
  * Nine-slot quick bar. Number keys `1`–`9` select a slot from anywhere on the
@@ -20,12 +21,13 @@ export const Hotbar = forwardRef<HTMLDivElement, HotbarProps>(function Hotbar(
     hotkeys = true,
     showKeys = true,
     slotSize = "md",
-    label = "Hotbar",
+    label,
     className,
     ...rest
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const [current, setCurrent] = useControllableState({
     value: selectedIndex,
     defaultValue: defaultSelectedIndex,
@@ -49,7 +51,7 @@ export const Hotbar = forwardRef<HTMLDivElement, HotbarProps>(function Hotbar(
         onSelectedIndexChange={setCurrent}
         selectionFollowsFocus
         wrap
-        label={label}
+        label={label ?? m.hotbar.label}
         aria-keyshortcuts={
           hotkeys
             ? Array.from({ length: Math.min(slots, 9) }, (_, i) => i + 1).join(" ")

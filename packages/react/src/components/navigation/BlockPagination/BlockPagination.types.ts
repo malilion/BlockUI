@@ -20,6 +20,6 @@ export interface BlockPaginationProps extends Omit<
   /** @default "md" */
   size?: "sm" | "md";
   disabled?: boolean;
-  /** Accessible name of the navigation landmark. @default "Pagination" */
+  /** Accessible name of the navigation landmark. @default messages.pagination.label ("Pagination") */
   label?: string;
 }

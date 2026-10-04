@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import { enMessages, type BlockUIMessages } from "../locale/messages";
 import type { BlockUIContextValue } from "./BlockUIProvider.types";
 
 export const BlockUIContext = createContext<BlockUIContextValue | null>(null);
@@ -16,4 +17,9 @@ export function usePortalContainer(): HTMLElement | null {
   const context = useContext(BlockUIContext);
   if (context) return context.portalContainer;
   return typeof document === "undefined" ? null : document.body;
+}
+
+/** Built-in component text from the nearest provider (English outside one). */
+export function useBlockUIMessages(): BlockUIMessages {
+  return useContext(BlockUIContext)?.messages ?? enMessages;
 }

@@ -1,6 +1,7 @@
 import "./styles/index.css";
 
 export * from "./provider";
+export * from "./locale";
 export * from "./components/actions";
 export * from "./components/forms";
 export * from "./components/inventory";

@@ -1,6 +1,7 @@
 import { ArrowIcon } from "@malilion/block-ui-icons";
 import { forwardRef, isValidElement } from "react";
 import { cx } from "../../../utils/cx";
+import { useBlockUIMessages } from "../../../provider/context";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";
 import { CraftingResult } from "../CraftingResult/CraftingResult";
 import styles from "./CraftingTable.module.css";
@@ -11,20 +12,10 @@ import type { CraftingTableProps } from "./CraftingTable.types";
  * vertical on mobile (< 768px).
  */
 export const CraftingTable = forwardRef<HTMLDivElement, CraftingTableProps>(function CraftingTable(
-  {
-    input,
-    result,
-    onTake,
-    onCraft,
-    canCraft,
-    craftLabel = "Craft",
-    label = "Crafting table",
-    className,
-    children,
-    ...rest
-  },
+  { input, result, onTake, onCraft, canCraft, craftLabel, label, className, children, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const hasResult = result !== undefined && result !== null && result !== false;
   const resultNode =
     isValidElement(result) && result.type === CraftingResult ? (
@@ -38,7 +29,7 @@ export const CraftingTable = forwardRef<HTMLDivElement, CraftingTableProps>(func
     <div
       ref={ref}
       role="group"
-      aria-label={label}
+      aria-label={label ?? m.craftingTable.label}
       className={cx(styles.table, className)}
       {...rest}
     >
@@ -56,7 +47,7 @@ export const CraftingTable = forwardRef<HTMLDivElement, CraftingTableProps>(func
           onClick={onCraft}
           className={styles.craft}
         >
-          {craftLabel}
+          {craftLabel ?? m.craftingTable.craft}
         </BlockButton>
       ) : null}
       {children}

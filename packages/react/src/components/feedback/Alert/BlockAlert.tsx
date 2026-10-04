@@ -4,6 +4,7 @@ import { cx } from "../../../utils/cx";
 import styles from "./BlockAlert.module.css";
 import type { AlertVariant, BlockAlertProps } from "./BlockAlert.types";
 import { alertMaterial } from "./BlockAlert.utils";
+import { useBlockUIMessages } from "../../../provider/context";
 
 const defaultIcons: Record<AlertVariant, ReactNode> = {
   success: <CheckIcon size={20} />,
@@ -23,7 +24,7 @@ export const BlockAlert = forwardRef<HTMLDivElement, BlockAlertProps>(function B
     children,
     icon,
     onClose,
-    closeLabel = "Dismiss",
+    closeLabel,
     action,
     className,
     role,
@@ -31,6 +32,7 @@ export const BlockAlert = forwardRef<HTMLDivElement, BlockAlertProps>(function B
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const titleId = useId();
   const assertive = variant === "warning" || variant === "error";
   return (
@@ -58,7 +60,12 @@ export const BlockAlert = forwardRef<HTMLDivElement, BlockAlertProps>(function B
       </div>
       {action ? <div className={styles.action}>{action}</div> : null}
       {onClose ? (
-        <button type="button" className={styles.close} aria-label={closeLabel} onClick={onClose}>
+        <button
+          type="button"
+          className={styles.close}
+          aria-label={closeLabel ?? m.common.dismiss}
+          onClick={onClose}
+        >
           <CloseIcon size={16} />
         </button>
       ) : null}

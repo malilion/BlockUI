@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.6.0] — 2026-10-04
+
+### Added
+
+- **Localization** — `BlockUIProvider` takes `messages`: a full locale or a partial override merged onto English. Every built-in string of every component (labels, empty states, accessible names, status texts, interpolated texts such as "Day 3") is read from it; explicit props still win.
+- **`zhTWMessages`** — Traditional Chinese locale, plus `enMessages`, `mergeMessages`, the `BlockUIMessages` / `BlockUIMessagesOverride` types and the `useBlockUIMessages()` hook.
+- **Block Miner** (`apps/game`, `pnpm game`) — a playable demo game built on the published packages, fully in Traditional Chinese.
+
 ## [0.5.1] — 2026-10-04
 
 No changes to the published packages; this release exercises the hardened release pipeline.

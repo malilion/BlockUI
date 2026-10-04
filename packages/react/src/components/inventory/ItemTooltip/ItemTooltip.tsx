@@ -3,6 +3,7 @@ import { cx } from "../../../utils/cx";
 import styles from "./ItemTooltip.module.css";
 import type { ItemTooltipProps } from "./ItemTooltip.types";
 import { normalizeRarity } from "./ItemTooltip.utils";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /**
  * Item details card: rarity-colored name, enchantments and stats. Rendered
@@ -12,11 +13,14 @@ export const ItemTooltip = forwardRef<HTMLDivElement, ItemTooltipProps>(function
   { name, rarity, description, enchantments, stats, statIcon, className, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const normalized = normalizeRarity(rarity);
   return (
     <div ref={ref} className={cx(styles.tooltip, className)} data-rarity={normalized} {...rest}>
       <p className={styles.name}>{name}</p>
-      {rarity ? <p className={styles.rarity}>{rarity}</p> : null}
+      {rarity ? (
+        <p className={styles.rarity}>{normalized ? m.rarity[normalized] : rarity}</p>
+      ) : null}
       {enchantments && enchantments.length > 0 ? (
         <ul className={styles.enchantments}>
           {enchantments.map((enchantment) => (

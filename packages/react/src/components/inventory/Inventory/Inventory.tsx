@@ -4,19 +4,21 @@ import { cx } from "../../../utils/cx";
 import { BlockPanel } from "../../layout/BlockPanel/BlockPanel";
 import styles from "./Inventory.module.css";
 import type { InventoryProps, InventorySectionProps } from "./Inventory.types";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /**
  * Inventory window — a panel that stacks `InventorySection`s (grids, hotbar).
  * Use `variant="chest"` for storage containers.
  */
 export const Inventory = forwardRef<HTMLElement, InventoryProps>(function Inventory(
-  { title = "Inventory", variant = "default", icon, className, children, ...rest },
+  { title, variant = "default", icon, className, children, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   return (
     <BlockPanel
       ref={ref}
-      title={title}
+      title={title ?? m.inventory.title}
       icon={icon ?? (variant === "chest" ? <ChestIcon size={24} /> : undefined)}
       data-inventory={variant}
       className={cx(styles.inventory, variant === "chest" && styles.chest, className)}

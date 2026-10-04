@@ -1,5 +1,6 @@
 import { PlayerIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
+import { useBlockUIMessages } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";
 import { BlockBadge } from "../../display/BlockBadge/BlockBadge";
@@ -29,22 +30,23 @@ export const PlayerCard = forwardRef<HTMLElement, PlayerCardProps>(function Play
     stats,
     onViewProfile,
     material = "deepslate",
-    label = "Player",
+    label,
     className,
     ...rest
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   return (
     <BlockCard
       ref={ref}
       material={material}
-      label={label}
+      label={label === undefined ? m.playerCard.label : label}
       className={cx(styles.card, className)}
       footer={
         onViewProfile ? (
           <BlockButton size="sm" variant="stone" onClick={onViewProfile}>
-            Profile
+            {m.playerCard.profile}
           </BlockButton>
         ) : undefined
       }
@@ -56,7 +58,9 @@ export const PlayerCard = forwardRef<HTMLElement, PlayerCardProps>(function Play
         </span>
         <div className={styles.titleBlock}>
           <p className={styles.title}>{name}</p>
-          {level !== undefined ? <p className={styles.description}>Level {level}</p> : null}
+          {level !== undefined ? (
+            <p className={styles.description}>{m.playerCard.level(String(level))}</p>
+          ) : null}
           {status ? (
             <BlockBadge size="sm" dot variant={statusVariant(status)}>
               {status}

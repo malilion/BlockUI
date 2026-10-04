@@ -3,6 +3,7 @@ import { cx } from "../../../utils/cx";
 import styles from "./MiniMap.module.css";
 import type { MiniMapProps } from "./MiniMap.types";
 import { compassName, describeMarker, terrainRuns } from "./MiniMap.utils";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /**
  * Top-down mini map: terrain pixels centred on the player, a heading arrow,
@@ -10,18 +11,10 @@ import { compassName, describeMarker, terrainRuns } from "./MiniMap.utils";
  * distance and direction as text.
  */
 export const MiniMap = forwardRef<HTMLElement, MiniMapProps>(function MiniMap(
-  {
-    tiles,
-    heading = 0,
-    markers = [],
-    shape = "square",
-    size = "md",
-    label = "Mini map",
-    className,
-    ...rest
-  },
+  { tiles, heading = 0, markers = [], shape = "square", size = "md", label, className, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const captionId = useId();
   const rows = Math.max(1, tiles.length);
   const columns = Math.max(1, ...tiles.map((row) => row.length));
@@ -71,11 +64,13 @@ export const MiniMap = forwardRef<HTMLElement, MiniMapProps>(function MiniMap(
         />
       </svg>
       <span className={styles.north} aria-hidden="true">
-        N
+        {m.miniMap.northShort}
       </span>
       <figcaption id={captionId} className="block-visually-hidden">
-        {label}. Facing {compassName(heading)}.
-        {markers.length > 0 ? ` ${markers.map(describeMarker).join(". ")}.` : ""}
+        {label ?? m.miniMap.label}. {m.miniMap.facing(compassName(heading, m))}
+        {markers.length > 0
+          ? ` ${markers.map((marker) => describeMarker(marker, m)).join(". ")}.`
+          : ""}
       </figcaption>
     </figure>
   );

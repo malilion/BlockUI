@@ -16,6 +16,7 @@ import { mergeRefs } from "../../../utils/refs";
 import { useInventoryGrid, useSlotIndex } from "../InventoryGrid/context";
 import styles from "./InventorySlot.module.css";
 import type { InventorySlotProps } from "./InventorySlot.types";
+import { useBlockUIMessages } from "../../../provider/context";
 
 type Placement = "right" | "left";
 
@@ -45,6 +46,7 @@ export const InventorySlot = forwardRef<HTMLElement, InventorySlotProps>(functio
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const grid = useInventoryGrid();
   const index = useSlotIndex();
   const inGrid = grid !== null && index >= 0;
@@ -103,7 +105,7 @@ export const InventorySlot = forwardRef<HTMLElement, InventorySlotProps>(functio
   const content = (
     <>
       <span className={styles.content}>{children}</span>
-      {empty && !label ? <span className="block-visually-hidden">Empty slot</span> : null}
+      {empty && !label ? <span className="block-visually-hidden">{m.common.emptySlot}</span> : null}
       {label && staticWell ? <span className="block-visually-hidden">{label}</span> : null}
       {locked ? (
         <span className={styles.lock} aria-hidden="true">

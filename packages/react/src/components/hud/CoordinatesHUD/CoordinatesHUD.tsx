@@ -5,24 +5,15 @@ import chip from "../hudChip.module.css";
 import styles from "./CoordinatesHUD.module.css";
 import type { CoordinatesHUDProps } from "./CoordinatesHUD.types";
 import { FACING_AXIS, coordinatesText, formatCoordinate } from "./CoordinatesHUD.utils";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /** Debug-screen style XYZ read-out with an optional facing and copy button. */
 export const CoordinatesHUD = forwardRef<HTMLDivElement, CoordinatesHUDProps>(
   function CoordinatesHUD(
-    {
-      x,
-      y,
-      z,
-      facing,
-      precision = 0,
-      copyable = false,
-      size = "md",
-      label = "Coordinates",
-      className,
-      ...rest
-    },
+    { x, y, z, facing, precision = 0, copyable = false, size = "md", label, className, ...rest },
     ref,
   ) {
+    const m = useBlockUIMessages();
     const [copied, setCopied] = useState(false);
     const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
     useEffect(() => () => clearTimeout(timer.current), []);
@@ -42,7 +33,7 @@ export const CoordinatesHUD = forwardRef<HTMLDivElement, CoordinatesHUDProps>(
       <div
         ref={ref}
         role="group"
-        aria-label={label}
+        aria-label={label ?? m.coordinatesHUD.label}
         data-size={size}
         className={cx(chip.chip, styles.coordinates, className)}
         {...rest}
@@ -66,7 +57,8 @@ export const CoordinatesHUD = forwardRef<HTMLDivElement, CoordinatesHUDProps>(
         </span>
         {facing ? (
           <span className={styles.facing}>
-            <span className={chip.label}>Facing</span> {facing}{" "}
+            <span className={chip.label}>{m.coordinatesHUD.facing}</span>{" "}
+            {m.coordinatesHUD.facings[facing]}{" "}
             <span className={chip.label}>({FACING_AXIS[facing]})</span>
           </span>
         ) : null}
@@ -75,14 +67,14 @@ export const CoordinatesHUD = forwardRef<HTMLDivElement, CoordinatesHUDProps>(
             type="button"
             className={styles.copy}
             onClick={copy}
-            aria-label={copied ? "Coordinates copied" : "Copy coordinates"}
+            aria-label={copied ? m.coordinatesHUD.copied : m.coordinatesHUD.copyLabel}
           >
-            {copied ? <CheckIcon size={16} /> : "Copy"}
+            {copied ? <CheckIcon size={16} /> : m.coordinatesHUD.copy}
           </button>
         ) : null}
         {copyable ? (
           <span className="block-visually-hidden" role="status">
-            {copied ? "Coordinates copied" : ""}
+            {copied ? m.coordinatesHUD.copied : ""}
           </span>
         ) : null}
       </div>

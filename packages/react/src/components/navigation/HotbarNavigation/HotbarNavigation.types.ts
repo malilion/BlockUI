@@ -21,6 +21,6 @@ export interface HotbarNavigationProps extends Omit<HTMLAttributes<HTMLElement>,
   fixed?: boolean;
   /** Only show below 768px (pair with a responsive `BlockSidebar`). @default false */
   mobileOnly?: boolean;
-  /** Accessible name. @default "Quick navigation" */
+  /** Accessible name. @default messages.hotbarNavigation.label ("Quick navigation") */
   label?: string;
 }

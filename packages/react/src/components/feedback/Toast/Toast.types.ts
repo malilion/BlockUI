@@ -26,7 +26,7 @@ export interface ToastRecord {
 export interface BlockToasterProps {
   /** Maximum toasts kept on screen; older ones are dropped. @default 5 */
   limit?: number;
-  /** Accessible name of the notification region. @default "Notifications" */
+  /** Accessible name of the notification region. @default messages.toast.region ("Notifications") */
   label?: string;
   className?: string;
 }

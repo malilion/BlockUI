@@ -26,6 +26,6 @@ export interface SkillTreeProps extends Omit<HTMLAttributes<HTMLDivElement>, "de
   onUnlock?: (id: string) => void;
   /** Initially selected skill id. */
   defaultValue?: string;
-  /** Accessible name. @default "Skill tree" */
+  /** Accessible name. @default messages.skillTree.label ("Skill tree") */
   label?: string;
 }

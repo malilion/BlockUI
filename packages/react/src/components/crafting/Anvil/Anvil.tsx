@@ -1,6 +1,7 @@
 import { AnvilIcon, ArrowIcon, PlusIcon } from "@malilion/block-ui-icons";
 import { forwardRef, useId } from "react";
 import { useControllableState } from "../../../hooks/useControllableState";
+import { useBlockUIMessages } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { BlockInput } from "../../forms/BlockInput/BlockInput";
 import { InventorySlot } from "../../inventory/InventorySlot/InventorySlot";
@@ -27,12 +28,13 @@ export const Anvil = forwardRef<HTMLDivElement, AnvilProps>(function Anvil(
     playerLevel,
     maxCost = 40,
     onTakeResult,
-    label = "Anvil",
+    label,
     className,
     ...rest
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const costId = useId();
   const [itemName, setItemName] = useControllableState({
     value: name,
@@ -47,7 +49,7 @@ export const Anvil = forwardRef<HTMLDivElement, AnvilProps>(function Anvil(
     <div
       ref={ref}
       role="group"
-      aria-label={label}
+      aria-label={label ?? m.anvil.label}
       data-cost={costState}
       className={cx(styles.anvil, className)}
       {...rest}
@@ -57,7 +59,7 @@ export const Anvil = forwardRef<HTMLDivElement, AnvilProps>(function Anvil(
           <AnvilIcon size={32} />
         </span>
         <BlockInput
-          label="Item name"
+          label={m.anvil.itemName}
           value={itemName}
           onChange={(event) => setItemName(event.target.value)}
           disabled={!hasLeft}
@@ -66,20 +68,23 @@ export const Anvil = forwardRef<HTMLDivElement, AnvilProps>(function Anvil(
         />
       </div>
       <div className={styles.layout}>
-        <InventorySlot size="lg" label={hasLeft ? undefined : "Item: empty"}>
+        <InventorySlot size="lg" label={hasLeft ? undefined : m.common.emptyNamed(m.anvil.item)}>
           {left}
         </InventorySlot>
         <span className={styles.symbol} aria-hidden="true">
           <PlusIcon size={24} />
         </span>
-        <InventorySlot size="lg" label={filled(right) ? undefined : "Material: empty"}>
+        <InventorySlot
+          size="lg"
+          label={filled(right) ? undefined : m.common.emptyNamed(m.anvil.material)}
+        >
           {right}
         </InventorySlot>
         <span className={styles.symbol} aria-hidden="true">
           <ArrowIcon size={32} />
         </span>
         <CraftingResult
-          label="Result"
+          label={m.common.result}
           onTake={blocked ? undefined : onTakeResult}
           disabled={blocked}
           aria-describedby={costState === "none" ? undefined : costId}
@@ -90,8 +95,9 @@ export const Anvil = forwardRef<HTMLDivElement, AnvilProps>(function Anvil(
       {costState !== "none" ? (
         <p id={costId} className={styles.cost} aria-live="polite">
           {costState === "tooExpensive"
-            ? "Too Expensive!"
-            : `Enchantment Cost: ${cost}${costState === "unaffordable" ? " (not enough levels)" : ""}`}
+            ? m.anvil.tooExpensive
+            : m.anvil.cost(String(cost)) +
+              (costState === "unaffordable" ? m.anvil.notEnoughLevels : "")}
         </p>
       ) : null}
     </div>

@@ -11,8 +11,8 @@ export interface CraftingTableProps extends HTMLAttributes<HTMLDivElement> {
   onCraft?: () => void;
   /** Enables the Craft button. @default true when a result exists */
   canCraft?: boolean;
-  /** @default "Craft" */
+  /** @default locale `craftingTable.craft` ("Craft") */
   craftLabel?: string;
-  /** Accessible name of the crafting area. @default "Crafting table" */
+  /** Accessible name of the crafting area. @default locale `craftingTable.label` ("Crafting table") */
   label?: string;
 }

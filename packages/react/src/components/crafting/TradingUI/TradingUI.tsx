@@ -1,12 +1,13 @@
 import { ArrowIcon, CloseIcon } from "@malilion/block-ui-icons";
 import { forwardRef, useId, useRef, type CSSProperties, type KeyboardEvent } from "react";
 import { useControllableState } from "../../../hooks/useControllableState";
+import { useBlockUIMessages } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { clamp } from "../../../utils/number";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";
 import { InventorySlot } from "../../inventory/InventorySlot/InventorySlot";
 import styles from "./TradingUI.module.css";
-import { villagerLevels, type TradingUIProps } from "./TradingUI.types";
+import type { TradingUIProps } from "./TradingUI.types";
 import { isSoldOut } from "./TradingUI.utils";
 
 /**
@@ -23,12 +24,13 @@ export const TradingUI = forwardRef<HTMLDivElement, TradingUIProps>(function Tra
     profession,
     level,
     levelProgress,
-    label = "Trading",
+    label,
     className,
     ...rest
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const baseId = useId();
   const [selectedId, setSelectedId] = useControllableState({
     value,
@@ -62,11 +64,16 @@ export const TradingUI = forwardRef<HTMLDivElement, TradingUIProps>(function Tra
     <div
       ref={ref}
       role="group"
-      aria-label={label}
+      aria-label={label ?? m.tradingUI.label}
       className={cx(styles.trading, className)}
       {...rest}
     >
-      <ul role="listbox" aria-label="Trades" className={styles.list} onKeyDown={onKeyDown}>
+      <ul
+        role="listbox"
+        aria-label={m.tradingUI.trades}
+        className={styles.list}
+        onKeyDown={onKeyDown}
+      >
         {trades.map((trade, index) => {
           const isSelected = trade.id === selectedId;
           const out = isSoldOut(trade);
@@ -102,7 +109,7 @@ export const TradingUI = forwardRef<HTMLDivElement, TradingUIProps>(function Tra
               </span>
               <span className="block-visually-hidden">
                 {trade.label}
-                {out ? " (sold out)" : ""}
+                {out ? m.tradingUI.soldOutSuffix : ""}
               </span>
             </li>
           );
@@ -115,12 +122,12 @@ export const TradingUI = forwardRef<HTMLDivElement, TradingUIProps>(function Tra
             {levelIndex !== undefined ? (
               <div className={styles.level}>
                 <span className={styles.levelName}>
-                  {levelIndex + 1} · {villagerLevels[levelIndex]}
+                  {levelIndex + 1} · {m.tradingUI.levels[levelIndex]}
                 </span>
                 {levelProgress !== undefined && levelIndex < 4 ? (
                   <div
                     role="progressbar"
-                    aria-label={`Progress to ${villagerLevels[levelIndex + 1]}`}
+                    aria-label={m.tradingUI.progressTo(m.tradingUI.levels[levelIndex + 1] ?? "")}
                     aria-valuemin={0}
                     aria-valuemax={100}
                     aria-valuenow={Math.round(clamp(levelProgress, 0, 100))}
@@ -137,19 +144,28 @@ export const TradingUI = forwardRef<HTMLDivElement, TradingUIProps>(function Tra
           </div>
         ) : null}
         <div className={styles.exchange} aria-live="polite">
-          <div role="group" aria-label="Payment" className={styles.payment}>
-            <InventorySlot size="lg" label={selected ? undefined : "Payment: empty"}>
+          <div role="group" aria-label={m.tradingUI.payment} className={styles.payment}>
+            <InventorySlot
+              size="lg"
+              label={selected ? undefined : m.common.emptyNamed(m.tradingUI.payment)}
+            >
               {selected?.cost}
             </InventorySlot>
-            <InventorySlot size="lg" label={selected?.cost2 ? undefined : "Second payment: empty"}>
+            <InventorySlot
+              size="lg"
+              label={selected?.cost2 ? undefined : m.common.emptyNamed(m.tradingUI.secondPayment)}
+            >
               {selected?.cost2}
             </InventorySlot>
           </div>
           <span className={styles.arrow} data-sold-out={soldOut || undefined} aria-hidden="true">
             {soldOut ? <CloseIcon size={32} /> : <ArrowIcon size={32} />}
           </span>
-          <div role="group" aria-label="Result">
-            <InventorySlot size="lg" label={selected ? undefined : "Result: empty"}>
+          <div role="group" aria-label={m.common.result}>
+            <InventorySlot
+              size="lg"
+              label={selected ? undefined : m.common.emptyNamed(m.common.result)}
+            >
               {selected?.result}
             </InventorySlot>
           </div>
@@ -160,7 +176,7 @@ export const TradingUI = forwardRef<HTMLDivElement, TradingUIProps>(function Tra
             disabled={!selected || soldOut}
             onClick={() => selected && onTrade(selected.id)}
           >
-            {soldOut ? "Sold out" : "Trade"}
+            {soldOut ? m.tradingUI.soldOut : m.tradingUI.trade}
           </BlockButton>
         ) : null}
       </div>

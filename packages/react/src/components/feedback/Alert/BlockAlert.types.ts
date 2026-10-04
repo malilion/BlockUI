@@ -14,7 +14,7 @@ export interface BlockAlertProps extends Omit<HTMLAttributes<HTMLDivElement>, "t
   icon?: ReactNode | false;
   /** Renders a dismiss button when provided. */
   onClose?: () => void;
-  /** Accessible label for the dismiss button. @default "Dismiss" */
+  /** Accessible label for the dismiss button. @default messages.common.dismiss ("Dismiss") */
   closeLabel?: string;
   /** Extra actions (e.g. a button) shown after the text. */
   action?: ReactNode;

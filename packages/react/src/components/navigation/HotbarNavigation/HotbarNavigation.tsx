@@ -3,6 +3,7 @@ import { useControllableState } from "../../../hooks/useControllableState";
 import { cx } from "../../../utils/cx";
 import styles from "./HotbarNavigation.module.css";
 import type { HotbarNavigationProps } from "./HotbarNavigation.types";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /** Mobile bottom navigation styled as a hotbar (max 5 items). */
 export const HotbarNavigation = forwardRef<HTMLElement, HotbarNavigationProps>(
@@ -15,12 +16,13 @@ export const HotbarNavigation = forwardRef<HTMLElement, HotbarNavigationProps>(
       maxItems = 5,
       fixed = false,
       mobileOnly = false,
-      label = "Quick navigation",
+      label,
       className,
       ...rest
     },
     ref,
   ) {
+    const m = useBlockUIMessages();
     const visible = items.slice(0, maxItems);
     const [active, setActive] = useControllableState({
       value,
@@ -31,7 +33,7 @@ export const HotbarNavigation = forwardRef<HTMLElement, HotbarNavigationProps>(
     return (
       <nav
         ref={ref}
-        aria-label={label}
+        aria-label={label ?? m.hotbarNavigation.label}
         data-fixed={fixed || undefined}
         data-mobile-only={mobileOnly || undefined}
         className={cx(styles.nav, className)}

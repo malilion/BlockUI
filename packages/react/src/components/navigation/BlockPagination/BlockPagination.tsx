@@ -7,6 +7,7 @@ import { BlockButton } from "../../actions/BlockButton/BlockButton";
 import styles from "./BlockPagination.module.css";
 import type { BlockPaginationProps } from "./BlockPagination.types";
 import { getPaginationRange } from "./BlockPagination.utils";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /**
  * Page navigation with previous / next arrows. The current page is a grass
@@ -24,12 +25,13 @@ export const BlockPagination = forwardRef<HTMLElement, BlockPaginationProps>(
       variant = "full",
       size = "md",
       disabled = false,
-      label = "Pagination",
+      label,
       className,
       ...rest
     },
     ref,
   ) {
+    const m = useBlockUIMessages();
     const count = Math.max(1, Math.floor(pageCount));
     const [rawPage, setPage] = useControllableState({
       value: page,
@@ -48,7 +50,7 @@ export const BlockPagination = forwardRef<HTMLElement, BlockPaginationProps>(
     return (
       <nav
         ref={ref}
-        aria-label={label}
+        aria-label={label ?? m.pagination.label}
         data-size={size}
         className={cx(styles.pagination, className)}
         {...rest}
@@ -57,7 +59,7 @@ export const BlockPagination = forwardRef<HTMLElement, BlockPaginationProps>(
           <li>
             <BlockButton
               size={buttonSize}
-              aria-label="Previous page"
+              aria-label={m.pagination.previous}
               disabled={disabled || current <= 1}
               className={styles.arrow}
               onClick={() => goTo(current - 1)}
@@ -67,7 +69,7 @@ export const BlockPagination = forwardRef<HTMLElement, BlockPaginationProps>(
           </li>
           {variant === "compact" ? (
             <li className={styles.status} aria-live="polite">
-              Page {current} of {count}
+              {m.pagination.pageOf(current, count)}
             </li>
           ) : (
             getPaginationRange(current, count, siblingCount, boundaryCount).map((entry) =>
@@ -76,7 +78,7 @@ export const BlockPagination = forwardRef<HTMLElement, BlockPaginationProps>(
                   <BlockButton
                     size={buttonSize}
                     variant={entry === current ? "grass" : "stone"}
-                    aria-label={`Page ${entry}`}
+                    aria-label={m.pagination.page(entry)}
                     aria-current={entry === current ? "page" : undefined}
                     disabled={disabled}
                     className={styles.page}
@@ -95,7 +97,7 @@ export const BlockPagination = forwardRef<HTMLElement, BlockPaginationProps>(
           <li>
             <BlockButton
               size={buttonSize}
-              aria-label="Next page"
+              aria-label={m.pagination.next}
               disabled={disabled || current >= count}
               className={styles.arrow}
               onClick={() => goTo(current + 1)}

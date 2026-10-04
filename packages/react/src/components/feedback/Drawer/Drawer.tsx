@@ -3,7 +3,7 @@ import { forwardRef, useId, useRef, type KeyboardEvent, type MouseEvent } from "
 import { createPortal } from "react-dom";
 import { useFocusTrap } from "../../../hooks/useFocusTrap";
 import { useScrollLock } from "../../../hooks/useScrollLock";
-import { usePortalContainer } from "../../../provider/context";
+import { useBlockUIMessages, usePortalContainer } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { mergeRefs } from "../../../utils/refs";
 import styles from "./Drawer.module.css";
@@ -30,6 +30,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const container = usePortalContainer();
   const panelRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
@@ -73,7 +74,12 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
           <h2 id={titleId} className={styles.title}>
             {title}
           </h2>
-          <button type="button" className={styles.close} aria-label="Close" onClick={onClose}>
+          <button
+            type="button"
+            className={styles.close}
+            aria-label={m.common.close}
+            onClick={onClose}
+          >
             <CloseIcon size={16} />
           </button>
         </div>

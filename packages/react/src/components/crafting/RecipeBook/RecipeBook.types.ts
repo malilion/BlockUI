@@ -33,6 +33,6 @@ export interface RecipeBookProps extends Omit<HTMLAttributes<HTMLDivElement>, "d
   onCraft?: (id: string) => void;
   /** Start with "Craftable only" switched on. */
   defaultCraftableOnly?: boolean;
-  /** Accessible name. @default "Recipe book" */
+  /** Accessible name. @default locale `recipeBook.label` ("Recipe book") */
   label?: string;
 }

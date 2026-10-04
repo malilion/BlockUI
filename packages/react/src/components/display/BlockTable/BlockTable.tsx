@@ -12,6 +12,7 @@ import { cx } from "../../../utils/cx";
 import styles from "./BlockTable.module.css";
 import type { BlockTableProps, BlockTableSort } from "./BlockTable.types";
 import { nextSort, readField, sortRows } from "./BlockTable.utils";
+import { useBlockUIMessages } from "../../../provider/context";
 
 const ARIA_SORT = { asc: "ascending", desc: "descending" } as const;
 
@@ -29,13 +30,14 @@ function BlockTableInner<T>(
     striped = false,
     size = "md",
     stickyHeader = false,
-    emptyState = "No data",
+    emptyState,
     wrapperClassName,
     className,
     ...rest
   }: BlockTableProps<T>,
   ref: ForwardedRef<HTMLTableElement>,
 ) {
+  const m = useBlockUIMessages();
   const captionId = useId();
   const [activeSort, setSort] = useControllableState<BlockTableSort | null>({
     value: sort,
@@ -122,7 +124,7 @@ function BlockTableInner<T>(
           {visibleRows.length === 0 ? (
             <tr>
               <td colSpan={columns.length} className={styles.empty}>
-                {emptyState}
+                {emptyState ?? m.blockTable.empty}
               </td>
             </tr>
           ) : (

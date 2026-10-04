@@ -48,7 +48,7 @@ export interface BlockTableProps<T> extends Omit<
   size?: "sm" | "md";
   /** Keep the header visible while the page scrolls. */
   stickyHeader?: boolean;
-  /** Shown in place of rows when `rows` is empty. @default "No data" */
+  /** Shown in place of rows when `rows` is empty. @default messages.blockTable.empty ("No data") */
   emptyState?: ReactNode;
   /** Class for the scroll container around the table. */
   wrapperClassName?: string;

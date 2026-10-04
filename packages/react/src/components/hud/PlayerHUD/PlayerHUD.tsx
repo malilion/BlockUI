@@ -6,15 +6,17 @@ import { HungerBar } from "../HungerBar/HungerBar";
 import { XPBar } from "../XPBar/XPBar";
 import styles from "./PlayerHUD.module.css";
 import type { PlayerHUDProps } from "./PlayerHUD.types";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /**
  * Survival HUD: armor above health on the left, hunger on the right and the
  * XP bar with level underneath.
  */
 export const PlayerHUD = forwardRef<HTMLElement, PlayerHUDProps>(function PlayerHUD(
-  { player, iconSize = 16, showText = false, label = "Player status", className, ...rest },
+  { player, iconSize = 16, showText = false, label, className, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const {
     health,
     maxHealth = 20,
@@ -28,7 +30,12 @@ export const PlayerHUD = forwardRef<HTMLElement, PlayerHUDProps>(function Player
   } = player;
 
   return (
-    <section ref={ref} aria-label={label} className={cx(styles.hud, className)} {...rest}>
+    <section
+      ref={ref}
+      aria-label={label ?? m.hud.playerStatus}
+      className={cx(styles.hud, className)}
+      {...rest}
+    >
       <div className={styles.bars}>
         <div className={styles.left}>
           {armor !== undefined ? (

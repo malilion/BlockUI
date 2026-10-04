@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from "react";
 
 export interface BlockLoadingProps extends HTMLAttributes<HTMLDivElement> {
-  /** Status text (announced politely). @default "Loading…" */
+  /** Status text (announced politely). @default messages.common.loading ("Loading…") */
   label?: string;
   /** `blocks` — stepping pixel blocks; `bar` — indeterminate or determinate bar. @default "blocks" */
   variant?: "blocks" | "bar";

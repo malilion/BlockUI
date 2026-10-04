@@ -12,6 +12,6 @@ export interface BreadcrumbProps extends HTMLAttributes<HTMLElement> {
   items: BreadcrumbItem[];
   /** Separator between items. Defaults to a pixel chevron. */
   separator?: ReactNode;
-  /** Accessible name. @default "Breadcrumb" */
+  /** Accessible name. @default messages.breadcrumb.label ("Breadcrumb") */
   label?: string;
 }

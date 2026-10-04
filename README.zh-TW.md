@@ -251,6 +251,26 @@ import type {
 
 每套主題都以 `--block-*` CSS 變數定義 `BlockTheme` 的角色（`background`、`surface`、`surfaceAlt`、`primary`、`secondary`、`border`、`text`、`textMuted`……）。測試會檢查每套主題每個表面上的文字都達到 WCAG AA。
 
+## 多語系
+
+所有內建文字(按鈕、空狀態、無障礙名稱、狀態文字)都來自 `BlockUIProvider` 的 `messages`。預設為英文,並內建繁體中文 `zhTWMessages`。
+
+```tsx
+import { BlockUIProvider, zhTWMessages } from "@malilion/block-ui-react";
+
+<BlockUIProvider messages={zhTWMessages}>
+  <App />
+</BlockUIProvider>;
+```
+
+只想改幾個字串時,傳入那幾個區塊即可,會合併到英文之上:
+
+```tsx
+<BlockUIProvider messages={{ questCard: { claim: "領取" } }}>…</BlockUIProvider>
+```
+
+要寫完整的語系,請用 `BlockUIMessages` 型別;帶數值的字串(如 `worldCard.day`)是函式,讓每種語言自行決定語序。元件上的 `label`、`placeholder`、`statusLabels` 等屬性仍會覆蓋 provider 的設定。自訂元件可用 `useBlockUIMessages()` 取得目前的文字。
+
 ## 色票
 
 | 名稱             | Token               | 值        | 用途               |

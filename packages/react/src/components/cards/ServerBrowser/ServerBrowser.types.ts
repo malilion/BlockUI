@@ -17,8 +17,8 @@ export interface ServerBrowserProps extends HTMLAttributes<HTMLDivElement> {
   onAddServer?: () => void;
   /** Initial sort. @default "players" */
   defaultSort?: ServerSort;
-  /** Shown when no server matches. @default "No servers found" */
+  /** Shown when no server matches. @default messages.serverBrowser.empty ("No servers found") */
   emptyText?: ReactNode;
-  /** Accessible name. @default "Server browser" */
+  /** Accessible name. @default messages.serverBrowser.label ("Server browser") */
   label?: string;
 }

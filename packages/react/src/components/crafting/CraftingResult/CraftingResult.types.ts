@@ -5,7 +5,7 @@ export interface CraftingResultProps extends Omit<HTMLAttributes<HTMLDivElement>
   children?: ReactNode;
   /** Called when the player takes the result (click / Enter). */
   onTake?: () => void;
-  /** Accessible label prefix. @default "Crafting result" */
+  /** Accessible label prefix. @default locale `craftingResult.label` ("Crafting result") */
   label?: string;
   disabled?: boolean;
 }

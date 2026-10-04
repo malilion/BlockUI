@@ -33,6 +33,6 @@ export interface TradingUIProps extends Omit<HTMLAttributes<HTMLDivElement>, "de
   level?: number;
   /** Progress to the next level, 0–100. */
   levelProgress?: number;
-  /** Accessible name. @default "Trading" */
+  /** Accessible name. @default locale `tradingUI.label` ("Trading") */
   label?: string;
 }

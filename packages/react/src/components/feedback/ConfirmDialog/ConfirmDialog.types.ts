@@ -4,9 +4,9 @@ export interface ConfirmDialogProps {
   open: boolean;
   title: ReactNode;
   description?: ReactNode;
-  /** @default "Confirm" */
+  /** @default messages.confirmDialog.confirm ("Confirm") */
   confirmText?: string;
-  /** @default "Cancel" */
+  /** @default messages.confirmDialog.cancel ("Cancel") */
   cancelText?: string;
   /** `danger` uses a redstone confirm button and focuses Cancel first. @default "default" */
   variant?: "default" | "danger";
