@@ -25,6 +25,8 @@
 
 <p align="center">
   <a href="https://malilion.github.io/BlockUI/"><b>📖 Docs & live demos (Storybook)</b></a>
+  ·
+  <a href="https://malilion.github.io/BlockUI/game/"><b>🎮 Play Block Miner</b></a>
 </p>
 
 <p align="center">
@@ -164,6 +166,14 @@ import "@fontsource/silkscreen/700.css";
 </p>
 
 Every component has stories in [Storybook](https://malilion.github.io/BlockUI/) (or run `pnpm storybook` locally) — always `Default`, `Variants`, `States`, `Sizes`, `Disabled`, `Interactive` (an interaction test) and `Responsive` — with live controls, all variants and states, usage, props tables, accessibility notes and an a11y checker. Storybook also has Foundations pages (colors, typography, spacing, shadows, themes, icons) and full-screen Patterns (dashboard, player profile, inventory screen, crafting screen, server browser).
+
+## Demo game
+
+**[Block Miner](https://malilion.github.io/BlockUI/game/)** ([`apps/game`](./apps/game)) is a small mining and crafting game built only from the published npm packages, in Traditional Chinese through `zhTWMessages`. Dig through five layers that switch the theme, craft tools in `RecipeBook`, smelt ore in `Furnace`, trade with `TradingUI`, fight monsters shown in a `BossBar`, and track progress with `QuestCard`, `AchievementCard` and `Scoreboard`. Progress is saved in the browser. Run it locally with `pnpm game`.
+
+<p align="center">
+  <img src="./docs/images/game.png" alt="Block Miner: a mine grid, player HUD, hotbar and quest cards" width="100%">
+</p>
 
 ## Components
 
@@ -328,6 +338,7 @@ Common scripts:
 
 ```bash
 pnpm dev               # Playground demo at http://localhost:5173
+pnpm game              # Block Miner demo game at http://localhost:5173
 pnpm storybook         # Storybook at http://localhost:6006
 pnpm test              # Vitest unit, component and axe tests
 pnpm test:e2e          # Playwright E2E (desktop + mobile)
@@ -347,6 +358,7 @@ pnpm screenshots       # Regenerate the README images (after pnpm build)
 block-ui/
 ├─ apps/
 │  ├─ docs/          # Storybook: Introduction, Foundations, Patterns
+│  ├─ game/          # Block Miner demo game (uses the npm packages)
 │  └─ playground/    # Demo dashboard
 ├─ packages/
 │  ├─ react/         # @malilion/block-ui-react
@@ -361,7 +373,7 @@ Each component lives in its own folder with `Component.tsx`, `Component.types.ts
 
 The library is built with Vite library mode into ESM with `preserveModules`, TypeScript declarations and a single `dist/styles.css`. React is external.
 
-Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, package install check, Storybook build, every story's interaction test plus an axe scan in all five themes, and Playwright E2E (including axe on the playground). Pushes to `main` also deploy Storybook to GitHub Pages. When a push to `main` carries a new package version, the Release workflow publishes `@malilion/block-ui-*` to npm through trusted publishing (no npm token), then tags `vX.Y.Z` and creates a GitHub Release from the CHANGELOG (see [docs/RELEASING.md](./docs/RELEASING.md)).
+Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, package install check, Storybook build, every story's interaction test plus an axe scan in all five themes, and Playwright E2E (including axe on the playground). Pushes to `main` also deploy Storybook and the demo game to GitHub Pages. When a push to `main` carries a new package version, the Release workflow publishes `@malilion/block-ui-*` to npm through trusted publishing (no npm token), then tags `vX.Y.Z` and creates a GitHub Release from the CHANGELOG (see [docs/RELEASING.md](./docs/RELEASING.md)).
 
 ## Browser Support
 
