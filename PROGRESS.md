@@ -40,6 +40,7 @@
 - [x] npm: `@malilion/block-ui-{tokens,themes,icons,react}@0.1.0` (published 2026-10-02; the `@block-ui` npm org belongs to another account)
 - [x] npm: `@malilion/block-ui-*@0.2.0` (2026-10-04) — tokens / themes via trusted publishing, icons / react published by hand; GitHub Release [v0.2.0](https://github.com/malilion/BlockUI/releases/tag/v0.2.0)
 - [x] npm: `@malilion/block-ui-*@0.3.0` (2026-10-04) — fully automatic CI release; GitHub Release [v0.3.0](https://github.com/malilion/BlockUI/releases/tag/v0.3.0)
+- [x] npm: `@malilion/block-ui-*@0.4.0` (2026-10-04) — Avatar, Accordion, Drawer, EmptyState, Skeleton, NumberInput; automatic CI release, GitHub Release [v0.4.0](https://github.com/malilion/BlockUI/releases/tag/v0.4.0); CI on main green (36 min, incl. axe on every story × 5 themes)
 
 ## Next
 
