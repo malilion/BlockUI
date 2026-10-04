@@ -46,6 +46,7 @@
 - [x] Localization: `BlockUIProvider messages` (full locale or partial override merged onto English), `zhTWMessages`, `useBlockUIMessages()`; every built-in string of every component reads from it, explicit props still win
 - [x] Block Miner (`apps/game`, `pnpm game`) — playable demo game on the published 0.6.0 packages, in Traditional Chinese via `zhTWMessages`
 - [x] Storybook localization: **Language** toolbar (English / 繁體中文) on every story, Foundations → Localization page; internal `WEATHER_LABEL` removed
+- [x] 0.6.1 versioned (`pnpm release:version 0.6.1`) — Storybook language switch + Localization page, internal `WEATHER_LABEL` removed
 - [x] 0.6.0 versioned (`pnpm release:version 0.6.0`)
 - [x] 0.5.1 versioned (`pnpm release:version 0.5.1`) — no package changes, first release through the hardened pipeline
 - [x] 0.5.0 versioned (`pnpm release:version 0.5.0`)
