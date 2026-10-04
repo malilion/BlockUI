@@ -121,6 +121,9 @@ import {
 } from "@malilion/block-ui-icons";
 import styles from "./App.module.css";
 
+/** Block Miner, the demo game built on the published packages (deployed next to Storybook). */
+const GAME_URL = "https://malilion.github.io/BlockUI/game/";
+
 const TABS = ["Dashboard", "Inventory", "Crafting", "Cards", "Servers", "Feedback"] as const;
 type TabName = (typeof TABS)[number];
 
@@ -1099,7 +1102,20 @@ export default function App() {
   return (
     <BlockUIProvider theme={theme} className={styles.root}>
       <div className={styles.layout}>
-        <BlockSidebar label="Playground Navigation">
+        <BlockSidebar
+          label="Playground Navigation"
+          footer={
+            <a
+              className={`${styles.gameLink} ${styles.gameLinkWide}`}
+              href={GAME_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <PlayIcon size={16} />
+              <span>Play Block Miner</span>
+            </a>
+          }
+        >
           {TABS.map((tab) => (
             <SidebarItem
               key={tab}
@@ -1114,7 +1130,13 @@ export default function App() {
         <main className={styles.main}>
           <header className={styles.topBar}>
             <p className={styles.brand}>Block UI</p>
-            {themeSelect}
+            <div className={styles.topActions}>
+              <a className={styles.gameLink} href={GAME_URL} target="_blank" rel="noreferrer">
+                <PlayIcon size={16} />
+                <span>Play Block Miner</span>
+              </a>
+              {themeSelect}
+            </div>
           </header>
           <Breadcrumb
             className={styles.breadcrumb}

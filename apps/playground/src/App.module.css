@@ -35,8 +35,51 @@
   gap: var(--block-space-4);
 }
 
+.topActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--block-space-3);
+}
+
+.gameLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--block-space-2);
+  min-height: var(--block-size-control-sm);
+  padding: 0 var(--block-space-3);
+  border: var(--block-border-width-thin) solid var(--block-outline);
+  background: var(--block-grass);
+  color: var(--block-on-grass);
+  box-shadow: var(--block-shadow-bevel);
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-sm);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.gameLinkWide {
+  display: flex;
+  justify-content: center;
+}
+
+.gameLink:hover {
+  background: var(--block-grass-light);
+}
+
+.gameLink:active {
+  box-shadow: var(--block-shadow-inset);
+}
+
+.gameLink:focus-visible {
+  outline: 3px solid var(--block-focus);
+  outline-offset: 2px;
+}
+
 .brand {
   margin: 0;
+  white-space: nowrap;
   font-family: var(--block-font-display);
   font-size: var(--block-font-size-xl);
   letter-spacing: var(--block-letter-spacing-wide);
@@ -106,6 +149,20 @@
 @media (min-width: 768px) and (max-width: 1023.98px) {
   .section {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* The sidebar shows icons only here; keep the label for screen readers. */
+  .gameLinkWide {
+    padding: 0;
+  }
+
+  .gameLinkWide > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 }
 
