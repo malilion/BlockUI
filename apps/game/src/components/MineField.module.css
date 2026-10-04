@@ -1,0 +1,143 @@
+.field {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: 0;
+  border: var(--block-border-width) solid var(--block-outline);
+  background: #0b0c0f;
+  box-shadow: var(--block-shadow-drop);
+  user-select: none;
+}
+
+.tile,
+.air {
+  position: relative;
+  aspect-ratio: 1;
+  min-width: 0;
+}
+
+.air {
+  background: linear-gradient(rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.82)), var(--rock);
+  background-size: 100% 100%;
+  image-rendering: pixelated;
+  box-shadow: var(--block-shadow-inset);
+}
+
+.air[data-surface] {
+  background: linear-gradient(#7fb6e8, #a9d2f2);
+  box-shadow: none;
+}
+
+.tile {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background-size: 100% 100%;
+  image-rendering: pixelated;
+  box-shadow: var(--block-shadow-bevel);
+  transition:
+    filter var(--block-duration-instant) var(--block-ease-step),
+    transform var(--block-duration-instant) var(--block-ease-step);
+}
+
+.tile[data-texture="rock"] {
+  background-image: var(--rock);
+}
+.tile[data-texture="grass"] {
+  background-image: var(--block-texture-grass);
+}
+.tile[data-texture="dirt"] {
+  background-image: var(--block-texture-dirt);
+}
+.tile[data-texture="obsidian"] {
+  background-image: var(--block-texture-obsidian);
+}
+.tile[data-texture="sand"] {
+  background:
+    radial-gradient(circle at 30% 30%, var(--block-sand-light) 8%, transparent 9%) 0 0 / 50% 50%,
+    radial-gradient(circle at 70% 60%, var(--block-sand-dark) 7%, transparent 8%) 0 0 / 50% 50%,
+    var(--block-sand);
+}
+.tile[data-texture="sky"] {
+  background: linear-gradient(#7fb6e8 0 70%, var(--block-grass) 70% 76%, var(--block-dirt) 76%);
+}
+
+.tile:hover:not([aria-disabled]) {
+  filter: brightness(1.15);
+  outline: 3px solid rgba(255, 255, 255, 0.85);
+  outline-offset: -3px;
+  z-index: 1;
+}
+
+.tile:active:not([aria-disabled]) {
+  transform: translate(2px, 2px);
+}
+
+.tile:focus-visible {
+  outline: 3px solid var(--block-focus);
+  outline-offset: -3px;
+  z-index: 2;
+}
+
+.tile[aria-disabled] {
+  cursor: not-allowed;
+  filter: brightness(0.7) saturate(0.8);
+}
+
+.overlay {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+.tile[data-texture="sky"] .overlay {
+  width: 82%;
+  filter: none;
+  transform: translateY(-6%);
+}
+
+/* Crack overlay — grows with damage stage */
+.tile[data-stage]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(45deg, transparent 46%, rgba(0, 0, 0, 0.7) 47% 53%, transparent 54%),
+    linear-gradient(-45deg, transparent 46%, rgba(0, 0, 0, 0.7) 47% 53%, transparent 54%);
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.tile[data-stage="2"]::after {
+  background-size: 70% 70%;
+}
+.tile[data-stage="3"]::after {
+  background-size: 90% 90%;
+}
+.tile[data-stage="4"]::after {
+  background-size: 100% 100%;
+}
+
+.hp {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 8%;
+  height: 5px;
+  border: 1px solid var(--block-outline);
+  background: linear-gradient(
+    90deg,
+    var(--block-grass-light) calc(var(--hp) * 100%),
+    rgba(0, 0, 0, 0.6) 0
+  );
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile {
+    transition: none;
+  }
+}

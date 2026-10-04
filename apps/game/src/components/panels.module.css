@@ -1,0 +1,27 @@
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--block-space-3);
+}
+
+.buttonRow,
+.equipment {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--block-space-2);
+}
+
+.label {
+  min-width: 56px;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-sm);
+  text-transform: uppercase;
+  color: var(--block-text-muted);
+}
+
+.hint {
+  margin: 0;
+  font-size: var(--block-font-size-sm);
+  color: var(--block-text-muted);
+}

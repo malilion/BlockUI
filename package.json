@@ -10,6 +10,7 @@
   },
   "scripts": {
     "dev": "pnpm --filter @block-ui/playground dev",
+    "game": "pnpm --filter @block-ui/game dev",
     "build": "pnpm -r build",
     "build:packages": "pnpm -r --filter \"./packages/**\" build",
     "storybook": "pnpm build:packages && pnpm --filter @block-ui/docs storybook",
