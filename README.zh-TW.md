@@ -26,11 +26,14 @@
 <p align="center">
   <a href="https://malilion.github.io/BlockUI/"><b>📖 文件與線上範例（Storybook）</b></a>
   ·
+  <a href="https://malilion.github.io/BlockUI/playground/"><b>🧪 Playground</b></a>
+  ·
   <a href="https://malilion.github.io/BlockUI/game/"><b>🎮 玩方塊礦工</b></a>
 </p>
 
 <p align="center">
-  <img src="./docs/images/hero.png" alt="Block UI Playground 儀表板" width="100%">
+  <a href="https://malilion.github.io/BlockUI/playground/"><img src="./docs/images/hero.png" alt="Block UI Playground 儀表板" width="100%"></a><br>
+  <sub><a href="https://malilion.github.io/BlockUI/playground/">Playground</a>:在同一個 app 裡展示所有元件,可切換主題。</sub>
 </p>
 
 Block UI 是一套 React 元件庫，視覺語言來自方塊建造生存遊戲：**方塊（Block）、背包（Inventory）、合成（Craft）、遊戲 HUD 與像素互動（Pixel Interaction）**。它不是「一般 SaaS 後台 + 像素字體」——每個主要互動都是一塊方塊：按鈕是有斜角立體感的方塊，hover 時往上彈、按下時往下壓；背包是真正可以用鍵盤操作的格子；生命值用愛心表示；合成台把格子裡的材料變成成品。
@@ -373,7 +376,7 @@ block-ui/
 
 函式庫使用 Vite library mode 建置成 ESM（`preserveModules`）、TypeScript 型別宣告與單一 `dist/styles.css`。React 為 external，不會被打包。
 
-每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、套件安裝檢查、Storybook 建置、在五套主題下執行每個 story 的互動測試與 axe 檢查，以及 Playwright E2E（含 Playground 的 axe 檢查）。push 到 `main` 時也會把 Storybook 與範例遊戲部署到 GitHub Pages。當 push 到 `main` 的套件版本號是新的，Release workflow 會以 Trusted Publishing（不需 npm token）把 `@malilion/block-ui-*` 發布到 npm，接著打上 `vX.Y.Z` tag，並以 CHANGELOG 內容建立 GitHub Release（見 [docs/RELEASING.md](./docs/RELEASING.md)）。
+每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、套件安裝檢查、Storybook 建置、在五套主題下執行每個 story 的互動測試與 axe 檢查，以及 Playwright E2E（含 Playground 的 axe 檢查）。push 到 `main` 時也會把 Storybook、範例遊戲與 Playground 部署到 GitHub Pages。當 push 到 `main` 的套件版本號是新的，Release workflow 會以 Trusted Publishing（不需 npm token）把 `@malilion/block-ui-*` 發布到 npm，接著打上 `vX.Y.Z` tag，並以 CHANGELOG 內容建立 GitHub Release（見 [docs/RELEASING.md](./docs/RELEASING.md)）。
 
 ## 瀏覽器支援
 

@@ -26,11 +26,14 @@
 <p align="center">
   <a href="https://malilion.github.io/BlockUI/"><b>📖 Docs & live demos (Storybook)</b></a>
   ·
+  <a href="https://malilion.github.io/BlockUI/playground/"><b>🧪 Playground</b></a>
+  ·
   <a href="https://malilion.github.io/BlockUI/game/"><b>🎮 Play Block Miner</b></a>
 </p>
 
 <p align="center">
-  <img src="./docs/images/hero.png" alt="Block UI playground dashboard" width="100%">
+  <a href="https://malilion.github.io/BlockUI/playground/"><img src="./docs/images/hero.png" alt="Block UI playground dashboard" width="100%"></a><br>
+  <sub>The <a href="https://malilion.github.io/BlockUI/playground/">playground</a>: every component in one app, with a theme switcher.</sub>
 </p>
 
 Block UI is a React component library whose visual language comes from block-building survival games: **Block, Inventory, Craft, Game HUD and Pixel Interaction**. It is not "a normal SaaS dashboard with a pixel font" — every main interaction is a block. Buttons are bevelled blocks that snap up on hover and press down on click, inventories are real keyboard-navigable grids of slots, health is drawn in hearts, and the crafting table turns a grid into a result.
@@ -373,7 +376,7 @@ Each component lives in its own folder with `Component.tsx`, `Component.types.ts
 
 The library is built with Vite library mode into ESM with `preserveModules`, TypeScript declarations and a single `dist/styles.css`. React is external.
 
-Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, package install check, Storybook build, every story's interaction test plus an axe scan in all five themes, and Playwright E2E (including axe on the playground). Pushes to `main` also deploy Storybook and the demo game to GitHub Pages. When a push to `main` carries a new package version, the Release workflow publishes `@malilion/block-ui-*` to npm through trusted publishing (no npm token), then tags `vX.Y.Z` and creates a GitHub Release from the CHANGELOG (see [docs/RELEASING.md](./docs/RELEASING.md)).
+Every push and pull request to `main` runs GitHub Actions: format, lint, typecheck, unit tests, build, tree-shake check, package install check, Storybook build, every story's interaction test plus an axe scan in all five themes, and Playwright E2E (including axe on the playground). Pushes to `main` also deploy Storybook, the demo game and the playground to GitHub Pages. When a push to `main` carries a new package version, the Release workflow publishes `@malilion/block-ui-*` to npm through trusted publishing (no npm token), then tags `vX.Y.Z` and creates a GitHub Release from the CHANGELOG (see [docs/RELEASING.md](./docs/RELEASING.md)).
 
 ## Browser Support
 
