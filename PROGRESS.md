@@ -39,12 +39,13 @@
 
 - [x] npm: `@malilion/block-ui-{tokens,themes,icons,react}@0.1.0` (published 2026-10-02; the `@block-ui` npm org belongs to another account)
 - [x] npm: `@malilion/block-ui-*@0.2.0` (2026-10-04) — tokens / themes via trusted publishing, icons / react published by hand; GitHub Release [v0.2.0](https://github.com/malilion/BlockUI/releases/tag/v0.2.0)
+- [x] npm: `@malilion/block-ui-*@0.3.0` (2026-10-04) — fully automatic CI release; GitHub Release [v0.3.0](https://github.com/malilion/BlockUI/releases/tag/v0.3.0)
 
 ## Next
 
 - [x] 0.2.0 versioned (`pnpm release:version 0.2.0`) and CHANGELOG section dated 2026-10-04
 - [x] npm trusted publishing for icons / react: their configs hold the environment `leave blank` (npm web form would not clear it); `release.yml` now publishes them in a `publish-ui` job running in a GitHub environment of that name (docs/RELEASING.md)
-- [ ] Confirm on the 0.3.0 release that all four packages publish from CI with no manual step
+- [x] Confirmed on 0.3.0: all four packages publish from CI (tokens / themes without an environment, icons / react from `leave blank`), with provenance and no manual step
 - [x] V2 batch 1 (HUD): `BossBar`, `Scoreboard`, `CoordinatesHUD`, `BiomeIndicator`, `DayNightIndicator`, `WeatherIndicator` + 8 environment icons; playground "World HUD"
 - [x] V2 batch 2 (workstations): `EnchantingTable`, `BrewingStand`, `Anvil`, `TradingUI`, `RecipeBook` + 4 icons; playground Crafting tab
 - [x] V2 batch 3 (community): `ServerBrowser`, `WorldBrowser`, `ChatWindow`, `CommandConsole`, `SkillTree`, `MiniMap` — every PRD §83 V2 component is done
