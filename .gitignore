@@ -12,3 +12,6 @@ blob-report
 .eslintcache
 .pnpm-store
 .claude
+
+# Promo video renders
+promo/
