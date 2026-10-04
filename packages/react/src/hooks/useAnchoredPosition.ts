@@ -17,7 +17,8 @@ export interface AnchoredPosition extends FloatingPosition {
  * the first measurement.
  */
 export function useAnchoredPosition(
-  anchorRef: RefObject<HTMLElement | null>,
+  /** The anchor element, or a virtual one (e.g. the pointer position) with `getBoundingClientRect`. */
+  anchorRef: RefObject<Pick<Element, "getBoundingClientRect"> | null>,
   floatingRef: RefObject<HTMLElement | null>,
   open: boolean,
   { side, align = "center", gap = 8 }: { side: FloatingSide; align?: FloatingAlign; gap?: number },

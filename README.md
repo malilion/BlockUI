@@ -167,16 +167,16 @@ Every component has stories in [Storybook](https://malilion.github.io/BlockUI/) 
 
 | Category   | Components                                                                                                                                                                             |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Actions    | `BlockButton` · `IconButton` · `BlockMenu`                                                                                                                                             |
+| Actions    | `BlockButton` · `IconButton` · `BlockMenu` · `ContextMenu`                                                                                                                             |
 | Forms      | `BlockInput` · `BlockTextarea` · `BlockSelect` · `BlockCheckbox` · `BlockRadioGroup` / `BlockRadio` · `BlockToggle` · `BlockSlider` · `NumberInput`                                    |
 | Inventory  | `Inventory` / `InventorySection` · `InventoryGrid` · `InventorySlot` · `ItemStack` · `ItemTooltip` · `DurabilityBar` · `Hotbar`                                                        |
 | Crafting   | `CraftingTable` · `CraftingGrid` · `CraftingSlot` · `CraftingResult` · `Furnace` · `EnchantingTable` · `BrewingStand` · `Anvil` · `TradingUI` · `RecipeBook`                           |
 | HUD        | `HealthBar` · `ArmorBar` · `HungerBar` · `XPBar` · `PlayerHUD` · `BossBar` · `Scoreboard` · `CoordinatesHUD` · `BiomeIndicator` · `DayNightIndicator` · `WeatherIndicator` · `MiniMap` |
 | Cards      | `BlockCard` · `QuestCard` · `AchievementCard` · `PlayerCard` · `ServerCard` · `WorldCard` · `ServerBrowser` · `WorldBrowser`                                                           |
-| Display    | `BlockTable` · `SkillTree` · `Avatar`                                                                                                                                                  |
+| Display    | `BlockTable` · `SkillTree` · `Avatar` · `Popover` · `Kbd`                                                                                                                              |
 | Feedback   | `BlockAlert` · `toast()` / `BlockToaster` · `BlockModal` · `ConfirmDialog` · `BlockProgress` · `BlockLoading` · `BlockBadge` · `BlockTooltip` · `Drawer` · `EmptyState` · `Skeleton`   |
-| Navigation | `BlockSidebar` / `SidebarItem` · `BlockTabs` · `Breadcrumb` · `HotbarNavigation` · `BlockPagination`                                                                                   |
-| Layout     | `BlockUIProvider` · `BlockPanel` · `BlockStack` · `BlockDivider` · `Accordion`                                                                                                         |
+| Navigation | `BlockSidebar` / `SidebarItem` · `BlockTabs` · `Breadcrumb` · `HotbarNavigation` · `BlockPagination` · `BlockStepper`                                                                  |
+| Layout     | `BlockUIProvider` · `BlockPanel` · `BlockStack` · `BlockDivider` · `Accordion` · `BlockGrid` · `BlockContainer`                                                                        |
 | Social     | `ChatWindow` · `CommandConsole`                                                                                                                                                        |
 | Hooks      | `useControllableState` · `useFocusTrap` · `useDigitHotkeys` · `useMediaQuery` · `useToasts` · `useBlockUI`                                                                             |
 

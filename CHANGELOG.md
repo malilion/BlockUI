@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- **`Popover`** — click-to-open non-modal dialog for interactive content, in the overlay layer with viewport flip; focus moves inside, Escape returns it to the trigger, outside clicks and tabbing out close it.
+- **`ContextMenu`** — right-click menu (or Shift+F10 / the Menu key) that opens at the pointer and shares the menu with `BlockMenu`.
+- **`Kbd`** — pixel keycaps, including key combinations as nested `<kbd>`s.
+- **`BlockGrid`** — fixed equal columns (one column on phones) or auto-fill with a minimum item width, on the spacing scale.
+- **`BlockContainer`** — centred max-width container on the breakpoint scale with 16px gutters.
+- **`BlockStepper`** — horizontal / vertical multi-step progress with `aria-current="step"`; completed steps can be revisited.
+- **Playground** — inventory items have a context menu, the dashboard has a settings popover and a "Create World" stepper.
+
+### Changed
+
+- `BlockMenu`'s menu list is shared with `ContextMenu` (internal `MenuList`); `useAnchoredPosition` also accepts a virtual anchor such as the pointer position.
+
 ## [0.4.0] — 2026-10-04
 
 ### Added

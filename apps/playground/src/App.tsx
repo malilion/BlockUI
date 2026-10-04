@@ -74,6 +74,10 @@ import {
   EmptyState,
   Skeleton,
   NumberInput,
+  ContextMenu,
+  Popover,
+  Kbd,
+  BlockStepper,
   type ChatMessage,
   type ConsoleEntry,
   blockButtonVariants,
@@ -175,7 +179,17 @@ function DashboardSection() {
         </div>
         <div className={styles.row}>
           <IconButton icon={<SearchIcon size={16} />} label="Search" />
-          <IconButton icon={<SettingsIcon size={16} />} label="Settings" />
+          <Popover
+            title="Quick Settings"
+            content={
+              <div className={styles.col}>
+                <BlockToggle label="Show coordinates" defaultChecked />
+                <BlockToggle label="Auto-jump" />
+              </div>
+            }
+          >
+            <IconButton icon={<SettingsIcon size={16} />} label="Settings" />
+          </Popover>
         </div>
       </div>
       <div className={styles.col}>
@@ -249,6 +263,10 @@ function DashboardSection() {
             { id: "border", title: "World border", content: "60,000,000 blocks wide." },
           ]}
         />
+      </div>
+      <div className={styles.col}>
+        <h3 className={styles.heading}>Create World</h3>
+        <CreateWorldSteps />
       </div>
       <div className={styles.col}>
         <h3 className={styles.heading}>Current Status</h3>
@@ -341,22 +359,36 @@ function InventorySectionView() {
     <div className={styles.col}>
       <Inventory title="Inventory" icon={<InventoryIcon size={24} />}>
         <InventorySection title="Storage">
-          <InventoryGrid columns={9} rows={3}>
-            {slot("Diamond Sword", <SwordIcon size={16} />, {
-              durability: 1200,
-              maxDurability: 1561,
-              rarity: "rare",
-            })}
-            {slot("Iron Pickaxe", <PickaxeIcon size={16} />, {
-              durability: 10,
-              maxDurability: 250,
-            })}
-            {slot("Emerald", <EmeraldIcon size={16} />, { amount: 64 })}
-            <InventorySlot />
-            {slot("Gold Ingot", <GoldIcon size={16} />, { amount: 12 })}
-            {slot("Torch", <TorchIcon size={16} />, { amount: 17 })}
-            {slot("Apple", <AppleIcon size={16} />, { amount: 8 })}
-          </InventoryGrid>
+          <p className={styles.hint}>
+            Right-click an item, or press <Kbd size="sm" keys={["Shift", "F10"]} />, for actions.
+          </p>
+          <ContextMenu
+            label="Item actions"
+            items={[
+              { id: "split", label: "Split stack" },
+              { id: "equip", label: "Equip" },
+              { type: "separator" },
+              { id: "drop", label: "Drop", danger: true, shortcut: "Q" },
+            ]}
+            onSelect={(id) => toast.info(`Item action: ${id}`)}
+          >
+            <InventoryGrid columns={9} rows={3}>
+              {slot("Diamond Sword", <SwordIcon size={16} />, {
+                durability: 1200,
+                maxDurability: 1561,
+                rarity: "rare",
+              })}
+              {slot("Iron Pickaxe", <PickaxeIcon size={16} />, {
+                durability: 10,
+                maxDurability: 250,
+              })}
+              {slot("Emerald", <EmeraldIcon size={16} />, { amount: 64 })}
+              <InventorySlot />
+              {slot("Gold Ingot", <GoldIcon size={16} />, { amount: 12 })}
+              {slot("Torch", <TorchIcon size={16} />, { amount: 17 })}
+              {slot("Apple", <AppleIcon size={16} />, { amount: 8 })}
+            </InventoryGrid>
+          </ContextMenu>
         </InventorySection>
         <InventorySection title="Hotbar">
           <Hotbar slots={9} selectedIndex={0}>
@@ -798,6 +830,38 @@ function ServersSection() {
         </div>
       </BlockPanel>
     </>
+  );
+}
+
+function CreateWorldSteps() {
+  const [step, setStep] = useState(1);
+  const steps = [
+    { id: "name", label: "Name", description: "Emerald Valley" },
+    { id: "mode", label: "Game mode", description: "Survival" },
+    { id: "terrain", label: "Terrain", description: "Default" },
+    { id: "create", label: "Create" },
+  ];
+  return (
+    <div className={styles.col}>
+      <BlockStepper
+        steps={steps}
+        current={step}
+        onStepClick={setStep}
+        label="Create world progress"
+      />
+      <div className={styles.row}>
+        <BlockButton disabled={step === 0} onClick={() => setStep((s) => Math.max(0, s - 1))}>
+          Back
+        </BlockButton>
+        <BlockButton
+          variant="grass"
+          disabled={step >= steps.length}
+          onClick={() => setStep((s) => s + 1)}
+        >
+          {step >= steps.length - 1 ? "Create" : "Next"}
+        </BlockButton>
+      </div>
+    </div>
   );
 }
 
