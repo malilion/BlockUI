@@ -106,14 +106,14 @@ importers:
         specifier: ^5.2.5
         version: 5.3.0
       '@malilion/block-ui-icons':
-        specifier: ^0.5.1
-        version: 0.5.1(react@19.3.0)
+        specifier: ^0.6.0
+        version: 0.6.0(react@19.3.0)
       '@malilion/block-ui-react':
-        specifier: ^0.5.1
-        version: 0.5.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        specifier: ^0.6.0
+        version: 0.6.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@malilion/block-ui-themes':
-        specifier: ^0.5.1
-        version: 0.5.1
+        specifier: ^0.6.0
+        version: 0.6.0
       react:
         specifier: ^19.3.0
         version: 19.3.0
@@ -669,22 +669,22 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@malilion/block-ui-icons@0.5.1':
-    resolution: {integrity: sha512-2Qei/LhVacBYW11gL8uRvuGixKSWtb5xX+/OjzB4wrfsk9hOpKFfIZUz7pdk6nbG0DoFksf5ZGcxRyMx+et6iw==}
+  '@malilion/block-ui-icons@0.6.0':
+    resolution: {integrity: sha512-J7KYwZXmuKcYWYnxxbJzOWQ2L5C+gk7SpgjLyLQXTH9SqovTSLaYdWBwp3y+YUuaUeEcd7AlH4bcypai3TUxWA==}
     peerDependencies:
       react: ^18.2.0 || ^19.0.0
 
-  '@malilion/block-ui-react@0.5.1':
-    resolution: {integrity: sha512-6BhVyHuVWaVGuwgDBdtjdIl+6DSMyB6rAJrAu37xd+GRCJbJF0GpT1gvoqZgVQE8PL6xuTFXb4m/qIvIxtuUEw==}
+  '@malilion/block-ui-react@0.6.0':
+    resolution: {integrity: sha512-4cgEu1uWCaDTIzIs6ljaBOaaJgwtN/byPcodpKQoDGB86n8Wf3Y507loJqXqRLEwmMpNK14zk4ovW3fjU3TiVQ==}
     peerDependencies:
       react: ^18.2.0 || ^19.0.0
       react-dom: ^18.2.0 || ^19.0.0
 
-  '@malilion/block-ui-themes@0.5.1':
-    resolution: {integrity: sha512-eReZqmsyoBmVYvbNvp0IUTyXbxe0Eb21UmebymobFZBOJHtf6al+YUw2kqb3YuNksX35IRfyIdunHtZXgbLkhg==}
+  '@malilion/block-ui-themes@0.6.0':
+    resolution: {integrity: sha512-VoIDtxJWNud1A6rApCv77DvMW//ffV1otWJgvQ8oh7qhwqnSCFFHnKjFPIoOYik886WLFeIqEuVCFHo+pFCc5w==}
 
-  '@malilion/block-ui-tokens@0.5.1':
-    resolution: {integrity: sha512-XdN6Uooa5AhA0+eSk6qICHti99vJz406tAsKGiNGdC5G2mVzrqhIgA8ErPkGOcXb/kltbjeBUyOAyjvImoIPpg==}
+  '@malilion/block-ui-tokens@0.6.0':
+    resolution: {integrity: sha512-AOO9WqgYT2KKiEU8HCD5DbrEnHL6TJ6w40Qr2SrNwoZJnIhYk6H/koXdDj1E0WKn3MnOm2RgoPIO33hT0omp3A==}
 
   '@mdx-js/react@3.1.1':
     resolution: {integrity: sha512-f++rKLQgUVYDAtECQ6fn/is15GkEH9+nZPM3MS0RcxVqoTfawHvDlSCH7JbMhAM6uJ32v3eXLvLmLvjGu7PTQw==}
@@ -3143,24 +3143,24 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@malilion/block-ui-icons@0.5.1(react@19.3.0)':
+  '@malilion/block-ui-icons@0.6.0(react@19.3.0)':
     dependencies:
-      '@malilion/block-ui-tokens': 0.5.1
+      '@malilion/block-ui-tokens': 0.6.0
       react: 19.3.0
 
-  '@malilion/block-ui-react@0.5.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
+  '@malilion/block-ui-react@0.6.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
-      '@malilion/block-ui-icons': 0.5.1(react@19.3.0)
-      '@malilion/block-ui-themes': 0.5.1
-      '@malilion/block-ui-tokens': 0.5.1
+      '@malilion/block-ui-icons': 0.6.0(react@19.3.0)
+      '@malilion/block-ui-themes': 0.6.0
+      '@malilion/block-ui-tokens': 0.6.0
       react: 19.3.0
       react-dom: 19.3.0(react@19.3.0)
 
-  '@malilion/block-ui-themes@0.5.1':
+  '@malilion/block-ui-themes@0.6.0':
     dependencies:
-      '@malilion/block-ui-tokens': 0.5.1
+      '@malilion/block-ui-tokens': 0.6.0
 
-  '@malilion/block-ui-tokens@0.5.1': {}
+  '@malilion/block-ui-tokens@0.6.0': {}
 
   '@mdx-js/react@3.1.1(@types/react@19.3.0)(react@19.3.0)':
     dependencies:
