@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-0.5.1 released
+0.6.0 released
 
 ## Completed
 
@@ -44,6 +44,7 @@
 - [x] CI hardening: GitHub Actions pinned to commit SHAs (Dependabot keeps them current), npm pinned to 11.21.0 in the publish jobs, workflow permissions granted per job (`id-token: write` only on publish / Pages deploy, `contents: write` only on the GitHub Release job)
 - [x] npm account: every `@malilion/block-ui-*` package requires 2FA and disallows tokens (CI publishes through OIDC only); the leftover `~/.npmrc` token was already invalid (401) and is removed — the account has no access tokens
 - [x] Localization: `BlockUIProvider messages` (full locale or partial override merged onto English), `zhTWMessages`, `useBlockUIMessages()`; every built-in string of every component reads from it, explicit props still win
+- [x] Block Miner (`apps/game`, `pnpm game`) — playable demo game on the published 0.6.0 packages, in Traditional Chinese via `zhTWMessages`
 - [x] 0.6.0 versioned (`pnpm release:version 0.6.0`)
 - [x] 0.5.1 versioned (`pnpm release:version 0.5.1`) — no package changes, first release through the hardened pipeline
 - [x] 0.5.0 versioned (`pnpm release:version 0.5.0`)
@@ -60,6 +61,7 @@
 - [x] npm: `@malilion/block-ui-*@0.4.0` (2026-10-04) — Avatar, Accordion, Drawer, EmptyState, Skeleton, NumberInput; automatic CI release, GitHub Release [v0.4.0](https://github.com/malilion/BlockUI/releases/tag/v0.4.0); CI on main green (36 min, incl. axe on every story × 5 themes)
 - [x] npm: `@malilion/block-ui-*@0.5.0` (2026-10-04) — Popover, ContextMenu, Kbd, BlockGrid, BlockContainer, BlockStepper; automatic CI release, GitHub Release [v0.5.0](https://github.com/malilion/BlockUI/releases/tag/v0.5.0)
 - [x] npm: `@malilion/block-ui-*@0.5.1` (2026-10-04) — same code as 0.5.0; published by the SHA-pinned, per-job-permission `release.yml` with provenance, GitHub Release [v0.5.1](https://github.com/malilion/BlockUI/releases/tag/v0.5.1)
+- [x] npm: `@malilion/block-ui-*@0.6.0` (2026-10-04) — localization (`BlockUIProvider messages`, `zhTWMessages`, `useBlockUIMessages()`); automatic CI release with provenance, the first one after packages were set to 2FA + no tokens; GitHub Release [v0.6.0](https://github.com/malilion/BlockUI/releases/tag/v0.6.0); CI on main green (`e3dc653`)
 
 ## Next
 
