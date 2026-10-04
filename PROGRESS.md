@@ -2,7 +2,7 @@
 
 ## Current Phase
 
-0.5.0 released
+0.5.1 released
 
 ## Completed
 
@@ -41,6 +41,9 @@
 - [x] V2 batch 1 (HUD): `BossBar`, `Scoreboard`, `CoordinatesHUD`, `BiomeIndicator`, `DayNightIndicator`, `WeatherIndicator` + 8 environment icons; playground "World HUD"
 - [x] V2 batch 2 (workstations): `EnchantingTable`, `BrewingStand`, `Anvil`, `TradingUI`, `RecipeBook` + 4 icons; playground Crafting tab
 - [x] V2 batch 3 (community): `ServerBrowser`, `WorldBrowser`, `ChatWindow`, `CommandConsole`, `SkillTree`, `MiniMap` — every PRD §83 V2 component is done
+- [x] CI hardening: GitHub Actions pinned to commit SHAs (Dependabot keeps them current), npm pinned to 11.21.0 in the publish jobs, workflow permissions granted per job (`id-token: write` only on publish / Pages deploy, `contents: write` only on the GitHub Release job)
+- [x] npm account: every `@malilion/block-ui-*` package requires 2FA and disallows tokens (CI publishes through OIDC only); the leftover `~/.npmrc` token was already invalid (401) and is removed — the account has no access tokens
+- [x] 0.5.1 versioned (`pnpm release:version 0.5.1`) — no package changes, first release through the hardened pipeline
 - [x] 0.5.0 versioned (`pnpm release:version 0.5.0`)
 - [x] General batch 3: `Popover`, `ContextMenu`, `Kbd`, `BlockGrid`, `BlockContainer`, `BlockStepper` (+ shared `MenuList`)
 - [x] 0.4.0 versioned (`pnpm release:version 0.4.0`)
@@ -54,6 +57,7 @@
 - [x] npm: `@malilion/block-ui-*@0.3.0` (2026-10-04) — fully automatic CI release; GitHub Release [v0.3.0](https://github.com/malilion/BlockUI/releases/tag/v0.3.0)
 - [x] npm: `@malilion/block-ui-*@0.4.0` (2026-10-04) — Avatar, Accordion, Drawer, EmptyState, Skeleton, NumberInput; automatic CI release, GitHub Release [v0.4.0](https://github.com/malilion/BlockUI/releases/tag/v0.4.0); CI on main green (36 min, incl. axe on every story × 5 themes)
 - [x] npm: `@malilion/block-ui-*@0.5.0` (2026-10-04) — Popover, ContextMenu, Kbd, BlockGrid, BlockContainer, BlockStepper; automatic CI release, GitHub Release [v0.5.0](https://github.com/malilion/BlockUI/releases/tag/v0.5.0)
+- [x] npm: `@malilion/block-ui-*@0.5.1` (2026-10-04) — same code as 0.5.0; published by the SHA-pinned, per-job-permission `release.yml` with provenance, GitHub Release [v0.5.1](https://github.com/malilion/BlockUI/releases/tag/v0.5.1)
 
 ## Next
 
