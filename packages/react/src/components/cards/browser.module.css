@@ -1,0 +1,66 @@
+/* Shared layout of ServerBrowser and WorldBrowser: toolbar, count and card list. */
+.browser {
+  display: flex;
+  flex-direction: column;
+  gap: var(--block-space-3);
+  width: 100%;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--block-space-3);
+}
+
+.search {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.filter {
+  flex: 0 1 180px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--block-space-2);
+  margin-left: auto;
+}
+
+.count {
+  margin: 0;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-xs);
+  text-transform: uppercase;
+  color: var(--block-text-muted);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: var(--block-space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list > li {
+  display: flex;
+  min-width: 0;
+}
+
+.list > li > * {
+  flex: 1;
+}
+
+.empty {
+  margin: 0;
+  padding: var(--block-space-6);
+  text-align: center;
+  color: var(--block-text-muted);
+  background-color: var(--block-slot);
+  border: var(--block-border-width-thin) dashed var(--block-border);
+}
