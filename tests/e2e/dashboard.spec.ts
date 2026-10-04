@@ -164,3 +164,22 @@ test.describe("Server browser (0.2.0 components)", () => {
     await expect(page.getByRole("tooltip")).toBeVisible();
   });
 });
+
+test.describe("Drawer", () => {
+  test("opens, traps focus, closes on Escape and restores focus", async ({ page }) => {
+    await page.goto("/");
+    await page
+      .getByRole("navigation", { name: /navigation/i })
+      .getByRole("button", { name: "Feedback" })
+      .first()
+      .click();
+    const opener = page.getByRole("button", { name: "Open Drawer" });
+    await opener.click();
+    const drawer = page.getByRole("dialog", { name: "Video Settings" });
+    await expect(drawer).toBeVisible();
+    await expect(page.getByRole("button", { name: "Close" })).toBeFocused();
+    await page.keyboard.press("Escape");
+    await expect(drawer).toBeHidden();
+    await expect(opener).toBeFocused();
+  });
+});

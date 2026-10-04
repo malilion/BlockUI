@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- **`Avatar`** — pixelated skin image or initials on a material colour derived from the name, four sizes and a presence dot (online / away / busy / offline) that is also announced in text.
+- **`Accordion`** — WAI-ARIA accordion with single or multiple open sections, heading level, disabled items and ↑ / ↓ / Home / End between headers.
+- **`Drawer`** — modal panel sliding in from the left, right or bottom, in three sizes, with focus trap, Escape, overlay click and focus restoration.
+- **`EmptyState`** — icon, heading, description and action for empty lists and searches.
+- **`Skeleton`** — decorative pixel placeholders (text lines, block, inventory slot, avatar) with a stepped sweep that stops with reduced motion.
+- **`NumberInput`** — WAI-ARIA spinbutton with − / + buttons, ↑ / ↓, Page Up / Down (×10), Home / End, clamping and step-precision rounding on commit.
+- **Playground** — avatars, a "World Settings" accordion and a "Max Players" number input on the dashboard; a drawer, an empty state and skeletons on the Feedback tab.
+
+### Changed
+
+- `BlockModal` and `Drawer` share one page scroll lock (`useScrollLock`), so the page only unlocks when the last overlay closes.
+
 ## [0.3.0] — 2026-10-04
 
 ### Added

@@ -1,14 +1,13 @@
 import { CloseIcon } from "@malilion/block-ui-icons";
-import { forwardRef, useEffect, useId, useRef, type KeyboardEvent, type MouseEvent } from "react";
+import { forwardRef, useId, useRef, type KeyboardEvent, type MouseEvent } from "react";
 import { createPortal } from "react-dom";
 import { useFocusTrap } from "../../../hooks/useFocusTrap";
+import { useScrollLock } from "../../../hooks/useScrollLock";
 import { usePortalContainer } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { mergeRefs } from "../../../utils/refs";
 import styles from "./BlockModal.module.css";
 import type { BlockModalProps } from "./BlockModal.types";
-
-let openModals = 0;
 
 /**
  * Accessible modal dialog: focus trap, `Escape` to close, overlay, focus
@@ -41,16 +40,7 @@ export const BlockModal = forwardRef<HTMLDivElement, BlockModalProps>(function B
 
   useFocusTrap(dialogRef, open && container !== null, { initialFocus: initialFocusRef });
 
-  useEffect(() => {
-    if (!open) return undefined;
-    openModals += 1;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      openModals -= 1;
-      if (openModals === 0) document.body.style.overflow = previous;
-    };
-  }, [open]);
+  useScrollLock(open);
 
   if (!open || !container) return null;
 

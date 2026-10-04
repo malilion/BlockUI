@@ -168,15 +168,15 @@ import "@fontsource/silkscreen/700.css";
 | 分類  | 元件                                                                                                                                                                                   |
 | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 動作  | `BlockButton` · `IconButton` · `BlockMenu`                                                                                                                                             |
-| 表單  | `BlockInput` · `BlockTextarea` · `BlockSelect` · `BlockCheckbox` · `BlockRadioGroup` / `BlockRadio` · `BlockToggle` · `BlockSlider`                                                    |
+| 表單  | `BlockInput` · `BlockTextarea` · `BlockSelect` · `BlockCheckbox` · `BlockRadioGroup` / `BlockRadio` · `BlockToggle` · `BlockSlider` · `NumberInput`                                    |
 | 背包  | `Inventory` / `InventorySection` · `InventoryGrid` · `InventorySlot` · `ItemStack` · `ItemTooltip` · `DurabilityBar` · `Hotbar`                                                        |
 | 合成  | `CraftingTable` · `CraftingGrid` · `CraftingSlot` · `CraftingResult` · `Furnace` · `EnchantingTable` · `BrewingStand` · `Anvil` · `TradingUI` · `RecipeBook`                           |
 | HUD   | `HealthBar` · `ArmorBar` · `HungerBar` · `XPBar` · `PlayerHUD` · `BossBar` · `Scoreboard` · `CoordinatesHUD` · `BiomeIndicator` · `DayNightIndicator` · `WeatherIndicator` · `MiniMap` |
 | 卡片  | `BlockCard` · `QuestCard` · `AchievementCard` · `PlayerCard` · `ServerCard` · `WorldCard` · `ServerBrowser` · `WorldBrowser`                                                           |
-| 資料  | `BlockTable` · `SkillTree`                                                                                                                                                             |
-| 回饋  | `BlockAlert` · `toast()` / `BlockToaster` · `BlockModal` · `ConfirmDialog` · `BlockProgress` · `BlockLoading` · `BlockBadge` · `BlockTooltip`                                          |
+| 資料  | `BlockTable` · `SkillTree` · `Avatar`                                                                                                                                                  |
+| 回饋  | `BlockAlert` · `toast()` / `BlockToaster` · `BlockModal` · `ConfirmDialog` · `BlockProgress` · `BlockLoading` · `BlockBadge` · `BlockTooltip` · `Drawer` · `EmptyState` · `Skeleton`   |
 | 導覽  | `BlockSidebar` / `SidebarItem` · `BlockTabs` · `Breadcrumb` · `HotbarNavigation` · `BlockPagination`                                                                                   |
-| 版面  | `BlockUIProvider` · `BlockPanel` · `BlockStack` · `BlockDivider`                                                                                                                       |
+| 版面  | `BlockUIProvider` · `BlockPanel` · `BlockStack` · `BlockDivider` · `Accordion`                                                                                                         |
 | 社群  | `ChatWindow` · `CommandConsole`                                                                                                                                                        |
 | Hooks | `useControllableState` · `useFocusTrap` · `useDigitHotkeys` · `useMediaQuery` · `useToasts` · `useBlockUI`                                                                             |
 
