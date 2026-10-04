@@ -35,6 +35,8 @@ Block UI is a React component library whose visual language comes from block-bui
 
 All artwork — the 50+ pixel icons, the procedural stone / dirt / planks textures and the landscape previews — is original. No third-party game textures, logos or characters are bundled.
 
+The early concept mockup in [`docs/design/concept.png`](./docs/design/concept.png) is a design reference only: it is not part of any npm package, and its game-style character and scenery are not Block UI assets.
+
 ## Features
 
 - 50+ components across actions, forms, inventory, crafting, HUD, cards, feedback, navigation and layout
