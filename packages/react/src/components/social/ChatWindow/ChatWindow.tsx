@@ -11,6 +11,7 @@ import {
 import { cx } from "../../../utils/cx";
 import styles from "./ChatWindow.module.css";
 import type { ChatWindowProps } from "./ChatWindow.types";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /** Pixels from the bottom that still count as "following" the conversation. */
 const STICK_THRESHOLD = 24;
@@ -24,16 +25,18 @@ export const ChatWindow = forwardRef<HTMLDivElement, ChatWindowProps>(function C
   {
     messages,
     onSend,
-    placeholder = "Type a message…",
+    placeholder,
     maxLength = 256,
     showTimestamps = false,
     size = "md",
-    label = "Chat",
+    label: labelProp,
     className,
     ...rest
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
+  const label = labelProp ?? m.chatWindow.label;
   const inputId = useId();
   const logRef = useRef<HTMLDivElement>(null);
   const stick = useRef(true);
@@ -99,7 +102,7 @@ export const ChatWindow = forwardRef<HTMLDivElement, ChatWindowProps>(function C
       <div
         ref={logRef}
         role="log"
-        aria-label={`${label} messages`}
+        aria-label={m.chatWindow.messages(label)}
         // Scrollable log: keyboard users must be able to focus it to scroll.
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={0}
@@ -117,7 +120,7 @@ export const ChatWindow = forwardRef<HTMLDivElement, ChatWindowProps>(function C
                   <span className={styles.author}>&lt;{message.author}&gt; </span>
                 ) : null}
                 {type === "whisper" && message.author ? (
-                  <span className={styles.author}>{message.author} whispers: </span>
+                  <span className={styles.author}>{m.chatWindow.whispers(message.author)}</span>
                 ) : null}
                 <span className={styles.text}>{message.text}</span>
               </li>
@@ -128,14 +131,14 @@ export const ChatWindow = forwardRef<HTMLDivElement, ChatWindowProps>(function C
       {onSend ? (
         <form className={styles.form} onSubmit={submit}>
           <label htmlFor={inputId} className="block-visually-hidden">
-            Message
+            {m.chatWindow.message}
           </label>
           <input
             id={inputId}
             type="text"
             value={draft}
             maxLength={maxLength}
-            placeholder={placeholder}
+            placeholder={placeholder ?? m.chatWindow.placeholder}
             autoComplete="off"
             className={styles.input}
             onChange={(event) => {
@@ -145,7 +148,7 @@ export const ChatWindow = forwardRef<HTMLDivElement, ChatWindowProps>(function C
             onKeyDown={onKeyDown}
           />
           <button type="submit" className={styles.send}>
-            Send
+            {m.chatWindow.send}
           </button>
         </form>
       ) : null}

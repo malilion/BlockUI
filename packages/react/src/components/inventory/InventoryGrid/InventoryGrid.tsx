@@ -15,6 +15,7 @@ import { InventorySlot } from "../InventorySlot/InventorySlot";
 import { InventoryGridContext, SlotIndexContext, type InventoryGridContextValue } from "./context";
 import styles from "./InventoryGrid.module.css";
 import type { InventoryGridProps } from "./InventoryGrid.types";
+import { useBlockUIMessages } from "../../../provider/context";
 
 function chunk<T>(items: T[], size: number): T[][] {
   const rows: T[][] = [];
@@ -39,13 +40,14 @@ export const InventoryGrid = forwardRef<HTMLDivElement, InventoryGridProps>(func
     onSelectedIndexChange,
     selectionFollowsFocus = false,
     wrap = false,
-    label = "Inventory",
+    label,
     className,
     onKeyDown,
     ...rest
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const cols = Math.max(1, Math.floor(columns));
   const items: ReactNode[] = Children.toArray(children);
   if (rows !== undefined) {
@@ -142,7 +144,7 @@ export const InventoryGrid = forwardRef<HTMLDivElement, InventoryGridProps>(func
       ref={ref}
       role="grid"
       tabIndex={-1}
-      aria-label={label}
+      aria-label={label ?? m.inventory.label}
       aria-rowcount={Math.ceil(count / cols)}
       aria-colcount={cols}
       data-size={slotSize}

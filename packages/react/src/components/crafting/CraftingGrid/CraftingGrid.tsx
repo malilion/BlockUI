@@ -1,5 +1,6 @@
 import { Children, forwardRef } from "react";
 import { cx } from "../../../utils/cx";
+import { useBlockUIMessages } from "../../../provider/context";
 import { InventoryGrid } from "../../inventory/InventoryGrid/InventoryGrid";
 import { CraftingSlot } from "../CraftingSlot/CraftingSlot";
 import styles from "./CraftingGrid.module.css";
@@ -10,9 +11,10 @@ import type { CraftingGridProps } from "./CraftingGrid.types";
  * `CraftingSlot`s; keyboard behaviour matches `InventoryGrid`.
  */
 export const CraftingGrid = forwardRef<HTMLDivElement, CraftingGridProps>(function CraftingGrid(
-  { size = 3, slotSize = "lg", label = "Crafting grid", className, children, ...rest },
+  { size = 3, slotSize = "lg", label, className, children, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const filled = Children.toArray(children);
   const padded = [...filled];
   for (let i = filled.length; i < size * size; i += 1) {
@@ -24,7 +26,7 @@ export const CraftingGrid = forwardRef<HTMLDivElement, CraftingGridProps>(functi
       ref={ref}
       columns={size}
       slotSize={slotSize}
-      label={label}
+      label={label ?? m.craftingGrid.label}
       data-crafting-size={size}
       className={cx(styles.craftingGrid, className)}
       {...rest}

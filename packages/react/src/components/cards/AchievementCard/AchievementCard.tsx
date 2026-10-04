@@ -1,5 +1,6 @@
 import { AchievementIcon, LockIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
+import { useBlockUIMessages } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";
 import { BlockCard } from "../BlockCard/BlockCard";
@@ -17,23 +18,24 @@ export const AchievementCard = forwardRef<HTMLElement, AchievementCardProps>(
       unlockedAt,
       onView,
       material = "wood",
-      label = "Achievement",
+      label,
       className,
       ...rest
     },
     ref,
   ) {
+    const m = useBlockUIMessages();
     return (
       <BlockCard
         ref={ref}
         material={material}
-        label={label}
+        label={label === undefined ? m.achievementCard.label : label}
         data-unlocked={unlocked || undefined}
         className={cx(styles.card, !unlocked && styles.locked, className)}
         footer={
           onView ? (
             <BlockButton size="sm" variant="wood" onClick={onView} disabled={!unlocked}>
-              View
+              {m.achievementCard.view}
             </BlockButton>
           ) : undefined
         }
@@ -49,7 +51,11 @@ export const AchievementCard = forwardRef<HTMLElement, AchievementCardProps>(
           </div>
         </div>
         <p className={styles.meta}>
-          {unlocked ? (unlockedAt ? `Unlocked on ${unlockedAt}` : "Unlocked") : "Locked"}
+          {unlocked
+            ? unlockedAt
+              ? m.achievementCard.unlockedOn(unlockedAt)
+              : m.achievementCard.unlocked
+            : m.achievementCard.locked}
         </p>
       </BlockCard>
     );

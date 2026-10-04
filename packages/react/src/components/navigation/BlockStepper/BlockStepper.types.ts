@@ -15,6 +15,6 @@ export interface BlockStepperProps extends HTMLAttributes<HTMLElement> {
   onStepClick?: (index: number) => void;
   /** @default "horizontal" */
   orientation?: "horizontal" | "vertical";
-  /** Accessible name of the progress list. @default "Progress" */
+  /** Accessible name of the progress list. @default messages.stepper.label ("Progress") */
   label?: string;
 }

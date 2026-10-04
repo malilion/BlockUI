@@ -1,28 +1,31 @@
+import { enMessages, type BlockUIMessages } from "../../../locale/messages";
 import { miniMapTerrain, type MiniMapMarker, type MiniMapTerrainCode } from "./MiniMap.types";
 
-const DIRECTIONS = [
-  "north",
-  "north-east",
-  "east",
-  "south-east",
-  "south",
-  "south-west",
-  "west",
-  "north-west",
-];
+/**
+ * Locale for the helpers below. They are public and often passed straight to
+ * `Array#map`, which supplies the index as the second argument, so a number
+ * (or anything that is not a locale) falls back to English.
+ */
+type MessagesArg = BlockUIMessages | number;
+
+function resolveMessages(messages: MessagesArg | undefined): BlockUIMessages {
+  return typeof messages === "object" && messages !== null ? messages : enMessages;
+}
 
 /** 8-way compass name for a clockwise angle from north. */
-export function compassName(degrees: number): string {
+export function compassName(degrees: number, messages?: MessagesArg): string {
   const index = Math.round((((degrees % 360) + 360) % 360) / 45) % 8;
-  return DIRECTIONS[index] ?? "north";
+  const { directions } = resolveMessages(messages).miniMap;
+  return directions[index] ?? directions[0];
 }
 
 /** "Home: 12 blocks north-east" style description of a marker. */
-export function describeMarker(marker: MiniMapMarker): string {
+export function describeMarker(marker: MiniMapMarker, messages?: MessagesArg): string {
+  const m = resolveMessages(messages);
   const distance = Math.round(Math.hypot(marker.x, marker.y));
-  if (distance === 0) return `${marker.label}: here`;
+  if (distance === 0) return m.miniMap.here(marker.label);
   const angle = (Math.atan2(marker.x, -marker.y) * 180) / Math.PI;
-  return `${marker.label}: ${distance} ${distance === 1 ? "block" : "blocks"} ${compassName(angle)}`;
+  return m.miniMap.distance(marker.label, distance, compassName(angle, m));
 }
 
 export interface TerrainRun {

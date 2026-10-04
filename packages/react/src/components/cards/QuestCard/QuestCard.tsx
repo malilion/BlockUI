@@ -1,5 +1,6 @@
 import { CheckIcon, CoinIcon, QuestIcon, XPOrbIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
+import { useBlockUIMessages } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { formatNumber } from "../../../utils/number";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";
@@ -22,12 +23,13 @@ export const QuestCard = forwardRef<HTMLElement, QuestCardProps>(function QuestC
     onClaim,
     icon,
     material = "grass",
-    label = "Quest",
+    label,
     className,
     ...rest
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const done = completed ?? progress >= max;
   const current = Math.min(progress, max);
 
@@ -35,7 +37,7 @@ export const QuestCard = forwardRef<HTMLElement, QuestCardProps>(function QuestC
     <BlockCard
       ref={ref}
       material={material}
-      label={label}
+      label={label === undefined ? m.questCard.label : label}
       data-completed={done || undefined}
       className={cx(styles.card, className)}
       footer={
@@ -47,7 +49,7 @@ export const QuestCard = forwardRef<HTMLElement, QuestCardProps>(function QuestC
             onClick={onClaim}
             startIcon={claimed ? <CheckIcon size={16} /> : undefined}
           >
-            {claimed ? "Claimed" : done ? "Claim" : "In progress"}
+            {claimed ? m.questCard.claimed : done ? m.questCard.claim : m.questCard.inProgress}
           </BlockButton>
         ) : undefined
       }
@@ -63,7 +65,7 @@ export const QuestCard = forwardRef<HTMLElement, QuestCardProps>(function QuestC
         </div>
       </div>
       <BlockProgress
-        label="Progress"
+        label={m.common.progress}
         value={current}
         max={max}
         variant={done ? "gold" : "grass"}
@@ -72,13 +74,13 @@ export const QuestCard = forwardRef<HTMLElement, QuestCardProps>(function QuestC
       />
       {xp !== undefined || coins !== undefined ? (
         <div className={styles.rewards}>
-          <span className={styles.rewardsLabel}>Reward</span>
+          <span className={styles.rewardsLabel}>{m.questCard.reward}</span>
           <ul className={styles.rewardList}>
             {xp !== undefined ? (
               <li className={styles.reward}>
                 <XPOrbIcon size={16} aria-hidden="true" />
                 <span>
-                  {formatNumber(xp)} <span className={styles.unit}>XP</span>
+                  {formatNumber(xp)} <span className={styles.unit}>{m.questCard.xp}</span>
                 </span>
               </li>
             ) : null}
@@ -86,7 +88,7 @@ export const QuestCard = forwardRef<HTMLElement, QuestCardProps>(function QuestC
               <li className={styles.reward}>
                 <CoinIcon size={16} aria-hidden="true" />
                 <span>
-                  {formatNumber(coins)} <span className={styles.unit}>coins</span>
+                  {formatNumber(coins)} <span className={styles.unit}>{m.questCard.coins}</span>
                 </span>
               </li>
             ) : null}

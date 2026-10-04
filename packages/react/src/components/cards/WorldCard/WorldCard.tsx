@@ -1,5 +1,6 @@
 import { PlayIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
+import { useBlockUIMessages } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { formatNumber } from "../../../utils/number";
 import { IconButton } from "../../actions/IconButton/IconButton";
@@ -19,17 +20,18 @@ export const WorldCard = forwardRef<HTMLElement, WorldCardProps>(function WorldC
     lastPlayed,
     onPlay,
     material = "grass",
-    label = "World",
+    label,
     className,
     ...rest
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   return (
     <BlockCard
       ref={ref}
       material={material}
-      label={label}
+      label={label === undefined ? m.worldCard.label : label}
       className={cx(styles.card, className)}
       {...rest}
     >
@@ -44,17 +46,25 @@ export const WorldCard = forwardRef<HTMLElement, WorldCardProps>(function WorldC
         <div className={styles.titleBlock}>
           <p className={styles.title}>{name}</p>
           <p className={styles.description}>
-            {[gameMode, day !== undefined ? `Day ${formatNumber(day)}` : undefined]
+            {[gameMode, day !== undefined ? m.worldCard.day(formatNumber(day)) : undefined]
               .filter(Boolean)
               .join(" · ")}
           </p>
-          {seed ? <p className={styles.description}>Seed: {seed}</p> : null}
-          {lastPlayed ? <p className={styles.description}>Last played {lastPlayed}</p> : null}
+          {seed ? (
+            <p className={styles.description}>
+              {m.worldCard.seed} {seed}
+            </p>
+          ) : null}
+          {lastPlayed ? (
+            <p className={styles.description}>
+              {m.worldCard.lastPlayed} {lastPlayed}
+            </p>
+          ) : null}
         </div>
         {onPlay ? (
           <IconButton
             icon={<PlayIcon size={16} />}
-            label={`Play ${name}`}
+            label={m.worldCard.play(name)}
             variant="grass"
             onClick={onPlay}
             className={worldStyles.play}

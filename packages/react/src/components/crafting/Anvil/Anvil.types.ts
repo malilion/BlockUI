@@ -20,6 +20,6 @@ export interface AnvilProps extends HTMLAttributes<HTMLDivElement> {
   maxCost?: number;
   /** Called when the result is taken. */
   onTakeResult?: () => void;
-  /** Accessible name. @default "Anvil" */
+  /** Accessible name. @default locale `anvil.label` ("Anvil") */
   label?: string;
 }

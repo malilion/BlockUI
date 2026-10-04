@@ -3,6 +3,7 @@ import { cx } from "../../../utils/cx";
 import { ratio } from "../../../utils/number";
 import styles from "./BlockProgress.module.css";
 import type { BlockProgressProps } from "./BlockProgress.types";
+import { useBlockUIMessages } from "../../../provider/context";
 
 const percentFormat = (value: number, max: number) => `${Math.round(ratio(value, max) * 100)}%`;
 
@@ -22,6 +23,7 @@ export const BlockProgress = forwardRef<HTMLDivElement, BlockProgressProps>(func
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const labelId = useId();
   const indeterminate = value === undefined;
   const current = indeterminate ? 0 : Math.max(0, Math.min(value, max));
@@ -47,7 +49,7 @@ export const BlockProgress = forwardRef<HTMLDivElement, BlockProgressProps>(func
         ref={ref}
         role="progressbar"
         aria-labelledby={label ? labelId : undefined}
-        aria-label={label ? undefined : (ariaLabel ?? "Progress")}
+        aria-label={label ? undefined : (ariaLabel ?? m.common.progress)}
         aria-valuemin={indeterminate ? undefined : 0}
         aria-valuemax={indeterminate ? undefined : max}
         aria-valuenow={indeterminate ? undefined : current}

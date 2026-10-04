@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";
 import { BlockModal } from "../Modal/BlockModal";
 import type { ConfirmDialogProps } from "./ConfirmDialog.types";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /**
  * Confirmation built on `BlockModal` with `role="alertdialog"`. For the
@@ -11,8 +12,8 @@ export function ConfirmDialog({
   open,
   title,
   description,
-  confirmText = "Confirm",
-  cancelText = "Cancel",
+  confirmText,
+  cancelText,
   variant = "default",
   onConfirm,
   onCancel,
@@ -21,6 +22,7 @@ export function ConfirmDialog({
   children,
   className,
 }: ConfirmDialogProps) {
+  const m = useBlockUIMessages();
   const cancelRef = useRef<HTMLButtonElement>(null);
   const confirmRef = useRef<HTMLButtonElement>(null);
   const danger = variant === "danger";
@@ -43,7 +45,7 @@ export function ConfirmDialog({
       footer={
         <>
           <BlockButton ref={cancelRef} variant="stone" onClick={onCancel} disabled={loading}>
-            {cancelText}
+            {cancelText ?? m.confirmDialog.cancel}
           </BlockButton>
           <BlockButton
             ref={confirmRef}
@@ -51,7 +53,7 @@ export function ConfirmDialog({
             onClick={onConfirm}
             loading={loading}
           >
-            {confirmText}
+            {confirmText ?? m.confirmDialog.confirm}
           </BlockButton>
         </>
       }

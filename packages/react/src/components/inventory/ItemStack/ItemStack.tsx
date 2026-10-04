@@ -4,6 +4,7 @@ import { DurabilityBar } from "../DurabilityBar/DurabilityBar";
 import styles from "./ItemStack.module.css";
 import type { ItemStackProps } from "./ItemStack.types";
 import { describeItemStack } from "./ItemStack.utils";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /**
  * An item inside a slot: icon, stack amount (bottom-right) and an optional
@@ -14,11 +15,12 @@ export const ItemStack = forwardRef<HTMLSpanElement, ItemStackProps>(function It
   { icon, amount, maxAmount, durability, maxDurability, name, className, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const showAmount = amount !== undefined && amount > 1;
   const full = maxAmount !== undefined && amount !== undefined && amount >= maxAmount;
   const showDurability =
     durability !== undefined && maxDurability !== undefined && durability < maxDurability;
-  const description = describeItemStack({ name, amount, durability, maxDurability });
+  const description = describeItemStack({ name, amount, durability, maxDurability }, m);
 
   return (
     <span ref={ref} className={cx(styles.stack, className)} data-full={full || undefined} {...rest}>

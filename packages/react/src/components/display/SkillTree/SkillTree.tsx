@@ -4,8 +4,7 @@ import { BlockButton } from "../../actions/BlockButton/BlockButton";
 import styles from "./SkillTree.module.css";
 import type { SkillTreeProps } from "./SkillTree.types";
 import { gridSize, skillState } from "./SkillTree.utils";
-
-const STATE_TEXT = { locked: "locked", available: "available", unlocked: "unlocked" } as const;
+import { useBlockUIMessages } from "../../../provider/context";
 
 /**
  * Skill tree: nodes on a grid joined to their prerequisites. Unlocked skills
@@ -13,9 +12,10 @@ const STATE_TEXT = { locked: "locked", available: "available", unlocked: "unlock
  * they need. Selecting a node shows its details and Unlock button.
  */
 export const SkillTree = forwardRef<HTMLDivElement, SkillTreeProps>(function SkillTree(
-  { skills, unlocked, points, onUnlock, defaultValue, label = "Skill tree", className, ...rest },
+  { skills, unlocked, points, onUnlock, defaultValue, label, className, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const detailId = useId();
   const [selectedId, setSelectedId] = useState(defaultValue ?? skills[0]?.id ?? "");
   const unlockedSet = new Set(unlocked);
@@ -43,10 +43,16 @@ export const SkillTree = forwardRef<HTMLDivElement, SkillTreeProps>(function Ski
   );
 
   return (
-    <div ref={ref} role="group" aria-label={label} className={cx(styles.tree, className)} {...rest}>
+    <div
+      ref={ref}
+      role="group"
+      aria-label={label ?? m.skillTree.label}
+      className={cx(styles.tree, className)}
+      {...rest}
+    >
       {points !== undefined ? (
         <p className={styles.points}>
-          Skill points: <strong>{points}</strong>
+          {m.skillTree.points} <strong>{points}</strong>
         </p>
       ) : null}
       <div
@@ -71,7 +77,7 @@ export const SkillTree = forwardRef<HTMLDivElement, SkillTreeProps>(function Ski
             />
           ))}
         </svg>
-        <ul className={styles.nodes} aria-label="Skills">
+        <ul className={styles.nodes} aria-label={m.skillTree.skills}>
           {skills.map((skill) => {
             const state = skillState(skill, unlockedSet);
             return (
@@ -91,7 +97,7 @@ export const SkillTree = forwardRef<HTMLDivElement, SkillTreeProps>(function Ski
                   data-state={state}
                   aria-pressed={skill.id === selectedId}
                   aria-controls={detailId}
-                  aria-label={`${skill.label}, ${STATE_TEXT[state]}`}
+                  aria-label={`${skill.label}, ${m.skillTree.states[state]}`}
                   onClick={() => setSelectedId(skill.id)}
                 >
                   <span className={styles.icon} aria-hidden="true">
@@ -107,21 +113,21 @@ export const SkillTree = forwardRef<HTMLDivElement, SkillTreeProps>(function Ski
         id={detailId}
         className={styles.detail}
         aria-live="polite"
-        aria-label="Skill details"
+        aria-label={m.skillTree.details}
       >
         {selected ? (
           <>
             <p className={styles.name}>
               {selected.label}{" "}
               <span className={styles.state} data-state={selectedState}>
-                {selectedState}
+                {selectedState ? m.skillTree.states[selectedState] : null}
               </span>
             </p>
             {selected.description ? (
               <p className={styles.description}>{selected.description}</p>
             ) : null}
             {missing.length > 0 ? (
-              <p className={styles.requires}>Requires: {missing.join(", ")}</p>
+              <p className={styles.requires}>{m.skillTree.requires(missing.join(", "))}</p>
             ) : null}
             {selectedState === "available" && onUnlock ? (
               <BlockButton
@@ -130,9 +136,7 @@ export const SkillTree = forwardRef<HTMLDivElement, SkillTreeProps>(function Ski
                 disabled={!affordable}
                 onClick={() => onUnlock(selected.id)}
               >
-                {affordable
-                  ? `Unlock (${selectedCost} ${selectedCost === 1 ? "point" : "points"})`
-                  : `Needs ${selectedCost} ${selectedCost === 1 ? "point" : "points"}`}
+                {affordable ? m.skillTree.unlock(selectedCost) : m.skillTree.needs(selectedCost)}
               </BlockButton>
             ) : null}
           </>

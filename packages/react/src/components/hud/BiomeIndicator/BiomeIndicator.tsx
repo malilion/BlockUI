@@ -4,6 +4,7 @@ import chip from "../hudChip.module.css";
 import styles from "./BiomeIndicator.module.css";
 import type { BiomeIndicatorProps } from "./BiomeIndicator.types";
 import { BIOMES, biomeLabel } from "./BiomeIndicator.utils";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /** Current biome read-out: a pixel icon, an accent stripe and the biome name. */
 export const BiomeIndicator = forwardRef<HTMLDivElement, BiomeIndicatorProps>(
@@ -11,6 +12,7 @@ export const BiomeIndicator = forwardRef<HTMLDivElement, BiomeIndicatorProps>(
     { type, name, icon, announce = false, size = "md", className, ...rest },
     ref,
   ) {
+    const m = useBlockUIMessages();
     const { icon: Icon, material } = BIOMES[type];
     return (
       <div
@@ -26,8 +28,10 @@ export const BiomeIndicator = forwardRef<HTMLDivElement, BiomeIndicatorProps>(
           {icon ?? <Icon size={size === "lg" ? 24 : 16} />}
         </span>
         <span>
-          <span className={chip.label}>Biome</span>{" "}
-          <span className={styles.name}>{name ?? biomeLabel(type)}</span>
+          <span className={chip.label}>{m.biomeIndicator.biome}</span>{" "}
+          <span className={styles.name}>
+            {name ?? m.biomeIndicator.names[type] ?? biomeLabel(type)}
+          </span>
         </span>
       </div>
     );

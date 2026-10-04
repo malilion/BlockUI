@@ -7,7 +7,7 @@ export interface ContextMenuProps extends Omit<HTMLAttributes<HTMLDivElement>, "
   items: BlockMenuEntry[];
   /** Called with the item id after any item is chosen. */
   onSelect?: (id: string) => void;
-  /** Accessible name of the menu. @default "Context menu" */
+  /** Accessible name of the menu. @default messages.contextMenu.label ("Context menu") */
   label?: string;
   /** Keep the browser's own menu. */
   disabled?: boolean;

@@ -2,6 +2,7 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cx } from "../../../utils/cx";
 import { clamp } from "../../../utils/number";
 import styles from "./PointsBar.module.css";
+import { useBlockUIMessages } from "../../../provider/context";
 
 export interface PointsBarProps extends HTMLAttributes<HTMLDivElement> {
   value: number;
@@ -42,6 +43,7 @@ export const PointsBar = forwardRef<HTMLDivElement, PointsBarProps>(function Poi
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const safeMax = Math.max(0, max);
   const current = clamp(value, 0, safeMax);
   const units = Math.ceil(safeMax / 2);
@@ -59,7 +61,7 @@ export const PointsBar = forwardRef<HTMLDivElement, PointsBarProps>(function Poi
       aria-valuemin={0}
       aria-valuemax={safeMax}
       aria-valuenow={current}
-      aria-valuetext={`${current} of ${safeMax}`}
+      aria-valuetext={m.common.amount(String(current), String(safeMax))}
       data-low={low || undefined}
       data-direction={direction}
       data-icon-size={iconSize}

@@ -5,26 +5,17 @@ import chip from "../hudChip.module.css";
 import styles from "./DayNightIndicator.module.css";
 import type { DayNightIndicatorProps } from "./DayNightIndicator.types";
 import { arcPosition, dayPhase, formatClock } from "./DayNightIndicator.utils";
-
-const PHASE_LABEL = { dawn: "Dawn", day: "Day", dusk: "Dusk", night: "Night" } as const;
+import { useBlockUIMessages } from "../../../provider/context";
 
 /** Day / night read-out: a pixel arc with the sun or moon, the day counter and the clock. */
 export const DayNightIndicator = forwardRef<HTMLDivElement, DayNightIndicatorProps>(
   function DayNightIndicator(
-    {
-      time,
-      day,
-      format = "24h",
-      showDial = true,
-      size = "md",
-      label = "Time of day",
-      className,
-      ...rest
-    },
+    { time, day, format = "24h", showDial = true, size = "md", label, className, ...rest },
     ref,
   ) {
+    const m = useBlockUIMessages();
     const phase = dayPhase(time);
-    const clock = formatClock(time, format);
+    const clock = formatClock(time, format, m.dayNightIndicator);
     const { body, progress, height } = arcPosition(time);
     const Body = body === "sun" ? SunIcon : MoonIcon;
 
@@ -32,7 +23,7 @@ export const DayNightIndicator = forwardRef<HTMLDivElement, DayNightIndicatorPro
       <div
         ref={ref}
         role="group"
-        aria-label={label}
+        aria-label={label ?? m.dayNightIndicator.label}
         data-phase={phase}
         data-size={size}
         className={cx(chip.chip, styles.dayNight, className)}
@@ -58,11 +49,12 @@ export const DayNightIndicator = forwardRef<HTMLDivElement, DayNightIndicatorPro
         <span className={styles.text}>
           {day !== undefined ? (
             <span>
-              <span className={chip.label}>Day</span> <span className={chip.value}>{day}</span>
+              <span className={chip.label}>{m.dayNightIndicator.day}</span>{" "}
+              <span className={chip.value}>{day}</span>
             </span>
           ) : null}
           <span className={chip.value}>{clock}</span>
-          <span className={styles.phase}>{PHASE_LABEL[phase]}</span>
+          <span className={styles.phase}>{m.dayNightIndicator.phases[phase]}</span>
         </span>
       </div>
     );

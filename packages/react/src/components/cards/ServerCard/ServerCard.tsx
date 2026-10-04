@@ -1,5 +1,6 @@
 import { GrassBlockIcon } from "@malilion/block-ui-icons";
 import { forwardRef } from "react";
+import { useBlockUIMessages } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { formatNumber } from "../../../utils/number";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";
@@ -24,20 +25,22 @@ export const ServerCard = forwardRef<HTMLElement, ServerCardProps>(function Serv
     icon,
     onJoin,
     material = "stone",
-    label = "Server",
+    label,
     className,
     ...rest
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const quality = pingQuality(ping, online);
-  const pingText = online && ping !== undefined ? `${ping} ms` : "Offline";
+  const pingText =
+    online && ping !== undefined ? m.serverCard.pingValue(String(ping)) : m.serverCard.offline;
 
   return (
     <BlockCard
       ref={ref}
       material={material}
-      label={label}
+      label={label === undefined ? m.serverCard.label : label}
       data-online={online || undefined}
       className={cx(styles.card, className)}
       footer={
@@ -48,7 +51,7 @@ export const ServerCard = forwardRef<HTMLElement, ServerCardProps>(function Serv
             disabled={!online}
             onClick={onJoin}
           >
-            Join
+            {m.serverCard.join}
           </BlockButton>
         ) : undefined
       }
@@ -64,7 +67,7 @@ export const ServerCard = forwardRef<HTMLElement, ServerCardProps>(function Serv
         </div>
         <span
           role="img"
-          aria-label={`Ping: ${pingText}`}
+          aria-label={`${m.serverCard.ping}: ${pingText}`}
           className={serverStyles.signal}
           data-quality={quality}
         >
@@ -79,7 +82,7 @@ export const ServerCard = forwardRef<HTMLElement, ServerCardProps>(function Serv
       </div>
       <dl className={styles.stats}>
         <div className={styles.statRow}>
-          <dt>Online</dt>
+          <dt>{m.serverCard.online}</dt>
           <dd>
             {online && onlinePlayers !== undefined
               ? `${formatNumber(onlinePlayers)}${maxPlayers !== undefined ? ` / ${formatNumber(maxPlayers)}` : ""}`
@@ -88,12 +91,12 @@ export const ServerCard = forwardRef<HTMLElement, ServerCardProps>(function Serv
         </div>
         {version ? (
           <div className={styles.statRow}>
-            <dt>Version</dt>
+            <dt>{m.serverCard.version}</dt>
             <dd>{version}</dd>
           </div>
         ) : null}
         <div className={styles.statRow}>
-          <dt>Ping</dt>
+          <dt>{m.serverCard.ping}</dt>
           <dd>{pingText}</dd>
         </div>
       </dl>

@@ -1,4 +1,5 @@
 import { forwardRef, useId, useRef, useState, type KeyboardEvent, type MouseEvent } from "react";
+import { useBlockUIMessages } from "../../../provider/context";
 import { useAnchoredPosition } from "../../../hooks/useAnchoredPosition";
 import { cx } from "../../../utils/cx";
 import { mergeRefs } from "../../../utils/refs";
@@ -19,18 +20,10 @@ interface Point {
  * behaviour matches `BlockMenu` and focus returns to where it was.
  */
 export const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(function ContextMenu(
-  {
-    children,
-    items,
-    onSelect,
-    label = "Context menu",
-    disabled = false,
-    onOpenChange,
-    className,
-    ...rest
-  },
+  { children, items, onSelect, label, disabled = false, onOpenChange, className, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const menuId = useId();
   const areaRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -117,7 +110,7 @@ export const ContextMenu = forwardRef<HTMLDivElement, ContextMenuProps>(function
         focusTarget={focusTarget}
         menuRef={menuRef}
         position={position}
-        label={label}
+        label={label ?? m.contextMenu.label}
         isInside={isInside}
         onClose={close}
         onChoose={choose}

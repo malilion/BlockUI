@@ -3,7 +3,7 @@ import { forwardRef, useId, useRef, type KeyboardEvent, type MouseEvent } from "
 import { createPortal } from "react-dom";
 import { useFocusTrap } from "../../../hooks/useFocusTrap";
 import { useScrollLock } from "../../../hooks/useScrollLock";
-import { usePortalContainer } from "../../../provider/context";
+import { useBlockUIMessages, usePortalContainer } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { mergeRefs } from "../../../utils/refs";
 import styles from "./BlockModal.module.css";
@@ -33,6 +33,7 @@ export const BlockModal = forwardRef<HTMLDivElement, BlockModalProps>(function B
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const container = usePortalContainer();
   const dialogRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
@@ -78,7 +79,12 @@ export const BlockModal = forwardRef<HTMLDivElement, BlockModalProps>(function B
             {title}
           </h2>
           {hideCloseButton ? null : (
-            <button type="button" className={styles.close} aria-label="Close" onClick={onClose}>
+            <button
+              type="button"
+              className={styles.close}
+              aria-label={m.common.close}
+              onClick={onClose}
+            >
               <CloseIcon size={16} />
             </button>
           )}

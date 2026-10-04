@@ -12,6 +12,7 @@ import { cx } from "../../../utils/cx";
 import styles from "./CommandConsole.module.css";
 import type { CommandConsoleProps } from "./CommandConsole.types";
 import { suggestCommands } from "./CommandConsole.utils";
+import { useBlockUIMessages } from "../../../provider/context";
 
 const STICK_THRESHOLD = 24;
 
@@ -21,9 +22,11 @@ const STICK_THRESHOLD = 24;
  */
 export const CommandConsole = forwardRef<HTMLDivElement, CommandConsoleProps>(
   function CommandConsole(
-    { entries, commands = [], onRun, size = "md", label = "Console", className, ...rest },
+    { entries, commands = [], onRun, size = "md", label: labelProp, className, ...rest },
     ref,
   ) {
+    const m = useBlockUIMessages();
+    const label = labelProp ?? m.commandConsole.label;
     const baseId = useId();
     const listId = `${baseId}-suggestions`;
     const logRef = useRef<HTMLDivElement>(null);
@@ -131,7 +134,7 @@ export const CommandConsole = forwardRef<HTMLDivElement, CommandConsoleProps>(
         <div
           ref={logRef}
           role="log"
-          aria-label={`${label} output`}
+          aria-label={m.commandConsole.output(label)}
           // Scrollable log: keyboard users must be able to focus it to scroll.
           // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
           tabIndex={0}
@@ -151,7 +154,7 @@ export const CommandConsole = forwardRef<HTMLDivElement, CommandConsoleProps>(
               <ul
                 id={listId}
                 role="listbox"
-                aria-label="Command suggestions"
+                aria-label={m.commandConsole.suggestions}
                 className={styles.suggestions}
               >
                 {suggestions.map((command, index) => (
@@ -177,7 +180,7 @@ export const CommandConsole = forwardRef<HTMLDivElement, CommandConsoleProps>(
               </ul>
             ) : null}
             <label htmlFor={`${baseId}-input`} className="block-visually-hidden">
-              Command
+              {m.commandConsole.command}
             </label>
             <span className={styles.prompt} aria-hidden="true">
               &gt;

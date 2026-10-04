@@ -12,7 +12,7 @@ export interface BlockSidebarProps extends HTMLAttributes<HTMLElement> {
    * mobile (< 768px, use `HotbarNavigation` there). @default true
    */
   responsive?: boolean;
-  /** Accessible name of the `<nav>`. @default "Main" */
+  /** Accessible name of the `<nav>`. @default messages.sidebar.label ("Main") */
   label?: string;
   children?: ReactNode;
 }

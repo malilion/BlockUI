@@ -1,6 +1,7 @@
 import { ArrowIcon, SearchIcon } from "@malilion/block-ui-icons";
 import { forwardRef, useId, useState } from "react";
 import { useControllableState } from "../../../hooks/useControllableState";
+import { useBlockUIMessages } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";
 import { BlockInput } from "../../forms/BlockInput/BlockInput";
@@ -23,12 +24,13 @@ export const RecipeBook = forwardRef<HTMLDivElement, RecipeBookProps>(function R
     onValueChange,
     onCraft,
     defaultCraftableOnly = false,
-    label = "Recipe book",
+    label,
     className,
     ...rest
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const titleId = useId();
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState(ALL);
@@ -39,23 +41,32 @@ export const RecipeBook = forwardRef<HTMLDivElement, RecipeBookProps>(function R
     onChange: onValueChange,
   });
 
-  const filters = [{ id: ALL, label: "All" }, ...(categories ?? deriveCategories(recipes))];
+  const filters = [
+    { id: ALL, label: m.recipeBook.all },
+    ...(categories ?? deriveCategories(recipes)),
+  ];
   const visible = filterRecipes(recipes, { query, category, craftableOnly });
   const selected = recipes.find((recipe) => recipe.id === selectedId);
   const pattern = Array.from({ length: 9 }, (_, i) => selected?.ingredients?.[i] ?? null);
 
   return (
-    <div ref={ref} role="group" aria-label={label} className={cx(styles.book, className)} {...rest}>
+    <div
+      ref={ref}
+      role="group"
+      aria-label={label ?? m.recipeBook.label}
+      className={cx(styles.book, className)}
+      {...rest}
+    >
       <div className={styles.browser}>
         <BlockInput
           type="search"
-          label="Search recipes"
+          label={m.recipeBook.search}
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           startIcon={<SearchIcon size={16} />}
         />
         <div className={styles.filters}>
-          <div role="group" aria-label="Categories" className={styles.categories}>
+          <div role="group" aria-label={m.recipeBook.categories} className={styles.categories}>
             {filters.map((filter) => (
               <button
                 key={filter.id}
@@ -75,16 +86,16 @@ export const RecipeBook = forwardRef<HTMLDivElement, RecipeBookProps>(function R
           </div>
           <BlockToggle
             size="sm"
-            label="Craftable only"
+            label={m.recipeBook.craftableOnly}
             checked={craftableOnly}
             onCheckedChange={setCraftableOnly}
           />
         </div>
         <p className={styles.count} role="status">
-          {visible.length === 1 ? "1 recipe" : `${visible.length} recipes`}
+          {m.recipeBook.count(visible.length)}
         </p>
         {visible.length > 0 ? (
-          <ul className={styles.grid} aria-label="Recipes">
+          <ul className={styles.grid} aria-label={m.recipeBook.recipes}>
             {visible.map((recipe) => (
               <li key={recipe.id}>
                 <InventorySlot
@@ -92,7 +103,7 @@ export const RecipeBook = forwardRef<HTMLDivElement, RecipeBookProps>(function R
                   selected={recipe.id === selectedId}
                   label={
                     recipe.craftable === false
-                      ? `${recipe.name} (missing ingredients)`
+                      ? m.recipeBook.missingSuffix(recipe.name)
                       : recipe.name
                   }
                   data-craftable={recipe.craftable === false ? "false" : undefined}
@@ -105,17 +116,17 @@ export const RecipeBook = forwardRef<HTMLDivElement, RecipeBookProps>(function R
             ))}
           </ul>
         ) : (
-          <p className={styles.empty}>No recipes match.</p>
+          <p className={styles.empty}>{m.recipeBook.noMatch}</p>
         )}
       </div>
       <section className={styles.detail} aria-labelledby={titleId}>
         <h3 id={titleId} className={styles.title}>
-          {selected ? selected.name : "Select a recipe"}
+          {selected ? selected.name : m.recipeBook.selectRecipe}
         </h3>
         {selected ? (
           <>
             <div className={styles.preview}>
-              <div role="group" aria-label="Pattern" className={styles.pattern}>
+              <div role="group" aria-label={m.recipeBook.pattern} className={styles.pattern}>
                 {pattern.map((cell, index) => (
                   <InventorySlot key={index} size="sm">
                     {cell}
@@ -125,12 +136,12 @@ export const RecipeBook = forwardRef<HTMLDivElement, RecipeBookProps>(function R
               <span className={styles.arrow} aria-hidden="true">
                 <ArrowIcon size={24} />
               </span>
-              <InventorySlot size="lg" label={`Makes ${selected.name}`}>
+              <InventorySlot size="lg" label={m.recipeBook.makes(selected.name)}>
                 {selected.result}
               </InventorySlot>
             </div>
             {selected.craftable === false ? (
-              <p className={styles.missing}>Missing ingredients</p>
+              <p className={styles.missing}>{m.recipeBook.missingIngredients}</p>
             ) : null}
             {onCraft ? (
               <BlockButton
@@ -138,7 +149,7 @@ export const RecipeBook = forwardRef<HTMLDivElement, RecipeBookProps>(function R
                 disabled={selected.craftable === false}
                 onClick={() => onCraft(selected.id)}
               >
-                Craft
+                {m.recipeBook.craft}
               </BlockButton>
             ) : null}
           </>

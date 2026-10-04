@@ -251,6 +251,26 @@ Not using the provider? Set `data-theme` on any ancestor:
 
 Each theme defines the `BlockTheme` roles (`background`, `surface`, `surfaceAlt`, `primary`, `secondary`, `border`, `text`, `textMuted`, …) as `--block-*` CSS variables. Tests check that text on every surface of every theme reaches WCAG AA.
 
+## Localization
+
+Every built-in string — button labels, empty states, accessible names, status texts — comes from `BlockUIProvider`'s `messages`. English is the default; Block UI ships Traditional Chinese as `zhTWMessages`.
+
+```tsx
+import { BlockUIProvider, zhTWMessages } from "@malilion/block-ui-react";
+
+<BlockUIProvider messages={zhTWMessages}>
+  <App />
+</BlockUIProvider>;
+```
+
+Override a few strings by passing only those sections — they are merged onto English:
+
+```tsx
+<BlockUIProvider messages={{ questCard: { claim: "Collect" } }}>…</BlockUIProvider>
+```
+
+Write a full locale by typing it as `BlockUIMessages`; strings with values (e.g. `worldCard.day`) are functions so each language controls word order. Props such as `label`, `placeholder` or `statusLabels` still override the provider. `useBlockUIMessages()` returns the active messages for your own components.
+
 ## Palette
 
 | Name      | Token               | Value     | Usage                         |

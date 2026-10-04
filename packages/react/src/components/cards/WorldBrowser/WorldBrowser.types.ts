@@ -17,8 +17,8 @@ export interface WorldBrowserProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   onCreate?: () => void;
   /** Initial sort. @default "recent" */
   defaultSort?: WorldSort;
-  /** Shown when no world matches. @default "No worlds yet" */
+  /** Shown when no world matches. @default messages.worldBrowser.empty ("No worlds yet") */
   emptyText?: ReactNode;
-  /** Accessible name. @default "World browser" */
+  /** Accessible name. @default messages.worldBrowser.label ("World browser") */
   label?: string;
 }

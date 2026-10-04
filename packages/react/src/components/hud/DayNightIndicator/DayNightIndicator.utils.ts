@@ -13,7 +13,11 @@ export function dayPhase(time: number): DayPhase {
   return "night";
 }
 
-export function formatClock(time: number, format: "24h" | "12h"): string {
+export function formatClock(
+  time: number,
+  format: "24h" | "12h",
+  suffixes: { am: string; pm: string } = { am: "AM", pm: "PM" },
+): string {
   const t = normalizeTime(time);
   let hours = Math.floor(t);
   let minutes = Math.round((t - hours) * 60);
@@ -23,7 +27,7 @@ export function formatClock(time: number, format: "24h" | "12h"): string {
   }
   const mm = String(minutes).padStart(2, "0");
   if (format === "24h") return `${String(hours).padStart(2, "0")}:${mm}`;
-  const suffix = hours < 12 ? "AM" : "PM";
+  const suffix = hours < 12 ? suffixes.am : suffixes.pm;
   return `${hours % 12 === 0 ? 12 : hours % 12}:${mm} ${suffix}`;
 }
 

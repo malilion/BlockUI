@@ -4,12 +4,14 @@ import { formatNumber, ratio } from "../../../utils/number";
 import styles from "./DurabilityBar.module.css";
 import type { DurabilityBarProps } from "./DurabilityBar.types";
 import { durabilityLevel } from "./DurabilityBar.utils";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /** Tool durability gauge — green → gold → redstone as it wears out. */
 export const DurabilityBar = forwardRef<HTMLDivElement, DurabilityBarProps>(function DurabilityBar(
-  { value, max, label = "Durability", compact = false, showValue = false, className, ...rest },
+  { value, max, label, compact = false, showValue = false, className, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const level = durabilityLevel(value, max);
   const percent = ratio(value, max) * 100;
   const text = `${formatNumber(Math.max(0, Math.round(value)))} / ${formatNumber(max)}`;
@@ -19,7 +21,7 @@ export const DurabilityBar = forwardRef<HTMLDivElement, DurabilityBarProps>(func
       <div
         ref={ref}
         role="meter"
-        aria-label={label}
+        aria-label={label ?? m.durability.label}
         aria-valuemin={0}
         aria-valuemax={max}
         aria-valuenow={Math.max(0, Math.min(value, max))}

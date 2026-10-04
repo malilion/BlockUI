@@ -27,6 +27,6 @@ export interface CommandConsoleProps extends HTMLAttributes<HTMLDivElement> {
   onRun?: (command: string) => void;
   /** Log height. @default "md" */
   size?: "sm" | "md" | "lg";
-  /** Accessible name. @default "Console" */
+  /** Accessible name. @default messages.commandConsole.label ("Console") */
   label?: string;
 }

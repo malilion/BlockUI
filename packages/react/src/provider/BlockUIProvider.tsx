@@ -1,6 +1,7 @@
 import { forwardRef, useMemo, useState } from "react";
 import { cx } from "../utils/cx";
 import { BlockToaster } from "../components/feedback/Toast/Toast";
+import { enMessages, mergeMessages } from "../locale/messages";
 import { BlockUIContext } from "./context";
 import type { BlockUIContextValue, BlockUIProviderProps } from "./BlockUIProvider.types";
 
@@ -16,13 +17,14 @@ import type { BlockUIContextValue, BlockUIProviderProps } from "./BlockUIProvide
  */
 export const BlockUIProvider = forwardRef<HTMLDivElement, BlockUIProviderProps>(
   function BlockUIProvider(
-    { theme = "grassland", toaster = true, className, children, ...rest },
+    { theme = "grassland", toaster = true, messages, className, children, ...rest },
     ref,
   ) {
     const [portalContainer, setPortalContainer] = useState<HTMLDivElement | null>(null);
+    const resolved = useMemo(() => mergeMessages(enMessages, messages), [messages]);
     const value = useMemo<BlockUIContextValue>(
-      () => ({ theme, portalContainer }),
-      [theme, portalContainer],
+      () => ({ theme, portalContainer, messages: resolved }),
+      [theme, portalContainer, resolved],
     );
 
     return (

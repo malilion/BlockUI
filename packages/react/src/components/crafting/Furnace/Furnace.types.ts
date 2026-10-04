@@ -23,6 +23,6 @@ export interface FurnaceProps extends HTMLAttributes<HTMLDivElement> {
   onTakeResult?: () => void;
   /** Override status texts. */
   statusLabels?: Partial<Record<FurnaceState, string>>;
-  /** Accessible name. @default "Furnace" */
+  /** Accessible name. @default locale `furnace.label` ("Furnace") */
   label?: string;
 }

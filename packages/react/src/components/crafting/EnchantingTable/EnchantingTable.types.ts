@@ -25,6 +25,6 @@ export interface EnchantingTableProps extends Omit<HTMLAttributes<HTMLDivElement
   /** Up to three offers, cheapest first. Hidden while there is no item. */
   options?: EnchantOption[];
   onEnchant?: (id: string) => void;
-  /** Accessible name. @default "Enchanting table" */
+  /** Accessible name. @default locale `enchantingTable.label` ("Enchanting table") */
   label?: string;
 }

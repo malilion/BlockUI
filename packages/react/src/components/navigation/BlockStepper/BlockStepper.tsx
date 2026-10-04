@@ -3,6 +3,7 @@ import { forwardRef } from "react";
 import { cx } from "../../../utils/cx";
 import styles from "./BlockStepper.module.css";
 import type { BlockStepperProps } from "./BlockStepper.types";
+import { useBlockUIMessages } from "../../../provider/context";
 
 type StepState = "complete" | "current" | "upcoming";
 
@@ -12,21 +13,14 @@ type StepState = "complete" | "current" | "upcoming";
  * `aria-current="step"`.
  */
 export const BlockStepper = forwardRef<HTMLElement, BlockStepperProps>(function BlockStepper(
-  {
-    steps,
-    current,
-    onStepClick,
-    orientation = "horizontal",
-    label = "Progress",
-    className,
-    ...rest
-  },
+  { steps, current, onStepClick, orientation = "horizontal", label, className, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   return (
     <nav
       ref={ref}
-      aria-label={label}
+      aria-label={label ?? m.stepper.label}
       className={cx(styles.stepper, className)}
       data-orientation={orientation}
       {...rest}

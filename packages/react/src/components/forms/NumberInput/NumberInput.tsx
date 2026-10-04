@@ -7,6 +7,7 @@ import control from "../Field/control.module.css";
 import styles from "./NumberInput.module.css";
 import type { NumberInputProps } from "./NumberInput.types";
 import { normalizeNumber, parseNumber, stepPrecision } from "./NumberInput.utils";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /**
  * Number field with − / + buttons, following the WAI-ARIA spinbutton pattern:
@@ -37,6 +38,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
   },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const [current, setCurrent] = useControllableState<number | null>({
     value,
     defaultValue,
@@ -95,7 +97,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
           <button
             type="button"
             tabIndex={-1}
-            aria-label="Decrease"
+            aria-label={m.numberInput.decrease}
             aria-controls={inputId}
             disabled={disabled || atMin}
             className={styles.button}
@@ -131,7 +133,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
           <button
             type="button"
             tabIndex={-1}
-            aria-label="Increase"
+            aria-label={m.numberInput.increase}
             aria-controls={inputId}
             disabled={disabled || atMax}
             className={styles.button}

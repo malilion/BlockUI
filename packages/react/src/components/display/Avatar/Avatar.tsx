@@ -1,10 +1,9 @@
 import { forwardRef, useState } from "react";
+import { useBlockUIMessages } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import styles from "./Avatar.module.css";
 import type { AvatarProps } from "./Avatar.types";
 import { avatarMaterial, initials } from "./Avatar.utils";
-
-const STATUS_TEXT = { online: "online", away: "away", busy: "busy", offline: "offline" } as const;
 
 /**
  * Square block avatar: a pixelated face image, or initials on a material
@@ -14,9 +13,10 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
   { name, src, icon, size = "md", status, decorative = false, className, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const [failedSrc, setFailedSrc] = useState<string | undefined>(undefined);
   const showImage = src !== undefined && src !== failedSrc;
-  const accessibleName = status ? `${name} (${STATUS_TEXT[status]})` : name;
+  const accessibleName = status ? `${name} (${m.avatar.statuses[status]})` : name;
 
   return (
     <span

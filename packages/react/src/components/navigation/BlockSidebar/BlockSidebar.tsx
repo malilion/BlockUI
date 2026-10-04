@@ -5,24 +5,17 @@ import { cx } from "../../../utils/cx";
 import styles from "./BlockSidebar.module.css";
 import type { BlockSidebarProps, SidebarItemProps } from "./BlockSidebar.types";
 import { SidebarContext, useSidebar } from "./context";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /**
  * Main navigation rail. Collapses to icons on tablet and hides on mobile when
  * `responsive` (pair it with `HotbarNavigation`).
  */
 export const BlockSidebar = forwardRef<HTMLElement, BlockSidebarProps>(function BlockSidebar(
-  {
-    header,
-    footer,
-    collapsed = false,
-    responsive = true,
-    label = "Main",
-    className,
-    children,
-    ...rest
-  },
+  { header, footer, collapsed = false, responsive = true, label, className, children, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   const tablet = useMediaQuery(media.tablet);
   const isCollapsed = collapsed || (responsive && tablet);
   const context = useMemo(() => ({ collapsed: isCollapsed }), [isCollapsed]);
@@ -30,7 +23,7 @@ export const BlockSidebar = forwardRef<HTMLElement, BlockSidebarProps>(function 
   return (
     <nav
       ref={ref}
-      aria-label={label}
+      aria-label={label ?? m.sidebar.label}
       data-collapsed={isCollapsed || undefined}
       data-responsive={responsive || undefined}
       className={cx(styles.sidebar, className)}

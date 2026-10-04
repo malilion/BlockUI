@@ -19,6 +19,6 @@ export interface BrewingStandProps extends HTMLAttributes<HTMLDivElement> {
   state?: BrewingState;
   /** Override status texts. */
   statusLabels?: Partial<Record<BrewingState, string>>;
-  /** Accessible name. @default "Brewing stand" */
+  /** Accessible name. @default locale `brewingStand.label` ("Brewing stand") */
   label?: string;
 }

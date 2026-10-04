@@ -3,20 +3,14 @@ import { cx } from "../../../utils/cx";
 import { BlockProgress } from "../Progress/BlockProgress";
 import styles from "./BlockLoading.module.css";
 import type { BlockLoadingProps } from "./BlockLoading.types";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /** Loading indicator — stepping pixel blocks or a loading bar — inside a polite status region. */
 export const BlockLoading = forwardRef<HTMLDivElement, BlockLoadingProps>(function BlockLoading(
-  {
-    label = "Loading…",
-    variant = "blocks",
-    progress,
-    hideLabel = false,
-    size = "md",
-    className,
-    ...rest
-  },
+  { label, variant = "blocks", progress, hideLabel = false, size = "md", className, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
   return (
     <div
       ref={ref}
@@ -36,7 +30,9 @@ export const BlockLoading = forwardRef<HTMLDivElement, BlockLoadingProps>(functi
       ) : (
         <BlockProgress value={progress} variant="water" aria-hidden="true" className={styles.bar} />
       )}
-      <span className={cx(styles.label, hideLabel && "block-visually-hidden")}>{label}</span>
+      <span className={cx(styles.label, hideLabel && "block-visually-hidden")}>
+        {label ?? m.common.loading}
+      </span>
     </div>
   );
 });

@@ -1,5 +1,6 @@
 import { PlusIcon, SearchIcon } from "@malilion/block-ui-icons";
 import { forwardRef, useState } from "react";
+import { useBlockUIMessages } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { BlockButton } from "../../actions/BlockButton/BlockButton";
 import { BlockInput } from "../../forms/BlockInput/BlockInput";
@@ -9,25 +10,16 @@ import { WorldCard } from "../WorldCard/WorldCard";
 import type { WorldBrowserProps, WorldSort } from "./WorldBrowser.types";
 import { ALL_MODES, browseWorlds, gameModes } from "./WorldBrowser.utils";
 
-const SORT_OPTIONS = [
-  { value: "recent", label: "Last played" },
-  { value: "name", label: "Name" },
-];
-
 /** Singleplayer world list: search, game-mode filter and sort over `WorldCard`s. */
 export const WorldBrowser = forwardRef<HTMLDivElement, WorldBrowserProps>(function WorldBrowser(
-  {
-    worlds,
-    onPlay,
-    onCreate,
-    defaultSort = "recent",
-    emptyText = "No worlds yet",
-    label = "World browser",
-    className,
-    ...rest
-  },
+  { worlds, onPlay, onCreate, defaultSort = "recent", emptyText, label, className, ...rest },
   ref,
 ) {
+  const m = useBlockUIMessages();
+  const sortOptions = [
+    { value: "recent", label: m.worldBrowser.lastPlayed },
+    { value: "name", label: m.common.name },
+  ];
   const [query, setQuery] = useState("");
   const [mode, setMode] = useState(ALL_MODES);
   const [sort, setSort] = useState<WorldSort>(defaultSort);
@@ -38,14 +30,14 @@ export const WorldBrowser = forwardRef<HTMLDivElement, WorldBrowserProps>(functi
     <div
       ref={ref}
       role="region"
-      aria-label={label}
+      aria-label={label ?? m.worldBrowser.label}
       className={cx(styles.browser, className)}
       {...rest}
     >
       <div className={styles.toolbar}>
         <BlockInput
           type="search"
-          label="Search worlds"
+          label={m.worldBrowser.search}
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           startIcon={<SearchIcon size={16} />}
@@ -53,36 +45,36 @@ export const WorldBrowser = forwardRef<HTMLDivElement, WorldBrowserProps>(functi
         />
         {modes.length > 1 ? (
           <BlockSelect
-            label="Game mode"
+            label={m.worldBrowser.gameMode}
             value={mode}
             onChange={(event) => setMode(event.target.value)}
             options={[
-              { value: ALL_MODES, label: "All modes" },
+              { value: ALL_MODES, label: m.worldBrowser.allModes },
               ...modes.map((value) => ({ value, label: value })),
             ]}
             wrapperClassName={styles.filter}
           />
         ) : null}
         <BlockSelect
-          label="Sort by"
+          label={m.common.sortBy}
           value={sort}
           onChange={(event) => setSort(event.target.value as WorldSort)}
-          options={SORT_OPTIONS}
+          options={sortOptions}
           wrapperClassName={styles.filter}
         />
         {onCreate ? (
           <div className={styles.actions}>
             <BlockButton variant="grass" startIcon={<PlusIcon size={16} />} onClick={onCreate}>
-              Create world
+              {m.worldBrowser.createWorld}
             </BlockButton>
           </div>
         ) : null}
       </div>
       <p className={styles.count} role="status">
-        {visible.length === 1 ? "1 world" : `${visible.length} worlds`}
+        {m.worldBrowser.count(visible.length)}
       </p>
       {visible.length > 0 ? (
-        <ul className={styles.list} aria-label="Worlds">
+        <ul className={styles.list} aria-label={m.worldBrowser.worlds}>
           {visible.map(({ id, lastPlayedAt: _lastPlayedAt, ...world }) => (
             <li key={id}>
               <WorldCard {...world} onPlay={onPlay ? () => onPlay(id) : undefined} />
@@ -90,7 +82,7 @@ export const WorldBrowser = forwardRef<HTMLDivElement, WorldBrowserProps>(functi
           ))}
         </ul>
       ) : (
-        <p className={styles.empty}>{emptyText}</p>
+        <p className={styles.empty}>{emptyText === undefined ? m.worldBrowser.empty : emptyText}</p>
       )}
     </div>
   );

@@ -3,7 +3,8 @@ import { cx } from "../../../utils/cx";
 import chip from "../hudChip.module.css";
 import styles from "./WeatherIndicator.module.css";
 import type { WeatherIndicatorProps } from "./WeatherIndicator.types";
-import { WEATHER_LABEL, weatherIcon } from "./WeatherIndicator.utils";
+import { weatherIcon } from "./WeatherIndicator.utils";
+import { useBlockUIMessages } from "../../../provider/context";
 
 /** Current weather read-out with a pixel icon and an optional time remaining. */
 export const WeatherIndicator = forwardRef<HTMLDivElement, WeatherIndicatorProps>(
@@ -11,6 +12,7 @@ export const WeatherIndicator = forwardRef<HTMLDivElement, WeatherIndicatorProps
     { weather, name, remaining, night = false, announce = false, size = "md", className, ...rest },
     ref,
   ) {
+    const m = useBlockUIMessages();
     const Icon = weatherIcon(weather, night);
     return (
       <div
@@ -25,12 +27,17 @@ export const WeatherIndicator = forwardRef<HTMLDivElement, WeatherIndicatorProps
           <Icon size={size === "lg" ? 24 : 16} />
         </span>
         <span>
-          <span className={chip.label}>Weather</span>{" "}
-          <span className={styles.name}>{name ?? WEATHER_LABEL[weather]}</span>
+          <span className={chip.label}>{m.weatherIndicator.weather}</span>{" "}
+          <span className={styles.name}>
+            {name ??
+              (night && weather === "clear"
+                ? m.weatherIndicator.clearNight
+                : m.weatherIndicator.names[weather])}
+          </span>
         </span>
         {remaining !== undefined ? (
           <span className={chip.label}>
-            · <span className={chip.value}>{remaining}</span> left
+            · <span className={chip.value}>{remaining}</span> {m.weatherIndicator.remaining}
           </span>
         ) : null}
       </div>
