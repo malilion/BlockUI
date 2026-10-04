@@ -269,7 +269,7 @@ Override a few strings by passing only those sections — they are merged onto E
 <BlockUIProvider messages={{ questCard: { claim: "Collect" } }}>…</BlockUIProvider>
 ```
 
-Write a full locale by typing it as `BlockUIMessages`; strings with values (e.g. `worldCard.day`) are functions so each language controls word order. Props such as `label`, `placeholder` or `statusLabels` still override the provider. `useBlockUIMessages()` returns the active messages for your own components.
+Write a full locale by typing it as `BlockUIMessages`; strings with values (e.g. `worldCard.day`) are functions so each language controls word order. Props such as `label`, `placeholder` or `statusLabels` still override the provider. `useBlockUIMessages()` returns the active messages for your own components. In [Storybook](https://malilion.github.io/BlockUI/), the **Language** toolbar button switches every story, and **Foundations → Localization** shows English and 繁體中文 side by side.
 
 ## Palette
 

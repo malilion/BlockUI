@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- **Storybook** — a **Language** toolbar button (English / 繁體中文) switches the built-in text of every story, and **Foundations → Localization** shows the components side by side in both languages with usage code.
+
+### Removed
+
+- The internal `WEATHER_LABEL` map (never exported from the package); `WeatherIndicator` reads its names from the locale.
+
 ## [0.6.0] — 2026-10-04
 
 ### Added

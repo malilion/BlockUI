@@ -1,17 +1,19 @@
 import { render, screen } from "@testing-library/react";
 import { createRef } from "react";
 import { describe, expect, it } from "vitest";
+import { enMessages } from "../../../locale/messages";
+import { zhTWMessages } from "../../../locale/zhTW";
+import { BlockUIProvider } from "../../../provider/BlockUIProvider";
 import { expectNoA11yViolations } from "../../../test/axe";
 import { WeatherIndicator } from "./WeatherIndicator";
 import { weatherTypes } from "./WeatherIndicator.types";
-import { WEATHER_LABEL } from "./WeatherIndicator.utils";
 
 describe("WeatherIndicator", () => {
   it.each(weatherTypes)("renders %s weather with its label and icon", (weather) => {
     const ref = createRef<HTMLDivElement>();
     const { container } = render(<WeatherIndicator ref={ref} weather={weather} />);
     expect(ref.current).toHaveAttribute("data-weather", weather);
-    expect(ref.current).toHaveTextContent(`Weather ${WEATHER_LABEL[weather]}`);
+    expect(ref.current).toHaveTextContent(`Weather ${enMessages.weatherIndicator.names[weather]}`);
     expect(container.querySelector('[aria-hidden="true"] svg')).not.toBeNull();
   });
 
@@ -21,6 +23,16 @@ describe("WeatherIndicator", () => {
     );
     expect(container.querySelector('[data-icon="MoonIcon"]')).not.toBeNull();
     expect(container.firstElementChild).toHaveTextContent("Weather Starry· 4 min left");
+  });
+
+  it("uses the provider's locale for its built-in text", () => {
+    const ref = createRef<HTMLDivElement>();
+    render(
+      <BlockUIProvider toaster={false} messages={zhTWMessages}>
+        <WeatherIndicator ref={ref} weather="thunder" remaining="4 分鐘" />
+      </BlockUIProvider>,
+    );
+    expect(ref.current).toHaveTextContent("天氣 雷雨· 4 分鐘 後結束");
   });
 
   it("is a polite status only when announcing", () => {
