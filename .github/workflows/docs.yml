@@ -16,7 +16,7 @@ env:
 
 jobs:
   build:
-    name: Build Storybook and the demo game
+    name: Build Storybook, the demo game and the playground
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -43,6 +43,11 @@ jobs:
         run: |
           GAME_BASE=/BlockUI/game/ pnpm --filter @block-ui/game build
           cp -R apps/game/dist apps/docs/storybook-static/game
+
+      - name: Build the playground into /playground
+        run: |
+          PLAYGROUND_BASE=/BlockUI/playground/ pnpm --filter @block-ui/playground build
+          cp -R apps/playground/dist apps/docs/storybook-static/playground
 
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
