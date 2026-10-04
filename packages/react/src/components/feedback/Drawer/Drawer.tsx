@@ -6,40 +6,35 @@ import { useScrollLock } from "../../../hooks/useScrollLock";
 import { usePortalContainer } from "../../../provider/context";
 import { cx } from "../../../utils/cx";
 import { mergeRefs } from "../../../utils/refs";
-import styles from "./BlockModal.module.css";
-import type { BlockModalProps } from "./BlockModal.types";
+import styles from "./Drawer.module.css";
+import type { DrawerProps } from "./Drawer.types";
 
 /**
- * Accessible modal dialog: focus trap, `Escape` to close, overlay, focus
- * restoration and `aria-modal` dialog semantics (PRD §45).
+ * Panel that slides in from an edge (inventory, settings, mobile menu). Modal
+ * like `BlockModal`: focus trap, Escape, overlay click and focus restoration.
  */
-export const BlockModal = forwardRef<HTMLDivElement, BlockModalProps>(function BlockModal(
+export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
   {
     open,
     onClose,
     title,
-    description,
     children,
     footer,
+    side = "right",
     size = "md",
     closeOnOverlayClick = true,
     closeOnEscape = true,
-    hideCloseButton = false,
     initialFocusRef,
-    role = "dialog",
-    icon,
     className,
     ...rest
   },
   ref,
 ) {
   const container = usePortalContainer();
-  const dialogRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
-  const descriptionId = useId();
 
-  useFocusTrap(dialogRef, open && container !== null, { initialFocus: initialFocusRef });
-
+  useFocusTrap(panelRef, open && container !== null, { initialFocus: initialFocusRef });
   useScrollLock(open);
 
   if (!open || !container) return null;
@@ -59,43 +54,30 @@ export const BlockModal = forwardRef<HTMLDivElement, BlockModalProps>(function B
     <div
       role="presentation"
       className={styles.overlay}
+      data-side={side}
       onMouseDown={handleOverlayClick}
       onKeyDown={handleKeyDown}
     >
       <div
-        ref={mergeRefs(dialogRef, ref)}
-        role={role}
+        ref={mergeRefs(panelRef, ref)}
+        role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        aria-describedby={description ? descriptionId : undefined}
         tabIndex={-1}
+        data-side={side}
         data-size={size}
-        className={cx(styles.dialog, className)}
+        className={cx(styles.drawer, className)}
         {...rest}
       >
         <div className={styles.header}>
           <h2 id={titleId} className={styles.title}>
             {title}
           </h2>
-          {hideCloseButton ? null : (
-            <button type="button" className={styles.close} aria-label="Close" onClick={onClose}>
-              <CloseIcon size={16} />
-            </button>
-          )}
+          <button type="button" className={styles.close} aria-label="Close" onClick={onClose}>
+            <CloseIcon size={16} />
+          </button>
         </div>
-        <div className={styles.body}>
-          {icon ? (
-            <div className={styles.icon} aria-hidden="true">
-              {icon}
-            </div>
-          ) : null}
-          {description ? (
-            <div id={descriptionId} className={styles.description}>
-              {description}
-            </div>
-          ) : null}
-          {children}
-        </div>
+        <div className={styles.body}>{children}</div>
         {footer ? <div className={styles.footer}>{footer}</div> : null}
       </div>
     </div>,

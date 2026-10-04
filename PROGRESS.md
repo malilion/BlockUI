@@ -49,6 +49,7 @@
 - [x] V2 batch 1 (HUD): `BossBar`, `Scoreboard`, `CoordinatesHUD`, `BiomeIndicator`, `DayNightIndicator`, `WeatherIndicator` + 8 environment icons; playground "World HUD"
 - [x] V2 batch 2 (workstations): `EnchantingTable`, `BrewingStand`, `Anvil`, `TradingUI`, `RecipeBook` + 4 icons; playground Crafting tab
 - [x] V2 batch 3 (community): `ServerBrowser`, `WorldBrowser`, `ChatWindow`, `CommandConsole`, `SkillTree`, `MiniMap` — every PRD §83 V2 component is done
+- [x] General batch 2: `Avatar`, `Accordion`, `Drawer`, `EmptyState`, `Skeleton`, `NumberInput` (+ shared `useScrollLock`)
 - [x] 0.3.0 versioned (`pnpm release:version 0.3.0`), CHANGELOG section dated 2026-10-04
 
 ## Known Issues / Decisions
@@ -64,10 +65,10 @@
 - pnpm format:check ✅
 - pnpm build-storybook ✅
 - pnpm typecheck ✅
-- pnpm test ✅ (816)
+- pnpm test ✅ (869)
 - pnpm build ✅
-- pnpm test:e2e ✅ (36 passed, 2 skipped; axe on every playground tab in 5 themes)
-- pnpm check:a11y ✅ (511 stories in grassland; new stories in all 5 themes)
+- pnpm test:e2e ✅ (38 passed, 2 skipped; axe on every playground tab in 5 themes)
+- pnpm check:a11y ✅ (553 stories in grassland; new stories in all 5 themes)
 - pnpm check:package ✅
 - pnpm check:publish ✅ (dry-run, topological order)
 - pnpm check:treeshake ✅

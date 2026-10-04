@@ -1,0 +1,40 @@
+.wrapper {
+  display: flex;
+  align-items: stretch;
+  gap: var(--block-space-1);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: var(--block-size-control-md);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.button {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--block-size-control-md);
+  padding: 0;
+  color: var(--block-text);
+  background-color: var(--block-surface-alt);
+  border: var(--block-border-width-thin) solid var(--block-border);
+  box-shadow: var(--block-shadow-bevel);
+  cursor: pointer;
+}
+
+.button:hover:not(:disabled) {
+  background-color: var(--block-slot-hover);
+}
+
+.button:active:not(:disabled) {
+  box-shadow: var(--block-shadow-inset);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}

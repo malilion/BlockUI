@@ -5,3 +5,4 @@ export * from "./BlockCheckbox";
 export * from "./BlockRadio";
 export * from "./BlockToggle";
 export * from "./BlockSlider";
+export * from "./NumberInput";

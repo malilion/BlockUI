@@ -68,6 +68,12 @@ import {
   CommandConsole,
   SkillTree,
   MiniMap,
+  Avatar,
+  Accordion,
+  Drawer,
+  EmptyState,
+  Skeleton,
+  NumberInput,
   type ChatMessage,
   type ConsoleEntry,
   blockButtonVariants,
@@ -192,6 +198,12 @@ function DashboardSection() {
           </BlockBadge>
           <BlockBadge variant="amethyst">VIP</BlockBadge>
         </div>
+        <div className={styles.row}>
+          <Avatar name="BlockMaster_42" status="online" size="lg" />
+          <Avatar name="Steve" status="away" size="lg" />
+          <Avatar name="Alex" status="busy" size="lg" />
+          <Avatar name="Notch" status="offline" size="lg" />
+        </div>
       </div>
       <div className={styles.col}>
         <h3 className={styles.heading}>Game Rules</h3>
@@ -216,6 +228,25 @@ function DashboardSection() {
               icon: <RedstoneIcon size={16} />,
               content: "One life. The world is deleted when you die.",
             },
+          ]}
+        />
+      </div>
+      <div className={styles.col}>
+        <h3 className={styles.heading}>World Settings</h3>
+        <Accordion
+          defaultValue={["difficulty"]}
+          items={[
+            {
+              id: "difficulty",
+              title: "Difficulty",
+              content: "Normal — hostile mobs deal standard damage.",
+            },
+            {
+              id: "rules",
+              title: "Game rules",
+              content: "Keep inventory: off · Daylight cycle: on",
+            },
+            { id: "border", title: "World border", content: "60,000,000 blocks wide." },
           ]}
         />
       </div>
@@ -298,6 +329,7 @@ function DashboardSection() {
           <BlockRadio name="difficulty" value="survival" label="Survival" />
           <BlockToggle label="Fullscreen Mode" />
           <BlockSlider label="Render Distance" min={2} max={32} defaultValue={12} />
+          <NumberInput label="Max Players" min={1} max={100} defaultValue={20} />
         </div>
       </div>
     </BlockPanel>
@@ -862,6 +894,7 @@ function SkillTreeDemo() {
 function FeedbackSection() {
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
     <BlockPanel title="Feedback" icon={<RedstoneIcon size={24} />}>
@@ -885,7 +918,24 @@ function FeedbackSection() {
           <BlockButton variant="redstone" onClick={() => setConfirmOpen(true)}>
             Delete World
           </BlockButton>
+          <BlockButton onClick={() => setDrawerOpen(true)}>Open Drawer</BlockButton>
         </div>
+        <Drawer
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          title="Video Settings"
+          footer={
+            <BlockButton variant="grass" onClick={() => setDrawerOpen(false)}>
+              Done
+            </BlockButton>
+          }
+        >
+          <div className={styles.col}>
+            <BlockToggle label="Smooth lighting" defaultChecked />
+            <BlockToggle label="Fullscreen" />
+            <NumberInput label="Max frame rate" min={30} max={240} step={10} defaultValue={120} />
+          </div>
+        </Drawer>
         <BlockModal open={modalOpen} onClose={() => setModalOpen(false)} title="Confirm Action">
           <p>Are you sure you want to delete this world? This action cannot be undone.</p>
           <div className={styles.modalActions}>
@@ -913,6 +963,22 @@ function FeedbackSection() {
         <div className={styles.col}>
           <BlockProgress value={75} max={100} label="Downloading terrain..." />
           <BlockLoading label="Generating world..." />
+        </div>
+        <h3 className={styles.heading}>Empty &amp; Loading States</h3>
+        <div className={styles.section}>
+          <EmptyState
+            title="No backups yet"
+            description="Back up your world to restore it later."
+            action={<BlockButton variant="grass">Create backup</BlockButton>}
+            size="sm"
+          />
+          <div className={styles.col} aria-busy="true">
+            <div className={styles.row}>
+              <Skeleton variant="avatar" />
+              <Skeleton lines={2} width="60%" />
+            </div>
+            <Skeleton variant="block" height="64px" />
+          </div>
         </div>
       </div>
     </BlockPanel>

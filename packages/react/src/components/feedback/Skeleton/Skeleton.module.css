@@ -1,0 +1,59 @@
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--block-space-2);
+  width: var(--block-skeleton-width, 100%);
+  max-width: 100%;
+}
+
+.bone {
+  display: block;
+  height: 12px;
+  background-color: var(--block-slot);
+  background-image: linear-gradient(
+    90deg,
+    transparent 0 40%,
+    color-mix(in srgb, var(--block-text) 12%, transparent) 40% 60%,
+    transparent 60%
+  );
+  background-size: 300% 100%;
+  border: var(--block-border-width-thin) solid var(--block-border);
+  animation: block-skeleton-sweep 1.2s steps(8, end) infinite;
+}
+
+.bone[data-last] {
+  width: 60%;
+}
+
+.skeleton[data-variant="block"] .bone {
+  height: var(--block-skeleton-height, 96px);
+}
+
+.skeleton[data-variant="slot"] {
+  width: var(--block-skeleton-width, var(--block-size-slot-md));
+}
+
+.skeleton[data-variant="slot"] .bone {
+  aspect-ratio: 1;
+  height: auto;
+  box-shadow: var(--block-shadow-inset);
+}
+
+.skeleton[data-variant="avatar"] {
+  width: var(--block-skeleton-width, 48px);
+}
+
+.skeleton[data-variant="avatar"] .bone {
+  aspect-ratio: 1;
+  height: auto;
+}
+
+/* A stepped highlight sweep; reduced motion stops it (base.css). */
+@keyframes block-skeleton-sweep {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}

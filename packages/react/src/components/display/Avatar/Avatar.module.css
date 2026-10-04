@@ -1,0 +1,81 @@
+.avatar {
+  --avatar-size: 32px;
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  color: var(--block-mat-on);
+  background-color: var(--block-mat);
+  border: var(--block-border-width-thin) solid var(--block-black);
+  box-shadow:
+    inset 2px 2px 0 var(--block-mat-light),
+    inset -2px -2px 0 var(--block-mat-dark);
+  vertical-align: middle;
+}
+
+.avatar[data-size="sm"] {
+  --avatar-size: 24px;
+}
+
+.avatar[data-size="lg"] {
+  --avatar-size: 48px;
+}
+
+.avatar[data-size="xl"] {
+  --avatar-size: 64px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.icon {
+  display: inline-flex;
+  width: 70%;
+  height: 70%;
+}
+
+.icon > * {
+  width: 100%;
+  height: 100%;
+}
+
+.initials {
+  font-family: var(--block-font-display);
+  font-size: calc(var(--avatar-size) * 0.4);
+  font-weight: var(--block-font-weight-bold);
+  line-height: 1;
+  text-shadow: var(--block-mat-text-shadow, none);
+}
+
+/* Presence dot, a quarter of the avatar, in the bottom-right corner. */
+.status {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  width: max(8px, calc(var(--avatar-size) * 0.3));
+  height: max(8px, calc(var(--avatar-size) * 0.3));
+  border: 2px solid var(--block-black);
+}
+
+.status[data-status="online"] {
+  background-color: var(--block-emerald-light);
+}
+
+.status[data-status="away"] {
+  background-color: var(--block-gold-light);
+}
+
+.status[data-status="busy"] {
+  background-color: var(--block-redstone-light);
+}
+
+.status[data-status="offline"] {
+  background-color: var(--block-stone);
+}
