@@ -9,14 +9,6 @@ import {
 } from "@malilion/block-ui-icons";
 import type { WeatherType } from "./WeatherIndicator.types";
 
-export const WEATHER_LABEL: Record<WeatherType, string> = {
-  clear: "Clear",
-  cloudy: "Cloudy",
-  rain: "Rain",
-  thunder: "Thunderstorm",
-  snow: "Snow",
-};
-
 export function weatherIcon(weather: WeatherType, night: boolean): PixelIcon {
   switch (weather) {
     case "clear":

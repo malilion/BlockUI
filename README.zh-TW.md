@@ -269,7 +269,7 @@ import { BlockUIProvider, zhTWMessages } from "@malilion/block-ui-react";
 <BlockUIProvider messages={{ questCard: { claim: "領取" } }}>…</BlockUIProvider>
 ```
 
-要寫完整的語系,請用 `BlockUIMessages` 型別;帶數值的字串(如 `worldCard.day`)是函式,讓每種語言自行決定語序。元件上的 `label`、`placeholder`、`statusLabels` 等屬性仍會覆蓋 provider 的設定。自訂元件可用 `useBlockUIMessages()` 取得目前的文字。
+要寫完整的語系,請用 `BlockUIMessages` 型別;帶數值的字串(如 `worldCard.day`)是函式,讓每種語言自行決定語序。元件上的 `label`、`placeholder`、`statusLabels` 等屬性仍會覆蓋 provider 的設定。自訂元件可用 `useBlockUIMessages()` 取得目前的文字。在 [Storybook](https://malilion.github.io/BlockUI/) 中,工具列的 **Language** 按鈕可切換所有 story 的語言,**Foundations → Localization** 頁面則並排展示英文與繁體中文。
 
 ## 色票
 
