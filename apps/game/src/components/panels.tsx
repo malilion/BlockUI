@@ -112,7 +112,7 @@ export function InventoryPanel({ state }: PanelProps) {
         ))}
       </InventoryGrid>
       <div className={styles.equipment}>
-        <span className={styles.label}>Armor</span>
+        <span className={styles.label}>盔甲</span>
         <InventorySlot
           size="sm"
           label={state.armorItem ? item(state.armorItem).name : "沒有盔甲"}
@@ -181,14 +181,6 @@ export function FurnacePanel({ state, dispatch }: PanelProps) {
         burning={burning}
         fuelLevel={f.burnMax ? (f.burnLeft / f.burnMax) * 100 : 0}
         onTakeResult={() => dispatch({ type: "furnaceTake" })}
-        label="熔爐"
-        statusLabels={{
-          idle: "閒置",
-          burning: "燃燒中",
-          processing: "熔煉中",
-          complete: "完成",
-          noFuel: "沒有燃料",
-        }}
       />
       <div className={styles.buttonRow}>
         <span className={styles.label}>熔煉</span>
@@ -259,7 +251,7 @@ export function TraderPanel({ state, dispatch }: PanelProps) {
   return (
     <BlockStack gap={3}>
       <BlockBadge variant="gold" icon={<CoinIcon size={16} />}>
-        {state.coins} coins
+        {state.coins} 金幣
       </BlockBadge>
       <TradingUI
         trades={list}
@@ -353,7 +345,6 @@ export function ChatPanel({ state, dispatch }: PanelProps) {
       onSend={(text) => dispatch({ type: "chat", text })}
       placeholder="聊天,或輸入 /help"
       showTimestamps
-      label="聊天"
       size="lg"
     />
   );

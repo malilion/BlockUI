@@ -18,7 +18,7 @@ import {
   PlayerHUD,
   WeatherIndicator,
   toast,
-  type WeatherType,
+  zhTWMessages,
 } from "@malilion/block-ui-react";
 import {
   AchievementIcon,
@@ -63,14 +63,6 @@ import {
   TraderPanel,
 } from "./components/panels";
 import styles from "./App.module.css";
-
-const weatherNames: Record<WeatherType, string> = {
-  clear: "晴朗",
-  cloudy: "多雲",
-  rain: "下雨",
-  thunder: "雷雨",
-  snow: "下雪",
-};
 
 function showToast({ id, variant, message, title }: ToastMsg) {
   const options = { id, title, duration: 3200 };
@@ -141,7 +133,12 @@ export default function App() {
   const MonsterIcon = monster ? monsters[monster.id].icon : null;
 
   return (
-    <BlockUIProvider theme={layer.theme} className={styles.app} data-night={night || undefined}>
+    <BlockUIProvider
+      theme={layer.theme}
+      messages={zhTWMessages}
+      className={styles.app}
+      data-night={night || undefined}
+    >
       <header className={styles.topbar}>
         <div className={styles.brand}>
           <PickaxeIcon size={32} />
@@ -152,12 +149,7 @@ export default function App() {
         </div>
         <div className={styles.status}>
           <DayNightIndicator time={state.time} day={state.day} size="sm" />
-          <WeatherIndicator
-            weather={state.weather}
-            name={weatherNames[state.weather]}
-            night={night}
-            size="sm"
-          />
+          <WeatherIndicator weather={state.weather} night={night} size="sm" />
           <BiomeIndicator type={layer.biome} name={layer.name} size="sm" />
           <CoordinatesHUD
             x={0}
@@ -425,7 +417,6 @@ export default function App() {
         description="目前的進度會被刪除。"
         variant="danger"
         confirmText="建立新世界"
-        cancelText="取消"
         onConfirm={() => {
           dispatch({ type: "reset" });
           setConfirmReset(false);
