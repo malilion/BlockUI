@@ -35,15 +35,6 @@
 - [x] 0.2.0 batch: `BlockTooltip`, `BlockMenu`, `BlockTable`, `BlockPagination`, `BlockStack`, `BlockDivider` (+ `ChevronLeftIcon` / `ChevronUpIcon`) with stories, tests and docs; playground "Servers" tab; Tooltip / Menu portal into the provider overlay layer
 - [x] Copyable code on every Storybook page — paste-ready "Show code" for all component stories, Usage code blocks on Foundations (incl. Borders), click-to-copy icons, pattern page source in the Code panel
 
-## Released
-
-- [x] npm: `@malilion/block-ui-{tokens,themes,icons,react}@0.1.0` (published 2026-10-02; the `@block-ui` npm org belongs to another account)
-- [x] npm: `@malilion/block-ui-*@0.2.0` (2026-10-04) — tokens / themes via trusted publishing, icons / react published by hand; GitHub Release [v0.2.0](https://github.com/malilion/BlockUI/releases/tag/v0.2.0)
-- [x] npm: `@malilion/block-ui-*@0.3.0` (2026-10-04) — fully automatic CI release; GitHub Release [v0.3.0](https://github.com/malilion/BlockUI/releases/tag/v0.3.0)
-- [x] npm: `@malilion/block-ui-*@0.4.0` (2026-10-04) — Avatar, Accordion, Drawer, EmptyState, Skeleton, NumberInput; automatic CI release, GitHub Release [v0.4.0](https://github.com/malilion/BlockUI/releases/tag/v0.4.0); CI on main green (36 min, incl. axe on every story × 5 themes)
-
-## Next
-
 - [x] 0.2.0 versioned (`pnpm release:version 0.2.0`) and CHANGELOG section dated 2026-10-04
 - [x] npm trusted publishing for icons / react: their configs hold the environment `leave blank` (npm web form would not clear it); `release.yml` now publishes them in a `publish-ui` job running in a GitHub environment of that name (docs/RELEASING.md)
 - [x] Confirmed on 0.3.0: all four packages publish from CI (tokens / themes without an environment, icons / react from `leave blank`), with provenance and no manual step
@@ -55,6 +46,20 @@
 - [x] 0.4.0 versioned (`pnpm release:version 0.4.0`)
 - [x] General batch 2: `Avatar`, `Accordion`, `Drawer`, `EmptyState`, `Skeleton`, `NumberInput` (+ shared `useScrollLock`)
 - [x] 0.3.0 versioned (`pnpm release:version 0.3.0`), CHANGELOG section dated 2026-10-04
+
+## Released
+
+- [x] npm: `@malilion/block-ui-{tokens,themes,icons,react}@0.1.0` (published 2026-10-02; the `@block-ui` npm org belongs to another account)
+- [x] npm: `@malilion/block-ui-*@0.2.0` (2026-10-04) — tokens / themes via trusted publishing, icons / react published by hand; GitHub Release [v0.2.0](https://github.com/malilion/BlockUI/releases/tag/v0.2.0)
+- [x] npm: `@malilion/block-ui-*@0.3.0` (2026-10-04) — fully automatic CI release; GitHub Release [v0.3.0](https://github.com/malilion/BlockUI/releases/tag/v0.3.0)
+- [x] npm: `@malilion/block-ui-*@0.4.0` (2026-10-04) — Avatar, Accordion, Drawer, EmptyState, Skeleton, NumberInput; automatic CI release, GitHub Release [v0.4.0](https://github.com/malilion/BlockUI/releases/tag/v0.4.0); CI on main green (36 min, incl. axe on every story × 5 themes)
+- [x] npm: `@malilion/block-ui-*@0.5.0` (2026-10-04) — Popover, ContextMenu, Kbd, BlockGrid, BlockContainer, BlockStepper; automatic CI release, GitHub Release [v0.5.0](https://github.com/malilion/BlockUI/releases/tag/v0.5.0)
+
+## Next
+
+- [ ] Optional components, when there is a need: `Combobox` (searchable select), `FileUpload` (resource packs / world saves), `ColorPicker` (pixel palette), `Tag` input
+- [ ] PRD §84 package split (`@block-ui/core` without React, `@block-ui/game`) — a restructuring of packages and the release flow
+- [ ] npm trusted publishing: if npm's form ever lets the `leave blank` environment of icons / react be cleared, remove the `publish-ui` workaround (docs/RELEASING.md)
 
 ## Known Issues / Decisions
 
