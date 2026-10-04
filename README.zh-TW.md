@@ -25,6 +25,8 @@
 
 <p align="center">
   <a href="https://malilion.github.io/BlockUI/"><b>📖 文件與線上範例（Storybook）</b></a>
+  ·
+  <a href="https://malilion.github.io/BlockUI/game/"><b>🎮 玩方塊礦工</b></a>
 </p>
 
 <p align="center">
@@ -164,6 +166,14 @@ import "@fontsource/silkscreen/700.css";
 </p>
 
 每個元件都有 [Storybook](https://malilion.github.io/BlockUI/) stories（也可在本地執行 `pnpm storybook`）——固定包含 `Default`、`Variants`、`States`、`Sizes`、`Disabled`、`Interactive`（互動測試）與 `Responsive`——並有即時控制項、所有 variants 與 states、使用方式、Props 表、無障礙說明與 a11y 檢查。Storybook 另外有 Foundations 頁面（色彩、字體、間距、陰影、主題、圖示）與完整畫面的 Patterns（儀表板、玩家資料、背包畫面、合成畫面、伺服器瀏覽器）。
+
+## 範例遊戲
+
+**[方塊礦工](https://malilion.github.io/BlockUI/game/)**([`apps/game`](./apps/game))是只用 npm 上已發布的套件做成的挖礦合成小遊戲,透過 `zhTWMessages` 全面中文化。往下挖穿五個會切換主題的地層、用 `RecipeBook` 合成工具、用 `Furnace` 熔煉礦石、用 `TradingUI` 交易、對抗以 `BossBar` 顯示的怪物,並用 `QuestCard`、`AchievementCard` 和 `Scoreboard` 追蹤進度。進度會存在瀏覽器裡。本地執行:`pnpm game`。
+
+<p align="center">
+  <img src="./docs/images/game.png" alt="方塊礦工:礦場、玩家狀態列、快捷列與任務卡" width="100%">
+</p>
 
 ## 元件
 
@@ -328,6 +338,7 @@ pnpm install
 
 ```bash
 pnpm dev               # Playground 展示頁 http://localhost:5173
+pnpm game              # 方塊礦工範例遊戲 http://localhost:5173
 pnpm storybook         # Storybook http://localhost:6006
 pnpm test              # Vitest 單元、元件與 axe 測試
 pnpm test:e2e          # Playwright E2E（桌機 + 手機）
@@ -347,6 +358,7 @@ pnpm screenshots       # 重新產生 README 圖片（需先 pnpm build）
 block-ui/
 ├─ apps/
 │  ├─ docs/          # Storybook：Introduction、Foundations、Patterns
+│  ├─ game/          # 方塊礦工範例遊戲(使用 npm 套件)
 │  └─ playground/    # 展示用儀表板
 ├─ packages/
 │  ├─ react/         # @malilion/block-ui-react
@@ -361,7 +373,7 @@ block-ui/
 
 函式庫使用 Vite library mode 建置成 ESM（`preserveModules`）、TypeScript 型別宣告與單一 `dist/styles.css`。React 為 external，不會被打包。
 
-每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、套件安裝檢查、Storybook 建置、在五套主題下執行每個 story 的互動測試與 axe 檢查，以及 Playwright E2E（含 Playground 的 axe 檢查）。push 到 `main` 時也會把 Storybook 部署到 GitHub Pages。當 push 到 `main` 的套件版本號是新的，Release workflow 會以 Trusted Publishing（不需 npm token）把 `@malilion/block-ui-*` 發布到 npm，接著打上 `vX.Y.Z` tag，並以 CHANGELOG 內容建立 GitHub Release（見 [docs/RELEASING.md](./docs/RELEASING.md)）。
+每次 push 或對 `main` 開 Pull Request 都會執行 GitHub Actions：格式檢查、lint、型別檢查、單元測試、建置、tree-shake 檢查、套件安裝檢查、Storybook 建置、在五套主題下執行每個 story 的互動測試與 axe 檢查，以及 Playwright E2E（含 Playground 的 axe 檢查）。push 到 `main` 時也會把 Storybook 與範例遊戲部署到 GitHub Pages。當 push 到 `main` 的套件版本號是新的，Release workflow 會以 Trusted Publishing（不需 npm token）把 `@malilion/block-ui-*` 發布到 npm，接著打上 `vX.Y.Z` tag，並以 CHANGELOG 內容建立 GitHub Release（見 [docs/RELEASING.md](./docs/RELEASING.md)）。
 
 ## 瀏覽器支援
 

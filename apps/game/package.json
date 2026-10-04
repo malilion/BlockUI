@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@fontsource/silkscreen": "^5.2.5",
-    "@malilion/block-ui-icons": "^0.6.0",
-    "@malilion/block-ui-react": "^0.6.0",
-    "@malilion/block-ui-themes": "^0.6.0",
+    "@malilion/block-ui-icons": "^0.6.1",
+    "@malilion/block-ui-react": "^0.6.1",
+    "@malilion/block-ui-themes": "^0.6.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },
