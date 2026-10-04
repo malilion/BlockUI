@@ -71,6 +71,7 @@ const preview: Preview = {
             "Feedback",
             "HUD",
             "Navigation",
+            "Social",
             "Layout",
           ],
           "Patterns",

@@ -21,8 +21,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - **`Anvil`** — rename field, two inputs and a result with the experience cost, "not enough levels" and "Too Expensive!".
   - **`TradingUI`** — villager offers as a keyboard listbox (sold-out offers marked), payment / result slots, profession and level progress.
   - **`RecipeBook`** — search, category filters and "Craftable only" over a recipe grid, with a 3 × 3 pattern preview and Craft button.
+- **V2 community components (PRD §83):**
+  - **`ServerBrowser`** — search (name and MOTD), sort (players / ping / name) and "Online only" over `ServerCard`s, with Refresh and Add server.
+  - **`WorldBrowser`** — search, game-mode filter and sort (last played / name) over `WorldCard`s, with Create world.
+  - **`ChatWindow`** — chat / whisper / join / death / system lines in a `role="log"` that only auto-scrolls at the bottom; Enter sends, ↑ / ↓ recall sent messages.
+  - **`CommandConsole`** — output log with input / success / error lines and a "/" command line with suggestions (WAI-ARIA combobox), Tab completion and history.
+  - **`SkillTree`** — grid of skills joined to their prerequisites; locked / available / unlocked states, skill points, details panel and Unlock.
+  - **`MiniMap`** — terrain pixels centred on the player with a heading arrow, markers and a compass; screen readers get each marker's distance and direction.
 - **Icons** — `SunIcon`, `MoonIcon`, `CloudIcon`, `RainIcon`, `ThunderIcon`, `SnowIcon`, `TreeIcon`, `WaveIcon`, `PotionIcon` (tinted with `currentColor`), `LapisIcon`, `BlazePowderIcon`, `AnvilIcon`.
-- **Playground** — a "World HUD" block on the dashboard; the Crafting tab shows all five workstations.
+- **Playground** — a "World HUD" block on the dashboard; the Crafting tab shows all five workstations; the Servers tab gains a Community panel (server / world browsers, chat, console), the dashboard a mini map and the Cards tab a skill tree.
 
 ### Changed
 

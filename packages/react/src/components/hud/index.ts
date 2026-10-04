@@ -9,3 +9,4 @@ export * from "./CoordinatesHUD";
 export * from "./BiomeIndicator";
 export * from "./DayNightIndicator";
 export * from "./WeatherIndicator";
+export * from "./MiniMap";

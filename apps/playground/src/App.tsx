@@ -62,6 +62,14 @@ import {
   Anvil,
   TradingUI,
   RecipeBook,
+  ServerBrowser,
+  WorldBrowser,
+  ChatWindow,
+  CommandConsole,
+  SkillTree,
+  MiniMap,
+  type ChatMessage,
+  type ConsoleEntry,
   blockButtonVariants,
   type BlockTableColumn,
   type BlockTableSort,
@@ -97,6 +105,9 @@ import {
   BookIcon,
   IronIcon,
   DiamondSwordIcon,
+  AxeIcon,
+  HeartIcon,
+  FireIcon,
 } from "@malilion/block-ui-icons";
 import styles from "./App.module.css";
 
@@ -237,6 +248,24 @@ function DashboardSection() {
           <DayNightIndicator time={14.5} day={156} />
           <WeatherIndicator weather="rain" remaining="4 min" />
         </div>
+        <MiniMap
+          tiles={[
+            "wwwwssgggggff",
+            "wwwssggggggff",
+            "wwssgggddgggf",
+            "wssggggddgggt",
+            "ssggggggggttt",
+            "sgggggggggttn",
+            "gggggggggttnn",
+            "ffggggggttnnn",
+            "fffgggggtnnnn",
+          ]}
+          heading={45}
+          markers={[
+            { id: "home", x: -3, y: -2, label: "Home", kind: "home" },
+            { id: "alex", x: 4, y: 2, label: "Alex", kind: "player" },
+          ]}
+        />
         <div>
           <Scoreboard
             title="Kills"
@@ -536,6 +565,10 @@ function CardsSection() {
           lastPlayed="yesterday"
         />
       </div>
+      <div className={styles.col}>
+        <h3 className={styles.heading}>Skill Tree</h3>
+        <SkillTreeDemo />
+      </div>
     </BlockPanel>
   );
 }
@@ -617,62 +650,212 @@ function ServersSection() {
   ];
 
   return (
-    <BlockPanel title="Servers" icon={<WorldIcon size={24} />}>
-      <BlockStack gap={4}>
-        <BlockStack direction="row" justify="between" align="center" wrap stackOnMobile>
-          <BlockStack direction="row" gap={2} align="center">
-            <BlockTooltip content="Add a server by address">
-              <IconButton icon={<PlusIcon size={16} />} label="Add server" />
-            </BlockTooltip>
-            <BlockTooltip content="Search the server list">
-              <IconButton icon={<SearchIcon size={16} />} label="Search servers" />
-            </BlockTooltip>
-            <BlockDivider orientation="vertical" />
-            <BlockMenu
-              label="Region"
-              icon={<WorldIcon size={16} />}
-              items={[
-                { id: "all", label: "All regions" },
-                { id: "us", label: "US East" },
-                { id: "eu", label: "EU West" },
-                { id: "asia", label: "Asia" },
-              ]}
-              onSelect={(id) => toast.info(`Region: ${id}`)}
-            />
+    <>
+      <BlockPanel title="Servers" icon={<WorldIcon size={24} />}>
+        <BlockStack gap={4}>
+          <BlockStack direction="row" justify="between" align="center" wrap stackOnMobile>
+            <BlockStack direction="row" gap={2} align="center">
+              <BlockTooltip content="Add a server by address">
+                <IconButton icon={<PlusIcon size={16} />} label="Add server" />
+              </BlockTooltip>
+              <BlockTooltip content="Search the server list">
+                <IconButton icon={<SearchIcon size={16} />} label="Search servers" />
+              </BlockTooltip>
+              <BlockDivider orientation="vertical" />
+              <BlockMenu
+                label="Region"
+                icon={<WorldIcon size={16} />}
+                items={[
+                  { id: "all", label: "All regions" },
+                  { id: "us", label: "US East" },
+                  { id: "eu", label: "EU West" },
+                  { id: "asia", label: "Asia" },
+                ]}
+                onSelect={(id) => toast.info(`Region: ${id}`)}
+              />
+            </BlockStack>
+            <BlockBadge variant="emerald" dot>
+              {SERVERS.length} servers
+            </BlockBadge>
           </BlockStack>
-          <BlockBadge variant="emerald" dot>
-            {SERVERS.length} servers
-          </BlockBadge>
+          <BlockTable
+            caption="Server list"
+            hideCaption
+            columns={columns}
+            rows={rows}
+            getRowKey={(server) => server.id}
+            sort={sort}
+            onSortChange={(next) => {
+              setSort(next);
+              setPage(1);
+            }}
+            manualSort
+            striped
+          />
+          <BlockPagination
+            label="Server list pages"
+            pageCount={pageCount}
+            page={page}
+            onPageChange={setPage}
+          />
+          <BlockDivider label="or" />
+          <BlockStack direction="row" gap={2} wrap>
+            <BlockButton variant="grass" startIcon={<PlayIcon size={16} />}>
+              Direct connect
+            </BlockButton>
+            <BlockButton>Refresh</BlockButton>
+          </BlockStack>
         </BlockStack>
-        <BlockTable
-          caption="Server list"
-          hideCaption
-          columns={columns}
-          rows={rows}
-          getRowKey={(server) => server.id}
-          sort={sort}
-          onSortChange={(next) => {
-            setSort(next);
-            setPage(1);
-          }}
-          manualSort
-          striped
-        />
-        <BlockPagination
-          label="Server list pages"
-          pageCount={pageCount}
-          page={page}
-          onPageChange={setPage}
-        />
-        <BlockDivider label="or" />
-        <BlockStack direction="row" gap={2} wrap>
-          <BlockButton variant="grass" startIcon={<PlayIcon size={16} />}>
-            Direct connect
-          </BlockButton>
-          <BlockButton>Refresh</BlockButton>
-        </BlockStack>
-      </BlockStack>
-    </BlockPanel>
+      </BlockPanel>
+      <BlockPanel title="Community" icon={<WorldIcon size={24} />}>
+        <div className={styles.col}>
+          <h3 className={styles.heading}>Server Browser</h3>
+          <ServerBrowser
+            servers={SERVERS.slice(0, 5).map((server) => ({
+              id: server.id,
+              name: server.name,
+              motd: server.mode,
+              onlinePlayers: server.players,
+              maxPlayers: 1000,
+              ping: server.ping,
+            }))}
+            onJoin={(id) => toast.info(`Joining ${id}`)}
+            onRefresh={() => toast.info("Refreshing…")}
+          />
+          <h3 className={styles.heading}>World Browser</h3>
+          <WorldBrowser
+            worlds={[
+              {
+                id: "valley",
+                name: "Emerald Valley",
+                gameMode: "Survival",
+                day: 156,
+                lastPlayed: "2 hours ago",
+                lastPlayedAt: 3,
+              },
+              {
+                id: "plot",
+                name: "Build Plot",
+                gameMode: "Creative",
+                day: 12,
+                lastPlayed: "yesterday",
+                lastPlayedAt: 2,
+              },
+              {
+                id: "abyss",
+                name: "Abyss",
+                gameMode: "Hardcore",
+                day: 3,
+                lastPlayed: "last week",
+                lastPlayedAt: 1,
+              },
+            ]}
+            onPlay={(id) => toast.success(`Loading ${id}`)}
+            onCreate={() => toast.info("Create world")}
+          />
+          <div className={styles.section}>
+            <div className={styles.col}>
+              <h3 className={styles.heading}>Chat</h3>
+              <ChatDemo />
+            </div>
+            <div className={styles.col}>
+              <h3 className={styles.heading}>Console</h3>
+              <ConsoleDemo />
+            </div>
+          </div>
+        </div>
+      </BlockPanel>
+    </>
+  );
+}
+
+function ChatDemo() {
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    { id: "1", type: "join", text: "Alex joined the game" },
+    { id: "2", author: "Alex", text: "anyone up for mining?" },
+    { id: "3", type: "death", text: "Steve was blown up by Creeper" },
+  ]);
+  return (
+    <ChatWindow
+      messages={messages}
+      size="sm"
+      onSend={(text) =>
+        setMessages((previous) => [
+          ...previous,
+          { id: String(previous.length + 1), author: "BlockMaster_42", text },
+        ])
+      }
+    />
+  );
+}
+
+function ConsoleDemo() {
+  const [entries, setEntries] = useState<ConsoleEntry[]>([
+    { id: "1", kind: "input", text: "/time set day" },
+    { id: "2", kind: "success", text: "Set the time to 1000" },
+  ]);
+  return (
+    <CommandConsole
+      entries={entries}
+      size="sm"
+      commands={[
+        { name: "time", usage: "set <value>", description: "Change the time" },
+        { name: "weather", usage: "<clear|rain|thunder>", description: "Change the weather" },
+        { name: "give", usage: "<player> <item>", description: "Give an item" },
+      ]}
+      onRun={(command) =>
+        setEntries((previous) => [
+          ...previous,
+          { id: String(previous.length + 1), kind: "input", text: command },
+          { id: String(previous.length + 2), kind: "success", text: "Done." },
+        ])
+      }
+    />
+  );
+}
+
+function SkillTreeDemo() {
+  const [unlocked, setUnlocked] = useState(["mining"]);
+  return (
+    <SkillTree
+      unlocked={unlocked}
+      points={3}
+      onUnlock={(id) => setUnlocked((previous) => [...previous, id])}
+      skills={[
+        {
+          id: "mining",
+          label: "Mining",
+          icon: <PickaxeIcon />,
+          row: 1,
+          column: 2,
+          description: "Break stone faster.",
+        },
+        {
+          id: "lumber",
+          label: "Lumberjack",
+          icon: <AxeIcon />,
+          row: 2,
+          column: 1,
+          requires: ["mining"],
+        },
+        {
+          id: "health",
+          label: "Vitality",
+          icon: <HeartIcon />,
+          row: 2,
+          column: 3,
+          requires: ["mining"],
+        },
+        {
+          id: "fire",
+          label: "Fire Aspect",
+          icon: <FireIcon />,
+          row: 3,
+          column: 2,
+          requires: ["lumber", "health"],
+        },
+      ]}
+    />
   );
 }
 

@@ -122,3 +122,8 @@
 .potion {
   color: var(--block-water-light);
 }
+
+/* Columns side by side in a grid row are not "consecutive blocks". */
+.section > .col + .col {
+  margin-top: 0;
+}

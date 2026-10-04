@@ -1,0 +1,164 @@
+.tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--block-space-3);
+  width: 100%;
+}
+
+.points {
+  margin: 0;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-sm);
+  text-transform: uppercase;
+  color: var(--block-text-muted);
+}
+
+.points strong {
+  color: var(--block-emerald-light);
+}
+
+.board {
+  --cell: 64px;
+  position: relative;
+  width: calc(var(--block-skill-columns) * var(--cell));
+  max-width: 100%;
+  aspect-ratio: var(--block-skill-columns) / var(--block-skill-rows);
+}
+
+.lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.lines line {
+  stroke: var(--block-border);
+  stroke-width: 4;
+}
+
+.lines line[data-lit] {
+  stroke: var(--block-emerald);
+}
+
+.nodes {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--block-skill-columns), 1fr);
+  grid-template-rows: repeat(var(--block-skill-rows), 1fr);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cell {
+  grid-row: var(--block-skill-row);
+  grid-column: var(--block-skill-col);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: min(48px, 80%);
+  aspect-ratio: 1;
+  padding: 0;
+  background-color: var(--block-slot);
+  border: var(--block-border-width) solid var(--block-border);
+  box-shadow: var(--block-shadow-inset);
+  cursor: pointer;
+}
+
+.node[data-state="available"] {
+  background-color: var(--block-surface-alt);
+  border-color: var(--block-gold);
+  box-shadow: var(--block-shadow-bevel);
+}
+
+.node[data-state="unlocked"] {
+  background-color: color-mix(in srgb, var(--block-emerald) 35%, var(--block-surface-alt));
+  border-color: var(--block-emerald-light);
+  box-shadow:
+    var(--block-shadow-bevel),
+    0 0 0 2px color-mix(in srgb, var(--block-emerald-light) 40%, transparent);
+}
+
+.node[aria-pressed="true"] {
+  outline: 3px solid var(--block-text);
+  outline-offset: 2px;
+}
+
+.node:focus-visible {
+  outline: 3px solid var(--block-focus);
+  outline-offset: 2px;
+}
+
+.icon {
+  display: inline-flex;
+  width: 70%;
+  height: 70%;
+}
+
+.icon > * {
+  width: 100%;
+  height: 100%;
+}
+
+.node[data-state="locked"] .icon {
+  opacity: 0.45;
+  filter: grayscale(1);
+}
+
+.detail {
+  width: 100%;
+  max-width: 420px;
+  min-height: 72px;
+  padding: var(--block-space-2) var(--block-space-3);
+  background-color: var(--block-surface-alt);
+  border: var(--block-border-width-thin) solid var(--block-border);
+  box-shadow: var(--block-shadow-bevel);
+}
+
+.detail > * + * {
+  margin-top: var(--block-space-2);
+}
+
+.name {
+  margin: 0;
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-md);
+  text-transform: uppercase;
+}
+
+.state {
+  margin-left: var(--block-space-1);
+  font-size: var(--block-font-size-xs);
+  color: var(--block-text-muted);
+}
+
+.state[data-state="unlocked"] {
+  color: var(--block-emerald-light);
+}
+
+.state[data-state="available"] {
+  color: var(--block-gold-light);
+}
+
+.description {
+  margin: 0;
+  font-size: var(--block-font-size-sm);
+  color: var(--block-text-muted);
+}
+
+.requires {
+  margin: 0;
+  font-size: var(--block-font-size-sm);
+  /* Lightened so it stays above 4.5:1 on every theme's panel colour. */
+  color: color-mix(in srgb, var(--block-redstone-light) 65%, var(--block-white));
+}

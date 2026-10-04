@@ -1,0 +1,107 @@
+.map {
+  --map-size: 128px;
+  position: relative;
+  width: var(--map-size);
+  height: var(--map-size);
+  margin: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  background-color: var(--block-black);
+  border: var(--block-border-width) solid var(--block-border);
+  box-shadow: var(--block-shadow-bevel);
+}
+
+.map[data-size="sm"] {
+  --map-size: 96px;
+}
+
+.map[data-size="lg"] {
+  --map-size: 192px;
+}
+
+.map[data-shape="round"] {
+  border-radius: 50%;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.svg [data-terrain="grass"] {
+  fill: var(--block-grass);
+}
+
+.svg [data-terrain="forest"] {
+  fill: var(--block-grass-dark);
+}
+
+.svg [data-terrain="dirt"] {
+  fill: var(--block-dirt);
+}
+
+.svg [data-terrain="sand"] {
+  fill: var(--block-sand);
+}
+
+.svg [data-terrain="water"] {
+  fill: var(--block-water);
+}
+
+.svg [data-terrain="stone"] {
+  fill: var(--block-stone);
+}
+
+.svg [data-terrain="snow"] {
+  fill: var(--block-white);
+}
+
+.svg [data-terrain="lava"] {
+  fill: var(--block-lava);
+}
+
+.svg [data-terrain="unknown"] {
+  fill: var(--block-black);
+}
+
+.marker {
+  stroke: var(--block-black);
+  stroke-width: 0.3;
+}
+
+.marker[data-kind="home"] {
+  fill: var(--block-gold-light);
+}
+
+.marker[data-kind="player"] {
+  fill: var(--block-diamond-light);
+}
+
+.marker[data-kind="death"] {
+  fill: var(--block-redstone-light);
+}
+
+.marker[data-kind="poi"] {
+  fill: var(--block-amethyst-light);
+}
+
+.player {
+  fill: var(--block-white);
+  stroke: var(--block-black);
+  stroke-width: 0.3;
+  stroke-linejoin: round;
+}
+
+.north {
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--block-font-display);
+  font-size: var(--block-font-size-xs);
+  font-weight: var(--block-font-weight-bold);
+  line-height: 1;
+  color: var(--block-redstone-light);
+  text-shadow: var(--block-shadow-text);
+}

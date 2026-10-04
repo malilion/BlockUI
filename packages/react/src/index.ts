@@ -8,6 +8,7 @@ export * from "./components/crafting";
 export * from "./components/hud";
 export * from "./components/cards";
 export * from "./components/display";
+export * from "./components/social";
 export * from "./components/navigation";
 export * from "./components/layout";
 export * from "./components/feedback";
