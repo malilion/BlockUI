@@ -183,3 +183,38 @@ test.describe("Drawer", () => {
     await expect(opener).toBeFocused();
   });
 });
+
+test.describe("Context menu and popover", () => {
+  test("inventory items open a context menu with Shift+F10 and right-click", async ({
+    page,
+    isMobile,
+  }) => {
+    await page.goto("/");
+    await page
+      .getByRole("navigation", { name: /navigation/i })
+      .getByRole("button", { name: "Inventory" })
+      .first()
+      .click();
+    const cell = page.getByRole("grid", { name: "Inventory" }).getByRole("gridcell").first();
+    await cell.focus();
+    await page.keyboard.press("Shift+F10");
+    await expect(page.getByRole("menuitem", { name: "Split stack" })).toBeFocused();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("menu", { name: "Item actions" })).toBeHidden();
+    await expect(cell).toBeFocused();
+    test.skip(isMobile, "right-click needs a mouse");
+    await cell.click({ button: "right" });
+    await expect(page.getByRole("menu", { name: "Item actions" })).toBeVisible();
+  });
+
+  test("settings popover opens, focuses inside and closes on Escape", async ({ page }) => {
+    await page.goto("/");
+    const trigger = page.getByRole("button", { name: "Settings" });
+    await trigger.click();
+    await expect(page.getByRole("dialog", { name: "Quick Settings" })).toBeVisible();
+    await expect(page.getByRole("switch", { name: "Show coordinates" })).toBeFocused();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog", { name: "Quick Settings" })).toBeHidden();
+    await expect(trigger).toBeFocused();
+  });
+});

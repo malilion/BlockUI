@@ -23,3 +23,8 @@ export function typeaheadIndex(items: BlockMenuItem[], from: number, char: strin
   }
   return -1;
 }
+
+/** Enabled item indexes among the menu items (separators excluded). */
+export function enabledMenuIndexes(items: BlockMenuEntry[]): number[] {
+  return items.filter(isMenuItem).flatMap((item, index) => (item.disabled ? [] : [index]));
+}

@@ -1,0 +1,4 @@
+/* The area takes the size of its content; it adds no visual of its own. */
+.area {
+  display: contents;
+}

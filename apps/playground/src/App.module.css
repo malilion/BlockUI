@@ -127,3 +127,9 @@
 .section > .col + .col {
   margin-top: 0;
 }
+
+.hint {
+  margin: 0 0 var(--block-space-2);
+  font-size: var(--block-font-size-sm);
+  color: var(--block-text-muted);
+}
