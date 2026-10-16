@@ -13,4 +13,4 @@ import "@malilion/block-ui-tokens/tokens.css"; // --block-* CSS variables + [dat
 
 `@malilion/block-ui-react` already includes this stylesheet in `@malilion/block-ui-react/styles.css`.
 
-MIT License
+Apache License 2.0
