@@ -15,4 +15,4 @@ import { DiamondIcon, HeartIcon, SearchIcon } from "@malilion/block-ui-icons";
 
 Monochrome UI glyphs (`SearchIcon`, `CloseIcon`, `CheckIcon`, …) use `currentColor`. Create your own with `createPixelIcon(name, { palette, pixels })`.
 
-MIT License
+Apache License 2.0

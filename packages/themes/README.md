@@ -19,4 +19,4 @@ import "@malilion/block-ui-themes/themes.css";
 
 `@malilion/block-ui-react` already includes this stylesheet and applies themes through `<BlockUIProvider theme="…">`.
 
-MIT License
+Apache License 2.0
