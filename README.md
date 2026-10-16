@@ -16,7 +16,7 @@
   <a href="https://github.com/malilion/BlockUI/stargazers"><img src="https://img.shields.io/github/stars/malilion/BlockUI?style=flat-square&color=5d9b3d" alt="GitHub stars"></a>
   <a href="https://www.npmjs.com/package/@malilion/block-ui-react"><img src="https://img.shields.io/npm/v/@malilion/block-ui-react?style=flat-square&color=5d9b3d" alt="npm @malilion/block-ui-react"></a>
   <a href="https://www.npmjs.com/package/@malilion/block-ui-react"><img src="https://img.shields.io/npm/dm/@malilion/block-ui-react?style=flat-square&color=1abc9c&label=downloads" alt="npm downloads per month"></a>
-  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-f2c94c?style=flat-square" alt="license: MIT"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-f2c94c?style=flat-square" alt="license: Apache-2.0"></a>
   <br/>
   <img src="https://img.shields.io/badge/React_18_|_19-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React 18 / 19">
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
@@ -385,6 +385,6 @@ Block UI targets the last two major versions of Chrome, Edge, Firefox and Safari
 
 ## License
 
-MIT License. See [LICENSE](./LICENSE).
+Apache License 2.0. See [LICENSE](./LICENSE).
 
 The pixel icons, textures and illustrations are original artwork, free to use along with the library. Block UI is not affiliated with Mojang or Microsoft.
