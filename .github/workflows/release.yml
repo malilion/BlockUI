@@ -49,6 +49,7 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
 
       - name: Plan release
         id: plan
@@ -93,6 +94,7 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
           registry-url: https://registry.npmjs.org
 
       - name: Install pnpm
@@ -145,6 +147,7 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
           registry-url: https://registry.npmjs.org
 
       - name: Install pnpm
@@ -184,6 +187,7 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
 
       - name: Release notes
         run: node scripts/release-plan.mjs --notes "$RUNNER_TEMP/notes.md"
