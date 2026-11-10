@@ -388,3 +388,8 @@ Block UI 支援 Chrome、Edge、Firefox 與 Safari 的最近兩個主要版本�
 Apache License 2.0，詳見 [LICENSE](./LICENSE)。
 
 像素圖示、材質與插圖皆為原創，可隨函式庫自由使用。Block UI 與 Mojang 或 Microsoft 無任何關聯。
+
+---
+
+<!-- malilion-ecosystem-footer -->
+<p align="center"><sub>🦁 碼力獅 <a href="https://github.com/malilion">MaliLion</a> 生態系的一員 · <a href="https://malilion.com">malilion.com</a> · <a href="https://github.com/malilion?tab=repositories">更多作品</a></sub></p>

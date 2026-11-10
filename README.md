@@ -388,3 +388,8 @@ Block UI targets the last two major versions of Chrome, Edge, Firefox and Safari
 Apache License 2.0. See [LICENSE](./LICENSE).
 
 The pixel icons, textures and illustrations are original artwork, free to use along with the library. Block UI is not affiliated with Mojang or Microsoft.
+
+---
+
+<!-- malilion-ecosystem-footer -->
+<p align="center"><sub>🦁 Part of the <a href="https://github.com/malilion">MaliLion</a> ecosystem · <a href="https://malilion.com">malilion.com</a> · <a href="https://github.com/malilion?tab=repositories">More projects</a></sub></p>
